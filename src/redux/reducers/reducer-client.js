@@ -1,11 +1,9 @@
+const initialState = [];
 
-const initialState =[]
-
-
-const clients =(state = initialState, action)=>{
-  switch(action.type){
-    default: return state
+const clients = (state = initialState, action) => {
+  switch (action.type) {
+    default: return state;
   }
-}
+};
 
-export default clients
+export default clients;

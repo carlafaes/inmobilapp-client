@@ -1,11 +1,9 @@
+const initiaState = [];
 
-const initiaState=[]
-
-
-const propertys=(state= initiaState, acttion)=>{
-  switch(acttion.type){
-    default: return state
+const propertys = (state = initiaState, acttion) => {
+  switch (acttion.type) {
+    default: return state;
   }
-}
+};
 
-export default propertys
+export default propertys;

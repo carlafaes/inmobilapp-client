@@ -6,7 +6,7 @@ import Home from './pages/Home';
 function App() {
   return (
     <Routes>
-       {/* <Route path="/" element={<Landing />} /> */}
+      {/* <Route path="/" element={<Landing />} /> */}
       <Route exact path="/" element={<Home />} />
     </Routes>
   );
