@@ -11,3 +11,5 @@ const clients =(state = initialState, action)=>{
     default: return state
   }
 }
+
+export default clients
