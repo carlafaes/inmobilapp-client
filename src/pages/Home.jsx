@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import adminService from '../services/admin';
 import Landing from './Landingprueba';
 import Navbar from './Navbar';
-import NavFilterProperty from '../componentes/Nav-filter';
+import NavFilterProperty from './Nav-filter';
 
 function Home() {
   const [admins, setAdmins] = useState([]);
