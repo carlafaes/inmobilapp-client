@@ -1,0 +1,14 @@
+.loading_style{
+    position:relative;
+    display:flex;
+    align-items: center;
+}
+.home_load{
+    margin-bottom: 90px;
+    width:100px;
+     height: 120px;
+}
+.contenedor_home{
+     margin-left: 45%;
+     margin-top: 20%;
+}
