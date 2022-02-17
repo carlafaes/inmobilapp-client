@@ -4,8 +4,8 @@ const baseUrl = '/api/properties';
 
 const getAll = async () => (await axios.get(baseUrl)).data;
 
-const adminService = {
+const propertyService = {
   getAll,
 };
 
-export default adminService;
+export default propertyService;
