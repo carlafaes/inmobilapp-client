@@ -25,10 +25,10 @@ function Home() {
   return (
     <div>
       <div>
-        <Landing/>
+        <Landing />
       </div>
       <div>
-        <Navbar/>
+        <Navbar />
       </div>
       <h1>Hello world!</h1>
       {admins.map((admin) => (

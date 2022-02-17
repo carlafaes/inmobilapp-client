@@ -1,14 +1,13 @@
 import React from 'react';
-import {AppBar, IconButton, Toolbar} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
+import { AppBar, IconButton, Toolbar } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import SortIcon from '@material-ui/icons/Sort';
-import icono from '../Img/icono.png'
+import icono from '../Img/icono.png';
 
-const useStyles = makeStyles((theme)=>({
-    appBar:{
-        background:'rgba(212,212,212, 0.7)',
-        position:'relative',
-        
+const useStyles = makeStyles((theme) => ({
+  appBar: {
+    background: 'rgba(212,212,212, 0.7)',
+    position: 'relative',
 
     },
     icon:{
@@ -23,8 +22,8 @@ const useStyles = makeStyles((theme)=>({
         width:'100%',
         
 
-    }
-}))
+  },
+}));
 
 export default function Navbar(){
     const classes= useStyles();
