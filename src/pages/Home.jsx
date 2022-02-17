@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import adminService from '../services/admin';
-import Landing from './Landingprueba';
-import Navbar from './Navbar';
+import Landing from '../componentes/Landingprueba';
+import Navbar from '../componentes/Navbar';
+import '../styles/Loading.css'
+import Load from '../Img/LOAD5gif.gif'
 
 function Home() {
   const [admins, setAdmins] = useState([]);
@@ -13,7 +15,11 @@ function Home() {
   }, []);
 
   if (admins.length === 0) {
-    return <h1>Loading...</h1>;
+    return <div className='loading_style'>
+        <div className='contenedor_home'>
+        <img className='home_load' src={Load} />
+        </div>
+          </div>
   }
 
   return (
