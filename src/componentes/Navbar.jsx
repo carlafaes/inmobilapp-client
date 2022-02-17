@@ -14,15 +14,11 @@ const useStyles = makeStyles((theme)=>({
     icon:{
         color:'#faa222',
         fontSize:'2rem',
-        marginLeft:'150vh'
-    },
-    icono:{
-    marginTop:'0px',
-    marginLeft:'-10px'
+        
     },
     container:{
         display:'flex',
-        flexDirection:'row',
+        // flexDirection:'row',
         justifyContent:'space-between',
         width:'100%',
         
@@ -37,7 +33,7 @@ export default function Navbar(){
             <AppBar className={classes.appBar} >
                 <Toolbar>
                     <div className={classes.container}>
-                    <img src={icono} alt="loconav" width={55} height={68}  />
+                    <img src={icono} alt="logonav" width={55} height={68}  />
                     <IconButton>
                         <SortIcon className={classes.icon} />
                     </IconButton>
