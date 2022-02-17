@@ -1,8 +1,9 @@
-import React from 'react';
-import { AppBar, IconButton, Toolbar } from '@material-ui/core';
+import React, { useState } from 'react';
+import { AppBar, IconButton, Menu, Toolbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SortIcon from '@material-ui/icons/Sort';
 import icono from '../Img/icono.png';
+import MenuNav from './MenuNav';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -26,16 +27,36 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Navbar(){
-    const classes= useStyles();
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
+    const classes = useStyles();
     return(
         <div id='navbar' >
             <AppBar className={classes.appBar} >
                 <Toolbar>
                     <div className={classes.container}>
-                    <img src={icono} alt="logonav" width={55} height={68}  />
-                    <IconButton>
+                    <IconButton onClick={handleClick}>
                         <SortIcon className={classes.icon} />
                     </IconButton>
+                    <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                            className={classes.siplemenu}
+                        >
+                            <MenuNav />
+                        </Menu>
+                    <img src={icono} alt="logonav" width={55} height={68}  />
                     </div>
                     
                 </Toolbar>
