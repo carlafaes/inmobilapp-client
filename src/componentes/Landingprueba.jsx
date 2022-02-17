@@ -50,7 +50,7 @@ export default function Landing() {
       <Collapse
         in={checked}
         {...(checked ? { timeout: 1000 } : {})}
-        collapsedHeight={50}
+        collapsedSize={50}
       >
         <img className={classes.imgLogo} src={Logo} alt="imglogo" width={650} height={450} />
         <h3 className={classes.slogan}>Innovación inmobiliaria</h3>
