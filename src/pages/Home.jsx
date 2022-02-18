@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import adminService from '../services/admin';
+import propertyService from '../services/property';
 import Landing from '../componentes/Landingprueba';
 import Navbar from '../componentes/Navbar';
 import '../styles/Loading.css'
@@ -7,15 +7,15 @@ import Load from '../Img/LOAD5gif.gif'
 import { LoginClient } from '../componentes/LoginClient';
 
 function Home() {
-  const [admins, setAdmins] = useState([]);
+  const [properties, setProperties] = useState([]);
 
   useEffect(() => {
-    adminService.getAll().then((returnedAdmins) => {
-      setAdmins(returnedAdmins);
+    propertyService.getAll().then((result) => {
+      setProperties(result);
     });
   }, []);
 
-  if (admins.length === 0) {
+  if (properties.length === 0) {
     return <div className='loading_style'>
         <div className='contenedor_home'>
         <img className='home_load' src={Load} />
@@ -32,11 +32,11 @@ function Home() {
         <Navbar />
       </div>
       <h1>Hello world!</h1>
-      {admins.map((admin) => (
-        <div key={admin.name}>
-          <h1>{admin.name}</h1>
-          <p>{admin.password}</p>
-          <p>{admin.email}</p>
+      {properties.map((propery) => (
+        <div key={propery.id}>
+          <h1>{propery.state}</h1>
+          <p>{propery.ubication.city}</p>
+          <p>{propery.rentalPrice}</p>
         </div>
       ))}
       <LoginClient/>
