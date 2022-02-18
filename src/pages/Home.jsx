@@ -7,6 +7,8 @@ import Load from '../Img/LOAD5gif.gif'
 import '../styles/Loading.css';
 import LOAD5 from '../Img/LOAD5gif.gif';
 import Footer from '../componentes/Footer';
+import NavFilterProperty from '../componentes/Nav-filter'
+
 
 function Home() {
 	const [properties, setProperties] = useState([]);
@@ -34,12 +36,13 @@ function Home() {
 			</div>
 			<div>
 				<Navbar />
+        <NavFilterProperty/>
 			</div>
 			<h1>Hello world!</h1>
 			{properties.map((propery) => (
 				<div key={propery.id}>
 					<h1>{propery.state}</h1>
-					<p>{propery.ubication.city}</p>
+					<p>{propery.location.city}</p>
 					<p>{propery.rentalPrice}</p>
 				</div>
 			))}
