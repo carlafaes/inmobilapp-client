@@ -2,15 +2,17 @@ import React, { useEffect, useState } from 'react';
 import propertyService from '../services/property';
 import Landing from '../componentes/Landingprueba';
 import Navbar from '../componentes/Navbar';
+import '../styles/Loading.css'
+import Load from '../Img/LOAD5gif.gif'
 import '../styles/Loading.css';
-import Load from '../Img/LOAD5gif.gif';
+import LOAD5 from '../Img/LOAD5gif.gif';
 import Footer from '../componentes/Footer';
 import NavFilterProperty from '../componentes/Nav-filter'
 
 
 function Home() {
 	const [properties, setProperties] = useState([]);
-
+	
 	useEffect(() => {
 		propertyService.getAll().then((result) => {
 			setProperties(result);
