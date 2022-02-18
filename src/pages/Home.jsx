@@ -38,7 +38,6 @@ function Home() {
           <p>{admin.email}</p>
         </div>
       ))}
-
     </div>
   );
 }
