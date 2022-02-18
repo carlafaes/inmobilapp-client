@@ -43,6 +43,7 @@ export const LoginClient = () => {
                     </form>
                 </div>
             </div>
+            <h2>hola mundo</h2>
         </Modal>
         </>
     )
