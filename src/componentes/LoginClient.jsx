@@ -15,7 +15,7 @@ export const LoginClient = () => {
                     <form >
                         <input type="text"
                             placeholder="Email"
-                            autocomplete="off"
+                            autoComplete="off"
                             className="auth_input" />
 
                         <input type="password"
