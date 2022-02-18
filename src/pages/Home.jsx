@@ -5,6 +5,7 @@ import Navbar from '../componentes/Navbar';
 import '../styles/Loading.css';
 import Load from '../Img/LOAD5gif.gif';
 import Footer from '../componentes/Footer';
+import Card from '../componentes/Card';
 
 function Home() {
 	const [properties, setProperties] = useState([]);
@@ -33,11 +34,11 @@ function Home() {
 			<div>
 				<Navbar />
 			</div>
-			<h1>Hello world!</h1>
+
 			{properties.map((propery) => (
 				<div key={propery.id}>
 					<h1>{propery.state}</h1>
-					<p>{propery.ubication.city}</p>
+					<p>{propery.location.city}</p>
 					<p>{propery.rentalPrice}</p>
 				</div>
 			))}
