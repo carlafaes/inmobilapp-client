@@ -4,6 +4,7 @@ import Landing from '../componentes/Landingprueba';
 import Navbar from '../componentes/Navbar';
 import '../styles/Loading.css'
 import Load from '../Img/LOAD5gif.gif'
+import { LoginClient } from '../componentes/LoginClient';
 
 function Home() {
   const [admins, setAdmins] = useState([]);
@@ -38,6 +39,8 @@ function Home() {
           <p>{admin.email}</p>
         </div>
       ))}
+      <LoginClient/>
+
     </div>
   );
 }

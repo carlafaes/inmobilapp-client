@@ -12,11 +12,8 @@
     "node-sass": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-<<<<<<< HEAD
-    "react-redux": "^7.2.6",
-=======
     "react-modal": "^3.14.4",
->>>>>>> 90ea1f7159258dcb68ef299377b5e5ce5da9b9fa
+    "react-redux": "^7.2.6",
     "react-router-dom": "6.2.1",
     "react-scripts": "5.0.0",
     "react-scroll": "^1.8.4",
