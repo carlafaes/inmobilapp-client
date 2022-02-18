@@ -5,6 +5,7 @@ import Navbar from '../componentes/Navbar';
 import '../styles/Loading.css';
 import Load from '../Img/LOAD5gif.gif';
 import Footer from '../componentes/Footer';
+import ReactPaginate from 'react-paginate';
 
 function Home() {
 	const [properties, setProperties] = useState([]);
@@ -25,6 +26,10 @@ function Home() {
 		);
 	}
 
+	const handlePageClick= (data)=>{
+		console.log(data.selected)
+	}
+
 	return (
 		<div>
 			<div>
@@ -41,6 +46,16 @@ function Home() {
 					<p>{propery.rentalPrice}</p>
 				</div>
 			))}
+			<div>
+				<ReactPaginate
+				previousLabel={'previous'}
+				nextLabel={'next'}
+				breakLabel={'...'}
+				pageCount={15} //cantidad de paginas total
+				marginPagesDisplayed={3}//num de paginas que se muestran antes y despues del breakLabel
+				onPageChange={handlePageClick}
+				/>
+			</div>
 			<div>
 				<Footer />
 			</div>
