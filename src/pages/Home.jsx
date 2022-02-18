@@ -41,6 +41,7 @@ function Home() {
 					<p>{propery.rentalPrice}</p>
 				</div>
 			))}
+
 			<div>
 				<Footer />
 			</div>
