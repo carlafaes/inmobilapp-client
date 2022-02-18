@@ -1,6 +1,7 @@
 import {
   LOAD_ALL_PROPERTIES,
-  FILTER_PROPERTIES
+  FILTER_PROPERTIES,
+  POST_PROPERTIE
 } from '../actions/types-propierties';
 
 const initiaState = [];
@@ -25,6 +26,11 @@ const propertys = (state = initiaState, action) => {
       }
     
       return [...action.payload];
+    
+    case POST_PROPERTIE:
+      return {
+        ...state
+      };
 
     default: return state;
   }

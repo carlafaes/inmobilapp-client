@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import postProperty from "../services/property";
+import { postProperties } from "../redux/actions/actions-propierties";
 
 export default function CreateProperty() {
 
@@ -122,7 +122,7 @@ export default function CreateProperty() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(input)
-        dispatch(postProperty(input))
+        dispatch(postProperties(input))
         alert('Inmueble creado!')
 
     }
