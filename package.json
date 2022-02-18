@@ -7,9 +7,13 @@
     "@emotion/styled": "^11.6.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
+<<<<<<< HEAD
     "@material-ui/lab": "^4.0.0-alpha.60",
     "@mui/material": "^5.4.2",
     "@mui/styled-engine-sc": "^5.4.2",
+=======
+    "@mui/material": "^5.4.2",
+>>>>>>> 9b13a84329d7102a83ba2963ee671b59c59d61f4
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
