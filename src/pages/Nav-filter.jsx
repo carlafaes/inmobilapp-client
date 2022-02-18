@@ -2,6 +2,7 @@ import  { useState } from "react"
 
 import {  Button, TextField } from "@material-ui/core"
 import { makeStyles } from '@material-ui/core/styles';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import './Nav-filter.css'
 
 
@@ -36,28 +37,30 @@ const NavFilterProperty =()=>{
   });
 
 
-  const handleChange=(e)=>{
 
+  const handleChange=(e, newValue)=>{
+    
     const filtro = 'abcdefghijklmnñopqrstuvwxyz ABCDEFGHIJKLMNÑOPQRSTUVWXYZ'
     const filtroNumber= '0123456789'
     
-    const {value}= e.target
-
-    if(e.target.name =='location'){
-      for(let i =0; i< value.length; i++){
-        if(filtro.indexOf(value[i]) === -1){
-          return document.getElementById('city').value= input.location
+    const value= e.target.value
+    
+      if(e.target.name =='location'){
+        for(let i =0; i< value.length; i++){
+          if(filtro.indexOf(value[i]) === -1){
+            return document.getElementById('city').value= input.location
+          }
+        }
+      }else if(e.target.name =='maximum_budget'){
+        for(let i =0; i< value.length; i++){
+          if(filtroNumber.indexOf(value[i]) === -1){
+            return document.getElementById('money').value= input.maximum_budget
+          }
         }
       }
-    }else{
-      for(let i =0; i< value.length; i++){
-        if(filtroNumber.indexOf(value[i]) === -1){
-          return document.getElementById('money').value= input.location
-        }
-      }
-    }
-    console.log('holi')
-    setInput({...input, [e.target.name]:e.target.value});
+      
+      setInput({...input, [e.target.name]:e.target.value});
+      
     
   }
 
@@ -78,7 +81,11 @@ const NavFilterProperty =()=>{
     console.log(input)
   }
 
+  const options=['medellin', 'envigado', 'itagui']
 
+
+  const [value, setValue] = useState(options[0]);
+  const [inputValue, setInputValue] = useState('');
 
   return(
     <div>
