@@ -6,7 +6,7 @@ import '../styles/Loading.css';
 import Load from '../Img/LOAD5gif.gif';
 import Footer from '../componentes/Footer';
 import NavFilterProperty from '../componentes/Nav-filter'
-import Cards from '../componentes/cards-temporal';
+
 
 function Home() {
 	const [properties, setProperties] = useState([]);
@@ -35,7 +35,6 @@ function Home() {
 			<div>
 				<Navbar />
         <NavFilterProperty/>
-        <Cards/>
 			</div>
 			<h1>Hello world!</h1>
 			{properties.map((propery) => (
