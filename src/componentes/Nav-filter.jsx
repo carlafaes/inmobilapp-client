@@ -53,13 +53,13 @@ const NavFilterProperty =()=>{
       if(e.target.name =='location'){
         for(let i =0; i< value.length; i++){
           if(filtro.indexOf(value[i]) === -1){
-            return document.getElementById('city').value= input.location
+            return input[e.target.name]= input.location
           }
         }
       }else if(e.target.name =='maximum_budget'){
         for(let i =0; i< value.length; i++){
           if(filtroNumber.indexOf(value[i]) === -1){
-            return document.getElementById('money').value= input.maximum_budget
+            return input[e.target.name]= input.maximum_budget
           }
         }
       }
@@ -95,7 +95,7 @@ const NavFilterProperty =()=>{
       <form onSubmit={search}>
       <div className="ContainerNavFilter">
         <TextField
-          id='money'
+          
           name="maximum_budget"
           label="Presupuesto maximo"
           value={input.maximum_budget}
@@ -104,7 +104,7 @@ const NavFilterProperty =()=>{
           className={clases.textFieldMoney}
         />
         <TextField
-          id='city'
+          
           name="location"
           label="Ciudad"
           value={input.location}
