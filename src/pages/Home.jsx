@@ -4,11 +4,9 @@ import Landing from '../componentes/Landingprueba';
 import Navbar from '../componentes/Navbar';
 import '../styles/Loading.css'
 import Load from '../Img/LOAD5gif.gif'
-import { LoginClient } from '../componentes/LoginClient';
 import '../styles/Loading.css';
 import LOAD5 from '../Img/LOAD5gif.gif';
 import Footer from '../componentes/Footer';
-import { useSelector } from 'react-redux';
 
 function Home() {
 	const [properties, setProperties] = useState([]);
