@@ -1,32 +1,56 @@
 import React, { useEffect, useState } from 'react';
-import adminService from '../services/admin';
+import propertyService from '../services/property';
+import Landing from '../componentes/Landingprueba';
+import Navbar from '../componentes/Navbar';
+import '../styles/Loading.css'
+import Load from '../Img/LOAD5gif.gif'
+import '../styles/Loading.css';
+import LOAD5 from '../Img/LOAD5gif.gif';
+import Footer from '../componentes/Footer';
+import NavFilterProperty from '../componentes/Nav-filter'
+
 
 function Home() {
-  const [admins, setAdmins] = useState([]);
+	const [properties, setProperties] = useState([]);
+	
+	useEffect(() => {
+		propertyService.getAll().then((result) => {
+			setProperties(result);
+		});
+	}, []);
 
-  useEffect(() => {
-    adminService.getAll().then((returnedAdmins) => {
-      setAdmins(returnedAdmins);
-    });
-  }, []);
+	if (properties.length === 0) {
+		return (
+			<div className='loading_style'>
+				<div className='contenedor_home'>
+					<img className='home_load' src={Load} />
+				</div>
+			</div>
+		);
+	}
 
-  if (admins.length === 0) {
-    return <h1>Loading...</h1>;
-  }
-
-  return (
-    <div>
-      <h1>Hello world!</h1>
-      {admins.map((admin) => (
-        <div key={admin.name}>
-          <h1>{admin.name}</h1>
-          <p>{admin.password}</p>
-          <p>{admin.email}</p>
-        </div>
-      ))}
-
-    </div>
-  );
+	return (
+		<div>
+			<div>
+				<Landing />
+			</div>
+			<div>
+				<Navbar />
+        <NavFilterProperty/>
+			</div>
+			<h1>Hello world!</h1>
+			{properties.map((propery) => (
+				<div key={propery.id}>
+					<h1>{propery.state}</h1>
+					<p>{propery.location.city}</p>
+					<p>{propery.rentalPrice}</p>
+				</div>
+			))}
+			<div>
+				<Footer />
+			</div>
+		</div>
+	);
 }
 
 export default Home;
