@@ -13,13 +13,14 @@ export const RegisterClient = () => {
                             placeholder="Names"
                             className='auth_input' />
 
-                        <input type="text"
-                            placeholder="LastName"
-                            className='auth_input' />
-
                         <input type='Number'
                             placeholder='DNI'
                             className='auth_input' />
+
+                        <input type="text"
+                            placeholder="address"
+                            className='auth_input' />
+
 
                         <input type="text"
                             placeholder='Email'
