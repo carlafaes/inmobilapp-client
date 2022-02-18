@@ -7,7 +7,7 @@ import InstagramIcon from '@material-ui/icons/Instagram';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import YouTubeIcon from '@material-ui/icons/YouTube';
 
-export function Footer() {
+export default function Footer() {
 	return (
 		<footer>
 			<Box
@@ -17,7 +17,7 @@ export function Footer() {
 				bgcolor='#DCDCDC'
 				color='#6C6C6C'
 			>
-				<Container maxWidth='w={{ base: "100", md: "19%" }}'>
+				<Container>
 					<Grid container spacing={1} fontFamily={'Roboto'}>
 						<Grid item xs={12} sm={4}>
 							<Box borderBottom={3}>Mas Informacion </Box>
@@ -94,5 +94,3 @@ export function Footer() {
 		</footer>
 	);
 }
-
-export default Footer;
