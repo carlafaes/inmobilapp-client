@@ -45,7 +45,6 @@ function Home() {
 					<p>{propery.rentalPrice}</p>
 				</div>
 			))}
-			<LoginClient/>
 			<div>
 				<Footer />
 			</div>
