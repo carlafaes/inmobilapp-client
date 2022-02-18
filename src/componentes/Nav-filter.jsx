@@ -85,19 +85,14 @@ const NavFilterProperty =()=>{
   const search=()=>{
     propertyService.getAll()
     .then(r =>{
-      
       dispatch(filterProperties(r,input))
     })
   }
 
-  const options=['medellin', 'envigado', 'itagui']
-
-
-  const [value, setValue] = useState(options[0]);
-  const [inputValue, setInputValue] = useState('');
 
   return(
     <div>
+      <form onSubmit={search}>
       <div className="ContainerNavFilter">
         <TextField
           id='money'
@@ -136,9 +131,9 @@ const NavFilterProperty =()=>{
         </div>
       </div>
         <div className="containerSearch" >
-          <Button className="search" size="medium" variant="contained"  onClick={search} >Buscar</Button>
+          <Button className="search" size="medium" variant="contained"   >Buscar</Button>
         </div>
-
+        </form>
     </div>
   )
 }
