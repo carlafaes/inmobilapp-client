@@ -1,6 +1,6 @@
 
 import React from "react"
-// import {useDispatch } from 'react-redux'
+import {useDispatch } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -14,7 +14,7 @@ import StarBorder from '@material-ui/icons/StarBorder';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-// import { openModal } from "../../redux/actions/ActionsClient";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,18 +27,15 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function MenuNav() {
+export const MenuNav=()=> {
     const classes = useStyles();
-    // const dispatch=useDispatch()
 
     const [open, setOpen] = React.useState(true);
 
     const handleClick = () => {
         setOpen(!open);
     };
-    const handleOpenModal=()=>{
-        // dispatch(openModal())
-    }
+    
     return (
         <>
             <List
@@ -66,11 +63,11 @@ export default function MenuNav() {
                             </ListItemIcon>
                             <ListItemText primary='Solicita tu inmueble' />
                         </ListItem>
-                        <ListItem button onClick={handleOpenModal} className={classes.nested}>
+                        <ListItem button className={classes.nested}>
                             <ListItemIcon >
                                 <ExitToAppIcon />
                             </ListItemIcon>
-                            <ListItemText primary='Entrar'/>
+                            <ListItemText  primary={<Link to='/login'>Entrar</Link>}/>
                         </ListItem>
                     </List>
                 </Collapse>
