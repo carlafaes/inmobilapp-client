@@ -2,12 +2,12 @@ import { combineReducers } from 'redux';
 
 import employees from './reducer-employee';
 import clients from './reducer-client';
-import propertys from './reducer-property';
+import property from './reducer-property';
 
 const rootReducer = combineReducers({
   employees,
   clients,
-  propertys,
+  property,
 });
 
 export default rootReducer;

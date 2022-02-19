@@ -1,9 +1,19 @@
-const initiaState = [];
+import { GET_PROPERTY } from "../actions/constants";
 
-const propertys = (state = initiaState, acttion) => {
-  switch (acttion.type) {
+const initialState = [];
+
+const property = (state = initialState, action) => {
+  /* action.payload = initialState */
+  console.log(action.payload);
+  console.log(action);
+  switch (action.type) {
+    case GET_PROPERTY:
+      return {
+        ...state,
+        property: action.payload
+      }
     default: return state;
   }
 };
 
-export default propertys;
+export default property;
