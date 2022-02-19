@@ -4,15 +4,25 @@ import Landing from '../componentes/Landingprueba';
 import Navbar from '../componentes/Navbar';
 import '../styles/Loading.css';
 import Load from '../Img/LOAD5gif.gif';
+import '../styles/Loading.css';
+import LOAD5 from '../Img/LOAD5gif.gif';
 import Footer from '../componentes/Footer';
-import Card from '../componentes/Card';
+import NavFilterProperty from '../componentes/Nav-filter';
+import ProCard from '../componentes/ProCard';
+import { useSelector, useDispatch } from 'react-redux';
+import { loadAllProperties } from '../redux/actions/actions-propierties';
+import { Grid, Card } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 function Home() {
-	const [properties, setProperties] = useState([]);
+	const dispatch = useDispatch();
+	// const [properties, setProperties] = useState([]);
+
+	const properties = useSelector((state) => state.propertys);
 
 	useEffect(() => {
 		propertyService.getAll().then((result) => {
-			setProperties(result);
+			dispatch(loadAllProperties(result));
 		});
 	}, []);
 
@@ -25,7 +35,7 @@ function Home() {
 			</div>
 		);
 	}
-
+	console.log(properties, 'properties');
 	return (
 		<div>
 			<div>
@@ -33,15 +43,34 @@ function Home() {
 			</div>
 			<div>
 				<Navbar />
+				<NavFilterProperty />
 			</div>
+			{/* <div>
+				<ProCard properties={properties} />
+			</div> */}
 
-			{properties.map((propery) => (
-				<div key={propery.id}>
+			{properties.map((property, classes) => {
+				return (
+					property.state === 'available' && (
+						<Card className='classes.item'>
+							<Grid
+								container
+								direction='row'
+								justifyContent='center'
+								alignItems='baseline'
+								border='3px solid red'
+							>
+								<ProCard key={property.id} property={property} />
+							</Grid>
+						</Card>
+					)
+				);
+				/* <div key={propery.id}>
 					<h1>{propery.state}</h1>
 					<p>{propery.location.city}</p>
 					<p>{propery.rentalPrice}</p>
-				</div>
-			))}
+				</div> */
+			})}
 
 			<div>
 				<Footer />
@@ -50,4 +79,13 @@ function Home() {
 	);
 }
 
-export default Home;
+export default withStyles({
+	item: {
+		minWidth: '350px',
+		margin: '1em',
+		boxSizing: 'border-box',
+	},
+	media: {
+		minWidth: '200px',
+	},
+})(Home);
