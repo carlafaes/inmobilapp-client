@@ -1,7 +1,6 @@
-import React, {useEffect} from "react";
-import {useSelector, useDispatch} from "react-redux";
+import React, {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
-import getProperty from "../../redux/actions/actions";
+import axios from "axios";
 
 
 import styles from "./PropertyDetails.module.css"
@@ -21,46 +20,64 @@ const slideData = [
 }
 ]
 
-function onClickHandler(e){
-    e.preventDefault()
-    console.log(e.target.value)
-    imageIndex = e.target.value
-}
 let imageIndex = 0
 export default function PropertyDetails() {
+    const [property, setProperty] = useState();
+    const [image, setImage] = useState(slideData[0])
     const {id} = useParams();
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getProperty(id))
+    let previousButton = null
+
+    useEffect( () => {
+        axios.get(`http://localhost:3000/api/properties/${id}`)
+        .then(data => {
+            setProperty(data.data)
+        })
+        .catch(err => {
+            console.log(err)
+        });
     },[])
-    const response = useSelector((state) => state.property);
-    console.log(response);
-    const property = response
-    if(!Array.isArray(slideData) || slideData.length <= 0) {
-        return null
+
+    function onClickHandler(e){
+        e.preventDefault();
+        if(!previousButton) {
+            previousButton = e.target;
+        }
+        previousButton.className = ''
+        previousButton = e.target
+        console.log('pppp',previousButton.className, previousButton.value)
+        console.log(e.target)
+        imageIndex = e.target.value
+        e.target.className = styles.active
+        setImage(slideData[imageIndex])
+    
     }
-    return (
+
+    return property !== undefined? (
         <div className={styles.main_container}>
+            {console.log(property)}
             <div className={styles.container}>
-                <section className={styles.slider}>
-                    {/* {slideData.map((slide, index) => {
-                    return (
-                        <img key={index} src={slide.image} alt="Images" className={styles.image} />
-                    )
-                    })} */}
-                    <img src={slideData[imageIndex].image} alt="" />
-                    {slideData.map((p, i) => <button key={i} type="button" value={i} onClick={onClickHandler}>{i+1}</button>)}
+                <section className={styles.slider_container}>
+                    <img className={styles.image} src={image.image} alt="property-images" />
+                    <div className={styles.buttons}>
+                        {slideData.map((p, i) => <button className='' key={i} type="button" value={i} onClick={onClickHandler}></button>)}
+                    </div>
                 </section>
                 <section className={styles.details_container}>
-                    <h2>{property.ubication.adress}</h2>
-                    <h3>{property.ubication.city}, {property.ubication.neighborhood}</h3>
-                    <h2>Details</h2>
                     <div className={styles.details}>
+                        <h2 className={styles.details_title}>Details</h2>
+                        <h2>{property.location.address}</h2>
+                        <h3>{property.location.city}, {property.location.neighborhood}</h3>
                         <p><span>Surface: </span>{property.details.area}</p>
                         <p><span>Rooms: </span>{property.details.rooms}</p>
                         <p><span>Baths: </span>{property.details.baths}</p>
                         <p><span>Garage: </span>{property.details.garage?(<span>Yes</span>):(<span>No</span>)}</p>
-                        <button>Mas Información</button>
+                    </div>
+                    <div className={styles.agent_info_container}>
+                        <h3>Agent info</h3>
+                        <div className={styles.agent_info}>
+                            <p><span>Name: </span>{property.agentID.name}</p>
+                            <p><span>Phone: </span>{property.agentID.phone}</p>
+                        </div>
                     </div>
                 </section>
 
@@ -69,5 +86,5 @@ export default function PropertyDetails() {
 
 
         </div>
-    )
+    ):(<div>Empty</div>)
 }
