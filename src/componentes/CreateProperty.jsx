@@ -29,9 +29,9 @@ export default function CreateProperty() {
             errors.type = 'Se requiere un tipo de inmueble!'
         } else if(!input.image){
             errors.image = 'Se requiere una direccion de imagen!'
-        } else if(true){
-            
-        }
+        } else if(!input.ubication.city){
+            errors.ubication.city = 'Debe ingresar una ciudad'
+        } else if(true){}
         return errors;
     }
 
@@ -135,10 +135,11 @@ export default function CreateProperty() {
         <form onSubmit={(e) => handleSubmit(e)}>
             <label>Type of Property:</label>
             <select onChange={(e) => handlerSelectType(e)}>
-                <option value="casa">casa</option>
-                <option value="apartamento">apartamento</option>
-                <option value="local">local</option>
-                <option value="finca">finca</option>
+                <option disabled selected>Tipo de propiedad:</option>
+                <option value="casa">Casa</option>
+                <option value="apartamento">Apartamento</option>
+                <option value="local">Local</option>
+                <option value="finca">Finca</option>
             </select><br />
             <label>Ubication:</label><br />
             <div>
