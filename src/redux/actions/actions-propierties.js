@@ -22,9 +22,13 @@ export const filterProperties=(payload, filter)=>{
 }
 
 export const postProperties = (payload) =>{
-  return async function(dispatch){
-      const resp = await axios.post('http://localhost:3001/api/properties',payload);
-      console.log(resp)
-      return resp
+  try {
+    return async function(dispatch){
+        const resp = await axios.post('http://localhost:3001/api/properties',payload);
+        console.log(resp)
+        return resp
+    }
+  } catch (e) {
+    console.log(e)
   }
 }

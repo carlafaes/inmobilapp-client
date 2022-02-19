@@ -8,14 +8,15 @@ export default function CreateProperty() {
     //Estado del input para el form
 
     const [input, setInput] = useState({
-        type: '',
+        typeProperty: '',
         ubication: {},
         state: '',
         images: [],
-        price: '',
+        rentalPrice: '',
         description: '',
         details: {},
-        date: ''
+        date: '',
+        agentID: ''
     })
 
     //Estado de errores y validador
@@ -39,11 +40,12 @@ export default function CreateProperty() {
     const [button, setButton] = useState({})
 
     useEffect(() => {
-        input.type &&
+        input.typeProperty &&
+        input.agentID &&
         Object.entries(input.ubication).length &&
         input.state &&
         input.images.length &&
-        input.price &&
+        input.rentalPrice &&
         input.description &&
         Object.entries(input.details).length &&
         input.date
@@ -106,7 +108,7 @@ export default function CreateProperty() {
     const handlerSelectType = (e) => {
         setInput({
             ...input,
-            type:  e.target.value
+            typeProperty:  e.target.value
         })
         
     }
@@ -147,8 +149,8 @@ export default function CreateProperty() {
                 onChange={(e) => handleChangeUbication(e)} />
                 <label>Neighbourhood:</label>
                 <input type="text"
-                value= {inputUbication.neighbourhood}
-                name="neighbourhood"
+                value= {inputUbication.neighbourhooh}
+                name="neighbourhooh"
                 onChange={(e) => handleChangeUbication(e)} />
                 <label>Adress:</label>
                 <input type="text"
@@ -175,8 +177,8 @@ export default function CreateProperty() {
             <div>
             <label>Price:</label>
                 <input type="text"
-                value= {input.price}
-                name="price"
+                value= {input.rentalPrice}
+                name="rentalPrice"
                 onChange={(e) => handleChange(e)} />
             </div>
             <div>
@@ -216,6 +218,14 @@ export default function CreateProperty() {
                 name="date"
                 onChange={handleChange} />
             </div>
+            <div>
+            <label>Agente ID:</label>
+                <input type="text"
+                value= {input.agentID}
+                name="agentID"
+                onChange={handleChange} />
+            </div>
+            
             <button disabled={button} type="submit">Create Property</button>
         </form>
     )
