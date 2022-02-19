@@ -6,9 +6,19 @@ import '../styles/Loading.css';
 import Load from '../Img/LOAD5gif.gif';
 import Footer from '../componentes/Footer';
 import ReactPaginate from 'react-paginate';
+import '../styles/Pagination.css'
 
 function Home() {
 	const [properties, setProperties] = useState([]);
+	const [pageNumber, setPageNumber]= useState(1);
+
+	const dwellingPerPage= 6;
+	const pagesVisited= pageNumber * dwellingPerPage;
+	const pageCount= Math.ceil(properties.length / dwellingPerPage);
+	const changePage = ({selected})=>{
+		setPageNumber(selected)
+	}
+	console.log(pageNumber)
 
 	useEffect(() => {
 		propertyService.getAll().then((result) => {
@@ -26,10 +36,6 @@ function Home() {
 		);
 	}
 
-	const handlePageClick= (data)=>{
-		console.log(data.selected)
-	}
-
 	return (
 		<div>
 			<div>
@@ -39,21 +45,26 @@ function Home() {
 				<Navbar />
 			</div>
 			<h1>Hello world!</h1>
-			{properties.map((propery) => (
+			{properties.slice(pagesVisited, pagesVisited + dwellingPerPage).map((propery) => (
 				<div key={propery.id}>
 					<h1>{propery.state}</h1>
-					<p>{propery.ubication.city}</p>
+					<p>{propery.location.city}</p>
 					<p>{propery.rentalPrice}</p>
 				</div>
 			))}
 			<div>
 				<ReactPaginate
-				previousLabel={'previous'}
-				nextLabel={'next'}
+				previousLabel={'⋘'}
+				nextLabel={'⋙'}
 				breakLabel={'...'}
-				pageCount={15} //cantidad de paginas total
-				marginPagesDisplayed={3}//num de paginas que se muestran antes y despues del breakLabel
-				onPageChange={handlePageClick}
+				pageCount={pageCount} //cantidad de paginas total
+				marginPagesDisplayed={2}//num de paginas que se muestran antes y despues del breakLabel
+				onPageChange={changePage}
+				containerClassName={"paginationBttns"}
+       			 previousLinkClassName={"previousBttn"}
+        		nextLinkClassName={"nextBttn"}
+        		disabledClassName={"paginationDisabled"}
+        		activeClassName={"paginationActive"}
 				/>
 			</div>
 			<div>
