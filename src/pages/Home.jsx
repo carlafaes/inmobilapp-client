@@ -10,10 +10,17 @@ import Footer from '../componentes/Footer';
 import NavFilterProperty from '../componentes/Nav-filter'
 import ReactPaginate from 'react-paginate';
 import '../styles/Pagination.css'
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+import { loadAllProperties } from "../redux/actions/actions-propierties";
 
 
 function Home() {
-	const [properties, setProperties] = useState([]);
+	const properties = useSelector((state) => state.propertys)
+	const dispatch = useDispatch();
+	
+	//const [properties, setProperties] = useState([]);
 	const [pageNumber, setPageNumber]= useState(1);
 
 	const dwellingPerPage= 5;
@@ -22,11 +29,12 @@ function Home() {
 	const changePage = ({selected})=>{
 		setPageNumber(selected)
 	}
+	console.log(properties);
 	
 	
 	useEffect(() => {
 		propertyService.getAll().then((result) => {
-			setProperties(result);
+			dispatch(loadAllProperties(result))
 		});
 	}, []);
 
@@ -53,7 +61,7 @@ function Home() {
 			{properties.slice(pagesVisited, pagesVisited + dwellingPerPage).map((propery) => (
 				<div key={propery.id}>
 					<h1>{propery.state}</h1>
-					{/* <p>{propery.location.city}</p> */}
+					<p>{propery.location.city}</p>
 					<p>{propery.rentalPrice}</p>
 				</div>
 			))}
