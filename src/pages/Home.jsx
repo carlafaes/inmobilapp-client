@@ -22,7 +22,7 @@ function Home() {
 	const changePage = ({selected})=>{
 		setPageNumber(selected)
 	}
-	console.log(pageNumber)
+	
 	
 	useEffect(() => {
 		propertyService.getAll().then((result) => {
@@ -49,7 +49,7 @@ function Home() {
 				<Navbar />
         <NavFilterProperty/>
 			</div>
-			<h1>Hello world!</h1>
+			
 			{properties.slice(pagesVisited, pagesVisited + dwellingPerPage).map((propery) => (
 				<div key={propery.id}>
 					<h1>{propery.state}</h1>
