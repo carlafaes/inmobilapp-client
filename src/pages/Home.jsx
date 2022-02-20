@@ -39,13 +39,28 @@ function Home() {
         <NavFilterProperty/>
 			</div>
 			<h1>Hello world!</h1>
-			{properties.map((propery) => (
+			{properties.slice(pagesVisited, pagesVisited + dwellingPerPage).map((propery) => (
 				<div key={propery.id}>
 					<h1>{propery.state}</h1>
 					<p>{propery.location.city}</p>
 					<p>{propery.rentalPrice}</p>
 				</div>
 			))}
+			<div>
+				<ReactPaginate
+				previousLabel={'⋘'}
+				nextLabel={'⋙'}
+				breakLabel={'...'}
+				pageCount={pageCount} //cantidad de paginas total
+				marginPagesDisplayed={2}//num de paginas que se muestran antes y despues del breakLabel
+				onPageChange={changePage}
+				containerClassName={"paginationBttns"}
+       			 previousLinkClassName={"previousBttn"}
+        		nextLinkClassName={"nextBttn"}
+        		disabledClassName={"paginationDisabled"}
+        		activeClassName={"paginationActive"}
+				/>
+			</div>
 			<div>
 				<Footer />
 			</div>
