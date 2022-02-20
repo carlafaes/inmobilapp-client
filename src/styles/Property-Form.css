@@ -1,0 +1,51 @@
+.submitform{
+    background-color: #7C7C7C;
+    direction: center center;
+    max-width:  1;
+    margin: 3rem 3rem 3rem 3rem;
+    border: 2px solid #535353;
+    padding: 2rem;
+}
+body{
+    background-color: #b4b4b4;
+}
+
+label{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: block;
+    padding: 1rem 0 .5rem;
+    
+}
+
+h2{
+    color: black; 
+    font-family: 'Source Sans Pro', sans-serif; 
+    font-size: 28px; font-weight: 400; 
+    line-height: 32px; 
+    margin: 0 0 24px;
+}
+
+input{
+    border-radius: 5px;
+}
+
+.submitbtn{
+    border: 2mm;
+    background: #EBB768;
+    padding: .5rem;
+    color: black;
+    margin: 1rem 0;
+    width: auto;
+    cursor: pointer;
+    
+}
+.submitbtn:hover{
+    background: #FAA222;
+}
+
+.selects{
+    background-color: #FAA222;
+    margin: 2rem auto;
+    border: 2px solid #535353;
+    padding: 2rem;
+}
