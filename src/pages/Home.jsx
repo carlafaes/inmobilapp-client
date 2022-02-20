@@ -8,10 +8,21 @@ import '../styles/Loading.css';
 import LOAD5 from '../Img/LOAD5gif.gif';
 import Footer from '../componentes/Footer';
 import NavFilterProperty from '../componentes/Nav-filter'
+import ReactPaginate from 'react-paginate';
+import '../styles/Pagination.css'
 
 
 function Home() {
 	const [properties, setProperties] = useState([]);
+	const [pageNumber, setPageNumber]= useState(1);
+
+	const dwellingPerPage= 5;
+	const pagesVisited= pageNumber * dwellingPerPage;
+	const pageCount= Math.ceil(properties.length / dwellingPerPage);
+	const changePage = ({selected})=>{
+		setPageNumber(selected)
+	}
+	console.log(pageNumber)
 	
 	useEffect(() => {
 		propertyService.getAll().then((result) => {
@@ -42,7 +53,7 @@ function Home() {
 			{properties.slice(pagesVisited, pagesVisited + dwellingPerPage).map((propery) => (
 				<div key={propery.id}>
 					<h1>{propery.state}</h1>
-					<p>{propery.location.city}</p>
+					{/* <p>{propery.location.city}</p> */}
 					<p>{propery.rentalPrice}</p>
 				</div>
 			))}
