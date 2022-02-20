@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import { GET_PROPERTY } from "../actions/constants";
-
-const initialState = [];
-
-const property = (state = initialState, action) => {
-  console.log(action);
-  switch (action.type) {
-    case GET_PROPERTY:
-      return {
-        ...state,
-        property: action.payload
-      }
-=======
 import {
   LOAD_ALL_PROPERTIES,
   FILTER_PROPERTIES
@@ -40,9 +26,8 @@ const propertys = (state = initiaState, action) => {
     
       return [...action.payload];
 
->>>>>>> 07f1cf169db8cb079580688d4b3f57de2e0c32cb
     default: return state;
   }
 };
 
-export default property;
+export default propertys;

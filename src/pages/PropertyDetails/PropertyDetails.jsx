@@ -22,14 +22,14 @@ const slideData = [
 
 let imageIndex = 0
 export default function PropertyDetails() {
-    const [property, setProperty] = useState();
+    const [property, setProperty] = useState([]);
     const [image, setImage] = useState(slideData[0])
     const {id} = useParams();
     let previousButton = null
 
-    useEffect( () => {
-        axios.get(`http://localhost:3000/api/properties/${id}`)
-        .then(data => {
+    useEffect(() => {
+        const request = axios.get(`http://localhost:3001/api/properties/${id}`)
+        request.then(data => {
             setProperty(data.data)
         })
         .catch(err => {
@@ -86,5 +86,8 @@ export default function PropertyDetails() {
 
 
         </div>
-    ):(<div>Empty</div>)
+    ):(<div>
+        {console.log(property)}
+        Empty
+    </div>)
 }
