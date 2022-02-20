@@ -108,7 +108,7 @@ const NavFilterProperty = () => {
 	};
 
 	return (
-		<div>
+		<div id='filters'>
 			<form onSubmit={search}>
 				<div className='ContainerNavFilter'>
 					<TextField

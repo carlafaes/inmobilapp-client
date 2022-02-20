@@ -3,36 +3,80 @@ import {
 	Card,
 	CardContent,
 	Typography,
-	Grid,
 	CardMedia,
+	Grid,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
-function ProCard(props) {
+function ProCard(props, classes) {
 	console.log(props.property.location?.city, 'props');
 	return (
-		<Grid item xs={12} sm={6} md={4} lg={3}>
-			<Card className={props.classes.item}>
-				<CardMedia image={props.property.image} />
-				<CardContent>
-					<Typography gutterBottom variant='h5' component='h6'>
-						<h1>{props.property.state}</h1>
-					</Typography>
-				</CardContent>
-				<p>{props.property.location?.city}</p>
-				<p>{props.property.rentalPrice}</p>
-			</Card>
-		</Grid>
+		<Card className={props.classes.item}>
+			<CardMedia image={props.property.image} />
+			<CardContent>
+				<Typography component='p' variant='h5'>
+					{props.property.state}
+					<p>{props.property.location?.city}</p>
+				</Typography>
+			</CardContent>
+			<p>{props.property.rentalPrice}</p>
+		</Card>
 	);
 }
 
 export default withStyles({
 	item: {
-		minWidth: '350px',
-		margin: '1em',
-		boxSizing: 'border-box',
+		display: 'flex',
+		margin: '10px',
+		width: '300px',
+		height: '300px',
+		flexDirection: 'column',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		backgroundColor: '#f5f5f5',
+		borderRadius: '10px',
+		boxShadow: '0px 0px 10px #000000',
+		flexGrow: 4,
 	},
+
+	'&:hover': {
+		boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.75)',
+	},
+
 	media: {
 		minWidth: '200px',
+		height: '200px',
+		backgroundColor: '#f5f5f5',
+		borderRadius: '1px',
+		margin: '10px',
+		boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)',
+		item: {
+			margin: '10px',
+			border: '1px solid red',
+			margin: '10px',
+			width: '300px',
+			height: '300px',
+			display: 'flex',
+			flexDirection: 'column',
+			justifyContent: 'center',
+			alignItems: 'center',
+			backgroundColor: '#f5f5f5',
+			borderRadius: '1px',
+
+			boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)',
+
+			'&:hover': {
+				boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.75)',
+			},
+		},
+
+		media: {
+			minWidth: '200px',
+			height: '200px',
+			backgroundColor: '#f5f5f5',
+			borderRadius: '1px',
+			margin: '10px',
+			boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)',
+		},
 	},
 })(ProCard);
