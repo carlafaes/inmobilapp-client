@@ -2,24 +2,17 @@ import React, { useEffect, useState } from 'react';
 import propertyService from '../services/property';
 import Landing from '../componentes/Landingprueba';
 import Navbar from '../componentes/Navbar';
+import '../styles/Loading.css'
+import Load from '../Img/LOAD5gif.gif'
 import '../styles/Loading.css';
-import Load from '../Img/LOAD5gif.gif';
+import LOAD5 from '../Img/LOAD5gif.gif';
 import Footer from '../componentes/Footer';
-import ReactPaginate from 'react-paginate';
-import '../styles/Pagination.css'
+import NavFilterProperty from '../componentes/Nav-filter'
+
 
 function Home() {
 	const [properties, setProperties] = useState([]);
-	const [pageNumber, setPageNumber]= useState(1);
-
-	const dwellingPerPage= 6;
-	const pagesVisited= pageNumber * dwellingPerPage;
-	const pageCount= Math.ceil(properties.length / dwellingPerPage);
-	const changePage = ({selected})=>{
-		setPageNumber(selected)
-	}
-	console.log(pageNumber)
-
+	
 	useEffect(() => {
 		propertyService.getAll().then((result) => {
 			setProperties(result);
@@ -43,6 +36,7 @@ function Home() {
 			</div>
 			<div>
 				<Navbar />
+        <NavFilterProperty/>
 			</div>
 			<h1>Hello world!</h1>
 			{properties.slice(pagesVisited, pagesVisited + dwellingPerPage).map((propery) => (
