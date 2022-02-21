@@ -76,7 +76,7 @@ function ProCard(props, classes) {
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-          <Link to={`/property/${props.property.id}`}>Mas informacion</Link>
+          Mas informacion
         </Button>
       </CardActions>
     </Card>
