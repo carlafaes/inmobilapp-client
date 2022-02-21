@@ -1,38 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import propertyService from "../../services/property";
-
+import Loading from "../../componentes/Loading";
 import styles from "./PropertyDetails.module.css";
-
-const slideData = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1645091751802-547f311002bf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1645090531845-ed3d634c5d87?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1645091246457-db3ae1e426d9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1645089657907-02c0c9319394?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
-  },
-];
-
 let imageIndex = 0;
+
 export default function PropertyDetails() {
   const [property, setProperty] = useState({});
-  const [image, setImage] = useState(slideData[0]);
-
+  const [image, setImage] = useState();
+  
   const { id } = useParams();
   let previousButton = null;
 
-  useEffect(() => {
-    propertyService.getPropertyDetail(id).then((res) => setProperty(res));
+  useEffect(async () => {
+    const request = await propertyService.getPropertyDetail(id);
+    setImage(request.images[0]);
+    setProperty(request);
   }, []);
 
   function onClickHandler(e) {
@@ -48,21 +31,21 @@ export default function PropertyDetails() {
     imageIndex = e.target.value;
 
     e.target.className = styles.active;
-    setImage(slideData[imageIndex]);
+    setImage(property.images[imageIndex]);
   }
 
-  return property.hasOwnProperty("id") ? (
+  return property.hasOwnProperty("id") && image ? (
     <div className={styles.main_container}>
       {console.log(property)}
       <div className={styles.container}>
         <section className={styles.slider_container}>
           <img
             className={styles.image}
-            src={image.image}
+            src={image}
             alt="property-images"
           />
           <div className={styles.buttons}>
-            {slideData.map((p, i) => (
+            {property.images.map((p, i) => (
               <button className="" key={i} type="button" value={i} onClick={onClickHandler}></button>
             ))}
           </div>
@@ -108,6 +91,6 @@ export default function PropertyDetails() {
       </div>
     </div>
   ) : (
-    <div>Empty</div>
+    <Loading/>
   );
 }
