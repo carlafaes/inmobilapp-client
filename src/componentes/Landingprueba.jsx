@@ -18,12 +18,12 @@ const useStyles = makeStyles((theme) => ({
   imgLogo: {
     marginLeft: '28%',
     marginTop: '2%',
-
   },
   slogan: {
     marginLeft: '36%',
     marginTop: '-5%',
     fontSize: '30px',
+    color:'#0d0d0d',
     fontFamily: 'Times New Roman',
     textShadow: '#faa222 1px 1px',
   },
