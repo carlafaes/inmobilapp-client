@@ -9,12 +9,15 @@ import LOAD5 from '../Img/LOAD5gif.gif';
 import Footer from '../componentes/Footer';
 import NavFilterProperty from '../componentes/Nav-filter'
 import ReactPaginate from 'react-paginate';
+import ScoreMax from '../componentes/ScoreMax';
 import '../styles/Pagination.css'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import {ThemeProvider, createTheme} from '@material-ui/core/styles'
 import { loadAllProperties } from "../redux/actions/actions-propierties";
 import {Switch} from '@material-ui/core';
+import { getScore,orderByScore } from '../redux/actions/action-properties-score';
+
 
 
 function Home() {
@@ -31,12 +34,19 @@ function Home() {
 		setPageNumber(selected)
 	}
 	console.log(properties);
-	
+	useEffect(()=>{
+		dispatch(getScore())
+	   // dispatch(orderByScore())
+	   console.log(getScore())
+   },[]);
 	
 	useEffect(() => {
+		
 		propertyService.getAll().then((result) => {
 			dispatch(loadAllProperties(result))
 		});
+
+		
 	}, []);
 
 	if (properties.length === 0) {
@@ -64,9 +74,10 @@ function Home() {
 			<div>
 				<Navbar />
 				<NavFilterProperty/>
-				<h2>🔆<Switch checked={darkMode} onChange={()=> setDarkMode(!darkMode)} color='primary' /> 🌙</h2>
-				
-        		
+				<h2>🔆<Switch checked={darkMode} onChange={()=> setDarkMode(!darkMode)} color='primary' /> 🌙</h2>	
+			</div>
+			<div>
+				<ScoreMax/>
 			</div>
 			
 			{properties.slice(pagesVisited, pagesVisited + dwellingPerPage).map((propery) => (
