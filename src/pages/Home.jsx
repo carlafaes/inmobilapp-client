@@ -25,7 +25,7 @@ function Home() {
 		});
 	}, []);
 
-	if (properties.length === 0) {
+	if (!properties) {
 		return (
 			<div className='loading_style'>
 				<div className='contenedor_home'>
@@ -34,7 +34,7 @@ function Home() {
 			</div>
 		);
 	}
-	console.log(properties, 'properties');
+	
 	return (
 		<div>
 			<Landing />

@@ -24,7 +24,6 @@ const labels = {
 };
 
 function ProCard(props, classes) {
-	console.log(props.property.location?.city, 'props');
 	const [value, setValue] = React.useState(2);
 	const [hover, setHover] = React.useState(-1);
 	return (
@@ -35,9 +34,9 @@ function ProCard(props, classes) {
 					height='150'
 					image='https://images4.alphacoders.com/211/thumb-350-211398.jpg'
 					alt='green iguana'
-					boxShadow='0px 0px 10px #f2D6AD'
+					boxshadow='0px 0px 10px #f2D6AD'
 				/>
-				<CardMedia image={props.property.image} />
+				<CardMedia image={props.property.image} src="img" />
 
 				<CardContent>
 					<Typography component='p' variant='h6' component='div'>
