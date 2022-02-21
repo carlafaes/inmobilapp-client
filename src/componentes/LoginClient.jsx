@@ -13,8 +13,8 @@ export const LoginClient = () => {
                         <h3 className="auth_title">Login</h3>
                     </div>
                     <form >
-                        <input type="text"
-                            placeholder="Email"
+                        <input type="Number"
+                            placeholder="Dni"
                             autoComplete="off"
                             className="auth_input" />
 

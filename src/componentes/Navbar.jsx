@@ -5,6 +5,7 @@ import SortIcon from '@material-ui/icons/Sort';
 import icono from '../Img/icono.png';
 import Fade from '@material-ui/core/Fade';
 import {Link} from 'react-router-dom'
+import 'animate.css';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -137,7 +138,8 @@ export default function Navbar() {
                 keepMounted
                 open={open}
                 onClose={handleClose}
-                TransitionComponent={Fade}>
+                TransitionComponent={Fade}
+                >
                 <h2 className="title">Area cliente</h2>
                 <MenuItem><i className="fa-regular fa-star emoticon"></i> Favoritos</MenuItem>
                 <MenuItem><i className="fa-solid fa-gift emoticon"></i> Solicita tu inmueble</MenuItem>
