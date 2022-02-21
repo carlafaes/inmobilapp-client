@@ -14,7 +14,6 @@ import { useDispatch } from "react-redux";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { loadAllProperties } from "../redux/actions/actions-propierties";
 import { Switch } from "@material-ui/core";
-import { Link } from "react-router-dom";
 import {ListCard} from "../componentes/ListCard";
 
 function Home() {
@@ -30,7 +29,6 @@ function Home() {
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
-  console.log(properties);
 
   useEffect(() => {
     propertyService.getAll().then((result) => {
