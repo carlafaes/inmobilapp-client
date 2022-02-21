@@ -119,7 +119,7 @@ export default withStyles({
 		marginRight: '1em',
 		marginBottom: '5em',
 		width: '300px',
-		height: '340px',
+		height: '400px',
 		flexDirection: 'column',
 		justifyContent: 'space-between',
 		alignItems: 'center',
@@ -142,7 +142,6 @@ export default withStyles({
 		margin: '10px',
 		boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)',
 		item: {
-			margin: '10px',
 			border: '1px solid red',
 			margin: '10px',
 			width: '300px',
