@@ -16,7 +16,11 @@ label{
     padding: 1rem 0 .5rem;
     
 }
-
+.img{
+    width: 30%;
+    height: 25%;
+    
+}
 h2{
     color: black; 
     font-family: 'Source Sans Pro', sans-serif; 
@@ -31,6 +35,7 @@ input{
 
 .submitbtn{
     border: 2mm;
+    border-radius: 5%;
     background: #EBB768;
     padding: .5rem;
     color: black;
