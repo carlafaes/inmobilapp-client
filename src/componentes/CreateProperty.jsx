@@ -38,36 +38,36 @@ function validate(input) {
 //Validador estados error details
 
 function validateDetails(inputDetails) {
-    let errorsD = {};
-    if (!inputDetails.area) {
-      errorsD.area = "Debe ingresar un area en metros";
-    }
-    if (!inputDetails.rooms) {
-      errorsD.rooms = "Debe ingresar una cantidad de habitaciones";
-    }
-    if (!inputDetails.baths) {
-      errorsD.baths = "Debe ingresar una cantidad de baños";
-    }
-    if (!inputDetails.garage) {
-      errorsD.garage = "Debe ingresar si posee o no garage";
-    }
-    return errorsD;
+  let errorsD = {};
+  if (!inputDetails.area) {
+    errorsD.area = "Debe ingresar un area en metros";
+  }
+  if (!inputDetails.rooms) {
+    errorsD.rooms = "Debe ingresar una cantidad de habitaciones";
+  }
+  if (!inputDetails.baths) {
+    errorsD.baths = "Debe ingresar una cantidad de baños";
+  }
+  if (!inputDetails.garage) {
+    errorsD.garage = "Debe ingresar si posee o no garage";
+  }
+  return errorsD;
 }
 
 //Validador estados error lotacion
 
 function validatelocation(inputlocation) {
-    let errorsU = {};
-    if (!inputlocation.city) {
-      errorsU.city = "Se requiere una ciudad";
-    }
-    if (!inputlocation.neighborhood) {
-      errorsU.neighborhood = "Se requiere un barrio";
-    }
-    if (!inputlocation.address) {
-      errorsU.address = "Se requiere una direccion";
-    }
-    return errorsU;
+  let errorsU = {};
+  if (!inputlocation.city) {
+    errorsU.city = "Se requiere una ciudad";
+  }
+  if (!inputlocation.neighborhood) {
+    errorsU.neighborhood = "Se requiere un barrio";
+  }
+  if (!inputlocation.address) {
+    errorsU.address = "Se requiere una direccion";
+  }
+  return errorsU;
 }
 
 export default function CreateProperty() {
@@ -91,7 +91,6 @@ export default function CreateProperty() {
   const [errors, setErrors] = useState({});
 
   //Estado del boton para controlar el form
-
 
   //Handlers
 
@@ -131,13 +130,12 @@ export default function CreateProperty() {
   };
 
   const handlerImages = (e) => {
-      e.preventDefault()
+    e.preventDefault();
     setInput({
       ...input,
       images: [...input.images, input.img],
-      img: ''
+      img: "",
     });
-    
   };
 
   const handlerImg = (e) => {
@@ -149,8 +147,16 @@ export default function CreateProperty() {
   //console.log(input);
   //Handlers Objetos
 
-  const [inputlocation, setInputlocation] = useState({});
-  const [inputDetails, setInputDetails] = useState({});
+  const [inputlocation, setInputlocation] = useState({
+    city: "",
+    neighborhood: "",
+    address: "",
+  });
+  const [inputDetails, setInputDetails] = useState({
+    area: "",
+    baths: "",
+    rooms: ""
+  });
 
   const handlelocation = (e) => {
     e.preventDefault();
@@ -199,8 +205,8 @@ export default function CreateProperty() {
 
   //Errors de location y details(con respectivos validadores)
 
-    const [errorsUbi, setErrorsU] = useState({});
-    const [errorsDet, setErrorsD] = useState({});
+  const [errorsUbi, setErrorsU] = useState({});
+  const [errorsDet, setErrorsD] = useState({});
 
   // Botones para checkear campos
 
@@ -232,28 +238,29 @@ export default function CreateProperty() {
   //funcion loca
 
   const Funcionreloca = (inputloc, inputdet) => {
-    if(inputdet && inputloc){
-        return true
+    if (inputdet && inputloc) {
+      return true;
+    } else {
+      return false;
     }
-    else {return false}
-  }
+  };
 
-  const [button, setButton] = useState({})
+  const [button, setButton] = useState({});
 
   useEffect(() => {
-      input.typeProperty &&
-      Object.entries(input.location).length &&
-      input.state &&
-      input.images.length &&
-      input.rentalPrice &&
-      input.description &&
-      Object.entries(input.details).length &&
-      input.date &&
-      input.agentID &&
-      Funcionreloca(errorsDet,errorsUbi) ? 
-      setButton(false) :
-      setButton(true)
-  },[input])
+    input.typeProperty &&
+    Object.entries(input.location).length &&
+    input.state &&
+    input.images.length &&
+    input.rentalPrice &&
+    input.description &&
+    Object.entries(input.details).length &&
+    input.date &&
+    input.agentID &&
+    Funcionreloca(errorsDet, errorsUbi)
+      ? setButton(false)
+      : setButton(true);
+  }, [input]);
 
   //Handler del submit
 
@@ -269,14 +276,14 @@ export default function CreateProperty() {
   //console.log(errorsDet);
   //console.log(errorsUbi);
   return (
-    <form className="submitform" >
+    <form className="submitform">
       <div align="center">
         <img className="img" src="icono.png" />
       </div>
       <h2>Formulario creación inmuebles</h2>
       <label>Type of Property:</label>
       <select defaultValue="" onChange={(e) => handlerSelectType(e)}>
-        <option value="" disabled>
+        <option value="default" disabled>
           Tipo de propiedad:
         </option>
         <option value="casa">Casa</option>
@@ -312,7 +319,11 @@ export default function CreateProperty() {
           onChange={(e) => handleChangelocation(e)}
         />
         {errorsUbi.address && <h3>{errorsUbi.address}</h3>}
-        <button className="submitbtn" disabled={buttonU} onClick={(e) => handleAlllocation(e)}>
+        <button
+          className="submitbtn"
+          disabled={buttonU}
+          onClick={(e) => handleAlllocation(e)}
+        >
           Check
         </button>
       </div>
@@ -337,7 +348,9 @@ export default function CreateProperty() {
           name="images"
         />
         {errors.img && <h3>{errors.img}</h3>}
-        <button className="submitbtn" onClick={handlerImages}>Add IMG</button>
+        <button className="submitbtn" onClick={handlerImages}>
+          Add IMG
+        </button>
       </div>
       <div>
         <label>Price:</label>
@@ -400,7 +413,11 @@ export default function CreateProperty() {
                 value= {inputDetails.garage}
                 name="garage" 
                 onChange={(e) => handleChangeDetails(e)}/>*/}
-        <button className="submitbtn" disabled={buttonD} onClick={(e) => handleAllDetails(e)}>
+        <button
+          className="submitbtn"
+          disabled={buttonD}
+          onClick={(e) => handleAllDetails(e)}
+        >
           Check Details
         </button>
       </div>
@@ -425,7 +442,11 @@ export default function CreateProperty() {
         {errors.agentID && <h3>{errors.agentID}</h3>}
       </div>
 
-      <button disabled={button} className="submitbtn" onClick={(e) =>handleSubmit(e)}>
+      <button
+        disabled={button}
+        className="submitbtn"
+        onClick={(e) => handleSubmit(e)}
+      >
         Create Property
       </button>
     </form>
