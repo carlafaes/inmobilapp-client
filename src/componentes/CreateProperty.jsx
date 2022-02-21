@@ -26,11 +26,8 @@ function validate(input) {
   if (!input.description) {
     errors.description = "Debe ingresar una descripcion del inmueble";
   }
-  if (!input.date) {
-    errors.date = "Debe ingresar una fecha";
-  }
   if (!input.agentID) {
-    errors.agentID = "Debe ingresar un ID de Agente";
+    errors.agentID = "Debe ingresar ID del Agente"
   }
   return errors;
 }
@@ -70,6 +67,7 @@ function validatelocation(inputlocation) {
   return errorsU;
 }
 
+
 export default function CreateProperty() {
   const dispatch = useDispatch();
   //Estado del input para el form
@@ -83,7 +81,7 @@ export default function CreateProperty() {
     description: "",
     details: {},
     date: "",
-    agentID: "",
+    agentID: ""
   });
 
   //Estado de errores
@@ -127,6 +125,10 @@ export default function CreateProperty() {
       ...inputDetails,
       garage: e.target.value,
     });
+    setInput({
+      ...input,
+      details: {...inputDetails}
+    })
   };
 
   const handlerImages = (e) => {
@@ -238,10 +240,14 @@ export default function CreateProperty() {
   //funcion loca
 
   const Funcionreloca = (inputloc, inputdet) => {
-    if (inputdet && inputloc) {
-      return true;
-    } else {
+    if (Object.entries(inputloc).length) {
       return false;
+    }
+    if (Object.entries(inputdet).length){
+      return false;
+    }
+    else {
+      return true;
     }
   };
 
@@ -255,9 +261,7 @@ export default function CreateProperty() {
     input.rentalPrice &&
     input.description &&
     Object.entries(input.details).length &&
-    input.date &&
-    input.agentID &&
-    Funcionreloca(errorsDet, errorsUbi)
+    Funcionreloca(errorsDet,errorsUbi)
       ? setButton(false)
       : setButton(true);
   }, [input]);
@@ -294,7 +298,7 @@ export default function CreateProperty() {
       {errors.typeProperty && <h3>{errors.typeProperty}</h3>}
 
       <div className="selects">
-        <label>location:</label>
+        <label>Location:</label>
         <label>City:</label>
         <input
           type="text"
@@ -372,6 +376,16 @@ export default function CreateProperty() {
         />
         {errors.description && <h3>{errors.description}</h3>}
       </div>
+      <div>
+        <label>ID del Agente:</label>
+        <input
+          type="text"
+          value={input.agentID}
+          name="agentID"
+          onChange={(e) => handleChange(e)}
+        />
+        {errors.agentID && <h3>{errors.agentID}</h3>}
+      </div>
 
       <div className="selects">
         <label>Details:</label>
@@ -422,33 +436,15 @@ export default function CreateProperty() {
         </button>
       </div>
       <div>
-        <label>Date:</label>
-        <input
-          type="date"
-          value={input.date}
-          name="date"
-          onChange={handleChange}
-        />
-        {errors.date && <h3>{errors.date}</h3>}
-      </div>
-      <div>
-        <label>Agente ID:</label>
-        <input
-          type="text"
-          value={input.agentID}
-          name="agentID"
-          onChange={handleChange}
-        />
-        {errors.agentID && <h3>{errors.agentID}</h3>}
-      </div>
-
       <button
         disabled={button}
         className="submitbtn"
-        onClick={(e) => handleSubmit(e)}
-      >
+        onClick={(e) => handleSubmit(e)}>
         Create Property
       </button>
+      {!Funcionreloca(errorsDet,errorsUbi) && <h3>Debe checkear todos los campos Location y Details</h3>}
+      </div>
+      
     </form>
   );
 }
