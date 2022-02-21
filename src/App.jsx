@@ -1,5 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import PropertyDetails from './pages/PropertyDetails/PropertyDetails';
+// import Landing from './pages/Landingprueba'
 import { LoginClient } from './componentes/LoginClient';
 import { RegisterClient } from './componentes/RegisterClient';
 import Home from './pages/Home';
@@ -13,6 +15,7 @@ function App() {
       <Route exact path="/form" element={<CreateProperty />} />
       <Route path="/login" element={<LoginClient/>}/>
       <Route path='/register' element={<RegisterClient/>}/>
+      <Route exact path= "/property/:id" element={<PropertyDetails/>}/>
     </Routes>
   );
 }
