@@ -1,31 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import propertyService from '../services/property';
-import Landing from '../componentes/Landingprueba';
-import Navbar from '../componentes/Navbar';
-import '../styles/Loading.css'
-import Load from '../Img/LOAD5gif.gif'
-import '../styles/Loading.css';
-import LOAD5 from '../Img/LOAD5gif.gif';
-import Footer from '../componentes/Footer';
-import NavFilterProperty from '../componentes/Nav-filter'
-import ReactPaginate from 'react-paginate';
-import ScoreMax from '../componentes/ScoreMax';
-import '../styles/Pagination.css'
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import {ThemeProvider, createTheme} from '@material-ui/core/styles'
+import React, { useEffect, useState } from "react";
+import propertyService from "../services/property";
+import Landing from "../componentes/Landingprueba";
+import Navbar from "../componentes/Navbar";
+import "../styles/Loading.css";
+import Load from "../Img/LOAD5gif.gif";
+import "../styles/Loading.css";
+import Footer from "../componentes/Footer";
+import NavFilterProperty from "../componentes/Nav-filter";
+import ReactPaginate from "react-paginate";
+import "../styles/Pagination.css";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { loadAllProperties } from "../redux/actions/actions-propierties";
-import {Switch} from '@material-ui/core';
-import { getScore,orderByScore } from '../redux/actions/action-properties-score';
-
-
+import { Switch } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 function Home() {
-	const properties = useSelector((state) => state.propertys)
-	const dispatch = useDispatch();
-	const [darkMode,setDarkMode] = useState(false)
-	//const [properties, setProperties] = useState([]);
-	const [pageNumber, setPageNumber]= useState(1);
+  const properties = useSelector((state) => state.propertys);
+  const dispatch = useDispatch();
+  const [darkMode, setDarkMode] = useState(false);
+  //const [properties, setProperties] = useState([]);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  
 
 	const dwellingPerPage= 5;
 	const pagesVisited= pageNumber * dwellingPerPage;
@@ -34,11 +32,11 @@ function Home() {
 		setPageNumber(selected)
 	}
 	console.log(properties);
-	useEffect(()=>{
-		dispatch(getScore())
-	   // dispatch(orderByScore())
-	   console.log(getScore())
-   },[]);
+// 	useEffect(()=>{
+// 		dispatch(getScore())
+// 	   // dispatch(orderByScore())
+// 	   console.log(getScore())
+//    },[]);
 	
 	useEffect(() => {
 		
@@ -48,22 +46,23 @@ function Home() {
 
 		
 	}, []);
+  if (properties.length === 0) {
+    return (
+      <div className="loading_style">
+        <div className="contenedor_home">
+          <img className="home_load" src={Load} />
+        </div>
+      </div>
+    );
+  }
 
-	if (properties.length === 0) {
-		return (
-			<div className='loading_style'>
-				<div className='contenedor_home'>
-					<img className='home_load' src={Load} />
-				</div>
-			</div>
-		);
-	}
+  const theme = createTheme({
+    palette: {
+      type: darkMode ? "dark" : "light",
+    },
+  });
 
-	const theme= createTheme({
-		palette:{
-			type: darkMode ? 'dark' : 'light',
-		}
-	})
+  
 
 	return (
 		<ThemeProvider theme={theme}>
@@ -76,9 +75,9 @@ function Home() {
 				<NavFilterProperty/>
 				<h2>🔆<Switch checked={darkMode} onChange={()=> setDarkMode(!darkMode)} color='primary' /> 🌙</h2>	
 			</div>
-			<div>
+			{/* <div>
 				<ScoreMax/>
-			</div>
+			</div> */}
 			
 			{properties.slice(pagesVisited, pagesVisited + dwellingPerPage).map((propery) => (
 				<div key={propery.id}>
