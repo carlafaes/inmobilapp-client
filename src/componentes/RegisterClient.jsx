@@ -50,7 +50,7 @@ export const RegisterClient = () => {
             name,
             address
         }
-        // dispatch(PostClient(data))
+        dispatch(PostClient(data))
         console.log(data)
         notify()
     }
