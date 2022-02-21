@@ -1,12 +1,16 @@
+import React from 'react';
 import { useState } from 'react';
 
 import { filterProperties } from '../redux/actions/actions-propierties';
 
-import { Button, TextField } from '@material-ui/core';
+import { Button, FormControl, MenuItem, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import '../styles/Nav-filter.css';
 import { useDispatch } from 'react-redux';
 import propertyService from '../services/property';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
 
 const useStyles = makeStyles((theme) => ({
 	textFieldCity: {
@@ -59,8 +63,11 @@ const useStyles = makeStyles((theme) => ({
 
 const NavFilterProperty = () => {
 	const dispatch = useDispatch();
-
+	const [todo, setTodo] = React.useState('');
 	const clases = useStyles();
+	const onChangeTodo = (event) => {
+		setTodo(event.target.value);
+	};
 
 	const [input, setInput] = useState({
 		maximum_budget: '',
@@ -108,69 +115,80 @@ const NavFilterProperty = () => {
 	};
 
 	return (
-		<div id='filters'>
-			<form onSubmit={search}>
-				<div className='ContainerNavFilter'>
-					<TextField
-						name='maximum_budget'
-						label='Presupuesto maximo'
-						value={input.maximum_budget}
-						onChange={handleChange}
-						variant='standard'
-						className={clases.textFieldMoney}
-					/>
-					<TextField
-						name='location'
-						label='Ciudad'
-						value={input.location}
-						onChange={handleChange}
-						variant='standard'
-						className={clases.textFieldCity}
-					/>
-					<select
-						className='selectType navFilterAll'
-						onChange={handleChange}
-						name='typeProperty'
-					>
-						<option>Todo</option>
-						<option>Casa</option>
-						<option>Apartamento</option>
-						<option>Local</option>
-						<option>Finca</option>
-					</select>
-					<div className='ContainerRooms navFilterAll'>
-						<p className='pRomms'>Habitaciones</p>
-						<div>
-							<Button
-								variant='outlined'
-								onClick={changeRooms}
-								className={clases.buttonMoreOrLess}
-							>
-								+
-							</Button>
-							{input.rooms > 0 ? input.rooms : <span>Todos</span>}
-							<Button
-								variant='outlined'
-								onClick={changeRooms}
-								className={clases.buttonMoreOrLess}
-							>
-								-
-							</Button>
+		<Box
+			sx={{ minWidth: 1200, maxWidth: 1200, margin: 'auto', padding: '20px' }}
+		>
+			<div id='filters'>
+				<FormControl fullWidth>
+					<div className='ContainerNavFilter'>
+						<TextField
+							name='maximum_budget'
+							label='Presupuesto maximo'
+							value={input.maximum_budget}
+							onChange={handleChange}
+							variant='standard'
+							className={clases.textFieldMoney}
+						/>
+						<TextField
+							name='location'
+							label='Ciudad'
+							value={input.location}
+							onChange={handleChange}
+							variant='standard'
+							className={clases.textFieldCity}
+						/>
+						<Box sx={{ minWidth: 120 }}>
+							<FormControl fullWidth>
+								<Select
+									labelId='demo-simple-select-label'
+									id='demo-simple-select'
+									value={todo}
+									className='selectType navFilterAll'
+									onChange={onChangeTodo}
+									name='typeProperty'
+								>
+									<MenuItem value={10}>Todo</MenuItem>
+									<MenuItem value={20}>Casa</MenuItem>
+									<MenuItem value={30}>Apartamento</MenuItem>
+									<MenuItem value={40}>Local</MenuItem>
+									<MenuItem value={50}>Finca</MenuItem>
+								</Select>
+							</FormControl>
+						</Box>
+						<div className='ContainerRooms navFilterAll'>
+							<p className='pRomms'>Habitaciones</p>
+							<div>
+								<Button
+									variant='outlined'
+									onClick={changeRooms}
+									className={clases.buttonMoreOrLess}
+								>
+									+
+								</Button>
+								{input.rooms > 0 ? input.rooms : <span>Todos</span>}
+								<Button
+									variant='outlined'
+									onClick={changeRooms}
+									className={clases.buttonMoreOrLess}
+								>
+									-
+								</Button>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div className='containerSearch'>
-					<Button
-						onClick={search}
-						className='search'
-						size='medium'
-						variant='contained'
-					>
-						Buscar
-					</Button>
-				</div>
-			</form>
-		</div>
+					<div className='containerSearch'>
+						<Button
+							onClick={search}
+							className='search'
+							size='medium'
+							variant='contained'
+						>
+							Buscar
+						</Button>
+					</div>
+				</FormControl>
+			</div>
+		</Box>
 	);
 };
 

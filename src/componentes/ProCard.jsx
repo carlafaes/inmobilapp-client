@@ -1,35 +1,103 @@
 import React from 'react';
-import {
-	Card,
-	CardContent,
-	Typography,
-	CardMedia,
-	Grid,
-} from '@material-ui/core';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
 import { withStyles } from '@material-ui/core/styles';
+import { Button, CardActions } from '@material-ui/core';
+import Rating from '@mui/material/Rating';
+import Box from '@mui/material/Box';
+import StarIcon from '@material-ui/icons/Star';
+
+const labels = {
+	0.5: 'Useless',
+	1: 'Useless+',
+	1.5: 'Poor',
+	2: 'Poor+',
+	2.5: 'Ok',
+	3: 'Ok+',
+	3.5: 'Good',
+	4: 'Good+',
+	4.5: 'Excellent',
+	5: 'Excellent+',
+};
 
 function ProCard(props, classes) {
 	console.log(props.property.location?.city, 'props');
+	const [value, setValue] = React.useState(2);
+	const [hover, setHover] = React.useState(-1);
 	return (
-		<Card className={props.classes.item}>
-			<CardMedia image={props.property.image} />
-			<CardContent>
-				<Typography component='p' variant='h5'>
-					{props.property.state}
-					<p>{props.property.location?.city}</p>
-				</Typography>
-			</CardContent>
-			<p>{props.property.rentalPrice}</p>
+		<Card className={props.classes.item} sx={{ maxWidth: 320, maxHeight: 420 }}>
+			<CardActionArea>
+				<CardMedia
+					component='img'
+					height='150'
+					image='https://images4.alphacoders.com/211/thumb-350-211398.jpg'
+					alt='green iguana'
+					boxShadow='0px 0px 10px #f2D6AD'
+				/>
+				<CardMedia image={props.property.image} />
+
+				<CardContent>
+					<Typography component='p' variant='h6' component='div'>
+						{props.property.state}
+						<p>{props.property.location?.city}</p>
+					</Typography>
+					<p className={props.classes.$price}>{props.property.rentalPrice}</p>
+				</CardContent>
+				<div className={props.classes.rating}>
+					<Box
+						sx={{
+							width: 200,
+							display: 'flex',
+							alignItems: 'center',
+						}}
+					>
+						<Rating
+							name='hover-feedback'
+							value={value}
+							precision={0.5}
+							onChange={(event, newValue) => {
+								setValue(newValue);
+							}}
+							onChangeActive={(event, newHover) => {
+								setHover(newHover);
+							}}
+							emptyIcon={
+								<StarIcon style={{ opacity: 0.55 }} fontSize='inherit' />
+							}
+						/>
+						{value !== null && (
+							<Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
+						)}
+					</Box>
+				</div>
+			</CardActionArea>
+			<CardActions>
+				<Button size='small' color='primary'>
+					Mas informacion
+				</Button>
+			</CardActions>
 		</Card>
 	);
 }
 
 export default withStyles({
+	price: {
+		fontSize: '1.5rem',
+		fontWeight: 'bold',
+		color: 'black',
+	},
+	rating: {
+		display: 'flex',
+		justifyContent: 'center',
+	},
 	item: {
 		display: 'flex',
 		margin: '10px',
 		width: '300px',
-		height: '300px',
+		height: '340px',
 		flexDirection: 'column',
 		justifyContent: 'space-between',
 		alignItems: 'center',
@@ -40,13 +108,13 @@ export default withStyles({
 	},
 
 	'&:hover': {
-		boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.75)',
+		boxShadow: '#f2D6AD',
 	},
 
 	media: {
 		minWidth: '200px',
 		height: '200px',
-		backgroundColor: '#f5f5f5',
+		backgroundColor: '#f2D6AD',
 		borderRadius: '1px',
 		margin: '10px',
 		boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)',
