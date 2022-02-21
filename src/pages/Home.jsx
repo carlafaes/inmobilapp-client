@@ -12,14 +12,15 @@ import ReactPaginate from 'react-paginate';
 import '../styles/Pagination.css'
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-
+import {ThemeProvider, createTheme} from '@material-ui/core/styles'
 import { loadAllProperties } from "../redux/actions/actions-propierties";
+import {Switch} from '@material-ui/core';
 
 
 function Home() {
 	const properties = useSelector((state) => state.propertys)
 	const dispatch = useDispatch();
-	
+	const [darkMode,setDarkMode] = useState(false)
 	//const [properties, setProperties] = useState([]);
 	const [pageNumber, setPageNumber]= useState(1);
 
@@ -48,14 +49,24 @@ function Home() {
 		);
 	}
 
+	const theme= createTheme({
+		palette:{
+			type: darkMode ? 'dark' : 'light',
+		}
+	})
+
 	return (
+		<ThemeProvider theme={theme}>
 		<div>
 			<div>
 				<Landing />
 			</div>
 			<div>
 				<Navbar />
-        <NavFilterProperty/>
+				<NavFilterProperty/>
+				<h2>🔆<Switch checked={darkMode} onChange={()=> setDarkMode(!darkMode)} color='primary' /> 🌙</h2>
+				
+        		
 			</div>
 			
 			{properties.slice(pagesVisited, pagesVisited + dwellingPerPage).map((propery) => (
@@ -84,6 +95,7 @@ function Home() {
 				<Footer />
 			</div>
 		</div>
+		</ThemeProvider>
 	);
 }
 
