@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { loadAllProperties } from "../redux/actions/actions-propierties";
 import { Switch } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import {ListCard} from "../componentes/ListCard";
 
 function Home() {
   const properties = useSelector((state) => state.propertys);
@@ -29,7 +29,6 @@ function Home() {
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
-  console.log(properties);
 
   useEffect(() => {
     propertyService.getAll().then((result) => {
@@ -37,7 +36,7 @@ function Home() {
     });
   }, []);
 
-  if (properties.length === 0) {
+  if (!properties) {
     return (
       <div className="loading_style">
         <div className="contenedor_home">
@@ -72,19 +71,13 @@ function Home() {
             🌙
           </h2>
         </div>
-
-        {properties
-          .slice(pagesVisited, pagesVisited + dwellingPerPage)
-          .map((propery) => (
-            <div key={propery.id}>
-              <Link to={`/property/${propery.id}`}>
-                <h1>{propery.state}</h1>
-              </Link>
-              <p>{propery.location.city}</p>
-              <p>{propery.rentalPrice}</p>
-            </div>
-          ))}
-        <div>
+        <ListCard
+          properties={properties.slice(
+            pagesVisited,
+            pagesVisited + dwellingPerPage
+          )}
+        />
+        <div style={{padding:'20px 20px'}}>
           <ReactPaginate
             previousLabel={"⋘"}
             nextLabel={"⋙"}
