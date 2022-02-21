@@ -76,6 +76,9 @@ function ProCard(props, classes) {
 			</CardActionArea>
 			<CardActions>
 				<Button
+					className={props.classes.button}
+					size='small'
+					color='primary'
 					href={`/property/${props.property.id}`}
 					size='small'
 					color='primary'
@@ -88,8 +91,20 @@ function ProCard(props, classes) {
 }
 
 export default withStyles({
+	button: {
+		fontSize: '1rem',
+		fontWeight: 'bold',
+		textTransform: 'none',
+		color: '#fff',
+		backgroundColor: '#ECA242',
+
+		'&:hover': {
+			backgroundColor: '#535353',
+			color: '#fff',
+		},
+	},
 	price: {
-		fontSize: '1.5rem',
+		fontSize: '1.8rem',
 		fontWeight: 'bold',
 		color: 'black',
 	},
