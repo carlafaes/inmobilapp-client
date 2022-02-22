@@ -35,11 +35,7 @@ function Home() {
 		setPageNumber(selected)
 	}
 	console.log(properties);
-// 	useEffect(()=>{
-// 		dispatch(getScore())
-// 	    // dispatch(orderByScore())
-// 	   console.log(getScore())
-//    },[]);
+
 	
 	useEffect(() => {
 		
@@ -49,7 +45,8 @@ function Home() {
 
 		
 	}, []);
-  if (properties.length === 0) {
+
+	if (!properties) {
     return (
       <div className="loading_style">
         <div className="contenedor_home">
@@ -57,7 +54,7 @@ function Home() {
         </div>
       </div>
     );
-  }
+  	}
 
   const theme = createTheme({
     palette: {
@@ -82,13 +79,13 @@ function Home() {
 				<ScoreMax/>
 			</div>  
 			
-			{properties.slice(pagesVisited, pagesVisited + dwellingPerPage).map((propery) => (
-				<div key={propery.id}>
-					<h1>{propery.state}</h1>
-					<p>{propery.location.city}</p>
-					<p>{propery.rentalPrice}</p>
-				</div>
-			))}
+			<ListCard
+            properties={properties.slice(
+            pagesVisited,
+            pagesVisited + dwellingPerPage
+            )}
+           />
+	
 			<div>
 				<ReactPaginate
 				previousLabel={'⋘'}

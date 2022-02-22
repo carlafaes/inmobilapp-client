@@ -23,31 +23,21 @@ export default function ScoreMax(){
 
   console.log(reviews);
   
-    // const stateScoreMax= useSelector((state)=>state.filteredScore);
-    
-
-    // useEffect(()=>{
-    //   dispatch(getScore()) 
-
-    // },[]);
-
-    // useEffect(()=>{
-    //     // if(stateScoreMax){
-    //     //     dispatch(orderByScore(stateScoreMax))
-    //     // }
-    //     dispatch(orderByScore())
-    // },[])
+   
     
     return(
         <div>
             <h1>score</h1>
-            {/* {stateScoreMax && stateScoreMax.map((e,index)=>(
+            {reviews.length !== 0 ? reviews.map((e,index)=>(
                 <div key={Math.random(index)}>
-                    <h1>{e.content}</h1>
+                    <h1>{e.location.city}</h1>
+                    <h2>{e.score}</h2>
+                    <h3>{e.state}</h3>
+                    <a><img src={e.images.filter(e=>e)}/></a>
 
                 </div>
                 
-            ))}  */}
+            )) : <h1>no existen mejores puntuados</h1>} 
         
         </div>
     )
