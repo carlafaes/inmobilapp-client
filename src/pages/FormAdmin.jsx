@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import Input from "../componentes/Input";
 import adminService from "../services/admin";
+import reviewsService from "../services/reviews";
 import { validateFormAdmin } from "../utils/errorsFormAdmin";
+import { filterRevies, getAllReviews } from "../redux/actions/actions-reviews";
+import { useSelector } from "react-redux";
 
 export default function FormAdmin() {
   document.title = "InmobillApp | registerAdmin";
@@ -13,6 +17,10 @@ export default function FormAdmin() {
     age: 0,
   };
 
+  const reviews = useSelector((state) => state.reviews.reviewsFilter);
+
+  const dispatch = useDispatch();
+
   const [input, setInput] = useState(initInput);
   const [error, setError] = useState({
     name: true,
@@ -22,6 +30,16 @@ export default function FormAdmin() {
     age: true,
   });
 
+  useEffect(() => {
+    reviewsService.getReviews().then((data) => {
+      return dispatch(getAllReviews(data));
+    }).then(() => {
+      dispatch(filterRevies())
+    });
+  }, []);
+
+  console.log(reviews);
+
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
     setError(validateFormAdmin({ ...input, [e.target.name]: e.target.value }));
@@ -30,7 +48,7 @@ export default function FormAdmin() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isDone()) {
-      adminService.postAdmin(input).then(data => console.log(data));
+      adminService.postAdmin(input).then((data) => console.log(data));
       setInput(initInput);
     } else {
       alert("No...");
