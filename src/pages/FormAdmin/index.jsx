@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Input from "../componentes/Input";
-import adminService from "../services/admin";
-import { validateFormAdmin } from "../utils/errorsFormAdmin";
+import Input from "../../componentes/Input";
+import adminService from "../../services/admin";
+import { validateFormAdmin } from "../../utils/errorsFormAdmin";
 
 export default function FormAdmin() {
   document.title = "InmobillApp | registerAdmin";
