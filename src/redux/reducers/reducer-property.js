@@ -39,7 +39,6 @@ const properties = (state = initiaState, action) => {
           (p) => Number(p.details.rooms) === Number(action.filter.rooms)
         );
       }
-      console.log(action)
 
       return [...action.payload];
 
@@ -48,7 +47,6 @@ const properties = (state = initiaState, action) => {
         ...state,
       };
 
-      return [...action.payload];
 
     default:
       return state;

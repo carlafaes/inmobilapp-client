@@ -113,7 +113,6 @@ const NavFilterProperty = () => {
 
 	const search = () => {
 		propertyService.getAll().then((r) => {
-      console.log(r)
 			dispatch(filterProperties(r, input));
 			
 		});
