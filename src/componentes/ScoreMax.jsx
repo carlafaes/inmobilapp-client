@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import { getScore,orderByScore } from '../redux/actions/action-properties-score';
 import reviewsService from '../services/reviews';
 import {filterRevies,getAllReviews,getScoreReviews} from '../redux/actions/actions-reviews'
+import { isValidURL } from "../utils/validurl";
+import '../styles/Score.css'
 
 export default function ScoreMax(){
     const dispatch= useDispatch();
@@ -23,17 +25,21 @@ export default function ScoreMax(){
 
   console.log(reviews);
   
-   
+  reviews.forEach((review) => {
+    review.images.forEach((img) => {
+      console.log(isValidURL(img), img);
+    });
+  });
     
     return(
         <div>
             <h1>score</h1>
             {reviews.length !== 0 ? reviews.map((e,index)=>(
-                <div key={Math.random(index)}>
-                    <h1>{e.location.city}</h1>
+                <div className='container_score' key={Math.random(index)}>
+                    <h1>{e.location.city}-{e.location.neighborhood}</h1>
                     <h2>{e.score}</h2>
                     <h3>{e.state}</h3>
-                    <a><img src={e.images.filter(e=>e)}/></a>
+                    <a><img className='img_score' src={e.images.filter(e=>e)}/></a>
 
                 </div>
                 

@@ -1,0 +1,11 @@
+.container_score{
+    width: auto;
+    height: 200px;
+
+    background-color: aqua;
+}
+
+.img_score{
+    width:200px;
+    height: 200px;
+}
