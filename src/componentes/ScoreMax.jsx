@@ -5,7 +5,7 @@ import { getScore,orderByScore } from '../redux/actions/action-properties-score'
 
 export default function ScoreMax(){
     const dispatch= useDispatch();
-    const stateScore= useSelector((state)=>state.filteredScore);
+    const stateScoreMax= useSelector((state)=>state.reducerScore.filteredScore);
     
 
     useEffect(()=>{
@@ -13,14 +13,17 @@ export default function ScoreMax(){
         dispatch(orderByScore())
         
     },[]);
-    console.log(stateScore,'stateScore')
+    console.log(stateScoreMax,'stateScoreMax')
     return(
         <div>
             <h1>score</h1>
-            {/* {stateScore && stateScore.map((e)=>(
-
-                <h1>{e.user}</h1>
-            ))} */}
+            {stateScoreMax && stateScoreMax.map((e,index)=>(
+                <div key={Math.random(index)}>
+                    <h1>{e.content}</h1>
+                    
+                </div>
+                
+            ))} 
         
         </div>
     )

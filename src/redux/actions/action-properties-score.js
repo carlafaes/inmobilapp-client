@@ -4,7 +4,7 @@ import axios from 'axios';
 export function getScore(){
     return async (dispatch)=>{
         let infoSc= await axios.get('http://localhost:3001/api/reviews');
-        let inf= await infoSc.data;
+        let inf=  infoSc.data;
         console.log(inf,'inf de getScore')
         return dispatch({
             type:GET_SCORE,
@@ -14,8 +14,9 @@ export function getScore(){
 }
 
 export function orderByScore(value){
+    console.log(value,'payload')
     return{
         type:ORDER_SCORE,
-        payload:value
+        payload:value,
     }
 }

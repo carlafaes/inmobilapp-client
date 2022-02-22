@@ -15,6 +15,8 @@ import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { loadAllProperties } from "../redux/actions/actions-propierties";
 import { Switch } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import {getScore,orderByScore} from '../redux/actions/action-properties-score'
+import ScoreMax from '../componentes/ScoreMax'
 
 function Home() {
   const properties = useSelector((state) => state.propertys);
@@ -32,11 +34,11 @@ function Home() {
 		setPageNumber(selected)
 	}
 	console.log(properties);
-// 	useEffect(()=>{
-// 		dispatch(getScore())
-// 	   // dispatch(orderByScore())
-// 	   console.log(getScore())
-//    },[]);
+	useEffect(()=>{
+		dispatch(getScore())
+	    // dispatch(orderByScore())
+	   console.log(getScore())
+   },[]);
 	
 	useEffect(() => {
 		
@@ -75,9 +77,9 @@ function Home() {
 				<NavFilterProperty/>
 				<h2>🔆<Switch checked={darkMode} onChange={()=> setDarkMode(!darkMode)} color='primary' /> 🌙</h2>	
 			</div>
-			{/* <div>
+			 <div>
 				<ScoreMax/>
-			</div> */}
+			</div>  
 			
 			{properties.slice(pagesVisited, pagesVisited + dwellingPerPage).map((propery) => (
 				<div key={propery.id}>
