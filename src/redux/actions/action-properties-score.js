@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export function getScore(){
     return async (dispatch)=>{
-        let infoSc= await axios.get('http://localhost:3001/api/reviews');
+        let infoSc= await axios.get('/api/reviews?detailsProperty=true');
         let inf=  infoSc.data;
         console.log(inf,'inf de getScore')
         return dispatch({

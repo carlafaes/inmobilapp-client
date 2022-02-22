@@ -34,11 +34,11 @@ function Home() {
 		setPageNumber(selected)
 	}
 	console.log(properties);
-	useEffect(()=>{
-		dispatch(getScore())
-	    // dispatch(orderByScore())
-	   console.log(getScore())
-   },[]);
+// 	useEffect(()=>{
+// 		dispatch(getScore())
+// 	    // dispatch(orderByScore())
+// 	   console.log(getScore())
+//    },[]);
 	
 	useEffect(() => {
 		

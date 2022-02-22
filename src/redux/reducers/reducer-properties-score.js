@@ -14,8 +14,8 @@ const reducerScore = (state = initialState, action) => {
       }
     
     case ORDER_SCORE:
-        const scoreG=state.state.scoreState;
-        console.log(scoreG,'scoreG')
+        const scoreG=state
+        console.log(state,'scoreG')
         let mayores= scoreG.filter((num)=> num.score > 3);
         mayores= mayores.sort(function(a,b){
           if(b.score < a.score){
