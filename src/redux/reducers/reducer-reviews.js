@@ -1,9 +1,13 @@
-import { FILTER_REVIEWS, GET_ALL_REVIEWS } from "../actions/actions-reviews";
-import { FILTER_PROPERTIES } from "../actions/types-propierties";
+import {
+  FILTER_REVIEWS,
+  GET_ALL_REVIEWS,
+  GET_SCORE_REVIEWS,
+} from "../actions/actions-reviews";
 
 const initialState = {
-  allReviews: [],
-  reviewsFilter: [],
+  allProperties: [],
+  propertiesFilter: [],
+  propertiesScore: [],
 };
 
 const reducerReviews = (state = initialState, { payload, type }) => {
@@ -11,12 +15,28 @@ const reducerReviews = (state = initialState, { payload, type }) => {
     case GET_ALL_REVIEWS:
       return {
         ...state,
-        allReviews: payload,
+        allProperties: payload,
       };
     case FILTER_REVIEWS:
       return {
         ...state,
-        reviewsFilter: state.allReviews.filter(({ score }) => score > 3),
+        propertiesFilter: state.allProperties.filter((property) => {
+          return property.reviews.length !== 0;
+        }),
+      };
+
+    case GET_SCORE_REVIEWS:
+      const sumReviews = state.propertiesFilter.map((property) => {
+        return {
+          ...property,
+          score: (property.reviews.reduce((sum, cur) => {
+            return sum + cur.score;
+          }, 0)) / property.reviews.length,
+        };
+      });
+      return {
+        ...state,
+        propertiesScore: sumReviews,
       };
 
     default:

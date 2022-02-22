@@ -4,7 +4,7 @@ import Input from "../componentes/Input";
 import adminService from "../services/admin";
 import reviewsService from "../services/reviews";
 import { validateFormAdmin } from "../utils/errorsFormAdmin";
-import { filterRevies, getAllReviews } from "../redux/actions/actions-reviews";
+import { filterRevies, getAllReviews, getScoreReviews } from "../redux/actions/actions-reviews";
 import { useSelector } from "react-redux";
 
 export default function FormAdmin() {
@@ -17,8 +17,7 @@ export default function FormAdmin() {
     age: 0,
   };
 
-  const reviews = useSelector((state) => state.reviews.reviewsFilter);
-
+  const reviews = useSelector((state) => state.reviews.propertiesScore);
   const dispatch = useDispatch();
 
   const [input, setInput] = useState(initInput);
@@ -31,10 +30,12 @@ export default function FormAdmin() {
   });
 
   useEffect(() => {
-    reviewsService.getReviews().then((data) => {
+    reviewsService.getPropertiesReviews().then((data) => {
       return dispatch(getAllReviews(data));
     }).then(() => {
-      dispatch(filterRevies())
+      return dispatch(filterRevies())
+    }).then(() => {
+      dispatch(getScoreReviews());
     });
   }, []);
 
