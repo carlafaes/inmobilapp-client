@@ -1,16 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
 import Input from "../componentes/Input";
 import adminService from "../services/admin";
-import reviewsService from "../services/reviews";
 import { validateFormAdmin } from "../utils/errorsFormAdmin";
-import {
-  filterRevies,
-  getAllReviews,
-  getScoreReviews,
-} from "../redux/actions/actions-reviews";
-import { useSelector } from "react-redux";
-import { isValidURL } from "../utils/validurl";
 
 export default function FormAdmin() {
   document.title = "InmobillApp | registerAdmin";
@@ -22,9 +13,6 @@ export default function FormAdmin() {
     age: 0,
   };
 
-  const reviews = useSelector((state) => state.reviews.propertiesScore);
-  const dispatch = useDispatch();
-
   const [input, setInput] = useState(initInput);
   const [error, setError] = useState({
     name: true,
@@ -32,26 +20,6 @@ export default function FormAdmin() {
     address: true,
     phone: true,
     age: true,
-  });
-
-  useEffect(() => {
-    reviewsService
-      .getPropertiesReviews()
-      .then((data) => {
-        return dispatch(getAllReviews(data));
-      })
-      .then(() => {
-        return dispatch(filterRevies());
-      })
-      .then(() => {
-        dispatch(getScoreReviews());
-      });
-  }, []);
-
-  reviews.forEach((review) => {
-    review.images.forEach((img) => {
-      console.log(isValidURL(img), img);
-    });
   });
 
   const handleChange = (e) => {
