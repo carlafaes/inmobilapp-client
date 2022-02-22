@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form'
 import Navbar from './Navbar';
 import { useDispatch } from "react-redux";
-import { LoginClientP } from "../redux/actions/actionClient";
 
 export const LoginClient = () => {
 
