@@ -4,6 +4,7 @@ import { CssBaseline, IconButton, Collapse } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Link as Scroll } from 'react-scroll';
 import Logo from '../Img/logo.png';
+import { Navigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,6 +45,9 @@ export default function Landing() {
   useEffect(() => {
     setChecked(true);
   }, []);
+
+
+
 
   return (
     <div className={classes.root}>
