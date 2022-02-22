@@ -38,7 +38,11 @@ function ProCard(props, classes) {
 				<Card className={props.classes.item}>
 					<CardActionArea>
 						<div className={props.classes.textoencima}>
-							{props.property.state}
+							{props.property.state === 'available'
+								? 'DISPONIBLE'
+								: props.property.state === 'unavailable'
+								? 'NO DISPONIBLE'
+								: 'RESERVADO'}
 						</div>
 						<CardMedia
 							component='img'
