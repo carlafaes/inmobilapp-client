@@ -4,8 +4,13 @@ import Input from "../componentes/Input";
 import adminService from "../services/admin";
 import reviewsService from "../services/reviews";
 import { validateFormAdmin } from "../utils/errorsFormAdmin";
-import { filterRevies, getAllReviews, getScoreReviews } from "../redux/actions/actions-reviews";
+import {
+  filterRevies,
+  getAllReviews,
+  getScoreReviews,
+} from "../redux/actions/actions-reviews";
 import { useSelector } from "react-redux";
+import { isValidURL } from "../utils/validurl";
 
 export default function FormAdmin() {
   document.title = "InmobillApp | registerAdmin";
@@ -30,16 +35,24 @@ export default function FormAdmin() {
   });
 
   useEffect(() => {
-    reviewsService.getPropertiesReviews().then((data) => {
-      return dispatch(getAllReviews(data));
-    }).then(() => {
-      return dispatch(filterRevies())
-    }).then(() => {
-      dispatch(getScoreReviews());
-    });
+    reviewsService
+      .getPropertiesReviews()
+      .then((data) => {
+        return dispatch(getAllReviews(data));
+      })
+      .then(() => {
+        return dispatch(filterRevies());
+      })
+      .then(() => {
+        dispatch(getScoreReviews());
+      });
   }, []);
 
-  console.log(reviews);
+  reviews.forEach((review) => {
+    review.images.forEach((img) => {
+      console.log(isValidURL(img), img);
+    });
+  });
 
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
