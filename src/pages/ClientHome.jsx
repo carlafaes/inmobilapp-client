@@ -8,12 +8,11 @@ export const ClientHome = () => {
 
 
     return (
-        <div>
+        < >
             <NavbarClient/>
-                <div>
+                <div className="tabla-home">
                     <TablaHomeClient/>
                 </div>
-            <Footer/>
-        </div>
+        </>
     )
 }

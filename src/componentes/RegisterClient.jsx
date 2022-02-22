@@ -43,7 +43,7 @@ export const RegisterClient = () => {
         else if (rest.password != password2) {
             return alertPassword()
         }
-        // dispatch(PostClient(rest))
+        dispatch(PostClient(rest))
         console.log(data)
         notify()
         navigate(-1)

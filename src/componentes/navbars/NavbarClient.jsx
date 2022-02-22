@@ -97,7 +97,6 @@ export const NavbarClient = () => {
 
     return (
         <>
-
             <div id='navbar' >
                 <AppBar className={classes.appBar} >
                     <Toolbar>
