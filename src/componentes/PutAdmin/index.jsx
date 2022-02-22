@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import adminService from "../services/admin";
-import Loading from "./Loading";
+import adminService from "../../services/admin";
+import Loading from "../Loading";
 
 export default function PutAdmin({ id }) {
   const [admin, setAdmin] = useState({});

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import agentService from "../services/agent";
-import Loading from "./Loading";
+import agentService from "../../services/agent";
+import Loading from "../Loading";
 
 export default function PutAgent({ id }) {
   const [agent, setAgent] = useState({});

@@ -1,5 +1,5 @@
 import React from "react";
-import CardAgent from "./CardAgent";
+import CardAgent from "../CardAgent";
 
 export default function CardsAgent({ agents }) {
   return (

@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function CardAgent({ name, age, phone }) {
-
   return (
     <div>
       <button onClick={() => console.log("Deleted")}>DELETE</button>
