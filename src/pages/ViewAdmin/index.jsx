@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import CardsAgent from "../componentes/CardsAgent";
-import Loading from "../componentes/Loading";
-import adminService from "../services/admin";
+import CardsAgent from "../../componentes/CardsAgent";
+import Loading from "../../componentes/Loading";
+import adminService from "../../services/admin";
 
 export default function ViewAdmin() {
   const [adminDetailsAgent, setAdminDetailsAgent] = useState({});
