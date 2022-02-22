@@ -6,7 +6,7 @@ import {
 
 const initiaState = [];
 
-const propertys = (state = initiaState, action) => {
+const properties = (state = initiaState, action) => {
   switch (action.type) {
     case LOAD_ALL_PROPERTIES:
       return action.payload;
@@ -39,6 +39,7 @@ const propertys = (state = initiaState, action) => {
           (p) => Number(p.details.rooms) === Number(action.filter.rooms)
         );
       }
+      console.log(action)
 
       return [...action.payload];
 
@@ -54,4 +55,4 @@ const propertys = (state = initiaState, action) => {
   }
 };
 
-export default propertys;
+export default properties;

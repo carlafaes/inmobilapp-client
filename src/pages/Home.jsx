@@ -17,7 +17,7 @@ import { Switch } from "@material-ui/core";
 import {ListCard} from "../componentes/ListCard";
 
 function Home() {
-  const properties = useSelector((state) => state.propertys);
+  const properties = useSelector((state) => state.properties);
   const dispatch = useDispatch();
   const [darkMode, setDarkMode] = useState(false);
   //const [properties, setProperties] = useState([]);
@@ -51,6 +51,7 @@ function Home() {
       type: darkMode ? "dark" : "light",
     },
   });
+  console.log(properties)
 
   return (
     <ThemeProvider theme={theme}>

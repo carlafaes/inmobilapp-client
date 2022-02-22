@@ -2,13 +2,13 @@ import { combineReducers } from 'redux';
 
 import employees from './reducer-employee';
 import clients from './reducer-client';
-import propertys from './reducer-property';
+import properties from './reducer-property';
 import reducerScore from './reducer-properties-score';
 
 const rootReducer = combineReducers({
   employees,
   clients,
-  propertys,
+  properties,
   reducerScore
 });
 
