@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import PropertyDetails from "./pages/PropertyDetails/PropertyDetails";
+
 import { LoginClient } from "./componentes/LoginClient";
 import { RegisterClient } from "./componentes/RegisterClient";
 import Home from "./pages/Home";
@@ -27,6 +28,7 @@ function App() {
     <ToastContainer/>
     </>
   );
+
 }
 
 export default App;

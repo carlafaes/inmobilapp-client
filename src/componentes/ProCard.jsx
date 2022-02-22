@@ -3,13 +3,18 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import { CardActionArea, Grid } from '@mui/material';
 import { withStyles } from '@material-ui/core/styles';
-import { Button, CardActions } from '@material-ui/core';
+import {
+	Button,
+	CardActions,
+	CardHeader,
+	Avatar,
+	IconButton,
+} from '@material-ui/core';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 import StarIcon from '@material-ui/icons/Star';
-import { Link } from 'react-router-dom';
 
 const labels = {
 	0.5: 'Useless',
@@ -28,69 +33,100 @@ function ProCard(props, classes) {
 	const [value, setValue] = React.useState(2);
 	const [hover, setHover] = React.useState(-1);
 	return (
-		<Card className={props.classes.item}>
-			<CardActionArea>
-				<CardMedia
-					component='img'
-					height='150'
-					image='https://images4.alphacoders.com/211/thumb-350-211398.jpg'
-					alt='green iguana'
-					boxshadow='0px 0px 10px #f2D6AD'
-				/>
-				<CardMedia image={props.property.image} src='img' />
-
-				<CardContent>
-					<Typography component='p' variant='h6' component='div'>
-						{props.property.state}
-						<p>{props.property.location?.city}</p>
-					</Typography>
-					<p className={props.classes.$price}>{props.property.rentalPrice}</p>
-				</CardContent>
-				<div className={props.classes.rating}>
-					<Box
-						sx={{
-							width: 200,
-							display: 'flex',
-							alignItems: 'center',
-						}}
-					>
-						<Rating
-							name='hover-feedback'
-							value={value}
-							precision={0.5}
-							onChange={(event, newValue) => {
-								setValue(newValue);
-							}}
-							onChangeActive={(event, newHover) => {
-								setHover(newHover);
-							}}
-							emptyIcon={
-								<StarIcon style={{ opacity: 0.55 }} fontSize='inherit' />
-							}
+		<Grid>
+			<Box boxSizing={'border-box'} m={1} spacing={10}>
+				<Card className={props.classes.item}>
+					<CardActionArea>
+						<div className={props.classes.textoencima}>
+							{props.property.state === 'available'
+								? 'DISPONIBLE'
+								: props.property.state === 'unavailable'
+								? 'NO DISPONIBLE'
+								: 'RESERVADO'}
+						</div>
+						<CardMedia
+							component='img'
+							height='190'
+							image='https://source.unsplash.com/random'
 						/>
-						{value !== null && (
-							<Box sx={{ ml: 2 }}>{labels[hover !== -1 ? hover : value]}</Box>
-						)}
-					</Box>
-				</div>
-			</CardActionArea>
-			<CardActions>
-				<Button
-					className={props.classes.button}
-					size='small'
-					color='primary'
-					href={`/property/${props.property.id}`}
-					size='small'
-					color='primary'
-				>
-					Mas informacion
-				</Button>
-			</CardActions>
-		</Card>
+						<CardContent>
+							<Typography component='p' variant='h6' component='div'>
+								<>{props.property.location?.city}</>
+								<p className={props.classes.price}>
+									${props.property.rentalPrice}
+								</p>
+							</Typography>
+						</CardContent>
+						<div className={props.classes.rating}>
+							<Box
+								sx={{
+									width: 200,
+									display: 'flex',
+									alignItems: 'center',
+								}}
+							>
+								<Rating
+									className={props.classes.rating}
+									name='hover-feedback'
+									value={value}
+									precision={0.5}
+									onChange={(event, newValue) => {
+										setValue(newValue);
+									}}
+									onChangeActive={(event, newHover) => {
+										setHover(newHover);
+									}}
+									emptyIcon={
+										<StarIcon style={{ opacity: 0.55 }} fontSize='inherit' />
+									}
+								/>
+								{value !== null && (
+									<Box sx={{ ml: 2 }}>
+										{labels[hover !== -1 ? hover : value]}
+									</Box>
+								)}
+							</Box>
+						</div>
+					</CardActionArea>
+
+					<CardActions>
+						<Button
+							className={props.classes.button}
+							size='small'
+							color='primary'
+							href={`/property/${props.property.id}`}
+							size='small'
+							color='primary'
+						>
+							Mas detalles
+						</Button>
+					</CardActions>
+				</Card>
+			</Box>
+		</Grid>
 	);
 }
 
 export default withStyles({
+	root: {
+		maxWidth: 345,
+	},
+	textoencima: {
+		position: 'absolute',
+		top: '10px',
+		left: '10px',
+		color: 'white',
+		fontSize: '20px',
+		fontWeight: 'bold',
+		backgroundColor: '#FAA222',
+		padding: '5px',
+	},
+	contenedor: {
+		position: 'relative',
+		display: 'inline-block',
+		textAlign: 'center',
+	},
+
 	button: {
 		fontSize: '1rem',
 		fontWeight: 'bold',
@@ -104,13 +140,15 @@ export default withStyles({
 		},
 	},
 	price: {
-		fontSize: '1.8rem',
+		fontSize: '1.5rem',
 		fontWeight: 'bold',
-		color: 'black',
+		color: '#FAA222',
 	},
 	rating: {
 		display: 'flex',
 		justifyContent: 'center',
+		alignItems: 'center',
+		marginTop: '1px',
 	},
 	item: {
 		display: 'flex',
@@ -123,11 +161,6 @@ export default withStyles({
 		flexDirection: 'column',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		backgroundColor: '#f5f5f5',
-		borderRadius: '10px',
-		boxShadow: '0px 0px 10px #000000',
-		flexGrow: 4,
-		padding: '10 10 0 0',
 	},
 
 	'&:hover': {
@@ -137,11 +170,10 @@ export default withStyles({
 	media: {
 		minWidth: '200px',
 		height: '200px',
-		backgroundColor: '#f2D6AD',
 		borderRadius: '1px',
 		margin: '10px',
-		boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)',
 		item: {
+			margin: '10px',
 			border: '1px solid red',
 			margin: '10px',
 			width: '300px',
@@ -153,11 +185,7 @@ export default withStyles({
 			backgroundColor: '#f5f5f5',
 			borderRadius: '1px',
 
-			boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)',
-
-			'&:hover': {
-				boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.75)',
-			},
+			'&:hover': {},
 		},
 
 		media: {
@@ -166,7 +194,6 @@ export default withStyles({
 			backgroundColor: '#f5f5f5',
 			borderRadius: '1px',
 			margin: '10px',
-			boxShadow: '0px 0px 5px 0px rgba(0,0,0,0.75)',
 		},
 	},
 })(ProCard);
