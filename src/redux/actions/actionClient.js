@@ -10,3 +10,13 @@ export function PostClient(client) {
         })
     }
 }
+
+export function LoginClientP(client){
+    return async (dispatch)=>{
+        const {data} = await axios.post(`http://localhost:3000/api/clients`,client)
+        return dispatch({
+            payload:data
+        })
+
+    }
+}

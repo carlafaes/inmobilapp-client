@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { AppBar, IconButton, Menu, MenuItem, Toolbar,Modal,TextField,Button } from '@material-ui/core';
+import { AppBar, IconButton, Menu, MenuItem, Toolbar, Modal, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SortIcon from '@material-ui/icons/Sort';
-import icono from '../Img/icono.png';
+import icono from '../../Img/icono.png';
 import Fade from '@material-ui/core/Fade';
 import Link from '@material-ui/core/Link';
-
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -59,39 +58,21 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-
-
-export default function Navbar() {
-
+export const NavbarClient = () => {
+    
     const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
     const open = Boolean(anchorEl);
     const [modal,setModal]=useState(false);
     const [modalAg,setModalAg]=useState(false);
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const openCloseModal= ()=>{
-        setModal(!modal)
-    }
-    const openCloseModalAg= ()=>{
-        setModalAg(!modalAg)
-    }
-
-    
     const body=(
         
         <div className={classes.modal}>
             <div align='center'>
-                <h2 className={classes.titleLogin}>Login Admin</h2>
+                <h2 className={classes.titleLogin}>Datos a editar</h2>
             </div>
-            <TextField label='Correo electronico' className={classes.textfield}/>
+            <TextField label='Dni' className={classes.textfield}/>
             <br/>
             <TextField label='Password' className={classes.textfield}/>
             <br/>
@@ -101,24 +82,22 @@ export default function Navbar() {
             </div>
         </div>
     )
-    const body_agent=(
-        <div className={classes.modal}>
-            <div align='center'>
-                <h2 className={classes.titleLogin}>Loggin Agente</h2>
-            </div>
-            <TextField label='Correo electronico' className={classes.textfield}/>
-            <br/>
-            <TextField label='Password' className={classes.textfield}/>
-            <br/>
-            <div align='right'>
-                <Button className={classes.btnLogin} color='primary'>Ingresar</Button>
-                <Button className={classes.btnLogin} color='secondary' onClick={()=>openCloseModalAg()}>Cancelar</Button>
-            </div>
-        </div>
-    )
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+    
+    const openCloseModal= ()=>{
+        setModal(!modal)
+    }
+    
+
     return (
         <>
-        
+
             <div id='navbar' >
                 <AppBar className={classes.appBar} >
                     <Toolbar>
@@ -131,34 +110,28 @@ export default function Navbar() {
                     </Toolbar>
                 </AppBar>
             </div>
-            <Menu
-                id="fade-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={open}
-                onClose={handleClose}
-                TransitionComponent={Fade}
-                >
-                <h2 className="title">Area cliente</h2>
-                <MenuItem><i className="fa-regular fa-star emoticon"></i> Favoritos</MenuItem>
-                <MenuItem><i className="fa-solid fa-gift emoticon"></i> Solicita tu inmueble</MenuItem>
-                <Link href='/login'><MenuItem><i className="fa-solid fa-arrow-right-to-bracket emoticon"></i> Entrar</MenuItem></Link>
-                <h2 className="title">Area administrativa</h2>
-                <MenuItem  onClick={()=>openCloseModal()}> <i className=" emoticon fa-solid fa-user-shield"></i> Admin</MenuItem>
-                <MenuItem onClick={()=>openCloseModalAg()}><i className="emoticon fa-solid fa-id-badge"></i> Agente</MenuItem>
-                <h2 className="title">Redes sociales</h2>
-                <Link href="https://github.com/InmobilApp"><MenuItem><i className="fa-brands fa-github emoticon Link"></i> Git-Hub</MenuItem></Link>
-                <MenuItem> <i className="fa-solid fa-link emoticon"></i>Link deploy</MenuItem>
-            </Menu>
+                        <Menu
+                            id="fade-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={open}
+                            onClose={handleClose}
+                            TransitionComponent={Fade}
+                        >
+                            <Link href='/'>
+                            <MenuItem><i className="fa-solid fa-house emoticon"></i> Inicio</MenuItem>
+                            </Link>
+                            <MenuItem><i className="fa-regular fa-star emoticon"></i> Favoritos</MenuItem>
+                            <MenuItem><i className="fa-solid fa-gift emoticon"></i> Solicita tu inmueble</MenuItem>
+                            <MenuItem onClick={() => openCloseModal()}> <i className=" emoticon fa-solid fa-pen-to-square"></i> Editar perfil</MenuItem>
+                            <Link href='/login'><MenuItem><i className="fa-solid fa-arrow-right-from-bracket emoticon"></i> Salir</MenuItem></Link>
+                            {/* <h2 className="title">Redes sociales</h2>
+                            <Link href="https://github.com/InmobilApp"><MenuItem><i className="fa-brands fa-github emoticon Link"></i> Git-Hub</MenuItem></Link>
+                            <MenuItem> <i className="fa-solid fa-link emoticon"></i>Link deploy</MenuItem> */}
+                        </Menu>
             <Modal open={modal} onClose={openCloseModal}> 
                 {body}
             </Modal>
-            <Modal open={modalAg} onClose={openCloseModalAg}> 
-                {body_agent}
-            </Modal>
-        
         </>
-
-
     )
 }
