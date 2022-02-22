@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import CreateProperty from './componentes/CreateProperty'
 import AgentsList from './componentes/AgentsList/AgentsList'
 import AgentDetail from './componentes/AgentDetail/AgentDetail'
+import CreatePropertyForm from './componentes/CreatePropertyForm/CreatePropertyForm'
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
       <Route path='/register' element={<RegisterClient/>}/>
       <Route exact path= "/property/:id" element={<PropertyDetails/>}/>
       <Route path='/agents' element={<AgentsList/>} />
-      {<Route path='/agents/:id' element={<AgentDetail/>} />}
+      <Route path='/agents/:id' element={<AgentDetail/>} />
+      <Route path='/create-property' element={<CreatePropertyForm/>} />
     </Routes>
   );
 }
