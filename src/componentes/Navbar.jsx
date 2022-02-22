@@ -143,12 +143,9 @@ export default function Navbar() {
                 <MenuItem><i className="fa-regular fa-star emoticon"></i> Favoritos</MenuItem>
                 <MenuItem><i className="fa-solid fa-gift emoticon"></i> Solicita tu inmueble</MenuItem>
                 <Link href='/login'><MenuItem><i className="fa-solid fa-arrow-right-to-bracket emoticon"></i> Entrar</MenuItem></Link>
-                <h2 className="title">Area administrativa</h2>
-                <MenuItem  onClick={()=>openCloseModal()}> <i className=" emoticon fa-solid fa-user-shield"></i> Admin</MenuItem>
-                <MenuItem onClick={()=>openCloseModalAg()}><i className="emoticon fa-solid fa-id-badge"></i> Agente</MenuItem>
                 <h2 className="title">Redes sociales</h2>
                 <Link href="https://github.com/InmobilApp"><MenuItem><i className="fa-brands fa-github emoticon Link"></i> Git-Hub</MenuItem></Link>
-                <MenuItem> <i className="fa-solid fa-link emoticon"></i>Link deploy</MenuItem>
+                <Link href='https://inmobil-app.herokuapp.com/'><MenuItem> <i className="fa-solid fa-link emoticon"></i>Link deploy</MenuItem></Link>
             </Menu>
             <Modal open={modal} onClose={openCloseModal}> 
                 {body}

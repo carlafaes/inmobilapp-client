@@ -13,23 +13,6 @@ export const LoginClient = () => {
     const [password,setPassword]=useState('');
     const [user,setUser]=useState(null);
 
-    // const handleLogin =async ()=>{
-    //     try {
-    //         const user =await dispatch(LoginClientP({
-    //             dni,
-    //             password
-    //         }))
-    
-    //         setUser(user);
-    //         setDni('');
-    //         setPassword('');
-        
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    //     console.log(user);
-    // }
-
     const handleLogin=(data)=>{
         console.log(data);
     }
