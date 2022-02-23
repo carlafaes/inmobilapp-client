@@ -1,20 +1,18 @@
 import React,{useState} from 'react'
-import {Formik, Field, Form, ErrorMessage} from 'formik'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import styles from './CreateProperty.moduleForm.css';
+import {Formik, Field, Form, ErrorMessage} from 'formik';
+import styles from './CreateProperty.module.css';
 import propertyServices from '../../services/property';
 
-function handleSubmit(e){
-    e.preventDefault()
+const textAreaStyle = {
+    height: '100%',
 }
 
 export default function CreatePropertyForm(){
-    const [newProperty, setNewProperty] = useState({sent: false});
+    const [newProperty, setNewProperty] = useState('');
     const [formErrors, setFormErrors] = useState({})
     const[images, setNewImage] = useState([]);
     return (
-        <Formik
+        <Formik className={styles.formik}
         initialValues={{
             type: '',
             city: '',
@@ -86,8 +84,7 @@ export default function CreatePropertyForm(){
         onSubmit={(values, {resetForm})=> {
             resetForm();
             console.log(formErrors);
-            if(!formErrors.type && !formErrors.city && !formErrors.neighborhood && !formErrors.address && formErrors.price && formErrors.description && formErrors.area && formErrors.rooms && formErrors.baths && formErrors.garage){
-                values.sent = true;
+            if(!formErrors.type && !formErrors.city && !formErrors.neighborhood && !formErrors.address && !formErrors.price && !formErrors.description && !formErrors.area && !formErrors.rooms && !formErrors.baths && !formErrors.garage){
                 const property = { 
                     typeProperty: values.type,
                     location: {
@@ -102,103 +99,98 @@ export default function CreatePropertyForm(){
                       area: values.area,
                       rooms: values.rooms,
                       baths: values.baths,
-                      garage: values.garage
+                      garage: values.garage === 'false'? false : true,
                     },
                     agentID: "621271c06ec04903d5c20e0f" 
                 }
                 propertyServices.createProperty(property);
+                console.log(property);
+                setNewProperty('sent');
             }
-            setNewProperty(values)
-            setTimeout(() => setNewProperty({}), 5000);
-            console.log('values',values)
+            setTimeout(() => setNewProperty(''), 5000);
             console.log('formulario enviado')
         }}
         >
             {({errors})=>(
-                <Form>
-                    <section>
-                        {console.log(errors)}
-                        <h2>Ubicación</h2>
-                        <div>
-                            <label htmlFor="type">Tipo de propiedad</label>
-                            <Field name="type" as="select">
-                                <option name="type" value="tipo" selected={true} >Tipo</option>
-                                <option name="type" value="casa">Casa</option>
-                                <option name="type" value="apartamento">Apartamento</option>
-                                <option name="type" value="local">Local</option>
-                            </Field>
-                            <ErrorMessage name='type' component={() => <p className={styles.wrong}>{errors.type}</p>}/>
-                        </div>
-                        <label htmlFor="city">Ciudad</label>
-                        <div>
-                            <Field name="city" type="text"/>
-                            <FontAwesomeIcon icon={faCheckCircle}/>
-                            <ErrorMessage name='city' component={() => <p className={styles.wrong}>{errors.city}</p>}/>
-                        </div>
-                        <label htmlFor="neighborhood">Barrio</label>
-                        <div>
-                            <Field name="neighborhood" type="text"/>
-                            <FontAwesomeIcon icon={faCheckCircle}/>
-                            <ErrorMessage name='neighborhood' component={() => <p className={styles.wrong}>{errors.neighborhood}</p>}/>
-                        </div>
-                        <label htmlFor="address">Dirección</label>
-                        <div>
-                            <Field name="address" type="text"/>
-                            <FontAwesomeIcon icon={faCheckCircle}/>
-                            <ErrorMessage name='address' component={() => <p className={styles.wrong}>{errors.address}</p>}/>
-                        </div>
-                    </section>
-                    <section>
-                        <label htmlFor="file">Imagenes</label>
-                        <div>
-                            <input type="file" name='images' accept="image/*"/>
-                        </div>
-                        <label htmlFor="price">Precio</label>
-                        <div>
-                            <Field name="price" type="text"/>
-                            <FontAwesomeIcon icon={faCheckCircle}/>
-                            <ErrorMessage name='price' component={() => <p className={styles.wrong}>{errors.price}</p>}/>
-                        </div>
-                        <label htmlFor="description">Descripción</label>
-                        <div>
-                            <Field name="description" as="textarea"/>
-                            <FontAwesomeIcon icon={faCheckCircle}/>
-                            <ErrorMessage name='description' component={() => <p className={styles.wrong}>{errors.description}</p>}/>
-                        </div>
-                    </section>
-                    <section>
-                        <h2>Detalles</h2>
-                        <label htmlFor="">Area</label>
-                        <div>
-                            <Field name='area' type='text'/>
-                            <FontAwesomeIcon icon={faCheckCircle}/>
-                            <ErrorMessage name='area' component={() => <p className={styles.wrong}>{errors.area}</p>}/>
-                        </div>
-                        <label htmlFor="">Habitaciones</label>
-                        <div>
-                            <Field name='rooms' type='text'/>
-                            <FontAwesomeIcon icon={faCheckCircle}/>
-                            <ErrorMessage name='rooms' component={() => <p className={styles.wrong}>{errors.rooms}</p>}/>
-                        </div>
-                        <label htmlFor="">Baños</label>
-                        <div>
-                            <Field name='baths' type='text'/>
-                            <FontAwesomeIcon icon={faCheckCircle}/>
-                            <ErrorMessage name='baths' component={() => <p className={styles.wrong}>{errors.baths}</p>}/>
-                        </div>
-                        <label htmlFor="">Garage</label>
-                        <div>
-                            <Field name='garage' as="select">
-                                <option >Garage</option>
-                                <option name="garage" value={true} >Si</option>
-                                <option name="garage" value={false} >No</option>
-                            </Field>
-                            <ErrorMessage name='garage' component={() => <p className={styles.wrong}>{errors.garage}</p>}/>
-                        </div>
-                    </section>
-                <button type="submit" >Enviar</button>
-                {newProperty.sent && (<p className='success'>Formulario enviado</p>)}
-            </Form>
+                <Form className={styles.form}>
+                    <div className={styles.container}>
+
+                        <section className={styles.section}>    
+                            <h2>Ubicación</h2>
+                            <div>
+                                <label className={styles.label} htmlFor="type">Tipo de propiedad</label>
+                                <Field className={styles.field} name="type" as="select">
+                                    <option name="type" value="tipo" selected={true} >Tipo</option>
+                                    <option name="type" value="casa">Casa</option>
+                                    <option name="type" value="apartamento">Apartamento</option>
+                                    <option name="type" value="local">Local</option>
+                                </Field>
+                                <ErrorMessage name='type' component={() => <p className={styles.wrong}>{errors.type}</p>}/>
+                            </div>
+                            <label className={styles.label} htmlFor="city">Ciudad</label>
+                            <div>
+                                <Field className={styles.field} name="city" type="text"/>
+                                <ErrorMessage name='city' component={() => <p className={styles.wrong}>{errors.city}</p>}/>
+                            </div>
+                            <label htmlFor="neighborhood">Barrio</label>
+                            <div>
+                                <Field className={styles.field} name="neighborhood" type="text"/>
+                                <ErrorMessage name='neighborhood' component={() => <p className={styles.wrong}>{errors.neighborhood}</p>}/>
+                            </div>
+                            <label className={styles.label} htmlFor="address">Dirección</label>
+                            <div>
+                                <Field className={styles.field}  name="address" type="text"/>
+                                <ErrorMessage name='address' component={() => <p className={styles.wrong}>{errors.address}</p>}/>
+                            </div>
+                        </section>
+                        <section className={styles.section}>
+                            <h2>Detalles</h2>
+                            <label className={styles.label} htmlFor="file">Imagenes</label>
+                            <div>
+                                <input type="file" name='images' accept="image/*"/>
+                            </div>
+                            <label className={styles.label} htmlFor="price">Precio</label>
+                            <div>
+                                <Field className={styles.field} name="price" type="text"/>
+                                <ErrorMessage name='price' component={() => <p className={styles.wrong}>{errors.price}</p>}/>
+                            </div>
+                            <label className={styles.label} htmlFor="description">Descripción</label>
+                            <div className={styles.input_container}>
+                                <Field className={styles.field_text_area} name="description" as="textarea"/>
+                                <ErrorMessage name='description' component={() => <p className={styles.wrong}>{errors.description}</p>}/>
+                            </div>
+                        </section>
+                        <section className={styles.section}>
+                            <h2>Detalles</h2>
+                            <label className={styles.label} htmlFor="">Area</label>
+                            <div>
+                                <Field className={styles.field} name='area' type='text'/>
+                                <ErrorMessage name='area' component={() => <p className={styles.wrong}>{errors.area}</p>}/>
+                            </div>
+                            <label className={styles.label} htmlFor="">Habitaciones</label>
+                            <div>
+                                <Field className={styles.field} name='rooms' type='text'/>
+                                <ErrorMessage name='rooms' component={() => <p className={styles.wrong}>{errors.rooms}</p>}/>
+                            </div>
+                            <label className={styles.label} htmlFor="">Baños</label>
+                            <div>
+                                <Field className={styles.field} name='baths' type='text'/>
+                                <ErrorMessage name='baths' component={() => <p className={styles.wrong}>{errors.baths}</p>}/>
+                            </div>
+                            <label className={styles.label} htmlFor="">Garage</label>
+                            <div>
+                                <Field className={styles.field} name='garage' as="select">
+                                    <option >Garage</option>
+                                    <option name="garage" value={true} >Si</option>
+                                    <option name="garage" value={false} >No</option>
+                                </Field>
+                                <ErrorMessage name='garage' component={() => <p className={styles.wrong}>{errors.garage}</p>}/>
+                            </div>
+                            <input className={styles.button} type="submit" />
+                            {newProperty && (<p className={styles.success}>Formulario enviado</p>)}
+                        </section>
+                    </div>
+                </Form>
             )}
         </Formik>
     )
