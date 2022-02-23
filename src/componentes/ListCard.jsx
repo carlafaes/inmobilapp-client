@@ -1,27 +1,37 @@
-import React from "react";
-import { Grid } from "@material-ui/core";
-import ProCard from "../componentes/ProCard";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-
-import Typography from "@mui/material/Typography";
+import React from 'react';
+import { Grid } from '@material-ui/core';
+import ProCard from '../componentes/ProCard';
+import Card from '@mui/material/Card';
+import { Box } from '@mui/system';
+import { Container, TextField } from '@mui/material';
 
 export const ListCard = (props) => {
-  if (props.properties.length === 0) {
-    return <h1>Not Found</h1>;
-  }
+	if (props.properties.length === 0) {
+		return <h1>Not Found</h1>;
+	}
 
-  return (
-    <>
-      <Card>
-        <Grid container spacing={10}>
-          {props.properties.map((property) => {
-            return <ProCard key={property.id} property={property} />;
-          })}
-        </Grid>
-      </Card>
-    </>
-  );
+	return (
+		<Container fixed>
+			<Grid justify='center' container spacing={3}>
+				<Box
+					boxSizing={'border-box'}
+					m={1}
+					spacing={2}
+					display='flex'
+					flexWrap='wrap'
+					alignItems='center'
+					height={'100%'}
+					width={'100%'}
+				>
+					<Card>
+						<Grid container spacing={3} direction='row' justify='center'>
+							{props.properties.map((property) => {
+								return <ProCard key={property.id} property={property} />;
+							})}
+						</Grid>
+					</Card>
+				</Box>
+			</Grid>
+		</Container>
+	);
 };
