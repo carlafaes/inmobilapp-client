@@ -161,6 +161,7 @@ export default withStyles({
 		flexDirection: 'column',
 		justifyContent: 'space-between',
 		alignItems: 'center',
+		backgroundColor:'#fcebc9'
 	},
 
 	'&:hover': {

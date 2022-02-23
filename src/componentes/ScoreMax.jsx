@@ -7,10 +7,12 @@ import {filterRevies,getAllReviews,getScoreReviews} from '../redux/actions/actio
 import { isValidURL } from "../utils/validurl";
 import '../styles/Score.css'
 import Carousel from 'react-elastic-carousel'
+import Rating from '@mui/material/Rating';
+import Card from '@mui/material/Card';
 
 export default function ScoreMax(){
     const dispatch= useDispatch();
-    const reviews = useSelector((state) => state.reviews.propertiesScore);
+    const reviews = useSelector((state) => state.reducerReviews.propertiesScore);
   
 
     
@@ -47,18 +49,24 @@ export default function ScoreMax(){
           itemPadding={[10, 10]}
           focusOnSelect={false} 
           >
+            
             {reviews.length !== 0 ? reviews.map((e,index)=>(
                 <div className='container_score' key={Math.random(index)}>
                     <h2 className='score_letter'>{e.location.city}-{e.location.neighborhood}</h2>
-                    <h2 className='score_letter'>Puntuacion:{e.score}</h2>
-                    <h2 className='score_letter'>Disponibilidad:{e.state}</h2>
+                    <Rating className='score_rating' name='read-only' value={e.score} readOnly />
+                    <h2 className='score_disp'>{e.state === 'available'
+								? 'DISPONIBLE'
+								: e.state === 'unavailable'
+								? 'NO DISPONIBLE'
+								: 'RESERVADO'}</h2>
                     <a><img className='img_score' src={e.images.filter(e=>e)}/></a>
                     <br/>
-                    <button>Mas informacion</button>
+                    <button className='btn_score'>Mas informacion</button>
 
                 </div>
                 
             )) : <h1>no existen mejores puntuados</h1>} 
+          
           </Carousel>
         </div>
     )

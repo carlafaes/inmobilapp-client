@@ -12,7 +12,7 @@ export const ListCard = (props) => {
 
 	return (
 		<Container fixed>
-			<Grid justify='center' container spacing={3}>
+			<Grid justifyContent='center' container spacing={3}>
 				<Box
 					boxSizing={'border-box'}
 					m={1}

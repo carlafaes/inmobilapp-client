@@ -82,6 +82,7 @@ function Home() {
             />{" "}
             🌙
           </h2>
+		  <ScoreMax/>
         </div>
         <ListCard
           properties={properties.slice(
