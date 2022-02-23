@@ -1,17 +1,19 @@
 import { combineReducers } from "redux";
 
-import employees from "./reducer-employee";
 import clients from "./reducer-client";
 import properties from "./reducer-property";
 import reducerScore from "./reducer-properties-score";
 import reducerReviews from "./reducer-reviews";
+import reducerAdmin from "./reducer-admin";
+import reducerAgent from "./reducer-agent";
 
 const rootReducer = combineReducers({
-  employees,
   clients,
   properties,
   reducerScore,
-  reducerReviews
+  reducerReviews,
+  reducerAdmin,
+  reducerAgent,
 });
 
 export default rootReducer;

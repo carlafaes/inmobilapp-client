@@ -1,16 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import Input from "../componentes/Input";
-import adminService from "../services/admin";
-import reviewsService from "../services/reviews";
-import { validateFormAdmin } from "../utils/errorsFormAdmin";
-import {
-  filterRevies,
-  getAllReviews,
-  getScoreReviews,
-} from "../redux/actions/actions-reviews";
-import { useSelector } from "react-redux";
-import { isValidURL } from "../utils/validurl";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Input from "../../componentes/Input";
+import adminService from "../../services/admin";
+import { validateFormAdmin, isDone } from "../../utils/errorsFormAdmin";
 
 export default function FormAdmin() {
   document.title = "InmobillApp | registerAdmin";
@@ -19,12 +11,10 @@ export default function FormAdmin() {
     DNI: "",
     address: "",
     phone: "",
-    age: 0,
+    age: "",
   };
 
-  const reviews = useSelector((state) => state.reviews.propertiesScore);
-  const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [input, setInput] = useState(initInput);
   const [error, setError] = useState({
     name: true,
@@ -34,26 +24,6 @@ export default function FormAdmin() {
     age: true,
   });
 
-  useEffect(() => {
-    reviewsService
-      .getPropertiesReviews()
-      .then((data) => {
-        return dispatch(getAllReviews(data));
-      })
-      .then(() => {
-        return dispatch(filterRevies());
-      })
-      .then(() => {
-        dispatch(getScoreReviews());
-      });
-  }, []);
-
-  reviews.forEach((review) => {
-    review.images.forEach((img) => {
-      console.log(isValidURL(img), img);
-    });
-  });
-
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
     setError(validateFormAdmin({ ...input, [e.target.name]: e.target.value }));
@@ -61,16 +31,16 @@ export default function FormAdmin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isDone()) {
-      adminService.postAdmin(input).then((data) => console.log(data));
-      setInput(initInput);
+    if (isDone(error)) {
+      if (confirm("Seguro desea crear este admin?")) {
+        adminService.postAdmin(input).then((res) => {
+          setInput(initInput);
+          navigate(`/viewAdmin/${res.data.id}`);
+        });
+      }
     } else {
-      alert("No...");
+      alert("Completa correctamente los espacios!");
     }
-  };
-
-  const isDone = () => {
-    return !Object.values(error).reduce((pre, cur) => pre || cur, false);
   };
 
   return (
@@ -93,6 +63,7 @@ export default function FormAdmin() {
         onSubmit={handleSubmit}
       >
         <Input
+          value={input.name}
           error={error.name}
           placeholder={"Name"}
           type={"text"}
@@ -100,6 +71,7 @@ export default function FormAdmin() {
           handleChange={handleChange}
         />
         <Input
+          value={input.DNI}
           error={error.DNI}
           placeholder={"DNI"}
           type={"text"}
@@ -107,6 +79,7 @@ export default function FormAdmin() {
           handleChange={handleChange}
         />
         <Input
+          value={input.address}
           error={error.address}
           placeholder={"Address"}
           type={"text"}
@@ -114,6 +87,7 @@ export default function FormAdmin() {
           handleChange={handleChange}
         />
         <Input
+          value={input.phone}
           error={error.phone}
           placeholder={"Phone"}
           type={"text"}
@@ -121,6 +95,7 @@ export default function FormAdmin() {
           handleChange={handleChange}
         />
         <Input
+          value={input.age}
           error={error.age}
           placeholder={"Age"}
           type={"number"}

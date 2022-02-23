@@ -7,22 +7,24 @@ import Home from "./pages/Home";
 import CreateProperty from "./componentes/CreateProperty";
 import FormAdmin from "./pages/FormAdmin";
 import PageNotFound from "./pages/PageNotFound";
+import ViewAdmin from "./pages/ViewAdmin";
 import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <>
-    <Routes>
-      {/* <Route path="/" element={<Landing />} /> */}
-      <Route exact path="/" element={<Home />} />
-      <Route exact path="/form" element={<CreateProperty />} />
-      <Route path="/registerAdmin" element={<FormAdmin />} />
-      <Route path="/login" element={<LoginClient />} />
-      <Route path="/register" element={<RegisterClient />} />
-      <Route exact path="/property/:id" element={<PropertyDetails />} />
-      <Route path="*" element={<PageNotFound />} />
-    </Routes>
-    <ToastContainer/>
+      <Routes>
+        {/* <Route path="/" element={<Landing />} /> */}
+        <Route exact path="/" element={<Home />} />
+        <Route exact path="/form" element={<CreateProperty />} />
+        <Route path="/registerAdmin" element={<FormAdmin />} />
+        <Route path="/login" element={<LoginClient />} />
+        <Route path="/register" element={<RegisterClient />} />
+        <Route path="/viewAdmin/:id" element={<ViewAdmin />} />
+        <Route exact path="/property/:id" element={<PropertyDetails />} />
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+      <ToastContainer />
     </>
   );
 }
