@@ -1,7 +1,12 @@
-import { SET_ALL_PROPERTIES } from "../actions/actionsProperties";
+import {
+  SET_ALL_PROPERTIES,
+  GET_ALL_PROPERTIES,
+  FILTERED_PROPERTIES,
+} from "../actions/actionsProperties";
 
 const initialState = {
   allProperties: [],
+  filteredProperties: [],
 };
 
 const reducerProperties = (state = initialState, { type, payload }) => {
@@ -10,6 +15,18 @@ const reducerProperties = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allProperties: payload,
+      };
+
+    case GET_ALL_PROPERTIES:
+      return {
+        ...state,
+        filteredProperties: state.allProperties,
+      };
+
+    case FILTERED_PROPERTIES:
+      return {
+        ...state,
+        filteredProperties: state.allProperties,
       };
 
     default:
