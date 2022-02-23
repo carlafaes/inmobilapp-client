@@ -72,16 +72,17 @@ function Home() {
         </div>
         <div>
           <Navbar />
-          <NavFilterProperty />
-          <h2>
-            🔆
+		  <div className="switch_home">
+            <h2>🔆
             <Switch
               checked={darkMode}
               onChange={() => setDarkMode(!darkMode)}
               color="primary"
-            />{" "}
-            🌙
-          </h2>
+            />
+			🌙</h2>
+          </div>
+          <NavFilterProperty />
+          
 		  <ScoreMax/>
         </div>
         <ListCard
@@ -91,7 +92,7 @@ function Home() {
             )}
            />
 	
-			<div>
+			<div >
 				<ReactPaginate
 				previousLabel={'⋘'}
 				nextLabel={'⋙'}
