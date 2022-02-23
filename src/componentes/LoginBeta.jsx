@@ -1,35 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
-import loginService from "../services/login";
 import LoginForm from "./LoginForm";
 import Footer from "./Footer";
 import ClientInterface_DEMO from "./ClientInterface_DEMO";
+import { useDispatch, useSelector } from "react-redux";
+import { getClientInfoWithToken } from "../redux/actions/actionClient";
 
 const LoginBeta = () => {
   const [dni, setDNI] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
+  const clientWithToken = useSelector((state) => state.clientWithToken);
+
+  useEffect(() => {
+    alert(`Cambio algo`);
+  }, [clientWithToken]);
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    try {
-      const user = await loginService.login({
-        dni,
-        password,
-      });
-      setUser(user);
+    if (dni && password) {
+      dispatch(getClientInfoWithToken({ dni, password }));
       setDNI("");
       setPassword("");
-    } catch (error) {
-      alert(error);
     }
   };
 
   return (
     <>
       <Navbar />
-      {user ? (
-        <ClientInterface_DEMO user={user} />
+      {clientWithToken ? (
+        <ClientInterface_DEMO user={clientWithToken} />
       ) : (
         <LoginForm
           dni={dni}
