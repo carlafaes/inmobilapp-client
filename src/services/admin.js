@@ -9,10 +9,14 @@ const getAdminIdAgentDetails = async (id) =>
 
 const getAdminID = async (id) => (await axios.get(`${baseUrl}/${id}`)).data;
 
+const putAdminID = async (id, admin) =>
+  (await axios.put(`${baseUrl}/${id}`, admin)).data;
+
 const adminService = {
   postAdmin,
   getAdminIdAgentDetails,
   getAdminID,
+  putAdminID,
 };
 
 export default adminService;

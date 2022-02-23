@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { setAdmin } from "../../redux/actions/actions-admin";
 import { isDone, validatePutAdmin } from "../../utils/errorsFormAdmin";
+import adminService from "../../services/admin";
 
 export default function PutAdmin() {
   const [error, setError] = useState({});
@@ -28,12 +29,12 @@ export default function PutAdmin() {
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     if (e.target.name === "DONE") {
       if (isDone(error)) {
         const result = prompt("Seguro que desea hacer estos cambios?", "Si");
         if (result) {
-          console.log(admin);
+          await adminService.putAdminID(admin.id, admin);
           alert("done!");
           dispatch(setAdmin(null));
         }
