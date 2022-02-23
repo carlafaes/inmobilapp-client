@@ -40,14 +40,21 @@ export default function ScoreMax(){
   ]
     
     return(
-        <div>
-          <Carousel breakPoints={breakPoints}>
+        <div className='container_carrousel'>
+          <Carousel 
+          breakPoints={breakPoints}
+          enableAutoPlay autoPlaySpeed={1500}
+          itemPadding={[10, 10]}
+          focusOnSelect={false} 
+          >
             {reviews.length !== 0 ? reviews.map((e,index)=>(
                 <div className='container_score' key={Math.random(index)}>
-                    <h1>{e.location.city}-{e.location.neighborhood}</h1>
-                    <h2>{e.score}</h2>
-                    <h3>{e.state}</h3>
+                    <h2 className='score_letter'>{e.location.city}-{e.location.neighborhood}</h2>
+                    <h2 className='score_letter'>Puntuacion:{e.score}</h2>
+                    <h2 className='score_letter'>Disponibilidad:{e.state}</h2>
                     <a><img className='img_score' src={e.images.filter(e=>e)}/></a>
+                    <br/>
+                    <button>Mas informacion</button>
 
                 </div>
                 
