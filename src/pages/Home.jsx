@@ -12,13 +12,15 @@ import "../styles/Pagination.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
-import { loadAllProperties } from "../redux/actions/actions-propierties";
 import { Switch } from "@material-ui/core";
 import { ListCard } from "../componentes/ListCard";
 import FilterProperties from "../componentes/FilterProperties";
+import { setAllProperties } from "../redux/actions/actionsProperties";
 
 function Home() {
-  const properties = useSelector((state) => state.properties);
+  const properties = useSelector(
+    (state) => state.reducerProperties.allProperties
+  );
   const dispatch = useDispatch();
   const [darkMode, setDarkMode] = useState(false);
 
@@ -32,8 +34,8 @@ function Home() {
   };
 
   useEffect(() => {
-    propertyService.getAll().then((result) => {
-      dispatch(loadAllProperties(result));
+    propertyService.getAll().then((data) => {
+      dispatch(setAllProperties(data));
     });
   }, []);
 
