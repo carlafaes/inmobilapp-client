@@ -6,31 +6,29 @@ import Loading from "../../componentes/Loading";
 import PutAdmin from "../../componentes/PutAdmin";
 import adminService from "../../services/admin";
 import agentService from "../../services/agent";
-import { setAdmin } from "../../redux/actions/actions-admin";
+import {
+  setAdmin,
+  setAdminDetailsAgents,
+} from "../../redux/actions/actions-admin";
+import { useSelector } from "react-redux";
 
 export default function ViewAdmin() {
-  const [adminDetailsAgent, setAdminDetailsAgent] = useState({});
+  const adminDetailsAgents = useSelector(
+    (state) => state.reducerAdmin.adminDetailsAgents
+  );
   const dispatch = useDispatch();
 
   const { id } = useParams();
 
   useEffect(() => {
     adminService.getAdminIdAgentDetails(id).then((data) => {
-      setAdminDetailsAgent(data);
+      dispatch(setAdminDetailsAgents(data));
     });
   }, [id]);
 
-  if (Object.keys(adminDetailsAgent).length === 0) {
+  if (!adminDetailsAgents) {
     return <Loading />;
   }
-
-  const deleteAgent = async (id) => {
-    await agentService.deleteAgentID(id);
-    setAdminDetailsAgent({
-      ...adminDetailsAgent,
-      agentsID: adminDetailsAgent.agentsID.filter((agent) => agent.id !== id),
-    });
-  };
 
   const editAdmin = () => {
     adminService.getAdminID(id).then((data) => {
@@ -38,7 +36,7 @@ export default function ViewAdmin() {
     });
   };
 
-  const { name, agentsID, permissions } = adminDetailsAgent;
+  const { name, agentsID, permissions } = adminDetailsAgents;
 
   return (
     <div>
@@ -51,11 +49,7 @@ export default function ViewAdmin() {
         </ul>
       </nav>
       <PutAdmin />
-      <CardsAgent
-        agents={agentsID}
-        crudAgent={permissions.crudAgent}
-        deleteAgent={deleteAgent}
-      />
+      <CardsAgent agents={agentsID} crudAgent={permissions.crudAgent} />
     </div>
   );
 }
