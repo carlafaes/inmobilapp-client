@@ -116,4 +116,11 @@
       background-color: #ECA242;
       border-radius: 5px;
       border-style: none;
+      margin-top:10px;
+  }
+  .no_found_score{
+      font-size: 40px;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      margin-left: 100px;
+      color: #FAA222;
   }

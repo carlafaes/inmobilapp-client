@@ -8,7 +8,7 @@ import { isValidURL } from "../utils/validurl";
 import '../styles/Score.css'
 import Carousel from 'react-elastic-carousel'
 import Rating from '@mui/material/Rating';
-import Card from '@mui/material/Card';
+import { Link } from "react-router-dom";
 
 export default function ScoreMax(){
     const dispatch= useDispatch();
@@ -61,11 +61,13 @@ export default function ScoreMax(){
 								: 'RESERVADO'}</h2>
                     <a><img className='img_score' src={e.images.filter(e=>e)}/></a>
                     <br/>
-                    <button className='btn_score'>Mas informacion</button>
-
+                    <button className='btn_score' >
+                      Mas informacion
+                    </button>
+                    
                 </div>
                 
-            )) : <h1>no existen mejores puntuados</h1>} 
+            )) : <h1 className='no_found_score'>No existen mejores puntuados☹️</h1>} 
           
           </Carousel>
         </div>

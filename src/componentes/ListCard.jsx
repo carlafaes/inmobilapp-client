@@ -4,10 +4,11 @@ import ProCard from '../componentes/ProCard';
 import Card from '@mui/material/Card';
 import { Box } from '@mui/system';
 import { Container, TextField } from '@mui/material';
+import '../styles/Score.css'
 
 export const ListCard = (props) => {
 	if (props.properties.length === 0) {
-		return <h1>Not Found</h1>;
+		return <h1 className='no_found_score'>Not Found</h1>;
 	}
 
 	return (
@@ -24,7 +25,7 @@ export const ListCard = (props) => {
 					width={'100%'}
 				>
 					<Card>
-						<Grid container spacing={3} direction='row' justify='center'>
+						<Grid container spacing={3} direction='row' justifyContent='center'>
 							{props.properties.map((property) => {
 								return <ProCard key={property.id} property={property} />;
 							})}

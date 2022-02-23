@@ -19,22 +19,30 @@ const useStyles = makeStyles((theme) => ({
     zIndex: '10',
   },
   imgLogo: {
-    marginLeft: '210px',
-    marginTop: '2%',
+    width:'600px',
+    marginLeft: '220px',
+    marginTop: '1%',
+    height:'300px',
     '@media (max-width:575px)' : {
       marginLeft:'100px',
       width:'300px',
       marginTop:'-10%',
     },
-    '@media (max-width:1200px)' : {
-      width: '400px',
-      marginLeft:'170px',
+    '@media (max-width:960px)' : {
+      width: '480px',
+      marginLeft:'240px',
       height:'300px',
+    },
+    '@media (max-width:1200px)' : {
+      width: '600px',
+      marginLeft:'220px',
+      height:'350px',
+      marginTop:'30px',
     }
   },
   slogan: {
-    marginLeft: '36%',
-    marginTop: '-5%',
+    marginLeft: '26%',
+    marginTop: '1%',
     fontSize: '30px',
     color:'#0d0d0d',
     fontFamily: 'Times New Roman',
@@ -44,10 +52,15 @@ const useStyles = makeStyles((theme) => ({
     fontSize:'20px',
     marginLeft: '26%',
   },
+  '@media (max-width:960px)' : {
+    width: '400px',
+    marginLeft:'270px',
+    height:'80px',
+  },
   '@media (max-width:1200px)' : {
     width: '400px',
-    marginLeft:'170px',
-    height:'80px',
+    marginLeft:'296px',
+    height:'40px',
   }
   },
   arrow: {
@@ -64,10 +77,11 @@ const useStyles = makeStyles((theme) => ({
       marginLeft:'170px',
       height:'40px',
     },
-    '@media (max-width:1200px)' : {
+    '@media (max-width:960px)' : {
       width: '100px',
-      marginLeft:'270px',
+      marginLeft:'370px',
       height:'40px',
+      marginTop:'-10px',
     }
   },
 }));
