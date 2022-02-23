@@ -12,11 +12,14 @@ const getAdminID = async (id) => (await axios.get(`${baseUrl}/${id}`)).data;
 const putAdminID = async (id, admin) =>
   (await axios.put(`${baseUrl}/${id}`, admin)).data;
 
+const deleteAdminID = async (id) => await axios.delete(`${baseUrl}/${id}`);
+
 const adminService = {
   postAdmin,
   getAdminIdAgentDetails,
   getAdminID,
   putAdminID,
+  deleteAdminID,
 };
 
 export default adminService;

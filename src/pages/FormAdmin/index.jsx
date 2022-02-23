@@ -10,7 +10,7 @@ export default function FormAdmin() {
     DNI: "",
     address: "",
     phone: "",
-    age: 0,
+    age: "",
   };
 
   const [input, setInput] = useState(initInput);
@@ -30,10 +30,13 @@ export default function FormAdmin() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isDone(error)) {
-      adminService.postAdmin(input).then((data) => console.log(data));
-      setInput(initInput);
+      if (window.confirm("Seguro desea crear este admin?")) {
+        adminService.postAdmin(input).then((data) => console.log(data));
+        setInput(initInput);
+        window.history.back();
+      }
     } else {
-      alert("No...");
+      alert("Completa correctamente los espacios!");
     }
   };
 
@@ -57,6 +60,7 @@ export default function FormAdmin() {
         onSubmit={handleSubmit}
       >
         <Input
+          value={input.name}
           error={error.name}
           placeholder={"Name"}
           type={"text"}
@@ -64,6 +68,7 @@ export default function FormAdmin() {
           handleChange={handleChange}
         />
         <Input
+          value={input.DNI}
           error={error.DNI}
           placeholder={"DNI"}
           type={"text"}
@@ -71,6 +76,7 @@ export default function FormAdmin() {
           handleChange={handleChange}
         />
         <Input
+          value={input.address}
           error={error.address}
           placeholder={"Address"}
           type={"text"}
@@ -78,6 +84,7 @@ export default function FormAdmin() {
           handleChange={handleChange}
         />
         <Input
+          value={input.phone}
           error={error.phone}
           placeholder={"Phone"}
           type={"text"}
@@ -85,6 +92,7 @@ export default function FormAdmin() {
           handleChange={handleChange}
         />
         <Input
+          value={input.age}
           error={error.age}
           placeholder={"Age"}
           type={"number"}

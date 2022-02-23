@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import Loading from "../../componentes/Loading";
@@ -38,6 +38,11 @@ export default function ViewAdmin() {
     });
   };
 
+  const deleteCurrentAdminID = (id) => {
+    window.history.back();
+    adminService.deleteAdminID(id);
+  };
+
   const editAgent = (id) => {
     agentService.getAgentID(id).then((data) => {
       dispatch(setAgent(data));
@@ -53,6 +58,11 @@ export default function ViewAdmin() {
           <li>{name}</li>
           <li>
             <button onClick={editAdmin}>Editar perfil</button>
+          </li>
+          <li>
+            <button onClick={() => deleteCurrentAdminID(id)}>
+              Eliminar perfil
+            </button>
           </li>
         </ul>
       </nav>
