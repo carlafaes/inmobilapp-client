@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Input from "../../componentes/Input";
 import adminService from "../../services/admin";
-import { validateFormAdmin } from "../../utils/errorsFormAdmin";
+import { validateFormAdmin, isDone } from "../../utils/errorsFormAdmin";
 
 export default function FormAdmin() {
   document.title = "InmobillApp | registerAdmin";
@@ -29,16 +29,12 @@ export default function FormAdmin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isDone()) {
+    if (isDone(error)) {
       adminService.postAdmin(input).then((data) => console.log(data));
       setInput(initInput);
     } else {
       alert("No...");
     }
-  };
-
-  const isDone = () => {
-    return !Object.values(error).reduce((pre, cur) => pre || cur, false);
   };
 
   return (

@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import CardsAgent from "../../componentes/CardsAgent";
 import Loading from "../../componentes/Loading";
 import PutAdmin from "../../componentes/PutAdmin";
 import adminService from "../../services/admin";
 import agentService from "../../services/agent";
+import { setAdmin } from "../../redux/actions/actions-admin";
 
 export default function ViewAdmin() {
   const [adminDetailsAgent, setAdminDetailsAgent] = useState({});
-  const [admin, setAdmin] = useState(null);
+  const dispatch = useDispatch();
 
   const { id } = useParams();
 
@@ -32,7 +34,7 @@ export default function ViewAdmin() {
 
   const editAdmin = () => {
     adminService.getAdminID(id).then((data) => {
-      setAdmin(data);
+      dispatch(setAdmin(data));
     });
   };
 
