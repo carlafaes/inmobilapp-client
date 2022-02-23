@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import CardsAgent from "../../componentes/CardsAgent";
 import Loading from "../../componentes/Loading";
 import PutAdmin from "../../componentes/PutAdmin";
 import adminService from "../../services/admin";
@@ -10,7 +9,10 @@ import {
   setAdmin,
   setAdminDetailsAgents,
 } from "../../redux/actions/actions-admin";
+import { setAgent } from "../../redux/actions/actions-agent";
 import { useSelector } from "react-redux";
+import CardAgent from "../../componentes/CardAgent";
+import PutAgent from "../../componentes/PutAgent";
 
 export default function ViewAdmin() {
   const adminDetailsAgents = useSelector(
@@ -36,6 +38,12 @@ export default function ViewAdmin() {
     });
   };
 
+  const editAgent = (id) => {
+    agentService.getAgentID(id).then((data) => {
+      dispatch(setAgent(data));
+    });
+  };
+
   const { name, agentsID, permissions } = adminDetailsAgents;
 
   return (
@@ -49,7 +57,17 @@ export default function ViewAdmin() {
         </ul>
       </nav>
       <PutAdmin />
-      <CardsAgent agents={agentsID} crudAgent={permissions.crudAgent} />
+      <article>
+        {agentsID.map((agent) => (
+          <CardAgent
+            key={agent.id}
+            agent={agent}
+            crudAgent={permissions.crudAgent}
+            editAgent={editAgent}
+          />
+        ))}
+        <PutAgent />
+      </article>
     </div>
   );
 }

@@ -5,6 +5,8 @@ import { setAdmin } from "../../redux/actions/actions-admin";
 import { isDone, validatePutAdmin } from "../../utils/errorsFormAdmin";
 import adminService from "../../services/admin";
 
+import styled from "./PutAdmin.module.css";
+
 export default function PutAdmin() {
   const [error, setError] = useState({});
   const admin = useSelector((state) => state.reducerAdmin.admin);
@@ -50,26 +52,30 @@ export default function PutAdmin() {
   };
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form className={styled.container} onSubmit={(e) => e.preventDefault()}>
       <input
+        className={error.name ? styled.error : styled.done}
         type="text"
         value={admin.name}
         name="name"
         onChange={handleChange}
       />
       <input
+        className={error.name ? styled.error : styled.done}
         type="text"
         value={admin.address}
         name="address"
         onChange={handleChange}
       />
       <input
+        className={error.name ? styled.error : styled.done}
         type="number"
         value={admin.age}
         name="age"
         onChange={handleChange}
       />
       <input
+        className={error.name ? styled.error : styled.done}
         type="text"
         value={admin.phone}
         name="phone"

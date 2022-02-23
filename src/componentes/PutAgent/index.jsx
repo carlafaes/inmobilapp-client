@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from "react";
-import agentService from "../../services/agent";
+import { useSelector } from "react-redux";
 import Loading from "../Loading";
 
-export default function PutAgent({ id }) {
-  const [agent, setAgent] = useState({});
+export default function PutAgent() {
+  const agent = useSelector((state) => state.reducerAgent.agent);
 
-  useEffect(() => {
-    agentService.getAgentID(id).then((data) => {
-      setAgent(agent);
-    });
-  }, [id]);
-
-  if (Object.keys(agent).length === 0) {
+  if (!agent) {
     return <Loading />;
   }
 

@@ -3,14 +3,13 @@ import React from "react";
 import styled from "./CardAgent.module.css";
 
 export default function CardAgent({
-  name,
-  age,
-  phone,
-  id,
+  agent,
   crudAgent,
   deleteAgent,
   editAgent,
 }) {
+  const { name, age, phone, id } = agent;
+
   return (
     <div className={styled.card}>
       {crudAgent ? (
