@@ -6,11 +6,17 @@ import {
   Select,
   MenuItem,
   TextField,
-  Grid,
 } from "@mui/material";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import {
+  getAllProperties,
+  setFilterProperties,
+} from "../../redux/actions/actionsProperties";
 
 export default function FilterProperties() {
+  const dispatch = useDispatch();
+
   const initialState = {
     rentalPrice: [10, 5000000],
     state: "all",
@@ -30,8 +36,11 @@ export default function FilterProperties() {
         ...input,
         [e.target.name]: e.target.value,
       });
+      dispatch(
+        setFilterProperties({ ...input, [e.target.name]: e.target.value })
+      );
     } else {
-      
+      dispatch(getAllProperties());
     }
   };
 

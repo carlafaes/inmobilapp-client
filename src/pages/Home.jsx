@@ -19,7 +19,7 @@ import { setAllProperties } from "../redux/actions/actionsProperties";
 
 function Home() {
   const properties = useSelector(
-    (state) => state.reducerProperties.allProperties
+    (state) => state.reducerProperties.filteredProperties
   );
   const dispatch = useDispatch();
   const [darkMode, setDarkMode] = useState(false);

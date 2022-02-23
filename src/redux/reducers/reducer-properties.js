@@ -15,6 +15,7 @@ const reducerProperties = (state = initialState, { type, payload }) => {
       return {
         ...state,
         allProperties: payload,
+        filteredProperties: payload,
       };
 
     case GET_ALL_PROPERTIES:
