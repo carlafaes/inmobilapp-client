@@ -6,6 +6,7 @@ import reviewsService from '../services/reviews';
 import {filterRevies,getAllReviews,getScoreReviews} from '../redux/actions/actions-reviews'
 import { isValidURL } from "../utils/validurl";
 import '../styles/Score.css'
+import Carousel from 'react-elastic-carousel'
 
 export default function ScoreMax(){
     const dispatch= useDispatch();
@@ -30,10 +31,17 @@ export default function ScoreMax(){
       console.log(isValidURL(img), img);
     });
   });
+
+  const breakPoints=[
+    {width:100,itemsToShow:1},
+    {width:500,itemsToShow:2},
+    {width:1200,itemsToShow:3},
+    {width:1500,itemsToShow:5}
+  ]
     
     return(
         <div>
-            <h1>score</h1>
+          <Carousel breakPoints={breakPoints}>
             {reviews.length !== 0 ? reviews.map((e,index)=>(
                 <div className='container_score' key={Math.random(index)}>
                     <h1>{e.location.city}-{e.location.neighborhood}</h1>
@@ -44,7 +52,7 @@ export default function ScoreMax(){
                 </div>
                 
             )) : <h1>no existen mejores puntuados</h1>} 
-        
+          </Carousel>
         </div>
     )
 }

@@ -19,6 +19,7 @@ import {getScore,orderByScore} from '../redux/actions/action-properties-score'
 import ScoreMax from '../componentes/ScoreMax'
 import {ListCard} from "../componentes/ListCard";
 
+
 function Home() {
   const properties = useSelector((state) => state.propertys);
   const dispatch = useDispatch();
