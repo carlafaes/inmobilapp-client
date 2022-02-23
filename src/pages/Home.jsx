@@ -21,10 +21,10 @@ import {ListCard} from "../componentes/ListCard";
 
 
 function Home() {
-  const properties = useSelector((state) => state.propertys);
+  const properties = useSelector((state) => state.properties);
   const dispatch = useDispatch();
   const [darkMode, setDarkMode] = useState(false);
-  //const [properties, setProperties] = useState([]);
+
   const [pageNumber, setPageNumber] = useState(1);
 
   
@@ -63,25 +63,28 @@ function Home() {
     },
   });
 
-  
 
-	return (
-		<ThemeProvider theme={theme}>
-		<div>
-			<div>
-				<Landing />
-			</div>
-			<div>
-				<Navbar />
-				<NavFilterProperty/>
-				<h2>🔆<Switch checked={darkMode} onChange={()=> setDarkMode(!darkMode)} color='primary' /> 🌙</h2>	
-			</div>
-			 <div>
-				<ScoreMax/>
-			</div>  
-			
-			<ListCard
-            properties={properties.slice(
+  return (
+    <ThemeProvider theme={theme}>
+      <div>
+        <div>
+          <Landing />
+        </div>
+        <div>
+          <Navbar />
+          <NavFilterProperty />
+          <h2>
+            🔆
+            <Switch
+              checked={darkMode}
+              onChange={() => setDarkMode(!darkMode)}
+              color="primary"
+            />{" "}
+            🌙
+          </h2>
+        </div>
+        <ListCard
+          properties={properties.slice(
             pagesVisited,
             pagesVisited + dwellingPerPage
             )}

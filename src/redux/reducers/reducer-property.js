@@ -6,7 +6,7 @@ import {
 
 const initiaState = [];
 
-const propertys = (state = initiaState, action) => {
+const properties = (state = initiaState, action) => {
   switch (action.type) {
     case LOAD_ALL_PROPERTIES:
       return action.payload;
@@ -47,11 +47,10 @@ const propertys = (state = initiaState, action) => {
         ...state,
       };
 
-      return [...action.payload];
 
     default:
       return state;
   }
 };
 
-export default propertys;
+export default properties;
