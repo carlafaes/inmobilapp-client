@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import {
@@ -37,8 +37,7 @@ export default function PutAdmin() {
   const handleSubmit = async (e) => {
     if (e.target.name === "DONE") {
       if (isDone(error)) {
-        const result = prompt("Seguro que desea hacer estos cambios?", "Si");
-        if (result) {
+        if (confirm("Seguro que desea hacer estos cambios?")) {
           await adminService.putAdminID(admin.id, admin);
           alert("done!");
           adminService.getAdminIdAgentDetails(admin.id).then((data) => {
@@ -50,8 +49,7 @@ export default function PutAdmin() {
         alert("Completa correctamente los campos");
       }
     } else {
-      const result = prompt("Seguro? no se guardaran los cambios!", "Si");
-      if (result) {
+      if (confirm("Seguro? no se guardaran los cambios!")) {
         dispatch(setAdmin(null));
       }
     }

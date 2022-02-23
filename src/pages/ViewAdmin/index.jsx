@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Loading from "../../componentes/Loading";
 import PutAdmin from "../../componentes/PutAdmin";
 import adminService from "../../services/admin";
@@ -21,6 +21,7 @@ export default function ViewAdmin() {
   const dispatch = useDispatch();
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     adminService.getAdminIdAgentDetails(id).then((data) => {
@@ -38,9 +39,12 @@ export default function ViewAdmin() {
     });
   };
 
-  const deleteCurrentAdminID = (id) => {
-    window.history.back();
-    adminService.deleteAdminID(id);
+  const deleteCurrentAdminID = async (id) => {
+    if (confirm("Seguro que desea darse de baja?")) {
+      await adminService.deleteAdminID(id);
+      alert("Done!");
+      navigate("/");
+    }
   };
 
   const editAgent = (id) => {

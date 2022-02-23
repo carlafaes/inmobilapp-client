@@ -27,8 +27,7 @@ export default function PutAgent({ id }) {
   const handleSubmit = async (e) => {
     if (e.target.name === "DONE") {
       if (isDone(error)) {
-        const result = prompt("Seguro que desea hacer estos cambios?", "Si");
-        if (result) {
+        if (confirm("Seguro que desea hacer estos cambios?")) {
           await agentService.putAgentID(agent.id, agent);
           alert("done!");
           adminService.getAdminIdAgentDetails(id).then((data) => {
@@ -40,8 +39,7 @@ export default function PutAgent({ id }) {
         alert("Completa correctamente los campos");
       }
     } else {
-      const result = prompt("Seguro? no se guardaran los cambios!", "Si");
-      if (result) {
+      if (confirm("Seguro? no se guardaran los cambios!")) {
         dispatch(setAgent(null));
       }
     }

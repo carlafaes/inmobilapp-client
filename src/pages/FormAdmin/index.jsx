@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Input from "../../componentes/Input";
 import adminService from "../../services/admin";
 import { validateFormAdmin, isDone } from "../../utils/errorsFormAdmin";
@@ -13,6 +14,7 @@ export default function FormAdmin() {
     age: "",
   };
 
+  const navigate = useNavigate();
   const [input, setInput] = useState(initInput);
   const [error, setError] = useState({
     name: true,
@@ -30,10 +32,11 @@ export default function FormAdmin() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isDone(error)) {
-      if (window.confirm("Seguro desea crear este admin?")) {
-        adminService.postAdmin(input).then((data) => console.log(data));
-        setInput(initInput);
-        window.history.back();
+      if (confirm("Seguro desea crear este admin?")) {
+        adminService.postAdmin(input).then((res) => {
+          setInput(initInput);
+          navigate(`/viewAdmin/${res.data.id}`);
+        });
       }
     } else {
       alert("Completa correctamente los espacios!");
