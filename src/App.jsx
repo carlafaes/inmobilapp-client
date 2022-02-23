@@ -6,7 +6,6 @@ import { LoginClient } from './componentes/LoginClient';
 import { RegisterClient } from './componentes/RegisterClient';
 import Home from './pages/Home';
 import CreateProperty from './componentes/CreateProperty'
-import AgentsList from './componentes/AgentsList/AgentsList'
 import AgentDetail from './componentes/AgentDetail/AgentDetail'
 import CreatePropertyForm from './componentes/CreatePropertyForm/CreatePropertyForm'
 import FormAdmin from "./pages/FormAdmin";
@@ -27,7 +26,6 @@ function App() {
           <Route path="/register" element={<RegisterClient />} />
           <Route path="/viewAdmin/:id" element={<ViewAdmin />} />
           <Route exact path="/property/:id" element={<PropertyDetails />} />
-          <Route path="/agents" element={<AgentsList/>}/>
           <Route path="/agents/:id" element={<AgentDetail/>} />
           <Route path="/create-property" element={<CreatePropertyForm/>} />
           <Route path="*" element={<PageNotFound />} />
