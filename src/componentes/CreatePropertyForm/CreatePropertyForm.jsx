@@ -3,6 +3,7 @@ import {Formik, Field, Form, ErrorMessage} from 'formik'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import styles from './CreateProperty.moduleForm.css';
+import propertyServices from '../../services/property';
 
 function handleSubmit(e){
     e.preventDefault()
@@ -10,6 +11,7 @@ function handleSubmit(e){
 
 export default function CreatePropertyForm(){
     const [newProperty, setNewProperty] = useState({sent: false});
+    const [formErrors, setFormErrors] = useState({})
     const[images, setNewImage] = useState([]);
     return (
         <Formik
@@ -26,6 +28,7 @@ export default function CreatePropertyForm(){
             baths: '',
             garage: '',
         }}
+
         validate = {(v)=> {
             const err = {};
             if(!v.type){
@@ -77,15 +80,37 @@ export default function CreatePropertyForm(){
             if(!v.garage){
                 err.garage = 'Debes elegir una opción';
             }
-
+            setFormErrors(err)
             return err;
         }}
-        onSubmit={(valores, {resetForm})=> {
+        onSubmit={(values, {resetForm})=> {
             resetForm();
-            valores.sent = true;
-            setNewProperty(valores)
+            console.log(formErrors);
+            if(!formErrors.type && !formErrors.city && !formErrors.neighborhood && !formErrors.address && formErrors.price && formErrors.description && formErrors.area && formErrors.rooms && formErrors.baths && formErrors.garage){
+                values.sent = true;
+                const property = { 
+                    typeProperty: values.type,
+                    location: {
+                      city: values.city,
+                      neighborhood: values.neighborhood,
+                      address: values.address
+                    },
+                    images: ["url", "url1"],
+                    rentalPrice: values.price,
+                    description: values.description,
+                    details: {
+                      area: values.area,
+                      rooms: values.rooms,
+                      baths: values.baths,
+                      garage: values.garage
+                    },
+                    agentID: "621271c06ec04903d5c20e0f" 
+                }
+                propertyServices.createProperty(property);
+            }
+            setNewProperty(values)
             setTimeout(() => setNewProperty({}), 5000);
-            console.log(valores)
+            console.log('values',values)
             console.log('formulario enviado')
         }}
         >
@@ -136,7 +161,7 @@ export default function CreatePropertyForm(){
                         </div>
                         <label htmlFor="description">Descripción</label>
                         <div>
-                            <Field name="description" type="text"/>
+                            <Field name="description" as="textarea"/>
                             <FontAwesomeIcon icon={faCheckCircle}/>
                             <ErrorMessage name='description' component={() => <p className={styles.wrong}>{errors.description}</p>}/>
                         </div>
@@ -165,8 +190,8 @@ export default function CreatePropertyForm(){
                         <div>
                             <Field name='garage' as="select">
                                 <option >Garage</option>
-                                <option name="garage" value='si' >Si</option>
-                                <option name="garage" value='no' >No</option>
+                                <option name="garage" value={true} >Si</option>
+                                <option name="garage" value={false} >No</option>
                             </Field>
                             <ErrorMessage name='garage' component={() => <p className={styles.wrong}>{errors.garage}</p>}/>
                         </div>
