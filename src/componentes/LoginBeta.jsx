@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./Navbar";
 import LoginForm from "./LoginForm";
 import Footer from "./Footer";
 import ClientInterface_DEMO from "./ClientInterface_DEMO";
@@ -10,11 +9,9 @@ const LoginBeta = () => {
   const [dni, setDNI] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const clientWithToken = useSelector((state) => state.clientWithToken);
+  const clientWithToken = useSelector((state) => state.clients.clientWithToken);
 
-  useEffect(() => {
-    alert(`Cambio algo`);
-  }, [clientWithToken]);
+  useEffect(() => {}, [clientWithToken]);
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -24,10 +21,8 @@ const LoginBeta = () => {
       setPassword("");
     }
   };
-
   return (
     <>
-      <Navbar />
       {clientWithToken ? (
         <ClientInterface_DEMO user={clientWithToken} />
       ) : (

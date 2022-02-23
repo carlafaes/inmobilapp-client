@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   clients,
   properties,
   reducerScore,
-  reducerReviews
+  reducerReviews,
 });
 
 export default rootReducer;
