@@ -1,14 +1,18 @@
-import axios from 'axios';
+import axios from "axios";
 
-const baseUrl = '/api/agents';
+const baseUrl = "/api/agents";
 
-const getAll = async () => (await axios.get(baseUrl)).data;
+const getAgentID = async (id) => (await axios.get(`${baseUrl}/${id}`)).data;
 
-const getAgentDetails = async (id) => (await axios.get(`${baseUrl}/${id}`)).data
+const deleteAgentID = async (id) => await axios.delete(`${baseUrl}/${id}`);
 
-const agentServices = {
-    getAll,
-    getAgentDetails
-}
+const putAgentID = async (id, agent) =>
+  (await axios.put(`${baseUrl}/${id}`, agent)).data;
 
-export default agentServices;
+const agentService = {
+  getAgentID,
+  deleteAgentID,
+  putAgentID,
+};
+
+export default agentService;
