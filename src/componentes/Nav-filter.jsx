@@ -63,11 +63,9 @@ const useStyles = makeStyles((theme) => ({
 
 const NavFilterProperty = () => {
 	const dispatch = useDispatch();
-	const [todo, setTodo] = React.useState('');
+	
 	const clases = useStyles();
-	const onChangeTodo = (event) => {
-		setTodo(event.target.value);
-	};
+  const [todo, setTodo]= useState('')
 
 	const [input, setInput] = useState({
 		maximum_budget: '',
@@ -99,6 +97,12 @@ const NavFilterProperty = () => {
 		setInput({ ...input, [e.target.name]: e.target.value });
 	};
 
+  const onChangeType = (e) => {
+    console.log(e.target.name, e.target.value)
+    setInput({...input, [e.target.name]: e.target.value})
+    setTodo(e.target.value)
+	};
+
 	const changeRooms = (e) => {
 		if (e.target.innerText === '+' && input.rooms < 7) {
 			return setInput({ ...input, rooms: Number(input.rooms) + 1 });
@@ -110,7 +114,7 @@ const NavFilterProperty = () => {
 	const search = () => {
 		propertyService.getAll().then((r) => {
 			dispatch(filterProperties(r, input));
-			console.log(input);
+			
 		});
 	};
 
@@ -144,14 +148,14 @@ const NavFilterProperty = () => {
 									id='demo-simple-select'
 									value={todo}
 									className='selectType navFilterAll'
-									onChange={onChangeTodo}
+									onChange={onChangeType}
 									name='typeProperty'
 								>
-									<MenuItem value={10}>Todo</MenuItem>
-									<MenuItem value={20}>Casa</MenuItem>
-									<MenuItem value={30}>Apartamento</MenuItem>
-									<MenuItem value={40}>Local</MenuItem>
-									<MenuItem value={50}>Finca</MenuItem>
+									<MenuItem value={'Todo'}>Todo</MenuItem>
+									<MenuItem value={'Casa'}>Casa</MenuItem>
+									<MenuItem value={'Apartamento'}>Apartamento</MenuItem>
+									<MenuItem value={'Local'}>Local</MenuItem>
+									<MenuItem value={'Finca'}>Finca</MenuItem>
 								</Select>
 							</FormControl>
 						</Box>

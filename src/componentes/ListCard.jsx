@@ -12,7 +12,7 @@ export const ListCard = (props) => {
 
 	return (
 		<Container fixed>
-			<Grid justify='center' container spacing={3}>
+			<Grid justifyContent='center' container spacing={3}>
 				<Box
 					boxSizing={'border-box'}
 					m={1}
@@ -24,7 +24,7 @@ export const ListCard = (props) => {
 					width={'100%'}
 				>
 					<Card>
-						<Grid container spacing={3} direction='row' justify='center'>
+						<Grid container spacing={3} direction='row'  justifyContent='center'>
 							{props.properties.map((property) => {
 								return <ProCard key={property.id} property={property} />;
 							})}
