@@ -14,7 +14,8 @@ import { useDispatch } from "react-redux";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { loadAllProperties } from "../redux/actions/actions-propierties";
 import { Switch } from "@material-ui/core";
-import {ListCard} from "../componentes/ListCard";
+import { ListCard } from "../componentes/ListCard";
+import FilterProperties from "../componentes/FilterProperties";
 
 function Home() {
   const properties = useSelector((state) => state.properties);
@@ -52,7 +53,6 @@ function Home() {
     },
   });
 
-
   return (
     <ThemeProvider theme={theme}>
       <div>
@@ -62,6 +62,7 @@ function Home() {
         <div>
           <Navbar />
           <NavFilterProperty />
+          <FilterProperties />
           <h2>
             🔆
             <Switch
@@ -78,7 +79,7 @@ function Home() {
             pagesVisited + dwellingPerPage
           )}
         />
-        <div style={{padding:'20px 20px'}}>
+        <div style={{ padding: "20px 20px" }}>
           <ReactPaginate
             previousLabel={"⋘"}
             nextLabel={"⋙"}
