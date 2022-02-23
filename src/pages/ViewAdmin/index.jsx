@@ -56,8 +56,8 @@ export default function ViewAdmin() {
           </li>
         </ul>
       </nav>
-      <PutAdmin />
       <article>
+        <PutAdmin />
         {agentsID.map((agent) => (
           <CardAgent
             key={agent.id}
@@ -66,7 +66,7 @@ export default function ViewAdmin() {
             editAgent={editAgent}
           />
         ))}
-        <PutAgent />
+        <PutAgent id={id} />
       </article>
     </div>
   );

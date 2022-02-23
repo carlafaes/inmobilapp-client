@@ -1,13 +1,86 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import Loading from "../Loading";
+import { setAgent } from "../../redux/actions/actions-agent";
+import { setAdminDetailsAgents } from "../../redux/actions/actions-admin";
+import { isDone, validatePutAdmin } from "../../utils/errorsFormAdmin";
+import agentService from "../../services/agent";
+import adminService from "../../services/admin";
 
-export default function PutAgent() {
+import styled from "./PutAgent.module.css";
+
+export default function PutAgent({ id }) {
   const agent = useSelector((state) => state.reducerAgent.agent);
+  const dispatch = useDispatch();
+
+  const [error, setError] = useState({});
 
   if (!agent) {
-    return <Loading />;
+    return null;
   }
 
-  return <h1>{agent.name}</h1>;
+  const handleChange = (e) => {
+    dispatch(setAgent({ ...agent, [e.target.name]: e.target.value }));
+    setError(validatePutAdmin({ ...agent, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    if (e.target.name === "DONE") {
+      if (isDone(error)) {
+        const result = prompt("Seguro que desea hacer estos cambios?", "Si");
+        if (result) {
+          await agentService.putAgentID(agent.id, agent);
+          alert("done!");
+          adminService.getAdminIdAgentDetails(id).then((data) => {
+            dispatch(setAdminDetailsAgents(data));
+          });
+          dispatch(setAgent(null));
+        }
+      } else {
+        alert("Completa correctamente los campos");
+      }
+    } else {
+      const result = prompt("Seguro? no se guardaran los cambios!", "Si");
+      if (result) {
+        dispatch(setAgent(null));
+      }
+    }
+  };
+
+  return (
+    <form onSubmit={(e) => e.preventDefault()}>
+      <input
+        className={error.name ? styled.error : styled.done}
+        type="text"
+        value={agent.name}
+        onChange={handleChange}
+        name="name"
+      />
+      <input
+        className={error.address ? styled.error : styled.done}
+        type="text"
+        value={agent.address}
+        onChange={handleChange}
+        name="address"
+      />
+      <input
+        className={error.phone ? styled.error : styled.done}
+        type="text"
+        value={agent.phone}
+        onChange={handleChange}
+        name="phone"
+      />
+      <input
+        className={error.age ? styled.error : styled.done}
+        type="text"
+        value={agent.age}
+        onChange={handleChange}
+        name="age"
+      />
+      <button name="DONE" onClick={handleSubmit}>
+        terminar
+      </button>
+      <button onClick={handleSubmit}>cancelar</button>
+    </form>
+  );
 }

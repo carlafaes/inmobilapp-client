@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { setAdmin } from "../../redux/actions/actions-admin";
+import {
+  setAdmin,
+  setAdminDetailsAgents,
+} from "../../redux/actions/actions-admin";
 import { isDone, validatePutAdmin } from "../../utils/errorsFormAdmin";
 import adminService from "../../services/admin";
 
@@ -38,6 +41,9 @@ export default function PutAdmin() {
         if (result) {
           await adminService.putAdminID(admin.id, admin);
           alert("done!");
+          adminService.getAdminIdAgentDetails(admin.id).then((data) => {
+            dispatch(setAdminDetailsAgents(data));
+          });
           dispatch(setAdmin(null));
         }
       } else {
@@ -61,21 +67,21 @@ export default function PutAdmin() {
         onChange={handleChange}
       />
       <input
-        className={error.name ? styled.error : styled.done}
+        className={error.address ? styled.error : styled.done}
         type="text"
         value={admin.address}
         name="address"
         onChange={handleChange}
       />
       <input
-        className={error.name ? styled.error : styled.done}
+        className={error.age ? styled.error : styled.done}
         type="number"
         value={admin.age}
         name="age"
         onChange={handleChange}
       />
       <input
-        className={error.name ? styled.error : styled.done}
+        className={error.phone ? styled.error : styled.done}
         type="text"
         value={admin.phone}
         name="phone"
