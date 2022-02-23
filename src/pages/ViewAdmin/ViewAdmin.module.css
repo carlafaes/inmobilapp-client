@@ -1,0 +1,12 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../../Img/fonodcity2.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.container article {
+  min-height: 600px;
+}

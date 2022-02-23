@@ -13,6 +13,9 @@ import { setAgent } from "../../redux/actions/actions-agent";
 import { useSelector } from "react-redux";
 import CardAgent from "../../componentes/CardAgent";
 import PutAgent from "../../componentes/PutAgent";
+import Footer from "../../componentes/Footer";
+
+import styled from "./ViewAdmin.module.css";
 
 export default function ViewAdmin() {
   const adminDetailsAgents = useSelector(
@@ -56,7 +59,7 @@ export default function ViewAdmin() {
   const { name, agentsID, permissions } = adminDetailsAgents;
 
   return (
-    <div>
+    <div className={styled.container}>
       <nav>
         <ul>
           <li>{name}</li>
@@ -82,6 +85,7 @@ export default function ViewAdmin() {
         ))}
         <PutAgent id={id} />
       </article>
+      <Footer />
     </div>
   );
 }
