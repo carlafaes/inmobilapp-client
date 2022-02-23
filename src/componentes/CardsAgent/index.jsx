@@ -1,11 +1,24 @@
 import React from "react";
 import CardAgent from "../CardAgent";
 
-export default function CardsAgent({ agents }) {
+import styled from "./CardsAgent.module.css";
+
+export default function CardsAgent({ agents, crudAgent, deleteAgent, editAgent }) {
   return (
-    <div>
+    <div className={styled.cards}>
       {agents.map(({ name, age, phone, id }) => {
-        return <CardAgent key={id} name={name} age={age} phone={phone} />;
+        return (
+          <CardAgent
+            key={id}
+            name={name}
+            age={age}
+            phone={phone}
+            id={id}
+            crudAgent={crudAgent}
+            deleteAgent={deleteAgent}
+            editAgent={editAgent}
+          />
+        );
       })}
     </div>
   );

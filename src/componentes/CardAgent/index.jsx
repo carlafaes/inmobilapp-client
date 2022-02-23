@@ -1,13 +1,27 @@
 import React from "react";
 
-export default function CardAgent({ name, age, phone }) {
+import styled from "./CardAgent.module.css";
+
+export default function CardAgent({
+  name,
+  age,
+  phone,
+  id,
+  crudAgent,
+  deleteAgent,
+  editAgent,
+}) {
   return (
-    <div>
-      <button onClick={() => console.log("Deleted")}>DELETE</button>
+    <div className={styled.card}>
+      {crudAgent ? (
+        <button onClick={() => deleteAgent(id)}>Eliminar</button>
+      ) : null}
       <h1>{name}</h1>
       <h2>{age}</h2>
       <h3>{phone}</h3>
-      <button onClick={() => console.log("Put")}>PUT</button>
+      {crudAgent ? (
+        <button onClick={() => editAgent(id)}>Editar perfil</button>
+      ) : null}
     </div>
   );
 }
