@@ -4,24 +4,23 @@ import Landing from "../componentes/Landingprueba";
 import Navbar from "../componentes/Navbar";
 import "../styles/Loading.css";
 import Load from "../Img/LOAD5gif.gif";
-import "../styles/Loading.css";
 import Footer from "../componentes/Footer";
-import NavFilterProperty from "../componentes/Nav-filter";
 import ReactPaginate from "react-paginate";
 import "../styles/Pagination.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
-import { loadAllProperties } from "../redux/actions/actions-propierties";
 import { Switch } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import {getScore,orderByScore} from '../redux/actions/action-properties-score'
 import ScoreMax from '../componentes/ScoreMax'
 import {ListCard} from "../componentes/ListCard";
+import FilterProperties from "../componentes/FilterProperties";
+import { setAllProperties } from "../redux/actions/actionsProperties";
 
 
 function Home() {
-  const properties = useSelector((state) => state.properties);
+  const properties = useSelector(
+    (state) => state.reducerProperties.filteredProperties
+  );
   const dispatch = useDispatch();
   const [darkMode, setDarkMode] = useState(false);
 
@@ -37,15 +36,13 @@ function Home() {
 	}
 	console.log(properties);
 
-	
-	useEffect(() => {
-		
-		propertyService.getAll().then((result) => {
-			dispatch(loadAllProperties(result))
-		});
 
-		
-	}, []);
+
+  useEffect(() => {
+    propertyService.getAll().then((data) => {
+      dispatch(setAllProperties(data));
+    });
+  }, []);
 
 	if (!properties) {
     return (
@@ -63,7 +60,6 @@ function Home() {
     },
   });
 
-
   return (
     <ThemeProvider theme={theme}>
       <div>
@@ -73,46 +69,45 @@ function Home() {
         <div>
           <Navbar />
 		  <div className="switch_home">
-            <h2>🔆
-            <Switch
-              checked={darkMode}
-              onChange={() => setDarkMode(!darkMode)}
-              color="primary"
-            />
+      <h2>🔆
+          <Switch
+            checked={darkMode}
+            onChange={() => setDarkMode(!darkMode)}
+            color="primary"
+          />
 			🌙</h2>
-          </div>
-          <NavFilterProperty />
-          
-		  <ScoreMax/>
+      </div>
+      <br/>
+      <FilterProperties />
+      <ScoreMax/>
         </div>
         <ListCard
           properties={properties.slice(
             pagesVisited,
             pagesVisited + dwellingPerPage
-            )}
-           />
-	
-			<div >
-				<ReactPaginate
-				previousLabel={'⋘'}
-				nextLabel={'⋙'}
-				breakLabel={'...'}
-				pageCount={pageCount} //cantidad de paginas total
-				marginPagesDisplayed={2}//num de paginas que se muestran antes y despues del breakLabel
-				onPageChange={changePage}
-				containerClassName={"paginationBttns"}
-       			 previousLinkClassName={"previousBttn"}
-        		nextLinkClassName={"nextBttn"}
-        		disabledClassName={"paginationDisabled"}
-        		activeClassName={"paginationActive"}
-				/>
-			</div>
-			<div>
-				<Footer />
-			</div>
-		</div>
-		</ThemeProvider>
-	);
+          )}
+        />
+        <div >
+          <ReactPaginate
+            previousLabel={"⋘"}
+            nextLabel={"⋙"}
+            breakLabel={"..."}
+            pageCount={pageCount} //cantidad de paginas total
+            marginPagesDisplayed={2} //num de paginas que se muestran antes y despues del breakLabel
+            onPageChange={changePage}
+            containerClassName={"paginationBttns"}
+            previousLinkClassName={"previousBttn"}
+            nextLinkClassName={"nextBttn"}
+            disabledClassName={"paginationDisabled"}
+            activeClassName={"paginationActive"}
+          />
+        </div>
+        <div>
+          <Footer />
+        </div>
+      </div>
+    </ThemeProvider>
+  );
 }
 
 export default Home;

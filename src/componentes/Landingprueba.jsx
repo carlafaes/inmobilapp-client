@@ -4,9 +4,6 @@ import { CssBaseline, IconButton, Collapse } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Link as Scroll } from 'react-scroll';
 import Logo from '../Img/logo.png';
-import { Navigate } from 'react-router-dom';
-// import '../styles/Landing.css'
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,8 +31,8 @@ const useStyles = makeStyles((theme) => ({
       height:'300px',
     },
     '@media (max-width:1200px)' : {
-      width: '600px',
-      marginLeft:'220px',
+      width: '700px',
+      marginLeft:'190px',
       height:'350px',
       marginTop:'30px',
     }
@@ -59,8 +56,9 @@ const useStyles = makeStyles((theme) => ({
   },
   '@media (max-width:1200px)' : {
     width: '400px',
-    marginLeft:'296px',
+    marginLeft:'306px',
     height:'40px',
+    marginTop:'-20px',
   }
   },
   arrow: {
@@ -82,6 +80,12 @@ const useStyles = makeStyles((theme) => ({
       marginLeft:'370px',
       height:'40px',
       marginTop:'-10px',
+    },
+    '@media (max-width:1200px)' : {
+      width: '400px',
+      marginLeft:'260px',
+      height:'60px',
+      marginTop:'-20px',
     }
   },
 }));

@@ -1,7 +1,6 @@
 import React from 'react';
 import {useSelector,useDispatch} from 'react-redux';
 import { useEffect } from 'react';
-import { getScore,orderByScore } from '../redux/actions/action-properties-score';
 import reviewsService from '../services/reviews';
 import {filterRevies,getAllReviews,getScoreReviews} from '../redux/actions/actions-reviews'
 import { isValidURL } from "../utils/validurl";

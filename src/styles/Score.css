@@ -57,13 +57,14 @@
     border-radius: 50%;
 }
 .rec.rec-arrow:focus{
-    background-color: #FAA222;
+    background-color: #FAA222 !important;
 }
 /* round buttons on hover */
 .rec.rec-arrow:hover {
     border-radius: 50%;
     background-color: rgb(191, 192, 138);
 }
+
 /* hide disabled buttons */
 /* .rec.rec-arrow:disabled {
     visibility: hidden;

@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  max-width: 500px;
+  flex-direction: column;
+}
+
+.error {
+  border-color: red;
+}
+
+.done {
+  border-color: green;
+}
