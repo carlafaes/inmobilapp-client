@@ -32,11 +32,11 @@ const reducerProperties = (state = initialState, { type, payload }) => {
       return {
         ...state,
         filteredProperties: state.allProperties.filter((property) => {
-          return toLower(property.location.city).includes(
-            toLower(payload.city) ||
-              toLower(property.location.address).includes(
-                toLower(payload.address)
-              )
+          return (
+            toLower(property.location.city).includes(toLower(payload.city)) ||
+            toLower(property.location.address).includes(
+              toLower(payload.address)
+            )
           );
         }),
       };

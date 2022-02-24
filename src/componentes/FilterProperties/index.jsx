@@ -1,11 +1,11 @@
 import {
   Box,
-  Switch,
   Slider,
   Typography,
   Select,
   MenuItem,
   TextField,
+  Button,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -25,26 +25,24 @@ export default function FilterProperties() {
     city: "",
     address: "",
     neighborhood: "",
+    typeProperty: "all",
   };
 
   const [input, setInput] = useState(initialState);
-  const [filter, setFilter] = useState(false);
 
   const handleChange = (e) => {
-    if (filter) {
-      setInput({
-        ...input,
-        [e.target.name]: e.target.value,
-      });
-      dispatch(
-        setFilterProperties({ ...input, [e.target.name]: e.target.value })
-      );
-    }
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+    dispatch(
+      setFilterProperties({ ...input, [e.target.name]: e.target.value })
+    );
   };
 
-  const applyFilter = () => {
-    setFilter(!filter);
+  const clearFilter = () => {
     dispatch(getAllProperties());
+    setInput(initialState)
   };
 
   return (
@@ -90,7 +88,7 @@ export default function FilterProperties() {
           valueLabelDisplay="auto"
           disableSwap
         />
-        <Typography id="rentalPrice">Area</Typography>
+        <Typography id="rentalPrice">Precio de renta</Typography>
         <Slider
           aria-labelledby="rentalPrice"
           name="rentalPrice"
@@ -114,10 +112,22 @@ export default function FilterProperties() {
         <MenuItem value="unavailable">No disponibles</MenuItem>
         <MenuItem value="reserved">Reservada</MenuItem>
       </Select>
-      <Typography id="filter">
-        {filter ? "Quitar Filtros" : "Aplicar Filtros"}
-      </Typography>
-      <Switch aria-labelledby="filter" onChange={applyFilter} />
+      <Typography id="typeProperty">Tipo</Typography>
+      <Select
+        name="typeProperty"
+        aria-labelledby="typeProperty"
+        value={input.typeProperty}
+        onChange={handleChange}
+      >
+        <MenuItem value="all">Todas</MenuItem>
+        <MenuItem value="casa">Casa</MenuItem>
+        <MenuItem value="local">Local</MenuItem>
+        <MenuItem value="apartamento">Apartamento</MenuItem>
+        <MenuItem value="finca">Finca</MenuItem>
+      </Select>
+      <Button variant="contained" onClick={clearFilter}>
+        Limpiar Filtros
+      </Button>
     </Box>
   );
 }
