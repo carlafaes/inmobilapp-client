@@ -6,18 +6,20 @@ import "../styles/Loading.css";
 import Load from "../Img/LOAD5gif.gif";
 import "../styles/Loading.css";
 import Footer from "../componentes/Footer";
-import NavFilterProperty from "../componentes/Nav-filter";
 import ReactPaginate from "react-paginate";
 import "../styles/Pagination.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
-import { loadAllProperties } from "../redux/actions/actions-propierties";
 import { Switch } from "@material-ui/core";
-import {ListCard} from "../componentes/ListCard";
+import { ListCard } from "../componentes/ListCard";
+import FilterProperties from "../componentes/FilterProperties";
+import { setAllProperties } from "../redux/actions/actionsProperties";
 
 function Home() {
-  const properties = useSelector((state) => state.properties);
+  const properties = useSelector(
+    (state) => state.reducerProperties.filteredProperties
+  );
   const dispatch = useDispatch();
   const [darkMode, setDarkMode] = useState(false);
 
@@ -31,8 +33,8 @@ function Home() {
   };
 
   useEffect(() => {
-    propertyService.getAll().then((result) => {
-      dispatch(loadAllProperties(result));
+    propertyService.getAll().then((data) => {
+      dispatch(setAllProperties(data));
     });
   }, []);
 
@@ -52,7 +54,6 @@ function Home() {
     },
   });
 
-
   return (
     <ThemeProvider theme={theme}>
       <div>
@@ -61,7 +62,7 @@ function Home() {
         </div>
         <div>
           <Navbar />
-          <NavFilterProperty />
+          <FilterProperties />
           <h2>
             🔆
             <Switch
@@ -78,7 +79,7 @@ function Home() {
             pagesVisited + dwellingPerPage
           )}
         />
-        <div style={{padding:'20px 20px'}}>
+        <div style={{ padding: "20px 20px" }}>
           <ReactPaginate
             previousLabel={"⋘"}
             nextLabel={"⋙"}

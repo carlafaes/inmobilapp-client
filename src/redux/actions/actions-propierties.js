@@ -24,7 +24,7 @@ export const filterProperties=(payload, filter)=>{
 export const postProperties = (payload) =>{
   try {
     return async function(dispatch){
-        const resp = await axios.post('http://localhost:3001/api/properties',payload);
+        const resp = await axios.post('/api/properties',payload);
         console.log(resp)
         return resp
     }
