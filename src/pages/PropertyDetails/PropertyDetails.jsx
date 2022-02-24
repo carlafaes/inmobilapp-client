@@ -53,21 +53,21 @@ export default function PropertyDetails() {
         <section className={styles.details_container}>
           <div className={styles.details}>
             <h2 className={styles.details_title}>Details</h2>
-            <h2>{property.location.address}</h2>
+            <h2>{property.location?.address}</h2>
             <h3>
-              {property.location.city}, {property.location.neighborhood}
+              {property.location?.city}, {property.location?.neighborhood}
             </h3>
             <p>
               <span>Surface: </span>
-              {property.details.area}
+              {property.details?.area}
             </p>
             <p>
               <span>Rooms: </span>
-              {property.details.rooms}
+              {property.details?.rooms}
             </p>
             <p>
               <span>Baths: </span>
-              {property.details.baths}
+              {property.details?.baths}
             </p>
             <p>
               <span>Garage: </span>
@@ -79,11 +79,11 @@ export default function PropertyDetails() {
             <div className={styles.agent_info}>
               <p>
                 <span>Name: </span>
-                {property.agentID.name}
+                {property.agentID?.name}
               </p>
               <p>
                 <span>Phone: </span>
-                {property.agentID.phone}
+                {property.agentID?.phone}
               </p>
             </div>
           </div>

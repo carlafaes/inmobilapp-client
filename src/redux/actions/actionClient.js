@@ -1,21 +1,22 @@
 import axios from 'axios';
-const url=`http://localhost:3000/api`;
 
 export function PostClient(client) {
     
     return async (dispatch)=>{
-        const json =await axios.post(`${url}/clients`,client)
+        const json =await axios.post(`http://localhost:3001/api/clients`,client)
         return dispatch({
             type:'POST_CLIENT',
-            payload:client
+            payload:json
         })
     }
 }
 
-// export function homeClient (id){
-//     const {data} = await axios.get(`${url}/client/${id}`)
-//     return dispatch({
-//         type:'GET_CLIENT_ID',
-//         payload:data
-//     })
-// }
+export function LoginClientP(client){
+    return async (dispatch)=>{
+        const json = await axios.post(`http://localhost:3001/api/login`,client)
+        return dispatch({
+            type:'LOGIN_CLIENT',
+            payload:json
+        })
+    }
+}

@@ -1,13 +1,13 @@
 const initialState = {
-  client:[]
+  credentials:null
 };
 
 const clients = (state = initialState, action) => {
   switch (action.type) {
-    case 'GET_CLIENT_ID':
+    case 'LOGIN_CLIENT':
       return{
         ...state,
-        client:action.payload
+        credentials:action.payload
       }
     
     default: return state;
