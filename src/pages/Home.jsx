@@ -33,8 +33,6 @@ function Home() {
     setPageNumber(selected);
   };
 
-console.log(properties);
-
   useEffect(() => {
     propertyService.getAll().then((data) => {
       dispatch(setAllProperties(data));
@@ -65,7 +63,6 @@ console.log(properties);
         </div>
         <div>
           <Navbar />
-          <NavFilterProperty />
           <FilterProperties />
           <h2>
             🔆
