@@ -6,7 +6,6 @@ import "../styles/Loading.css";
 import Load from "../Img/LOAD5gif.gif";
 import "../styles/Loading.css";
 import Footer from "../componentes/Footer";
-import NavFilterProperty from "../componentes/Nav-filter";
 import ReactPaginate from "react-paginate";
 import "../styles/Pagination.css";
 import { useSelector } from "react-redux";

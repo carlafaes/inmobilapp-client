@@ -42,7 +42,7 @@ export default function FilterProperties() {
 
   const clearFilter = () => {
     dispatch(getAllProperties());
-    setInput(initialState)
+    setInput(initialState);
   };
 
   return (
