@@ -18,9 +18,9 @@ export default function FilterProperties() {
   const dispatch = useDispatch();
 
   const initialState = {
-    rentalPrice: [10, 5000000],
+    rentalPrice: [100, 2000],
     state: "all",
-    area: [10, 1000],
+    area: [25, 300],
     rooms: [1, 20],
     city: "",
     address: "",
@@ -72,8 +72,8 @@ export default function FilterProperties() {
           name="area"
           value={input.area}
           onChange={handleChange}
-          min={10}
-          max={1000}
+          min={25}
+          max={300}
           valueLabelDisplay="auto"
           disableSwap
         />
@@ -94,8 +94,8 @@ export default function FilterProperties() {
           name="rentalPrice"
           value={input.rentalPrice}
           onChange={handleChange}
-          min={10}
-          max={5000000}
+          min={100}
+          max={2000}
           valueLabelDisplay="auto"
           disableSwap
         />
