@@ -9,6 +9,10 @@ const initialState = {
   filteredProperties: [],
 };
 
+const toLower = (str) => {
+  return str.toLowerCase();
+};
+
 const reducerProperties = (state = initialState, { type, payload }) => {
   switch (type) {
     case SET_ALL_PROPERTIES:
@@ -27,7 +31,14 @@ const reducerProperties = (state = initialState, { type, payload }) => {
     case FILTERED_PROPERTIES:
       return {
         ...state,
-        filteredProperties: state.allProperties,
+        filteredProperties: state.allProperties.filter((property) => {
+          return toLower(property.location.city).includes(
+            toLower(payload.city) ||
+              toLower(property.location.address).includes(
+                toLower(payload.address)
+              )
+          );
+        }),
       };
 
     default:

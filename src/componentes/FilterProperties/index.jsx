@@ -39,13 +39,12 @@ export default function FilterProperties() {
       dispatch(
         setFilterProperties({ ...input, [e.target.name]: e.target.value })
       );
-    } else {
-      dispatch(getAllProperties());
     }
   };
 
   const applyFilter = () => {
     setFilter(!filter);
+    dispatch(getAllProperties());
   };
 
   return (
