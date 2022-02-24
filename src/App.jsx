@@ -5,9 +5,10 @@ import PropertyDetails from "./pages/PropertyDetails/PropertyDetails";
 import { LoginClient } from './componentes/LoginClient';
 import { RegisterClient } from './componentes/RegisterClient';
 import Home from './pages/Home';
-import CreateProperty from './componentes/CreateProperty'
-import AgentDetail from './componentes/AgentDetail/AgentDetail'
-import CreatePropertyForm from './componentes/CreatePropertyForm/CreatePropertyForm'
+import CreateProperty from './componentes/CreateProperty';
+import AgentDetail from './componentes/AgentDetail/AgentDetail';
+import CreatePropertyForm from './componentes/CreatePropertyForm/CreatePropertyForm';
+import CreateAgent from './componentes/CreateAgent/CreateAgent';
 import FormAdmin from "./pages/FormAdmin";
 import PageNotFound from "./pages/PageNotFound";
 import ViewAdmin from "./pages/ViewAdmin";
@@ -28,6 +29,7 @@ function App() {
           <Route exact path="/property/:id" element={<PropertyDetails />} />
           <Route path="/agents/:id" element={<AgentDetail/>} />
           <Route path="/create-property" element={<CreatePropertyForm/>} />
+          <Route path="/create-agent" element={<CreateAgent/>} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       <ToastContainer />

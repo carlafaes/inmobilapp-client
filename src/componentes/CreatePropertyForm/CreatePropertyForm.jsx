@@ -3,9 +3,6 @@ import {Formik, Field, Form, ErrorMessage} from 'formik';
 import styles from './CreateProperty.module.css';
 import propertyServices from '../../services/property';
 
-const textAreaStyle = {
-    height: '100%',
-}
 
 export default function CreatePropertyForm(){
     const [newProperty, setNewProperty] = useState('');
@@ -83,7 +80,6 @@ export default function CreatePropertyForm(){
         }}
         onSubmit={(values, {resetForm})=> {
             resetForm();
-            console.log(formErrors);
             if(!formErrors.type && !formErrors.city && !formErrors.neighborhood && !formErrors.address && !formErrors.price && !formErrors.description && !formErrors.area && !formErrors.rooms && !formErrors.baths && !formErrors.garage){
                 const property = { 
                     typeProperty: values.type,
