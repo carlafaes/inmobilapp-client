@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import propertyService from "../../services/property";
 import Loading from "../../componentes/Loading";
-import { NavBarDetails } from "../../componentes/NavBarDetails";
 import { withStyles } from "@material-ui/core/styles";
 import Footer from "../../componentes/Footer";
 import BedroomParentIcon from "@mui/icons-material/BedroomParent";
@@ -50,9 +49,6 @@ function PropertyDetails(props, classes) {
       <Container>
         <Box mt={2}>
           <Card className={props.classes.card}>
-            <>
-              <NavBarDetails />
-            </>
             <CardMedia>
               <Carousel className={props.classes.carousel}>
                 {property.images.map((image, index) => (
