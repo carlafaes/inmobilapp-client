@@ -5,13 +5,20 @@ import david from '../Img/perfiles/david.jpeg'
 import hevert from '../Img/perfiles/hevert.jpeg'
 import jonathan from '../Img/perfiles/jonathan.jpeg'
 import carla from '../Img/perfiles/carla.jpg'
+import dev from '../Img/perfiles/67.png'
+import llave from '../Img/perfiles/icono-de-llave.png'
 import '../styles/QuienesSomos.css'
+import Navbar from './Navbar'
 
 export default function QuienesSomos(){
     return(
         <>
+        <Navbar/>
         <div>
             <h1>¿Quienes estan detras de InmobilApp?</h1>
+            <div>
+              <img src={dev} alt="developer" />
+            </div>
             <p>InmobilApp esta conformada por el trabajo en conjunto de un equipo de estudiantes
                  Full Stack Web Developers, durante el cursado de la etapa de proyecto final en Henry.  </p>
             

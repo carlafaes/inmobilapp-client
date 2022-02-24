@@ -1,48 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Creepster&family=Open+Sans+Condensed:wght@300&family=Redressed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Creepster&family=Nunito:wght@200&family=Open+Sans+Condensed:wght@300&family=Redressed&display=swap');
 .imagen_perfil{
-    width: 70px;
+    width: 80px;
     height: 60px;
     border-radius: 50%;
     border-style: revert;
-    box-shadow: 0 1px 3px 3px rgb(250 162 34 / 29%);
+    box-shadow: 0 1px 3px 3px rgba(139, 103, 50, 0.377);
+    margin-top: 5px;
 }
 .container_perfiles{
-     background-color: aqua; 
-    width: 387px;
+     /* background-color: aqua;  */
+    width: 587px;
     height: 362px;
     position: absolute;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-
 }
 .perfil_unit{
     position: relative;
-     background-color: blueviolet; 
+     background-color: rgba(231, 230, 223, 0.562); 
     margin-bottom: 10px;
+    margin-left:50px;
     height: 160px;
-    width: 100px;
+    width: 110px;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-style: ridge;
+    border-width: 1px;
+    border-radius: 5px;
 
 }
 .name_title{
     display: flex;
     justify-content: center;
     position: relative;
+    /* font-family: 'Redressed', cursive; */
+    font-family: 'Nunito', sans-serif;
     font-size: 15px;
     width: 100%;
-    margin-bottom: 7px;
+    margin-bottom: -1px;
+    margin-left: 10px;
+    color: #696464d6;
 }
 .container_nombreYLinks{
     position: relative;
-     background-color: rgb(0, 255, 42);
+     /* background-color: rgb(0, 255, 42); */
     height: 90px;
     width: 100px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    margin-top: 5px;
 }
