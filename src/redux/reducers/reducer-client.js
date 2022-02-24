@@ -1,6 +1,5 @@
 const initialState = {
   client: [],
-  clientWithToken: {},
 };
 
 const clients = (state = initialState, action) => {
@@ -9,12 +8,6 @@ const clients = (state = initialState, action) => {
       return {
         ...state,
         client: action.payload,
-      };
-
-    case "GET_CLIENT_WITH_TOKEN":
-      return {
-        ...state,
-        clientWithToken: action.payload,
       };
     default:
       return state;

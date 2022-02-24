@@ -1,39 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import Footer from "./Footer";
-import ClientInterface_DEMO from "./ClientInterface_DEMO";
 import { useDispatch, useSelector } from "react-redux";
-import { getClientInfoWithToken } from "../redux/actions/actionClient";
+import { getUserInfoWithToken } from "../redux/actions/actionUser";
 
 const LoginBeta = () => {
   const [dni, setDNI] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const clientWithToken = useSelector((state) => state.clients.clientWithToken);
+  const userWithToken = useSelector((state) => state.reducerUsers.users);
 
-  useEffect(() => {}, [clientWithToken]);
+  useEffect(() => {
+    userWithToken.role === "Client" ? navigate("/viewClient") : null;
+  }, [userWithToken]);
 
   const handleLogin = async (event) => {
     event.preventDefault();
     if (dni && password) {
-      dispatch(getClientInfoWithToken({ dni, password }));
+      dispatch(getUserInfoWithToken({ dni, password }));
       setDNI("");
       setPassword("");
     }
   };
+
+  if (userWithToken.token) {
+    window.localStorage.setItem("loggedUser", JSON.stringify(userWithToken));
+  }
+
   return (
     <>
-      {clientWithToken ? (
-        <ClientInterface_DEMO user={clientWithToken} />
-      ) : (
-        <LoginForm
-          dni={dni}
-          setDNI={setDNI}
-          password={password}
-          setPassword={setPassword}
-          handleLogin={handleLogin}
-        />
-      )}
+      <LoginForm
+        dni={dni}
+        setDNI={setDNI}
+        password={password}
+        setPassword={setPassword}
+        handleLogin={handleLogin}
+      />
       <Footer />
     </>
   );

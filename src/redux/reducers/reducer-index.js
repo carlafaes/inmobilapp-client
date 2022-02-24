@@ -6,6 +6,7 @@ import reducerScore from "./reducer-properties-score";
 import reducerReviews from "./reducer-reviews";
 import reducerAdmin from "./reducer-admin";
 import reducerAgent from "./reducer-agent";
+import reducerUsers from "./reducer-user";
 
 const rootReducer = combineReducers({
   clients,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   reducerReviews,
   reducerAdmin,
   reducerAgent,
+  reducerUsers,
 });
 
 export default rootReducer;
