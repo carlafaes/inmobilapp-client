@@ -1,12 +1,11 @@
 import React, {useState} from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { StylesContext } from "@material-ui/styles";
 import agentService from "../../services/agent";
 import styles from "./CreateAgent.module.css"
 
 
 
-
+//Agregar password, agregar boton cancelar y que la edad no sea negativa
 export default function CreateAgent() {
     const [newAgent, setNewAgent] = useState('');
     const [formErrors, setFormErrors] = useState({});
@@ -51,6 +50,8 @@ export default function CreateAgent() {
             err.age = "Solo se aceptan números en este campo";
         }else if(v.age.length >= 3){
             err.age = "la edad debe tener como máximo dos dígitos";
+        }else if(v.age < 18){
+            err.age = "la edad mínima es de 18 años";
         }
 
         setFormErrors(err)
@@ -64,7 +65,7 @@ export default function CreateAgent() {
             crudProperty: true
         }
         console.log(values);
-        /* const request = agentService.createAgent(values); */
+        agentService.createAgent(values);
         setNewAgent('sent');
         setTimeout(() => setNewAgent(''),5000);
     }}
