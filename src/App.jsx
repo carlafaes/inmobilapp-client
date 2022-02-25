@@ -20,22 +20,22 @@ function App() {
   return (
     <>
       <ToastContainer/>
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/form" element={<CreateProperty />} />
-        <Route path="/registerAdmin" element={<FormAdmin />} />
-        <Route path="/login" element={<LoginBeta />} />
-        <Route path="/register" element={<RegisterClient />} />
-        <Route path="/viewAdmin" element={<ViewAdmin />} />
-        <Route path="/viewClient" element={<ClientInterface_DEMO />} />
-        <Route exact path="/property/:id" element={<PropertyDetails />} />
-        <Route path="/agents/:id" element={<AgentDetail />} />
-        <Route path="/create-property" element={<CreatePropertyForm />} />
-        <Route path="/quienes" element={<QuienesSomos />} />
-        <Route path="/create-agent" element={<CreateAgent/>} />
-        <Route path="/maquetaform" element={<MaquetaForm />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/form" element={<CreateProperty />} />
+          <Route path="/registerAdmin" element={<FormAdmin />} />
+          <Route path="/login" element={<LoginBeta />} />
+          <Route path="/register" element={<RegisterClient />} />
+          <Route path="/viewAdmin" element={<ViewAdmin />} />
+          <Route path="/viewClient" element={<ClientInterface_DEMO />} />
+          <Route exact path="/property/:id" element={<PropertyDetails />} />
+          <Route path="/agents/:id" element={<AgentDetail />} />
+          <Route path="/create-property" element={<CreatePropertyForm />} />
+          <Route path="/quienes" element={<QuienesSomos />} />
+          <Route path="/create-agent" element={<CreateAgent/>} />
+          <Route path="/maquetaform" element={<MaquetaForm />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
       <ToastContainer />
     </>
   );
