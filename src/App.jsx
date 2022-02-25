@@ -12,7 +12,9 @@ import FormAdmin from "./pages/FormAdmin";
 import PageNotFound from "./pages/PageNotFound";
 import ViewAdmin from "./pages/ViewAdmin";
 import { ToastContainer } from "react-toastify";
+import QuienesSomos from './componentes/QuienesSomos'
 import ClientInterface_DEMO from "./componentes/ClientInterface_DEMO";
+
 
 function App() {
   return (
@@ -31,6 +33,7 @@ function App() {
         <Route exact path="/property/:id" element={<PropertyDetails />} />
         <Route path="/agents/:id" element={<AgentDetail />} />
         <Route path="/create-property" element={<CreatePropertyForm />} />
+        <Route path="/quienes" element={<QuienesSomos />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <ToastContainer />

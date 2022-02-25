@@ -120,12 +120,14 @@ export default function Navbar() {
         <>
         
             <div id='navbar' >
+                
                 <AppBar className={classes.appBar} >
                     <Toolbar>
                         <div className={classes.container}>
                             <IconButton onClick={handleClick}>
                                 <SortIcon className={classes.icon} />
                             </IconButton>
+                            <Link href='/'>home</Link>
                             <Link href='/'><img src={icono} alt="logonav" width={55} height={68} className="pointer" /></Link>
                         </div>
                     </Toolbar>
