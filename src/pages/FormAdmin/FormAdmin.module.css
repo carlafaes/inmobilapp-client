@@ -1,0 +1,25 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: aliceblue;
+}
+
+.title {
+  padding: 10px;
+  color: #0d0d0d;
+}
+
+.item {
+  margin: 10px;
+  align-items: center;
+}
+
+.conten {
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 10px 10px 60px 0px rgba(0, 0, 0, 0.75);
+}

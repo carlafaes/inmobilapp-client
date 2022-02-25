@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Creepster&family=Nunito:wght@200&family=Open+Sans+Condensed:wght@300&family=Redressed&display=swap');    
+.pointer{
+     width: 120px;
+    margin-right: 20px;
+    
+}
+.link_home{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: 'Nunito', sans-serif; 
+    font-size: 25px;
+    list-style: none;
+    text-decoration: none;
+    color: #53452e;
+}
+.link_home:visited{ 
+    color: #53452e;
+}   

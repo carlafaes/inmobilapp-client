@@ -1,1 +1,0 @@
-export const GET_ADMINS='GET_ADMINS';

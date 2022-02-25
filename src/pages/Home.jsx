@@ -4,7 +4,6 @@ import Landing from "../componentes/Landingprueba";
 import Navbar from "../componentes/Navbar";
 import "../styles/Loading.css";
 import Load from "../Img/LOAD5gif.gif";
-import "../styles/Loading.css";
 import Footer from "../componentes/Footer";
 import ReactPaginate from "react-paginate";
 import "../styles/Pagination.css";
@@ -12,9 +11,11 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { Switch } from "@material-ui/core";
-import { ListCard } from "../componentes/ListCard";
+import ScoreMax from '../componentes/ScoreMax'
+import {ListCard} from "../componentes/ListCard";
 import FilterProperties from "../componentes/FilterProperties";
 import { setAllProperties } from "../redux/actions/actionsProperties";
+
 
 function Home() {
   const properties = useSelector(
@@ -25,12 +26,14 @@ function Home() {
 
   const [pageNumber, setPageNumber] = useState(1);
 
-  const dwellingPerPage = 5;
-  const pagesVisited = pageNumber * dwellingPerPage;
-  const pageCount = Math.ceil(properties.length / dwellingPerPage);
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
-  };
+  
+
+	const dwellingPerPage= 5;
+	const pagesVisited= pageNumber * dwellingPerPage;
+	const pageCount= Math.ceil(properties.length / dwellingPerPage);
+	const changePage = ({selected})=>{
+		setPageNumber(selected)
+	}
 
   useEffect(() => {
     propertyService.getAll().then((data) => {
@@ -38,7 +41,7 @@ function Home() {
     });
   }, []);
 
-  if (!properties) {
+	if (!properties) {
     return (
       <div className="loading_style">
         <div className="contenedor_home">
@@ -46,7 +49,7 @@ function Home() {
         </div>
       </div>
     );
-  }
+  	}
 
   const theme = createTheme({
     palette: {
@@ -62,16 +65,18 @@ function Home() {
         </div>
         <div>
           <Navbar />
-          <FilterProperties />
-          <h2>
-            🔆
-            <Switch
-              checked={darkMode}
-              onChange={() => setDarkMode(!darkMode)}
-              color="primary"
-            />{" "}
-            🌙
-          </h2>
+		  <div className="switch_home">
+      <h2>🔆
+          <Switch
+            checked={darkMode}
+            onChange={() => setDarkMode(!darkMode)}
+            color="primary"
+          />
+			🌙</h2>
+      </div>
+      <br/>
+      <FilterProperties />
+      <ScoreMax/>
         </div>
         <ListCard
           properties={properties.slice(
@@ -79,7 +84,7 @@ function Home() {
             pagesVisited + dwellingPerPage
           )}
         />
-        <div style={{ padding: "20px 20px" }}>
+        <div >
           <ReactPaginate
             previousLabel={"⋘"}
             nextLabel={"⋙"}
