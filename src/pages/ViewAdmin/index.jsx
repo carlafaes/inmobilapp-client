@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Loading from "../../componentes/Loading";
 import PutAdmin from "../../componentes/PutAdmin";
 import adminService from "../../services/admin";
@@ -15,6 +15,8 @@ import CardAgent from "../../componentes/CardAgent";
 import PutAgent from "../../componentes/PutAgent";
 import Footer from "../../componentes/Footer";
 
+import { getUserForLocalStorage } from "../../utils/user";
+
 import styled from "./ViewAdmin.module.css";
 
 export default function ViewAdmin() {
@@ -23,30 +25,41 @@ export default function ViewAdmin() {
   );
   const dispatch = useDispatch();
 
-  const { id } = useParams();
+  const user = getUserForLocalStorage();
   const navigate = useNavigate();
 
   useEffect(() => {
-    adminService.getAdminIdAgentDetails(id).then((data) => {
-      dispatch(setAdminDetailsAgents(data));
-    });
-  }, [id]);
+    if (!user) {
+      alert("tienes que estar logueado para usar esta vista");
+      navigate("/login");
+    } else {
+      adminService.getAdminIdAgentDetails(user.id).then((data) => {
+        dispatch(setAdminDetailsAgents(data));
+      });
+    }
+  }, []);
 
   if (!adminDetailsAgents) {
     return <Loading />;
   }
 
   const editAdmin = () => {
-    adminService.getAdminID(id).then((data) => {
+    adminService.getAdminID(user.id).then((data) => {
       dispatch(setAdmin(data));
     });
   };
 
-  const deleteCurrentAdminID = async (id) => {
+  const deleteCurrentAdminID = () => {
     if (confirm("Seguro que desea darse de baja?")) {
-      await adminService.deleteAdminID(id);
-      alert("Done!");
-      navigate("/");
+      adminService
+        .deleteAdminID(user.id, user.token)
+        .then(() => {
+          alert("Done!");
+          navigate("/");
+        })
+        .catch(() => {
+          alert("No se puede dar de bajan con agents a su cargo!");
+        });
     }
   };
 
@@ -54,6 +67,20 @@ export default function ViewAdmin() {
     agentService.getAgentID(id).then((data) => {
       dispatch(setAgent(data));
     });
+  };
+
+  const deleteAgent = (id) => {
+    agentService
+      .deleteAgentID(id, user.token)
+      .then(() => {
+        alert("Eliminado");
+        adminService.getAdminIdAgentDetails(user.id).then((data) => {
+          dispatch(setAdminDetailsAgents(data));
+        });
+      })
+      .catch(() => {
+        alert("No se puede eliminar este agente, ya que tiene una propiedad!");
+      });
   };
 
   const { name, agentsID, permissions } = adminDetailsAgents;
@@ -67,23 +94,34 @@ export default function ViewAdmin() {
             <button onClick={editAdmin}>Editar perfil</button>
           </li>
           <li>
-            <button onClick={() => deleteCurrentAdminID(id)}>
-              Eliminar perfil
+            <button onClick={deleteCurrentAdminID}>Eliminar perfil</button>
+          </li>
+          <li>
+            <button
+              onClick={() => {
+                if (confirm("Seguro desea salir?")) {
+                  localStorage.removeItem("loggedUser");
+                  navigate("/");
+                }
+              }}
+            >
+              Salir
             </button>
           </li>
         </ul>
       </nav>
       <article>
-        <PutAdmin />
+        <PutAdmin token={user.token} />
         {agentsID.map((agent) => (
           <CardAgent
             key={agent.id}
             agent={agent}
             crudAgent={permissions.crudAgent}
             editAgent={editAgent}
+            deleteAgent={deleteAgent}
           />
         ))}
-        <PutAgent id={id} />
+        <PutAgent id={user.id} />
       </article>
       <Footer />
     </div>
