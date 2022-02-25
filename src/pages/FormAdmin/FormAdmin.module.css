@@ -10,6 +10,7 @@
 
 .title {
   padding: 20px;
+  text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
   font-family: 'Nunito', sans-serif;
@@ -20,7 +21,7 @@
 .item {
   margin: 10px;
   margin-bottom: 30px;
-  align-items: center;
+  justify-content: center;
 }
 
 .conten {
