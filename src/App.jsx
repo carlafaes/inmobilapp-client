@@ -12,6 +12,7 @@ import FormAdmin from "./pages/FormAdmin";
 import PageNotFound from "./pages/PageNotFound";
 import ViewAdmin from "./pages/ViewAdmin";
 import { ToastContainer } from "react-toastify";
+import MaquetaForm from "./componentes/MaquetaForm";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route exact path="/property/:id" element={<PropertyDetails />} />
           <Route path="/agents/:id" element={<AgentDetail/>} />
           <Route path="/create-property" element={<CreatePropertyForm/>} />
+          <Route path="/maquetaform" element={<MaquetaForm/>} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       <ToastContainer />
