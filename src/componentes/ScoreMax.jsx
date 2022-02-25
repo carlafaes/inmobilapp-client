@@ -61,7 +61,7 @@ export default function ScoreMax(){
                     <a><img className='img_score' src={e.images.filter(e=>e)}/></a>
                     <br/>
                     <button className='btn_score' >
-                      Mas informacion
+                      Mas detalles
                     </button>
                     
                 </div>

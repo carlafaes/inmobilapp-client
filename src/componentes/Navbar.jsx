@@ -5,6 +5,7 @@ import SortIcon from '@material-ui/icons/Sort';
 import icono from '../Img/icono.png';
 import Fade from '@material-ui/core/Fade';
 import Link from '@material-ui/core/Link';
+import '../styles/Navbar.css'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -127,8 +128,9 @@ export default function Navbar() {
                             <IconButton onClick={handleClick}>
                                 <SortIcon className={classes.icon} />
                             </IconButton>
-                            <Link href='/'>home</Link>
-                            <Link href='/'><img src={icono} alt="logonav" width={55} height={68} className="pointer" /></Link>
+                            <Link href='/' className='link_home'><img src={icono} alt="logonav" width={55} height={68} className="pointer" />
+                            Home
+                            </Link>
                         </div>
                     </Toolbar>
                 </AppBar>
