@@ -31,7 +31,15 @@ export default function CreateAgent() {
         if(!v.name){
             err.name = "Debes introducir un nombre";
         }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(v.name)){
-            err.name = 'Solo se aceptan letras y espacios en este campo'
+            err.name = "Solo se aceptan letras y espacios en este campo";
+        }
+
+        if(!v.password) {
+            err.password = "Debes introducir una contraseña";
+        }
+
+        if(!v.confirm_password) {
+            err.confirm_password = "Los campos de contraseñas deben se iguales";
         }
 
         if(!v.address){
@@ -84,6 +92,16 @@ export default function CreateAgent() {
                         <div>
                             <Field className={styles.field} id="name" name="name" type="text" />
                             <ErrorMessage name="name" component={() => <p className={styles.wrong}>{errors.name}</p>}/>
+                        </div>
+                        <label className={styles.label} htmlFor="password">Contraseña</label>
+                        <div>
+                            <Field className={styles.field} id="password" name="password" type="password" />
+                            <ErrorMessage name="password" component={() => <p className={styles.wrong}>{errors.name}</p>}/>
+                        </div>
+                        <label className={styles.label} htmlFor="confirmPassword">Confirmar contraseña</label>
+                        <div>
+                            <Field className={styles.field} id="confirmPassword" name="confirmPassword" type="password" />
+                            <ErrorMessage name="confirmPassword" component={() => <p className={styles.wrong}>{errors.name}</p>}/>
                         </div>
                         <label className={styles.label} htmlFor="address">Dirección</label>
                         <div>
