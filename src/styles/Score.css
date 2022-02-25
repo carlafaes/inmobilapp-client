@@ -1,24 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Creepster&family=Open+Sans+Condensed:wght@300&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Creepster&family=Nunito:wght@200&family=Open+Sans+Condensed:wght@300&family=Redressed&display=swap');
 .container_score{
-    width: auto;
-    height: 350px;
+    width: 360px;
+    height: 400px;
     transition: all ease-in-out 0.7s;
     
     border-radius: 10px 10px;
-    background-color: rgb(252, 235, 201,0.5);
+    background-color: rgba(230, 224, 214, 0.5);
 }
 .container_score:hover{
-    box-shadow: rgb(242, 214, 173,0.8);
+    box-shadow: rgba(219, 140, 22, 0.8);
 }
 .score_letter{
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: large;
+    font-family: 'Nunito', sans-serif; 
+    font-size: 25px;
     letter-spacing: 1px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     margin-bottom: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 .score_rating{
     display: flex;
@@ -27,10 +29,12 @@
 }
 .score_disp{
     display: flex;
+    position: relative;
     flex-direction: row;
     justify-content: center;
     margin-bottom: 2px;
     color: white;
+    font-family: 'Nunito', sans-serif; 
     font-size: 20px;
 	font-weight: bold;
 	background-color: #FAA222;
@@ -39,9 +43,11 @@
     position: relative;
     z-index: 10;
     margin-left: 20px;
+    padding-left: 2px;
+    padding-right: 2px;
 }
 .img_score{
-    width:350px;
+    width:100%;
     height: 250px;
     margin-top: -50px;
     position: relative;
@@ -110,18 +116,23 @@
       flex-direction: row;
       justify-items: center;
       margin-left: 30%;
-      font-size: 1rem;
+      font-size: 20px;
       font-weight: bold;
       text-transform: none;
       color: #fff;
       background-color: #ECA242;
       border-radius: 5px;
+      height: 40px;
       border-style: none;
-      margin-top:10px;
+      margin-top:1px;
+      padding-top: 6px;
+      padding-left: 3px;
+      padding-right: 3px;
+      font-family: 'Nunito', sans-serif; 
   }
   .no_found_score{
       font-size: 40px;
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-family: 'Nunito', sans-serif; 
       margin-left: 100px;
       color: #FAA222;
   }
