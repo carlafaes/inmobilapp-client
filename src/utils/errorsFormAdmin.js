@@ -39,7 +39,9 @@ export const validateFormAdmin = (input, errors, name) => {
   if (name === "address") {
     return {
       ...errors,
-      address: !/^[A-Za-z0-9\s]+$/g.test(input.address)
+      address: !input.address
+        ? null
+        : !/^[A-Za-z0-9\s]+$/g.test(input.address)
         ? "Direccion invalida"
         : null,
     };
@@ -48,7 +50,11 @@ export const validateFormAdmin = (input, errors, name) => {
   if (name === "phone") {
     return {
       ...errors,
-      phone: input.phone.length !== 10 ? "Numero invalido" : null,
+      phone: !input.phone
+        ? null
+        : input.phone.length !== 10
+        ? "Numero invalido"
+        : null,
     };
   }
 
@@ -64,16 +70,6 @@ export const validateFormAdmin = (input, errors, name) => {
         : null,
     };
   }
-
-  // errors.name = !input.name || !/^[A-Za-z\s]+$/g.test(input.name);
-  // errors.DNI = !input.DNI || !/^[0-9\s]+$/g.test(input.DNI);
-  // errors.address = !input.address || !/^[A-Za-z0-9\s]+$/g.test(input.address);
-  // errors.phone = !input.phone || !/^[0-9\s]+$/g.test(input.phone);
-  // errors.age =
-  //   !input.age ||
-  //   !/^[0-9\s]+$/g.test(input.age) ||
-  //   input.age > 100 ||
-  //   input.age < 1;
 };
 
 export const validatePutAdmin = (input) => {
@@ -92,5 +88,5 @@ export const validatePutAdmin = (input) => {
 };
 
 export const isDone = (error) => {
-  return !Object.values(error).reduce((pre, cur) => pre || cur, false);
+  return Object.values(error).filter((err) => !!err).length === 0;
 };

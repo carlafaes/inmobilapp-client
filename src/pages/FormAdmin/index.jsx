@@ -15,8 +15,9 @@ import {
   Stack,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
-import SaveIcon from '@mui/icons-material/Save';
+import SaveIcon from "@mui/icons-material/Save";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Alert from '@mui/material/Alert';
 
 export default function FormAdmin() {
   document.title = "InmobillApp | registrar admin";
@@ -54,15 +55,23 @@ export default function FormAdmin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isDone(error)) {
-      if (confirm("Seguro desea crear este admin?")) {
-        adminService.postAdmin(input).then((res) => {
-          setInput(initInput);
-          navigate(`/login`);
-        });
+    if (e.target.name === "DONE") {
+      if (isDone(error)) {
+        if (confirm("Seguro desea crear este admin?")) {
+          adminService.postAdmin(input).then((res) => {
+            setInput(initInput);
+            if(res.status !== 201){
+              alert("El Admin ya esta creado")
+            }
+            navigate(`/login`);
+          });
+        }
+      } else {
+        alert("Completa correctamente los datos");
       }
     } else {
-      alert("Completa correctamente los espacios!");
+      
+      navigate("/");
     }
   };
 
@@ -172,8 +181,15 @@ export default function FormAdmin() {
         color={error.address ? "warning" : "success"}
       />
       <Stack direction="row">
-        <Button variant="outlined">Atras</Button>
-        <Button variant="outlined" startIcon={<SaveIcon/>}>
+        <Button variant="outlined" onClick={handleSubmit}>
+          Atras
+        </Button>
+        <Button
+          variant="outlined"
+          name="DONE"
+          onClick={handleSubmit}
+          startIcon={<SaveIcon />}
+        >
           Registrar
         </Button>
       </Stack>
