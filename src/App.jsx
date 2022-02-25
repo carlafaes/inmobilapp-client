@@ -25,7 +25,7 @@ function App() {
         <Route path="/registerAdmin" element={<FormAdmin />} />
         <Route path="/login" element={<LoginBeta />} />
         <Route path="/register" element={<RegisterClient />} />
-        <Route path="/viewAdmin/:id" element={<ViewAdmin />} />
+        <Route path="/viewAdmin" element={<ViewAdmin />} />
         <Route path="/viewClient" element={<ClientInterface_DEMO />} />
         <Route exact path="/property/:id" element={<PropertyDetails />} />
         <Route path="/agents/:id" element={<AgentDetail />} />

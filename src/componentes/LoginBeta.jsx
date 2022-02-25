@@ -16,7 +16,7 @@ const LoginBeta = () => {
     userWithToken.role === "CLIENT" || userWithToken.role === "Client"
       ? navigate("/viewClient")
       : userWithToken.role === "ADMIN"
-      ? navigate(`/viewAdmin/${userWithToken.id}`)
+      ? navigate(`/viewAdmin`)
       : null;
   }, [userWithToken]);
 
