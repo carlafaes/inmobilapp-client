@@ -13,7 +13,11 @@ const LoginBeta = () => {
   const userWithToken = useSelector((state) => state.reducerUsers.users);
 
   useEffect(() => {
-    userWithToken.role === "CLIENT" ? navigate("/viewClient") : null;
+    userWithToken.role === "CLIENT" || userWithToken.role === "Client"
+      ? navigate("/viewClient")
+      : userWithToken.role === "ADMIN"
+      ? navigate(`/viewAdmin/${userWithToken.id}`)
+      : null;
   }, [userWithToken]);
 
   const handleLogin = async (event) => {
