@@ -25,14 +25,19 @@ export default function ViewAdmin() {
   );
   const dispatch = useDispatch();
 
-  const { id, token } = getUserForLocalStorage();
+  const user = getUserForLocalStorage();
   const navigate = useNavigate();
 
   useEffect(() => {
-    adminService.getAdminIdAgentDetails(id).then((data) => {
-      dispatch(setAdminDetailsAgents(data));
-    });
-  }, [id]);
+    if (!user) {
+      alert("tienes que estar logueado para usar esta vista");
+      navigate("/login");
+    } else {
+      adminService.getAdminIdAgentDetails(user.id).then((data) => {
+        dispatch(setAdminDetailsAgents(data));
+      });
+    }
+  }, []);
 
   if (!adminDetailsAgents) {
     return <Loading />;
@@ -58,6 +63,20 @@ export default function ViewAdmin() {
     });
   };
 
+  const deleteAgent = (id) => {
+    agentService
+      .deleteAgentID(id, user.token)
+      .then(() => {
+        alert("Eliminado");
+        adminService.getAdminIdAgentDetails(user.id).then((data) => {
+          dispatch(setAdminDetailsAgents(data));
+        });
+      })
+      .catch(() => {
+        alert("No se puede eliminar este agente, ya que tiene una propiedad!");
+      });
+  };
+
   const { name, agentsID, permissions } = adminDetailsAgents;
 
   return (
@@ -73,6 +92,18 @@ export default function ViewAdmin() {
               Eliminar perfil
             </button>
           </li>
+          <li>
+            <button
+              onClick={() => {
+                if (confirm("Seguro desea salir?")) {
+                  localStorage.removeItem("loggedUser");
+                  navigate("/");
+                }
+              }}
+            >
+              Salir
+            </button>
+          </li>
         </ul>
       </nav>
       <article>
@@ -83,9 +114,10 @@ export default function ViewAdmin() {
             agent={agent}
             crudAgent={permissions.crudAgent}
             editAgent={editAgent}
+            deleteAgent={deleteAgent}
           />
         ))}
-        <PutAgent id={id} />
+        <PutAgent id={user.id} />
       </article>
       <Footer />
     </div>
