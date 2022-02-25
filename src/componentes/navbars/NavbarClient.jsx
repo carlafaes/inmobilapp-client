@@ -92,11 +92,11 @@ export const NavbarClient = ({ setUser, setActualToken,user}) => {
     const openCloseModal = () => {
         setModal(!modal)
     }
-    // const handleLogout = () => {
-    //     setUser(null)
-    //     setActualToken('')
-    //     window.localStorage.removeItem("loggedUser");
-    // };
+    const handleLogout = () => {
+        setUser(null)
+        setActualToken('')
+        window.localStorage.removeItem("loggedUser");
+    };
 
     return (
         <>

@@ -5,35 +5,33 @@ import { toast } from "react-toastify";
 import './ClientInterface.css'
 import { NavbarClient } from '../navbars/NavbarClient'
 import { useDispatch, useSelector } from "react-redux";
-import { cleanActiveUser, ClientById } from "../../redux/actions/actionClient";
+import services from '../../services/client'
+import { CardMinmueble } from "./cards/CardMinmueble";
 export const ClientInterface = () => {
 
-  const userId=useSelector((state)=>state.userId)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [actualToken, setActualToken] = useState("");
-  const clientID = user ? user.id : null;
   
- 
+  const clientID = user ? user.id : null;
 
-  useEffect(() => {
+
+  useEffect(async() => {
     const loggedUserJSON = window.localStorage.getItem("loggedUser");
     const user = JSON.parse(loggedUserJSON);
     if (user) {
       setUser(user);
       setActualToken(user.token);
-      // setName(user.name);
-      // setAddress(user.address);
-      // setPhone(user.phone);
+
       const notify = () =>
         toast.success(`welcome ${user.name}!`, {
           icon: "👋",
           theme: "dark",
         });
       notify(user.name);
-
     }
+
     return (
       <div className="div">
         <h1 >You must be login to see this interface</h1>
@@ -41,20 +39,6 @@ export const ClientInterface = () => {
       </div>
     );
   }, []);
-
-  // useEffect(() =>{
-  //   const user= window.localStorage.getItem("loggedUser")
-  //   const userId = JSON.parse(user)
-  //   console.log()
-  //   dispatch(ClientById(userId.id))
-  // })
-  // console.log(userId)
-  const handleLogout = () => {
-    setUser(null)
-    setActualToken('')
-    window.localStorage.removeItem("loggedUser");
-};
-
 
   if (!actualToken) {
     return (
@@ -64,10 +48,14 @@ export const ClientInterface = () => {
       </>
     );
   }
-
+  // console.log(completeInfoClient);
   return (
     <>
       <NavbarClient setUser={setUser} setActualToken={setActualToken} user={user} />
+      <div>
+      <h2>Mi inmueble</h2>
+      <CardMinmueble/>
+      </div>
     </>
   );
 };

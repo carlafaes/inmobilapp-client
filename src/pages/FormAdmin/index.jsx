@@ -1,109 +1,198 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Input from "../../componentes/Input";
 import adminService from "../../services/admin";
 import { validateFormAdmin, isDone } from "../../utils/errorsFormAdmin";
+import styled from "./FormAdmin.module.css";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import {
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
+  Button,
+  Stack,
+} from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import SaveIcon from "@mui/icons-material/Save";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import Alert from '@mui/material/Alert';
 
 export default function FormAdmin() {
-  document.title = "InmobillApp | registerAdmin";
+  document.title = "InmobillApp | registrar admin";
   const initInput = {
     name: "",
-    DNI: "",
+    dni: "",
     address: "",
     phone: "",
     age: "",
+    password: "",
   };
 
   const navigate = useNavigate();
   const [input, setInput] = useState(initInput);
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState({
-    name: true,
-    DNI: true,
-    address: true,
-    phone: true,
-    age: true,
+    name: "*",
+    dni: "*",
+    password: "*",
+    age: "*",
+    phone: "*",
+    address: "*",
   });
 
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
-    setError(validateFormAdmin({ ...input, [e.target.name]: e.target.value }));
+    setError(
+      validateFormAdmin(
+        { ...input, [e.target.name]: e.target.value },
+        error,
+        e.target.name
+      )
+    );
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isDone(error)) {
-      if (confirm("Seguro desea crear este admin?")) {
-        adminService.postAdmin(input).then((res) => {
-          setInput(initInput);
-          navigate(`/viewAdmin/${res.data.id}`);
-        });
+    if (e.target.name === "DONE") {
+      if (isDone(error)) {
+        if (confirm("Seguro desea crear este admin?")) {
+          adminService.postAdmin(input).then((res) => {
+            setInput(initInput);
+            if(res.status !== 201){
+              alert("El Admin ya esta creado")
+            }
+            navigate(`/login`);
+          });
+        }
+      } else {
+        alert("Completa correctamente los datos");
       }
     } else {
-      alert("Completa correctamente los espacios!");
+      
+      navigate("/");
     }
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        width: "100vw",
-        height: "100vh",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundImage:
-          "url(https://www.xtrafondos.com/descargar.php?id=3474&resolucion=2560x1440)",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <form
-        style={{ maxWidth: "80%", display: "grid" }}
-        onSubmit={handleSubmit}
-      >
-        <Input
-          value={input.name}
-          error={error.name}
-          placeholder={"Name"}
-          type={"text"}
-          name="name"
-          handleChange={handleChange}
+    <Box component="form" autoComplete="off" className={styled.container}>
+      <TextField
+        label={
+          error.name && error.name === "*"
+            ? "Nombre"
+            : error.name
+            ? error.name
+            : "Nombre"
+        }
+        value={input.name}
+        name="name"
+        onChange={handleChange}
+        color={error.name ? "warning" : "success"}
+      />
+      <TextField
+        label={
+          error.dni && error.dni === "*" ? "DNI" : error.dni ? error.dni : "DNI"
+        }
+        value={input.dni}
+        name="dni"
+        onChange={handleChange}
+        color={error.dni ? "warning" : "success"}
+      />
+      <FormControl>
+        <InputLabel
+          color={error.password ? "warning" : "success"}
+          htmlFor="password"
+        >
+          {error.password && error.password === "*"
+            ? "Contraseña"
+            : error.password
+            ? error.password
+            : "Contraseña"}
+        </InputLabel>
+        <OutlinedInput
+          id="password"
+          type={showPassword ? "text" : "password"}
+          value={input.password}
+          name="password"
+          onChange={handleChange}
+          label={
+            error.password && error.password === "*"
+              ? "Contraseña"
+              : error.password
+              ? error.password
+              : "Contraseña"
+          }
+          color={error.password ? "warning" : "success"}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={() => setShowPassword(!showPassword)}
+                onMouseDown={(e) => e.preventDefault()}
+                edge="end"
+              >
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          }
         />
-        <Input
-          value={input.DNI}
-          error={error.DNI}
-          placeholder={"DNI"}
-          type={"text"}
-          name="DNI"
-          handleChange={handleChange}
-        />
-        <Input
-          value={input.address}
-          error={error.address}
-          placeholder={"Address"}
-          type={"text"}
-          name="address"
-          handleChange={handleChange}
-        />
-        <Input
-          value={input.phone}
-          error={error.phone}
-          placeholder={"Phone"}
-          type={"text"}
-          name="phone"
-          handleChange={handleChange}
-        />
-        <Input
-          value={input.age}
-          error={error.age}
-          placeholder={"Age"}
-          type={"number"}
-          name="age"
-          handleChange={handleChange}
-        />
-        <button onClick={handleSubmit}>send</button>
-      </form>
-    </div>
+      </FormControl>
+      <TextField
+        label={
+          error.age && error.age === "*"
+            ? "Edad"
+            : error.age
+            ? error.age
+            : "Edad"
+        }
+        type="number"
+        value={input.age}
+        name="age"
+        onChange={handleChange}
+        color={error.age ? "warning" : "success"}
+      />
+      <TextField
+        label={
+          error.phone && error.phone === "*"
+            ? "Celular"
+            : error.phone
+            ? error.phone
+            : "Celular"
+        }
+        type="tel"
+        value={input.phone}
+        name="phone"
+        onChange={handleChange}
+        color={error.phone ? "warning" : "success"}
+      />
+      <TextField
+        label={
+          error.address && error.address === "*"
+            ? "Direccion"
+            : error.address
+            ? error.address
+            : "Direccion"
+        }
+        type="text"
+        value={input.address}
+        name="address"
+        onChange={handleChange}
+        color={error.address ? "warning" : "success"}
+      />
+      <Stack direction="row">
+        <Button variant="outlined" onClick={handleSubmit}>
+          Atras
+        </Button>
+        <Button
+          variant="outlined"
+          name="DONE"
+          onClick={handleSubmit}
+          startIcon={<SaveIcon />}
+        >
+          Registrar
+        </Button>
+      </Stack>
+    </Box>
   );
 }
