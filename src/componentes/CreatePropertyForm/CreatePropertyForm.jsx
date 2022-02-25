@@ -2,12 +2,18 @@ import React,{useState} from 'react'
 import {Formik, Field, Form, ErrorMessage} from 'formik';
 import styles from './CreateProperty.module.css';
 import propertyServices from '../../services/property';
+import { isValidURL } from '../../utils/validurl';
+import FormImages from '../FormImages/FormImages';
 
 
 export default function CreatePropertyForm(){
     const [newProperty, setNewProperty] = useState('');
     const [formErrors, setFormErrors] = useState({})
     const[images, setNewImage] = useState([]);
+
+    function onClickHandler(image) {
+        setNewImage([...images, image]);
+    }
     return (
         <Formik className={styles.formik}
         initialValues={{
@@ -15,7 +21,7 @@ export default function CreatePropertyForm(){
             city: '',
             neighborhood: '',
             address: '',
-            images: [],
+            images: '',
             price: '',
             description: '',
             area: '',
@@ -26,6 +32,7 @@ export default function CreatePropertyForm(){
 
         validate = {(v)=> {
             const err = {};
+            console.log(images);
             if(!v.type){
                 err.type = 'Debes elegir un tipo de inmueble';;
             }
@@ -41,6 +48,14 @@ export default function CreatePropertyForm(){
             if(!v.address){
                 err.address = 'Debes ingresar una dirección';
             }
+            if(!v.images){
+                err.images= 'necesitas agregar imagenes';
+            }else if(!isValidURL(v.images)){
+                err.images = 'Debes ingresar una URL valida';
+            }
+            else if(images.length < 4){
+                err.images='Debes agregar al menos 4 imagenes';
+            }
 
             if(!v.price){
                 err.price = 'Debes ingresar un precio';
@@ -50,7 +65,7 @@ export default function CreatePropertyForm(){
 
             if(!v.description){
                 err.description = 'Debes ingresar una descripción';
-            }else if(!/^[a-zA-ZÀ-ÿ\s]{1,40}$/.test(v.description)){
+            }else if(!/^[a-zA-ZÀ-ÿ\s]{1,2000}$/.test(v.description)){
                 err.description = 'Solo se aceptan letras, espacios y guiones en este campo';
             }
 
@@ -80,7 +95,7 @@ export default function CreatePropertyForm(){
         }}
         onSubmit={(values, {resetForm})=> {
             resetForm();
-            if(!formErrors.type && !formErrors.city && !formErrors.neighborhood && !formErrors.address && !formErrors.price && !formErrors.description && !formErrors.area && !formErrors.rooms && !formErrors.baths && !formErrors.garage){
+            if(!formErrors.type && !formErrors.city && !formErrors.neighborhood && !formErrors.address && !formErrors.price && !formErrors.description && !formErrors.area && !formErrors.rooms && !formErrors.baths && !formErrors.garage && !formErrors.images){
                 const property = { 
                     typeProperty: values.type,
                     location: {
@@ -88,7 +103,7 @@ export default function CreatePropertyForm(){
                       neighborhood: values.neighborhood,
                       address: values.address
                     },
-                    images: ["url", "url1"],
+                    images: images,
                     rentalPrice: values.price,
                     description: values.description,
                     details: {
@@ -100,14 +115,14 @@ export default function CreatePropertyForm(){
                     agentID: "621271c06ec04903d5c20e0f" 
                 }
                 propertyServices.createProperty(property);
-                console.log(property);
+                setNewImage([]);
                 setNewProperty('sent');
             }
             setTimeout(() => setNewProperty(''), 5000);
             console.log('formulario enviado')
         }}
         >
-            {({errors})=>(
+            {({errors,values})=>(
                 <Form className={styles.form}>
                     <div className={styles.container}>
 
@@ -141,9 +156,17 @@ export default function CreatePropertyForm(){
                         </section>
                         <section className={styles.section}>
                             <h2>Detalles</h2>
-                            <label className={styles.label} htmlFor="file">Imagenes</label>
+                            <label className={styles.label} htmlFor="images">Imagenes</label>
                             <div>
-                                <input type="file" name='images' accept="image/*"/>
+                                <div className={styles.image_input_container}>
+                                    <Field className={styles.field} name='images' type='text'/>
+                                    <button className={styles.image_button} onClick={() => onClickHandler(values.images)}>Agregar</button>
+
+                                </div>
+                                <ErrorMessage name='images' component={() => <p className={styles.wrong}>{errors.images}</p>}/>
+                                <div className={styles.images_container}>
+                                    {images.length? images.map((im,i) => <FormImages key={i} image={im}/>):null}
+                                </div>
                             </div>
                             <label className={styles.label} htmlFor="price">Precio</label>
                             <div>

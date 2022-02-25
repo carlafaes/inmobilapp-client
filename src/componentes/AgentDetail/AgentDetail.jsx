@@ -17,21 +17,23 @@ export default function AgentDetails() {
     },[]);
     return agent.id? (
         <div className={styles.container}>
-            <h2 className={styles.name}>{agent.name}</h2>
-            <div className={styles.info_container}>
-                <p><span>Phone: </span> {agent.phone}</p>
-                <p><span>Address: </span> {agent.address}</p>
-                <p><span>DNI: </span>{agent.dni}</p>
-                <p><span>Age: </span>{agent.age}</p>
-            </div>
-            <div className={styles.properties_container}>
-                <p>Properties:</p>
-                {agent.properties.map((p,i) => {
-                    return(
-                        <p key={i} >{p.location.city}</p>
-                    )
-                })}
-            </div>
+            <section className={styles.card}>
+                <h2 className={styles.name}>{agent.name}</h2>
+                <div className={styles.info_container}>
+                    <p><span>Phone: </span> {agent.phone}</p>
+                    <p><span>Address: </span> {agent.address}</p>
+                    <p><span>DNI: </span>{agent.dni}</p>
+                    <p><span>Age: </span>{agent.age}</p>
+                </div>
+                <div className={styles.properties_container}>
+                    <p>Properties:</p>
+                    {agent.properties.map((p,i) => {
+                        return(
+                            <p key={i} >{p.location.city}</p>
+                        )
+                    })}
+                </div>
+            </section>
         </div>
     ):<Loading/>
 }
