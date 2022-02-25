@@ -38,6 +38,12 @@ export default function CreateAgent() {
             err.password = "Debes introducir una contraseña";
         }
 
+        if(!v.confirm_password){
+            err.confirm_password = "Debe confirmar tu contraseña";
+        }else if(!v.confirm === v.password){
+            err.confirm_password = "Ambos campos de contraseña deben coinsidir";
+        }
+
         if(!v.confirm_password) {
             err.confirm_password = "Los campos de contraseñas deben se iguales";
         }
@@ -98,10 +104,10 @@ export default function CreateAgent() {
                             <Field className={styles.field} id="password" name="password" type="password" />
                             <ErrorMessage name="password" component={() => <p className={styles.wrong}>{errors.name}</p>}/>
                         </div>
-                        <label className={styles.label} htmlFor="confirmPassword">Confirmar contraseña</label>
+                        <label className={styles.label} htmlFor="confirm_password">Confirmar contraseña</label>
                         <div>
-                            <Field className={styles.field} id="confirmPassword" name="confirmPassword" type="password" />
-                            <ErrorMessage name="confirmPassword" component={() => <p className={styles.wrong}>{errors.name}</p>}/>
+                            <Field className={styles.field} id="confirm_password" name="confirm_password" type="password" />
+                            <ErrorMessage name="confirm_password" component={() => <p className={styles.wrong}>{errors.name}</p>}/>
                         </div>
                         <label className={styles.label} htmlFor="address">Dirección</label>
                         <div>
