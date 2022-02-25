@@ -45,8 +45,8 @@ export const RegularInput=({names,label,type,msgError})=>{
         onBlur={focusOut}
         onChange={handleChange}
         />
-        {/* <i className="fa-solid fa-check icon-ok"></i>
-        <i className="fa-solid fa-times icon-wrong"></i> */}
+         <i className="fa-solid fa-check icon-ok"></i>
+        <i className="fa-solid fa-times icon-wrong"></i> 
         <p className="msg">{msgError}</p>
         </div>
     )
@@ -70,7 +70,7 @@ const validated=(type,value)=>{
                 return false
             }
         case 'password':
-            if(/\d/g.test(value) && /[A-Z]/g.test(value) && !/[a-z]/g.test(value) && value.length > 7){
+            if(/\d/g.test(value) && /[A-Z]/g.test(value) && /[a-z]/g.test(value) && value.length > 7){
                     return true
             }else{
                     return false

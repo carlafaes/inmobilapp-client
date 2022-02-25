@@ -40,14 +40,17 @@
     border-radius: 5px;
     color: #999;
     outline: none;
+    
 }
 .fa-solid{
-    position: absolute;
-    right: 30px;
-    top:60px;
+    position:relative;
+    left:95%;
+    top:-26px;
     z-index: 14;
     display: none;
-}   
+
+} 
+  
 label{
     position: relative;
     // background-color: blue;
@@ -136,4 +139,10 @@ label{
     flex-direction: row;
     margin-left: 35%;
 
+}
+.campos{
+    font-family: 'Nunito', sans-serif; 
+    font-size: 16px;
+    color: #53452e;
+    margin-left: 30%;
 }

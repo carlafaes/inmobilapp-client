@@ -11,28 +11,29 @@ export default function MaquetaForm() {
       <form className="form-maq" onSubmit={(e) => e.preventDefault()}>
       <div>
       <h1 className="titulo_form_maq">Formulario</h1>
+      <h4 className='campos'>Los campos * son obligatorios</h4>
      </div>
       <RegularInput
     names='name'
-    label='Nombre'
+    label='Nombre*'
     type='text'
     msgError='Nombre es incorrecto'
     />
     <RegularInput
     names='lastname'
-    label='Apellido'
+    label='Apellido*'
     type='text'
     msgError='Apellido es incorrecto'
     />
     <RegularInput
     names='email'
-    label='Correo electronico'
+    label='Correo electronico*'
     type='email'
     msgError='Ingresa un correo valido,ejemplo: ejemplo@ejemplo.com'
     />
     <RegularInput
     names='password'
-    label='Contraseña'
+    label='Contraseña*'
     type='password'
     msgError='Contraseña debe tener mayusculas,minusculas y numeros'
     />
