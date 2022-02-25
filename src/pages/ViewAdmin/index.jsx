@@ -38,8 +38,6 @@ export default function ViewAdmin() {
     return <Loading />;
   }
 
-  console.log(token);
-
   const editAdmin = () => {
     adminService.getAdminID(id).then((data) => {
       dispatch(setAdmin(data));

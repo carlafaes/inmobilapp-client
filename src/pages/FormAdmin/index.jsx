@@ -5,23 +5,25 @@ import adminService from "../../services/admin";
 import { validateFormAdmin, isDone } from "../../utils/errorsFormAdmin";
 
 export default function FormAdmin() {
-  document.title = "InmobillApp | registerAdmin";
+  document.title = "InmobillApp | registrar admin";
   const initInput = {
     name: "",
-    DNI: "",
+    dni: "",
     address: "",
     phone: "",
     age: "",
+    password: "",
   };
 
   const navigate = useNavigate();
   const [input, setInput] = useState(initInput);
   const [error, setError] = useState({
     name: true,
-    DNI: true,
+    dni: true,
     address: true,
     phone: true,
     age: true,
+    password: true,
   });
 
   const handleChange = (e) => {
@@ -35,7 +37,7 @@ export default function FormAdmin() {
       if (confirm("Seguro desea crear este admin?")) {
         adminService.postAdmin(input).then((res) => {
           setInput(initInput);
-          navigate(`/viewAdmin/${res.data.id}`);
+          navigate(`/login`);
         });
       }
     } else {
@@ -44,24 +46,8 @@ export default function FormAdmin() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        width: "100vw",
-        height: "100vh",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundImage:
-          "url(https://www.xtrafondos.com/descargar.php?id=3474&resolucion=2560x1440)",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <form
-        style={{ maxWidth: "80%", display: "grid" }}
-        onSubmit={handleSubmit}
-      >
+    <div>
+      <form onSubmit={handleSubmit}>
         <Input
           value={input.name}
           error={error.name}
@@ -71,11 +57,11 @@ export default function FormAdmin() {
           handleChange={handleChange}
         />
         <Input
-          value={input.DNI}
-          error={error.DNI}
-          placeholder={"DNI"}
+          value={input.dni}
+          error={error.dni}
+          placeholder={"dni"}
           type={"text"}
-          name="DNI"
+          name="dni"
           handleChange={handleChange}
         />
         <Input
