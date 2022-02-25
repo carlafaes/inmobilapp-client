@@ -18,6 +18,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import SendIcon from "@mui/icons-material/Send";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import NavBar from "../../componentes/Navbar";
+import { notifyError } from "../../utils/notifications";
 
 export default function FormAdmin() {
   document.title = "InmobillApp | registrar admin";
@@ -56,27 +57,21 @@ export default function FormAdmin() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (e.target.name === "DONE") {
-      if (isDone(error)) {
-        if (confirm("Seguro desea crear este admin?")) {
-          const { password1, ...newAdmin } = input;
-          adminService
-            .postAdmin(newAdmin)
-            .then((res) => {
-              setInput(initInput);
-              navigate(`/login`);
-            })
-            .catch(() => {
-              alert("Un admin con ese DNI ya se encuentra registrado!");
-              setInput(initInput);
-              navigate(`/login`);
-            });
-        }
-      } else {
-        alert("Completa correctamente los datos");
-      }
+    if (isDone(error)) {
+      const { password1, ...newAdmin } = input;
+      adminService
+        .postAdmin(newAdmin)
+        .then((res) => {
+          setInput(initInput);
+          navigate(`/login`);
+        })
+        .catch(() => {
+          notifyError("Un admin con ese DNI ya se encuentra registrado!");
+          setInput(initInput);
+          navigate(`/login`);
+        });
     } else {
-      navigate("/");
+      notifyError("Completa correctamente los datos!");
     }
   };
 
@@ -164,7 +159,7 @@ export default function FormAdmin() {
                 color={error.password ? "error" : "success"}
               />
             </FormControl>
-            <FormControl sx={{ width: "100%" }} >
+            <FormControl sx={{ width: "100%" }}>
               <InputLabel
                 color={error.password ? "error" : "success"}
                 htmlFor="password1"
@@ -247,7 +242,6 @@ export default function FormAdmin() {
           >
             <Button
               variant="outlined"
-              name="DONE"
               onClick={handleSubmit}
               endIcon={<SendIcon />}
               sx={{ color: "#0d0d0d" }}
