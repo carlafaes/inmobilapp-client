@@ -35,7 +35,12 @@ const useStyles = makeStyles((theme) => ({
       marginLeft:'190px',
       height:'350px',
       marginTop:'30px',
-    }
+    },
+    '@media (max-width:1900px)' : {
+      width: '780px',
+      marginLeft:'490px',
+      height:'400px',
+    },
   },
   slogan: {
     marginLeft: '26%',
@@ -59,7 +64,13 @@ const useStyles = makeStyles((theme) => ({
     marginLeft:'306px',
     height:'40px',
     marginTop:'-20px',
-  }
+  },
+  '@media (max-width:1900px)' : {
+    width: '780px',
+    marginLeft:'670px',
+    height:'300px',
+    marginTop:'-30px',
+  },
   },
   arrow: {
     width:'100px',
@@ -81,11 +92,17 @@ const useStyles = makeStyles((theme) => ({
       height:'40px',
       marginTop:'-10px',
     },
-    '@media (max-width:1200px)' : {
+    '@media (max-width:1366px)' : {
       width: '400px',
       marginLeft:'260px',
       height:'60px',
       marginTop:'-20px',
+    },
+    '@media (max-width:1900px)' : {
+      width: '500px',
+      marginLeft:'550px',
+      height:'100px',
+      marginTop:'-260px'
     }
   },
 }));

@@ -58,7 +58,7 @@ export default function QuienesSomos(){
                     <img className='imagen_perfil' src={carla} alt="carla" />
                     <div className='container_nombreYLinks'>
                     <h2 className='name_title'>Carla Faes</h2>
-                    <a href="https://linkedin.com/in/www.linkedin.com/in/carla-faes-678454216" target="blank">
+                    <a href="https://www.linkedin.com/in/carla-faes/" target="blank">
                     <img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="www.linkedin.com/in/carla-faes-678454216" height="20" width="30" /></a>
 
                     <a href="https://github.com/carlafaes" target="blank">
