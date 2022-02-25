@@ -5,6 +5,7 @@ import david from '../Img/perfiles/david.jpeg'
 import hevert from '../Img/perfiles/hevert.jpeg'
 import jonathan from '../Img/perfiles/jonathan.jpeg'
 import carla from '../Img/perfiles/carla.jpg'
+import fede from '../Img/perfiles/federico.jpeg'
 import dev from '../Img/perfiles/67.png'
 import llave from '../Img/perfiles/icono-de-llave.png'
 import '../styles/QuienesSomos.css'
@@ -13,19 +14,23 @@ import Navbar from './Navbar'
 export default function QuienesSomos(){
     return(
         <>
-        <Navbar/>
         <div>
-            <h1>¿Quienes estan detras de InmobilApp?</h1>
-            <div>
-              <img src={dev} alt="developer" />
-            </div>
-            <p>InmobilApp esta conformada por el trabajo en conjunto de un equipo de estudiantes
+        <Navbar/>
+        </div>
+        <div className='container_quienes'>
+            <h1 className='title_cuestion'>¿Quienes estan detras de InmobilApp?</h1>
+            <div className='parrafo1'>
+              <img src={dev} alt="developer"  className='img_dev'/>
+              <p className='style_p'>InmobilApp esta conformada por el trabajo en conjunto de un equipo de estudiantes
                  Full Stack Web Developers, durante el cursado de la etapa de proyecto final en Henry.  </p>
-            
-            <p>Creamos InmobilApp para ofrecer a la empresa inmobiliaria,
+            </div>
+            <div className='parrafo2'>
+              <img src={llave} alt="llave-icon" className='img_dev' />
+            <p className='style_p'>Creamos InmobilApp para ofrecer a la empresa inmobiliaria,
               una herramienta útil para una correcta,sencilla, y efectiva administración de su empresa. 
               Permitiendo de esta manera, brindar un servicio de calidad tanto a sus agentes, como a sus clientes.</p>
-              <h2>Desarrolladores de InmobilApp</h2>
+            </div>
+              <h2 className='title_cuestion'>Desarrolladores de InmobilApp</h2>
               <div className='container_perfiles'>
                   <div className='perfil_unit'>
                     <img className='imagen_perfil' src={brayan} alt="brayan" />
@@ -94,8 +99,17 @@ export default function QuienesSomos(){
                     <a href="https://github.com/Dairo01001" target="blank">
                     <img align="center" src="https://logos-marcas.com/wp-content/uploads/2020/11/GitHub-Logo.png" alt="dairo_link" height="20" width="30" /></a>
                     </div>
-                    
-                    
+                  </div>
+                  <div className='perfil_unit'>
+                    <img className='imagen_perfil' src={fede} alt="brayan" />
+                    <div className='container_nombreYLinks'>
+                    <h2 className='name_title'>Federico Oses<br/></h2>
+                    <a href="https://www.linkedin.com/in/federico-oses-gonzález/" target="blank">
+                    <img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="fede_link" height="20" width="30" /></a>
+
+                    <a href="https://github.com/DexOses" target="blank">
+                    <img align="center" src="https://logos-marcas.com/wp-content/uploads/2020/11/GitHub-Logo.png" alt="https://github.com/DexOses" height="20" width="30" /></a>
+                    </div>
                   </div>
               </div>
         </div>
