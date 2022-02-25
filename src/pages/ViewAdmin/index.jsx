@@ -44,16 +44,22 @@ export default function ViewAdmin() {
   }
 
   const editAdmin = () => {
-    adminService.getAdminID(id).then((data) => {
+    adminService.getAdminID(user.id).then((data) => {
       dispatch(setAdmin(data));
     });
   };
 
-  const deleteCurrentAdminID = async (id) => {
+  const deleteCurrentAdminID = () => {
     if (confirm("Seguro que desea darse de baja?")) {
-      await adminService.deleteAdminID(id);
-      alert("Done!");
-      navigate("/");
+      adminService
+        .deleteAdminID(user.id, user.token)
+        .then(() => {
+          alert("Done!");
+          navigate("/");
+        })
+        .catch(() => {
+          alert("No se puede dar de bajan con agents a su cargo!");
+        });
     }
   };
 
@@ -88,9 +94,7 @@ export default function ViewAdmin() {
             <button onClick={editAdmin}>Editar perfil</button>
           </li>
           <li>
-            <button onClick={() => deleteCurrentAdminID(id)}>
-              Eliminar perfil
-            </button>
+            <button onClick={deleteCurrentAdminID}>Eliminar perfil</button>
           </li>
           <li>
             <button
@@ -107,7 +111,7 @@ export default function ViewAdmin() {
         </ul>
       </nav>
       <article>
-        <PutAdmin />
+        <PutAdmin token={user.token} />
         {agentsID.map((agent) => (
           <CardAgent
             key={agent.id}
