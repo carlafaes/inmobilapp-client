@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Input from "../../componentes/Input";
 import adminService from "../../services/admin";
 import { validateFormAdmin, isDone } from "../../utils/errorsFormAdmin";
+import styled from "./FormAdmin.module.css";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 
 export default function FormAdmin() {
   document.title = "InmobillApp | registrar admin";
@@ -46,50 +48,20 @@ export default function FormAdmin() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <Input
-          value={input.name}
-          error={error.name}
-          placeholder={"Name"}
-          type={"text"}
-          name="name"
-          handleChange={handleChange}
-        />
-        <Input
-          value={input.dni}
-          error={error.dni}
-          placeholder={"dni"}
-          type={"text"}
-          name="dni"
-          handleChange={handleChange}
-        />
-        <Input
-          value={input.address}
-          error={error.address}
-          placeholder={"Address"}
-          type={"text"}
-          name="address"
-          handleChange={handleChange}
-        />
-        <Input
-          value={input.phone}
-          error={error.phone}
-          placeholder={"Phone"}
-          type={"text"}
-          name="phone"
-          handleChange={handleChange}
-        />
-        <Input
-          value={input.age}
-          error={error.age}
-          placeholder={"Age"}
-          type={"number"}
-          name="age"
-          handleChange={handleChange}
-        />
-        <button onClick={handleSubmit}>send</button>
-      </form>
-    </div>
+    <Box
+      component="form"
+      autoComplete="off"
+      className={styled.container}
+    >
+      <TextField
+        error
+        id="outlined-error-helper-text"
+        label="Error"
+        helperText="Nombre incorrecto"
+        value={input.name}
+        name="name"
+        onChange={handleChange}
+      />
+    </Box>
   );
 }
