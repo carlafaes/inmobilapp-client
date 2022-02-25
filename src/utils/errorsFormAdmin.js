@@ -45,6 +45,26 @@ export const validateFormAdmin = (input, errors, name) => {
     };
   }
 
+  if (name === "phone") {
+    return {
+      ...errors,
+      phone: input.phone.length !== 10 ? "Numero invalido" : null,
+    };
+  }
+
+  if (name === "age") {
+    return {
+      ...errors,
+      age: !input.age
+        ? "Ingresa tu edad"
+        : input.age < 18
+        ? "Debes ser mayor de edad"
+        : input.age > 100
+        ? "Edad invalida"
+        : null,
+    };
+  }
+
   // errors.name = !input.name || !/^[A-Za-z\s]+$/g.test(input.name);
   // errors.DNI = !input.DNI || !/^[0-9\s]+$/g.test(input.DNI);
   // errors.address = !input.address || !/^[A-Za-z0-9\s]+$/g.test(input.address);

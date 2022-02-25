@@ -11,8 +11,11 @@ import {
   OutlinedInput,
   InputAdornment,
   IconButton,
+  Button,
+  Stack,
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
+import SaveIcon from '@mui/icons-material/Save';
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 export default function FormAdmin() {
@@ -33,6 +36,9 @@ export default function FormAdmin() {
     name: "*",
     dni: "*",
     password: "*",
+    age: "*",
+    phone: "*",
+    address: "*",
   });
 
   const handleChange = (e) => {
@@ -123,6 +129,54 @@ export default function FormAdmin() {
           }
         />
       </FormControl>
+      <TextField
+        label={
+          error.age && error.age === "*"
+            ? "Edad"
+            : error.age
+            ? error.age
+            : "Edad"
+        }
+        type="number"
+        value={input.age}
+        name="age"
+        onChange={handleChange}
+        color={error.age ? "warning" : "success"}
+      />
+      <TextField
+        label={
+          error.phone && error.phone === "*"
+            ? "Celular"
+            : error.phone
+            ? error.phone
+            : "Celular"
+        }
+        type="tel"
+        value={input.phone}
+        name="phone"
+        onChange={handleChange}
+        color={error.phone ? "warning" : "success"}
+      />
+      <TextField
+        label={
+          error.address && error.address === "*"
+            ? "Direccion"
+            : error.address
+            ? error.address
+            : "Direccion"
+        }
+        type="text"
+        value={input.address}
+        name="address"
+        onChange={handleChange}
+        color={error.address ? "warning" : "success"}
+      />
+      <Stack direction="row">
+        <Button variant="outlined">Atras</Button>
+        <Button variant="outlined" startIcon={<SaveIcon/>}>
+          Registrar
+        </Button>
+      </Stack>
     </Box>
   );
 }
