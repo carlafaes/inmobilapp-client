@@ -13,12 +13,6 @@
   color: #0d0d0d;
 }
 
-.back {
-  position: absolute;
-  right: 5%;
-  top: 10%;
-}
-
 .item {
   margin: 10px;
   align-items: center;

@@ -249,6 +249,9 @@ export default function FormAdmin() {
         </Stack>
 
         <Stack direction="row" spacing={6} className={styled.item}>
+          <Button variant="outlined" onClick={handleSubmit}>
+            Atras
+          </Button>
           <Button
             variant="outlined"
             name="DONE"
@@ -259,9 +262,6 @@ export default function FormAdmin() {
           </Button>
         </Stack>
       </div>
-      <Button variant="outlined" onClick={handleSubmit} className={styled.back}>
-        Atras
-      </Button>
     </Box>
   );
 }
