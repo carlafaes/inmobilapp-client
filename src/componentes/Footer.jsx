@@ -22,7 +22,7 @@ export default function Footer() {
 						<Grid item xs={12} sm={4}>
 							<Box borderBottom={3}>Mas Informacion </Box>
 							<Box>
-								<Link href='/' color='inherit' fontFamily='Roboto'>
+								<Link href='/quienes' color='inherit' fontFamily='Roboto'>
 									Quienes Somos?
 								</Link>
 							</Box>
