@@ -25,11 +25,13 @@ export const validateFormAdmin = (input, errors, name) => {
     };
   }
 
-  if (name === "password") {
+  if (name === "password" || name === "password1") {
     return {
       ...errors,
       password: !input.password
         ? "Falta contraseña"
+        : input.password !== input.password1
+        ? "Las contraseñas deben coincidir"
         : input.password.length < 6
         ? "Minimo 6 caracteres"
         : null,

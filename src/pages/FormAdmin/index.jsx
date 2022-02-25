@@ -17,7 +17,7 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import SaveIcon from "@mui/icons-material/Save";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Alert from '@mui/material/Alert';
+import Alert from "@mui/material/Alert";
 
 export default function FormAdmin() {
   document.title = "InmobillApp | registrar admin";
@@ -28,6 +28,7 @@ export default function FormAdmin() {
     phone: "",
     age: "",
     password: "",
+    password1: "",
   };
 
   const navigate = useNavigate();
@@ -58,11 +59,13 @@ export default function FormAdmin() {
     if (e.target.name === "DONE") {
       if (isDone(error)) {
         if (confirm("Seguro desea crear este admin?")) {
-          adminService.postAdmin(input).then((res) => {
+          const { password1, ...newAdmin } = input;
+          adminService.postAdmin(newAdmin).then((res) => {
             setInput(initInput);
-            if(res.status !== 201){
-              alert("El Admin ya esta creado")
-            }
+            navigate(`/login`);
+          }).catch(() => {
+            alert("Un admin con ese DNI ya se encuentra registrado!")
+            setInput(initInput);
             navigate(`/login`);
           });
         }
@@ -70,7 +73,6 @@ export default function FormAdmin() {
         alert("Completa correctamente los datos");
       }
     } else {
-      
       navigate("/");
     }
   };
@@ -78,6 +80,7 @@ export default function FormAdmin() {
   return (
     <Box component="form" autoComplete="off" className={styled.container}>
       <TextField
+        required
         label={
           error.name && error.name === "*"
             ? "Nombre"
@@ -91,6 +94,7 @@ export default function FormAdmin() {
         color={error.name ? "warning" : "success"}
       />
       <TextField
+        required
         label={
           error.dni && error.dni === "*" ? "DNI" : error.dni ? error.dni : "DNI"
         }
@@ -103,6 +107,7 @@ export default function FormAdmin() {
         <InputLabel
           color={error.password ? "warning" : "success"}
           htmlFor="password"
+          required
         >
           {error.password && error.password === "*"
             ? "Contraseña"
@@ -111,6 +116,7 @@ export default function FormAdmin() {
             : "Contraseña"}
         </InputLabel>
         <OutlinedInput
+          required
           id="password"
           type={showPassword ? "text" : "password"}
           value={input.password}
@@ -138,7 +144,49 @@ export default function FormAdmin() {
           }
         />
       </FormControl>
+      <FormControl>
+        <InputLabel
+          color={error.password ? "warning" : "success"}
+          htmlFor="password1"
+          required
+        >
+          {error.password && error.password === "*"
+            ? "Contraseña"
+            : error.password
+            ? error.password
+            : "Contraseña"}
+        </InputLabel>
+        <OutlinedInput
+          required
+          id="password1"
+          type={showPassword ? "text" : "password"}
+          value={input.password1}
+          name="password1"
+          onChange={handleChange}
+          label={
+            error.password && error.password === "*"
+              ? "Contraseña"
+              : error.password
+              ? error.password
+              : "Contraseña"
+          }
+          color={error.password ? "warning" : "success"}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={() => setShowPassword(!showPassword)}
+                onMouseDown={(e) => e.preventDefault()}
+                edge="end"
+              >
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          }
+        />
+      </FormControl>
       <TextField
+        required
         label={
           error.age && error.age === "*"
             ? "Edad"
@@ -180,7 +228,7 @@ export default function FormAdmin() {
         onChange={handleChange}
         color={error.address ? "warning" : "success"}
       />
-      <Stack direction="row">
+      <Stack direction="row" spacing={6}>
         <Button variant="outlined" onClick={handleSubmit}>
           Atras
         </Button>
