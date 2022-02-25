@@ -1,17 +1,59 @@
-export const validateFormAdmin = (input) => {
-  const errors = {};
+export const validateFormAdmin = (input, errors, name) => {
+  if (name === "name") {
+    return {
+      ...errors,
+      name: !input.name
+        ? "Falta un nombre"
+        : !/^[A-Za-z\s]+$/g.test(input.name)
+        ? "Solo letras"
+        : input.name.length < 5
+        ? "Longitud minima 5"
+        : null,
+    };
+  }
 
-  errors.name = !input.name || !/^[A-Za-z\s]+$/g.test(input.name);
-  errors.DNI = !input.DNI || !/^[0-9\s]+$/g.test(input.DNI);
-  errors.address = !input.address || !/^[A-Za-z0-9\s]+$/g.test(input.address);
-  errors.phone = !input.phone || !/^[0-9\s]+$/g.test(input.phone);
-  errors.age =
-    !input.age ||
-    !/^[0-9\s]+$/g.test(input.age) ||
-    input.age > 100 ||
-    input.age < 1;
+  if (name === "dni") {
+    return {
+      ...errors,
+      dni: !input.dni
+        ? "Falta el DNI"
+        : !/^[0-9\s]+$/g.test(input.dni)
+        ? "Solo numeros"
+        : input.dni.length < 10
+        ? "Longitud minima 10"
+        : null,
+    };
+  }
 
-  return errors;
+  if (name === "password") {
+    return {
+      ...errors,
+      password: !input.password
+        ? "Falta contraseña"
+        : input.password.length < 6
+        ? "Minimo 6 caracteres"
+        : null,
+    };
+  }
+
+  if (name === "address") {
+    return {
+      ...errors,
+      address: !/^[A-Za-z0-9\s]+$/g.test(input.address)
+        ? "Direccion invalida"
+        : null,
+    };
+  }
+
+  // errors.name = !input.name || !/^[A-Za-z\s]+$/g.test(input.name);
+  // errors.DNI = !input.DNI || !/^[0-9\s]+$/g.test(input.DNI);
+  // errors.address = !input.address || !/^[A-Za-z0-9\s]+$/g.test(input.address);
+  // errors.phone = !input.phone || !/^[0-9\s]+$/g.test(input.phone);
+  // errors.age =
+  //   !input.age ||
+  //   !/^[0-9\s]+$/g.test(input.age) ||
+  //   input.age > 100 ||
+  //   input.age < 1;
 };
 
 export const validatePutAdmin = (input) => {
