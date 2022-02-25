@@ -16,9 +16,9 @@ import {
 } from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import SaveIcon from "@mui/icons-material/Save";
+import SendIcon from "@mui/icons-material/Send";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import Grid from "@mui/material/Grid";
-import Alert from "@mui/material/Alert";
+import NavBar from "../../componentes/Navbar";
 
 export default function FormAdmin() {
   document.title = "InmobillApp | registrar admin";
@@ -81,7 +81,8 @@ export default function FormAdmin() {
     }
   };
 
-  return (
+  return (<>
+  <NavBar/>
     <Box component="form" autoComplete="off" className={styled.container}>
       <div className={styled.conten}>
         <h1 className={styled.title}>Registro</h1>
@@ -98,7 +99,7 @@ export default function FormAdmin() {
             value={input.name}
             name="name"
             onChange={handleChange}
-            color={error.name ? "warning" : "success"}
+            color={error.name ? "error" : "success"}
           />
 
           <TextField
@@ -113,7 +114,7 @@ export default function FormAdmin() {
             value={input.dni}
             name="dni"
             onChange={handleChange}
-            color={error.dni ? "warning" : "success"}
+            color={error.dni ? "error" : "success"}
           />
 
           <TextField
@@ -129,14 +130,14 @@ export default function FormAdmin() {
             value={input.age}
             name="age"
             onChange={handleChange}
-            color={error.age ? "warning" : "success"}
+            color={error.age ? "error" : "success"}
             sx={{ width: "100px" }}
           />
         </Stack>
         <Stack direction="row" spacing={2} className={styled.item}>
           <FormControl>
             <InputLabel
-              color={error.password ? "warning" : "success"}
+              color={error.password ? "error" : "success"}
               htmlFor="password"
               required
             >
@@ -160,7 +161,7 @@ export default function FormAdmin() {
                   ? error.password
                   : "Contraseña"
               }
-              color={error.password ? "warning" : "success"}
+              color={error.password ? "error" : "success"}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -177,7 +178,7 @@ export default function FormAdmin() {
           </FormControl>
           <FormControl>
             <InputLabel
-              color={error.password ? "warning" : "success"}
+              color={error.password ? "error" : "success"}
               htmlFor="password1"
               required
             >
@@ -201,7 +202,7 @@ export default function FormAdmin() {
                   ? error.password
                   : "Contraseña"
               }
-              color={error.password ? "warning" : "success"}
+              color={error.password ? "error" : "success"}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -230,7 +231,7 @@ export default function FormAdmin() {
             value={input.phone}
             name="phone"
             onChange={handleChange}
-            color={error.phone ? "warning" : "success"}
+            color={error.phone ? "error" : "success"}
           />
           <TextField
             label={
@@ -244,24 +245,23 @@ export default function FormAdmin() {
             value={input.address}
             name="address"
             onChange={handleChange}
-            color={error.address ? "warning" : "success"}
+            color={error.address ? "error" : "success"}
           />
         </Stack>
 
         <Stack direction="row" spacing={6} className={styled.item}>
-          <Button variant="outlined" onClick={handleSubmit}>
-            Atras
-          </Button>
           <Button
             variant="outlined"
             name="DONE"
             onClick={handleSubmit}
-            startIcon={<SaveIcon />}
+            endIcon={<SendIcon />}
+            sx={{ color: "#0d0d0d" }}
           >
             Registrar
           </Button>
         </Stack>
       </div>
     </Box>
+    </>
   );
 }
