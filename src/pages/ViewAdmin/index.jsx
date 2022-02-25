@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Loading from "../../componentes/Loading";
 import PutAdmin from "../../componentes/PutAdmin";
 import adminService from "../../services/admin";
@@ -15,6 +15,8 @@ import CardAgent from "../../componentes/CardAgent";
 import PutAgent from "../../componentes/PutAgent";
 import Footer from "../../componentes/Footer";
 
+import { getUserForLocalStorage } from "../../utils/user";
+
 import styled from "./ViewAdmin.module.css";
 
 export default function ViewAdmin() {
@@ -23,7 +25,7 @@ export default function ViewAdmin() {
   );
   const dispatch = useDispatch();
 
-  const { id } = useParams();
+  const { id, token } = getUserForLocalStorage();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,6 +37,8 @@ export default function ViewAdmin() {
   if (!adminDetailsAgents) {
     return <Loading />;
   }
+
+  console.log(token);
 
   const editAdmin = () => {
     adminService.getAdminID(id).then((data) => {
