@@ -7,6 +7,8 @@ import {
 } from "../../redux/actions/actions-admin";
 import { isDone, validatePutAdmin } from "../../utils/errorsFormAdmin";
 import adminService from "../../services/admin";
+import swal from "sweetalert";
+import { notifyError } from "../../utils/notifications";
 
 import styled from "./PutAdmin.module.css";
 
@@ -34,26 +36,45 @@ export default function PutAdmin({ token, openCloseModal }) {
     );
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     if (e.target.name === "DONE") {
       if (isDone(error)) {
-        if (confirm("Seguro que desea hacer estos cambios?")) {
-          const { dni, ...newAdmin } = admin;
-          await adminService.putAdminID(admin.id, newAdmin, token);
-          alert("done!");
-          adminService.getAdminIdAgentDetails(admin.id).then((data) => {
-            dispatch(setAdminDetailsAgents(data));
-          });
+        swal({
+          title: "Seguro?",
+          text: "Se aplicaran los cambios en su perfil!",
+          icon: "warning",
+          buttons: ["No", "Si"],
+          dangerMode: true,
+        }).then((editAdmin) => {
+          if (editAdmin) {
+            const { dni, ...newAdmin } = admin;
+            adminService.putAdminID(admin.id, newAdmin, token).then(() => {
+              swal("Tus datos, han sido actualizados!", {
+                icon: "success",
+              });
+              adminService.getAdminIdAgentDetails(admin.id).then((data) => {
+                dispatch(setAdminDetailsAgents(data));
+              });
+              dispatch(setAdmin(null));
+              openCloseModal();
+            });
+          }
+        });
+      } else {
+        notifyError("Completa correctamente los campos!");
+      }
+    } else {
+      swal({
+        title: "Estas seguro?",
+        text: "No se guardaran los cambios!",
+        icon: "warning",
+        buttons: ["No", "Si"],
+      }).then((op) => {
+        if (op) {
           dispatch(setAdmin(null));
           openCloseModal();
         }
-      } else {
-        alert("Completa correctamente los campos");
-      }
-    } else {
-      if (confirm("Seguro? no se guardaran los cambios!")) {
-        dispatch(setAdmin(null));
-      }
+      });
     }
   };
 
@@ -90,6 +111,7 @@ export default function PutAdmin({ token, openCloseModal }) {
       <button onClick={handleSubmit} name="DONE">
         terminar
       </button>
+      <button onClick={handleSubmit}>Cancelar</button>
     </form>
   );
 }
