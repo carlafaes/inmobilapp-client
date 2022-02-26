@@ -7,89 +7,228 @@ import {
 } from "../../redux/actions/actions-admin";
 import { isDone, validatePutAdmin } from "../../utils/errorsFormAdmin";
 import adminService from "../../services/admin";
+import swal from "sweetalert";
+import { notifyError } from "../../utils/notifications";
+import {
+  Box,
+  Stack,
+  TextField,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
+  Button,
+} from "@mui/material";
+import Visibility from "@mui/icons-material/Visibility";
+import SendIcon from "@mui/icons-material/Send";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-import styled from "./PutAdmin.module.css";
+import classes from "./PutAdmin.module.css";
 
-export default function PutAdmin({ token }) {
-  const [error, setError] = useState({});
-  const admin = useSelector((state) => state.reducerAdmin.admin);
+export default function PutAdmin({ token, openCloseModal }) {
+  const [showPassword, setShowPassword] = useState(false);
+  const input = useSelector((state) => state.reducerAdmin.admin);
   const dispatch = useDispatch();
 
-  if (!admin) {
+  if (!input) {
     return null;
   }
+
+  const [error, setError] = useState({
+    name: input.name,
+    password: "*",
+    phone: input.phone,
+    address: input.address,
+  });
 
   const handleChange = (e) => {
     dispatch(
       setAdmin({
-        ...admin,
+        ...input,
         [e.target.name]: e.target.value,
       })
     );
     setError(
-      validatePutAdmin({
-        ...admin,
-        [e.target.name]: e.target.value,
-      })
+      validatePutAdmin(
+        {
+          ...input,
+          [e.target.name]: e.target.value,
+        },
+        error,
+        e.target.name
+      )
     );
   };
 
-  const handleSubmit = async (e) => {
-    if (e.target.name === "DONE") {
-      if (isDone(error)) {
-        if (confirm("Seguro que desea hacer estos cambios?")) {
-          const { dni, ...newAdmin } = admin;
-          await adminService.putAdminID(admin.id, newAdmin, token);
-          alert("done!");
-          adminService.getAdminIdAgentDetails(admin.id).then((data) => {
-            dispatch(setAdminDetailsAgents(data));
+  const handleSubmit = (e) => {
+    if (isDone(error)) {
+      swal({
+        title: "Seguro?",
+        text: "Se aplicaran los cambios en su perfil!",
+        icon: "warning",
+        buttons: ["No", "Si"],
+        dangerMode: true,
+      }).then((editAdmin) => {
+        if (editAdmin) {
+          const { dni, ...newAdmin } = input;
+          adminService.putAdminID(input.id, newAdmin, token).then(() => {
+            swal("Tus datos, han sido actualizados!", {
+              icon: "success",
+            });
+            adminService.getAdminIdAgentDetails(input.id).then((data) => {
+              dispatch(setAdminDetailsAgents(data));
+            });
+            dispatch(setAdmin(null));
+            openCloseModal();
           });
-          dispatch(setAdmin(null));
         }
-      } else {
-        alert("Completa correctamente los campos");
-      }
+      });
     } else {
-      if (confirm("Seguro? no se guardaran los cambios!")) {
-        dispatch(setAdmin(null));
-      }
+      notifyError("Completa correctamente los campos!");
     }
   };
 
   return (
-    <form className={styled.container} onSubmit={(e) => e.preventDefault()}>
-      <input
-        className={error.name ? styled.error : styled.done}
-        type="text"
-        value={admin.name}
-        name="name"
-        onChange={handleChange}
-      />
-      <input
-        className={error.address ? styled.error : styled.done}
-        type="text"
-        value={admin.address}
-        name="address"
-        onChange={handleChange}
-      />
-      <input
-        className={error.age ? styled.error : styled.done}
-        type="number"
-        value={admin.age}
-        name="age"
-        onChange={handleChange}
-      />
-      <input
-        className={error.phone ? styled.error : styled.done}
-        type="text"
-        value={admin.phone}
-        name="phone"
-        onChange={handleChange}
-      />
-      <button onClick={handleSubmit} name="DONE">
-        terminar
-      </button>
-      <button onClick={handleSubmit}>cancelar</button>
-    </form>
+    <Box component="form" autoComplete="off">
+      <div className={classes.conten}>
+        <h1 className={classes.title}>Editar datos!</h1>
+        <Stack direction="row" spacing={2} className={classes.item}>
+          <TextField
+            required
+            label={
+              error.name && error.name === "*"
+                ? "Nombre"
+                : error.name
+                ? error.name
+                : "Nombre"
+            }
+            value={input.name}
+            name="name"
+            onChange={handleChange}
+            color={error.name ? "error" : "success"}
+          />
+        </Stack>
+        <Stack direction="row" spacing={2} className={classes.item}>
+          <FormControl sx={{ width: "100%" }}>
+            <InputLabel
+              color={error.password ? "error" : "success"}
+              htmlFor="password"
+              required
+            >
+              {error.password && error.password === "*"
+                ? "Nueva Contraseña"
+                : error.password
+                ? error.password
+                : "Nueva Contraseña"}
+            </InputLabel>
+            <OutlinedInput
+              required
+              id="password"
+              type={showPassword ? "text" : "password"}
+              value={input.password}
+              name="password"
+              onChange={handleChange}
+              label={
+                error.password && error.password === "*"
+                  ? "Nueva Contraseña"
+                  : error.password
+                  ? error.password
+                  : "Nueva Contraseña"
+              }
+              color={error.password ? "error" : "success"}
+            />
+          </FormControl>
+          <FormControl sx={{ width: "100%" }}>
+            <InputLabel
+              color={error.password ? "error" : "success"}
+              htmlFor="password1"
+              required
+            >
+              {error.password && error.password === "*"
+                ? "Repita Contraseña"
+                : error.password
+                ? error.password
+                : "Repita Contraseña"}
+            </InputLabel>
+            <OutlinedInput
+              required
+              id="password1"
+              type={showPassword ? "text" : "password"}
+              value={input.password1}
+              name="password1"
+              onChange={handleChange}
+              label={
+                error.password && error.password === "*"
+                  ? "Repita Contraseña"
+                  : error.password
+                  ? error.password
+                  : "Repita Contraseña"
+              }
+              color={error.password ? "error" : "success"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => setShowPassword(!showPassword)}
+                    onMouseDown={(e) => e.preventDefault()}
+                    edge="end"
+                  >
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
+          </FormControl>
+        </Stack>
+        <Stack direction="row" spacing={2} className={classes.item}>
+          <TextField
+            label={
+              error.phone && error.phone === "*"
+                ? "Celular"
+                : error.phone
+                ? error.phone
+                : "Celular"
+            }
+            type="tel"
+            value={input.phone}
+            name="phone"
+            sx={{ width: "100%" }}
+            onChange={handleChange}
+            color={error.phone ? "error" : "success"}
+          />
+          <TextField
+            label={
+              error.address && error.address === "*"
+                ? "Direccion"
+                : error.address
+                ? error.address
+                : "Direccion"
+            }
+            type="text"
+            sx={{ width: "100%" }}
+            value={input.address}
+            name="address"
+            onChange={handleChange}
+            color={error.address ? "error" : "success"}
+          />
+        </Stack>
+        <Stack
+          direction="row"
+          alignContent="center"
+          spacing={6}
+          className={classes.item}
+        >
+          <Button
+            variant="outlined"
+            onClick={handleSubmit}
+            endIcon={<SendIcon />}
+            sx={{ color: "#0d0d0d" }}
+          >
+            Enviar
+          </Button>
+        </Stack>
+      </div>
+    </Box>
   );
 }

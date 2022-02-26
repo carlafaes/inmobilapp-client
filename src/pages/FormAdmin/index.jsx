@@ -19,6 +19,7 @@ import SendIcon from "@mui/icons-material/Send";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import NavBar from "../../componentes/Navbar";
 import { notifyError } from "../../utils/notifications";
+import swal from "sweetalert";
 
 export default function FormAdmin() {
   document.title = "InmobillApp | registrar admin";
@@ -61,12 +62,17 @@ export default function FormAdmin() {
       const { password1, ...newAdmin } = input;
       adminService
         .postAdmin(newAdmin)
-        .then((res) => {
+        .then(() => {
           setInput(initInput);
+          swal("Administrador registrado", {
+            icon: "success",
+          });
           navigate(`/login`);
         })
         .catch(() => {
-          notifyError("Un admin con ese DNI ya se encuentra registrado!");
+          swal("Un administrador con ese DNI ya se encuentra registrado", {
+            icon: "warning",
+          });
           setInput(initInput);
           navigate(`/login`);
         });
