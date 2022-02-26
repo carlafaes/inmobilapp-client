@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import CardAgent from "../../componentes/CardAgent";
 import PutAgent from "../../componentes/PutAgent";
 import Footer from "../../componentes/Footer";
+import NavBarAdmin from "../../componentes/NavBarAdmin";
 
 import { getUserForLocalStorage } from "../../utils/user";
 
@@ -86,44 +87,47 @@ export default function ViewAdmin() {
   const { name, agentsID, permissions } = adminDetailsAgents;
 
   return (
-    <div className={styled.container}>
-      <nav>
-        <ul>
-          <li>{name}</li>
-          <li>
-            <button onClick={editAdmin}>Editar perfil</button>
-          </li>
-          <li>
-            <button onClick={deleteCurrentAdminID}>Eliminar perfil</button>
-          </li>
-          <li>
-            <button
-              onClick={() => {
-                if (confirm("Seguro desea salir?")) {
-                  localStorage.removeItem("loggedUser");
-                  navigate("/");
-                }
-              }}
-            >
-              Salir
-            </button>
-          </li>
-        </ul>
-      </nav>
-      <article>
-        <PutAdmin token={user.token} />
-        {agentsID.map((agent) => (
-          <CardAgent
-            key={agent.id}
-            agent={agent}
-            crudAgent={permissions.crudAgent}
-            editAgent={editAgent}
-            deleteAgent={deleteAgent}
-          />
-        ))}
-        <PutAgent id={user.id} />
-      </article>
+    <>
+      <NavBarAdmin name={name} />
+      <div className={styled.container}>
+        <nav>
+          <ul>
+            <li>{name}</li>
+            <li>
+              <button onClick={editAdmin}>Editar perfil</button>
+            </li>
+            <li>
+              <button onClick={deleteCurrentAdminID}>Eliminar perfil</button>
+            </li>
+            <li>
+              <button
+                onClick={() => {
+                  if (confirm("Seguro desea salir?")) {
+                    localStorage.removeItem("loggedUser");
+                    navigate("/");
+                  }
+                }}
+              >
+                Salir
+              </button>
+            </li>
+          </ul>
+        </nav>
+        <article>
+          <PutAdmin token={user.token} />
+          {agentsID.map((agent) => (
+            <CardAgent
+              key={agent.id}
+              agent={agent}
+              crudAgent={permissions.crudAgent}
+              editAgent={editAgent}
+              deleteAgent={deleteAgent}
+            />
+          ))}
+          <PutAgent id={user.id} />
+        </article>
+      </div>
       <Footer />
-    </div>
+    </>
   );
 }
