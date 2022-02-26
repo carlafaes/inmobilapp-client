@@ -45,6 +45,7 @@ function PropertyDetails(props, classes) {
   }, []);
 
   return property.hasOwnProperty("id") && image ? (
+  
     <Grid spacing={3} container className={props.classes.root}>
       <Container>
         <Box mt={2}>
