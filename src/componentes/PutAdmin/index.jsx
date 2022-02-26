@@ -10,7 +10,7 @@ import adminService from "../../services/admin";
 
 import styled from "./PutAdmin.module.css";
 
-export default function PutAdmin({ token }) {
+export default function PutAdmin({ token, openCloseModal }) {
   const [error, setError] = useState({});
   const admin = useSelector((state) => state.reducerAdmin.admin);
   const dispatch = useDispatch();
@@ -45,6 +45,7 @@ export default function PutAdmin({ token }) {
             dispatch(setAdminDetailsAgents(data));
           });
           dispatch(setAdmin(null));
+          openCloseModal();
         }
       } else {
         alert("Completa correctamente los campos");
@@ -89,7 +90,6 @@ export default function PutAdmin({ token }) {
       <button onClick={handleSubmit} name="DONE">
         terminar
       </button>
-      <button onClick={handleSubmit}>cancelar</button>
     </form>
   );
 }
