@@ -40,10 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
   modal: {
     position: "absolute",
-    width: 400,
-    height: 300,
     borderRadius: "5px",
-    backgroundColor: "rgba(229, 196, 271,0.7)",
     border: "2px solid #535353",
     boxShadow: theme.shadows[5],
     padding: "16px 32px 24px",

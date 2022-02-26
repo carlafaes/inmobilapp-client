@@ -62,7 +62,7 @@ export default function FormAdmin() {
       const { password1, ...newAdmin } = input;
       adminService
         .postAdmin(newAdmin)
-        .then((res) => {
+        .then(() => {
           setInput(initInput);
           swal("Administrador registrado", {
             icon: "success",
