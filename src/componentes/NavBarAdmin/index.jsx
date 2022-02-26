@@ -21,6 +21,7 @@ import { FiLogOut } from "react-icons/fi";
 import { FaPencilAlt, FaCat } from "react-icons/fa";
 import { logaoutCurrentUserForLocalStorage } from "../../utils/user";
 import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -113,8 +114,17 @@ export default function NavBarAdmin({ setUser, setActualToken, user }) {
   };
 
   const handleLogout = () => {
-    logaoutCurrentUserForLocalStorage();
-    navigate("/");
+    swal({
+      title: "Salir",
+      text: "Estas seguro que deseas salir?",
+      icon: "warning",
+      buttons: ["No", "Si"],
+    }).then((op) => {
+      if (op) {
+        logaoutCurrentUserForLocalStorage();
+        navigate("/");
+      }
+    });
   };
 
   return (

@@ -15,6 +15,7 @@ import CardAgent from "../../componentes/CardAgent";
 import PutAgent from "../../componentes/PutAgent";
 import Footer from "../../componentes/Footer";
 import NavBarAdmin from "../../componentes/NavBarAdmin";
+import swal from "sweetalert";
 
 import { getUserForLocalStorage } from "../../utils/user";
 
@@ -31,14 +32,16 @@ export default function ViewAdmin() {
 
   useEffect(() => {
     if (!user) {
-      alert("tienes que estar logueado para usar esta vista");
+      swal("Tienes que estar logueado como administrador!", {
+        icon: "warning",
+      });
       navigate("/login");
     } else {
       adminService.getAdminIdAgentDetails(user.id).then((data) => {
         dispatch(setAdminDetailsAgents(data));
       });
     }
-  }, []);
+  }, [user]);
 
   if (!adminDetailsAgents) {
     return <Loading />;

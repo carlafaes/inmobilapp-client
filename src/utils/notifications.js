@@ -10,3 +10,10 @@ export const notifySuccess = (msg) =>
     icon: "🚀",
     theme: "light",
   });
+
+export const notifyWelcome = (msg) => {
+  return toast.success(msg, {
+    icon: "👋",
+    theme: "light",
+  });
+};
