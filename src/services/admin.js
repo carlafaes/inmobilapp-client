@@ -9,10 +9,21 @@ const getAdminIdAgentDetails = async (id) =>
 
 const getAdminID = async (id) => (await axios.get(`${baseUrl}/${id}`)).data;
 
-const putAdminID = async (id, admin) =>
-  (await axios.put(`${baseUrl}/${id}`, admin)).data;
+const putAdminID = async (id, admin, token) =>
+  (
+    await axios.put(`${baseUrl}/${id}`, admin, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+  ).data;
 
-const deleteAdminID = async (id) => await axios.delete(`${baseUrl}/${id}`);
+const deleteAdminID = async (id, token) =>
+  await axios.delete(`${baseUrl}/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
 const adminService = {
   postAdmin,

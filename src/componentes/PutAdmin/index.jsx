@@ -10,7 +10,7 @@ import adminService from "../../services/admin";
 
 import styled from "./PutAdmin.module.css";
 
-export default function PutAdmin() {
+export default function PutAdmin({ token }) {
   const [error, setError] = useState({});
   const admin = useSelector((state) => state.reducerAdmin.admin);
   const dispatch = useDispatch();
@@ -38,7 +38,8 @@ export default function PutAdmin() {
     if (e.target.name === "DONE") {
       if (isDone(error)) {
         if (confirm("Seguro que desea hacer estos cambios?")) {
-          await adminService.putAdminID(admin.id, admin);
+          const { dni, ...newAdmin } = admin;
+          await adminService.putAdminID(admin.id, newAdmin, token);
           alert("done!");
           adminService.getAdminIdAgentDetails(admin.id).then((data) => {
             dispatch(setAdminDetailsAgents(data));
