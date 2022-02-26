@@ -38,8 +38,8 @@ function App() {
           <Route path="/quienes" element={<QuienesSomos />} />
           <Route path="/create-agent" element={<CreateAgent/>} />
           <Route path="/maquetaform" element={<MaquetaForm />} />
-          <Toaster position="top-center" reverseOrder={false} />
         </Routes>
+        <Toaster position="top-center" reverseOrder={false} />
       <ToastContainer />
     </>
   );
