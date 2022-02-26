@@ -5,7 +5,10 @@ import SortIcon from '@material-ui/icons/Sort';
 import icono from '../Img/icono.png';
 import Fade from '@material-ui/core/Fade';
 import Link from '@material-ui/core/Link';
-import HomeIcon from '@mui/icons-material/Home';
+import { ImHome } from "react-icons/im";
+import { IoLogoGithub } from "react-icons/io5";
+import { IoLogoVercel } from "react-icons/io5";
+import{RiLoginBoxLine} from 'react-icons/ri'
 import '../styles/Navbar.css'
 
 
@@ -142,13 +145,12 @@ export default function Navbar() {
                 onClose={handleClose}
                 TransitionComponent={Fade}
                 >
-                <MenuItem> <HomeIcon />Home</MenuItem>
-                <MenuItem> <i className="fa-solid fa-house"></i>Favoritos</MenuItem>
-                <MenuItem>Solicita tu inmueble</MenuItem>
-                <Link href='/login'><MenuItem><i className="fa-solid fa-arrow-right-to-bracket emoticon"></i> Entrar</MenuItem></Link>
+                <h2 className='title'> Inicio</h2>
+                <Link href='/'><MenuItem className='menuItem'> <ImHome className='emoticon'/>Home</MenuItem></Link>
+                <Link href='/login'><MenuItem className='menuItem'><RiLoginBoxLine className='emoticon'/>Login</MenuItem></Link>
                 <h2 className="title">Redes sociales</h2>
-                <Link href="https://github.com/InmobilApp"><MenuItem> Git-Hub</MenuItem></Link>
-                <Link href='https://inmobil-app.herokuapp.com/'><MenuItem> Link deploy</MenuItem></Link>
+                <Link href="https://github.com/InmobilApp"><MenuItem className='menuItem'> <IoLogoGithub className='emoticon'/>Git-Hub</MenuItem></Link>
+                <Link href='https://inmobil-app.herokuapp.com/'><MenuItem className='menuItem'><IoLogoVercel className='emoticon'/> Link deploy</MenuItem></Link>
             </Menu>
             <Modal open={modal} onClose={openCloseModal}> 
                 {body}

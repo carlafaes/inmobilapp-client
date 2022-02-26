@@ -15,7 +15,7 @@ import { ToastContainer } from "react-toastify";
 import MaquetaForm from "./componentes/MaquetaForm";
 import QuienesSomos from "./componentes/QuienesSomos";
 import {ClientInterface} from "./componentes/ClientInterface/ClientInterface";
-
+import {Toaster} from 'react-hot-toast'
 function App() {
         return (
                 <>
@@ -35,6 +35,10 @@ function App() {
                                 <Route path="/quienes" element={<QuienesSomos />} />
                                 <Route path="/maquetaform" element={<MaquetaForm />} />
                         </Routes>
+                        <Toaster
+                        position="top-center"
+                        reverseOrder={false}
+                        />
                         <ToastContainer />
                 </>
         );

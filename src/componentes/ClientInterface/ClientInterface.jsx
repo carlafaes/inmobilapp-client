@@ -25,7 +25,7 @@ export const ClientInterface = () => {
       setActualToken(user.token);
 
       const notify = () =>
-        toast.success(`welcome ${user.name}!`, {
+        toast.success(`Welcome ${user.name}!`, {
           icon: "👋",
           theme: "dark",
         });

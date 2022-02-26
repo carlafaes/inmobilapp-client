@@ -1,76 +1,83 @@
-* {
-  font-family: 'Roboto', sans-serif;
-  margin: 0px;
-  box-sizing: border-box;
+/* estilos register */
+.auth_main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fafafa;
+ 
 }
 
-.auth_main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0px;
-  height: 100vh;
-  width: 100vw;
-  background-color: #f2d6ad;
-}
 
 .auth_box-container {
   background-color: white;
-  box-shadow: 0px 3px #535353;
-  border-radius: 2px;
-  padding: 20px;
-  width: 260px;
-
+  border: 2px solid #FAA222;
+  border-radius: 5px;
+  height: 450px;
+  width: 600px;
+  box-shadow: 10px 10px 60px 0px rgba(0, 0, 0, 0.5);
+  
+}
+ .input_1{
+  display: flex;
+  justify-content: space-around;
+  
+} 
+.input_2{
+  display: flex;
+  justify-content: space-around;
+}
+.edad{
+  width: 150px;
+} 
+.input_ancho{
+  width: 300px;
 }
 
 .auth_title {
-  color: #0d0d0d;
-  margin-bottom: 20px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;  
+  font-family: 'Nunito', sans-serif;
+  color: #faa422;
+  text-shadow: 1px 1px 1px #535353;
+  font-size: 35px;
+}
+
+.auth_input{
+    padding: 10px;
+    border-color: #d1cecefd;
+    margin:10px 10px 10px;
+    height: 50px;
+}
+
+.btn{
+  cursor: pointer;
+  padding: 5px;
+  width: 150px;
   font-size: 20px;
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+  border-color: rgba(31, 94, 230, 0.651);
 }
-
-.auth_input {
-  color: #535353;
-  border: 0px;
-  border-bottom: 1px solid #d8d8d8;
-  font-size: 16px;
-  margin-bottom: 10px;
+.btn_button{
+  display:flex;
+  justify-content: center;
+  padding: 30px;
+  align-items: center;
+}
+.title {
   height: 30px;
-  width: 100%;
-  transition: border-bottom .3s ease;
+  padding: 20px;
+}
+.title:hover{
+  color:#535353
 }
 
-.auth_input:focus {
-  outline: none;
-  border-bottom: 1px solid #0d0d0d;
-}
-
-.btn-block {
-  width: 100%;
-}
-
-.btn-primary {
-  background-color: #0d0d0d;
-  border-radius: 2px;
-}
-
-.btn-primary:hover {
-  background-color: #131212;
-}
-
-.btn {
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-size: 12px;
-  padding: 7px 10px 7px 10px;
-  transition: color .3s ease;
-
-}
-
-.pointer {
-  cursor: pointer;
-}
+/* estilos menuNav */
 
 .menuNav {
   display: flex;
@@ -79,15 +86,23 @@
   width: 200px;
   color: rgb(209, 206, 191)
 }
-
-
-.login {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.emoticon {
+  font-size: 20px;
+  color: black;
 }
 
+.menuItem:hover {
+  color: #535353;
+  background-color: #535353;
+}
+/* estilos login */
 
+.form{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
 
 .hola {
   display: flex;
@@ -96,16 +111,4 @@
   padding: 5px;
 }
 
-.title {
-  padding: 20px;
-}
 
-.emoticon {
-  font-size: 20px;
-  padding: 10px;
-}
-
-.Link {
-  text-decoration: bold;
-
-}

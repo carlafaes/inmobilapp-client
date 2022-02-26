@@ -5,6 +5,12 @@ import SortIcon from '@material-ui/icons/Sort';
 import icono from '../../Img/icono.png';
 import Fade from '@material-ui/core/Fade';
 import Link from '@material-ui/core/Link';
+import { ImHome } from "react-icons/im";
+import { IoLogoGithub } from "react-icons/io5";
+import { IoLogoVercel } from "react-icons/io5";
+import {FiLogOut} from 'react-icons/fi'
+import {AiOutlineStar} from 'react-icons/ai'
+import {FaPencilAlt} from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -120,16 +126,14 @@ export const NavbarClient = ({ setUser, setActualToken,user}) => {
                 onClose={handleClose}
                 TransitionComponent={Fade}
             >
-                <Link href='/'>
-                    <MenuItem><i className="fa-solid fa-house emoticon"></i> Inicio</MenuItem>
-                </Link>
-                <MenuItem><i className="fa-regular fa-star emoticon"></i> Favoritos</MenuItem>
-                <MenuItem><i className="fa-solid fa-gift emoticon"></i> Solicita tu inmueble</MenuItem>
-                <MenuItem onClick={() => openCloseModal()}> <i className=" emoticon fa-solid fa-pen-to-square"></i> Editar perfil</MenuItem>
-                <MenuItem onClick={handleLogout}><i className="fa-solid fa-arrow-right-from-bracket emoticon"></i> Salir</MenuItem>
-                {/* <h2 className="title">Redes sociales</h2>
-                            <Link href="https://github.com/InmobilApp"><MenuItem><i className="fa-brands fa-github emoticon Link"></i> Git-Hub</MenuItem></Link>
-                            <MenuItem> <i className="fa-solid fa-link emoticon"></i>Link deploy</MenuItem> */}
+                <h2 className='title'> Area cliente</h2>
+                <Link href='/'><MenuItem className='menuItem'> <ImHome className='emoticon'/>Home</MenuItem></Link>
+                <Link href='/viewClient' ><MenuItem className='menuItem'><AiOutlineStar className='emoticon'/> Favoritos</MenuItem></Link>
+                <MenuItem className='menuItem' onClick={() => openCloseModal()}><FaPencilAlt className='emoticon'/>  Editar perfil</MenuItem>
+                <MenuItem  className='menuItem'onClick={handleLogout}> <FiLogOut className='emoticon'/> Salir</MenuItem>
+                <h2 className="title">Redes sociales</h2>
+                <Link href="https://github.com/InmobilApp"><MenuItem className='menuItem'> <IoLogoGithub className='emoticon'/>Git-Hub</MenuItem></Link>
+                <Link href='https://inmobil-app.herokuapp.com/'><MenuItem className='menuItem'><IoLogoVercel className='emoticon'/> Link deploy</MenuItem></Link>
             </Menu>
             <Modal open={modal} onClose={openCloseModal}>
                 {body}
