@@ -16,6 +16,8 @@ export default function CreateAgent() {
         dni: "",
         name: "",
         address: "",
+        password:"",
+        confirm_password:"",
         phone: "",
         age: "",
     }}
@@ -26,6 +28,8 @@ export default function CreateAgent() {
             err.dni = "Debes introducir un DNI";
         }else if(!/^\d+$/.test(v.dni)){
             err.dni = "Solo se aceptan números en este campo";
+        }else if(v.dni.length !== 10) {
+            err.dni = "El DNI debe ser de 10 digitos";
         }
 
         if(!v.name){
@@ -39,13 +43,9 @@ export default function CreateAgent() {
         }
 
         if(!v.confirm_password){
-            err.confirm_password = "Debe confirmar tu contraseña";
-        }else if(!v.confirm === v.password){
+            err.confirm_password = "Debes confirmar tu contraseña";
+        }else if(!(v.confirm_password === v.password)){
             err.confirm_password = "Ambos campos de contraseña deben coinsidir";
-        }
-
-        if(!v.confirm_password) {
-            err.confirm_password = "Los campos de contraseñas deben se iguales";
         }
 
         if(!v.address){
@@ -56,6 +56,8 @@ export default function CreateAgent() {
             err.phone = "Debes introducir un nombre";
         }else if(!/^\d+$/.test(v.phone)){
             err.phone = "Solo se aceptan números en este campo";
+        }else if(v.phone.length !== 10){
+            err.phone = "El telefono debe tener 10 digitos"
         }
 
         if(!v.age){
@@ -63,23 +65,28 @@ export default function CreateAgent() {
         }else if(!/^\d+$/.test(v.age)){
             err.age = "Solo se aceptan números en este campo";
         }else if(v.age.length >= 3){
-            err.age = "la edad debe tener como máximo dos dígitos";
+            err.age = "La edad debe tener como máximo dos dígitos";
         }else if(v.age < 18){
-            err.age = "la edad mínima es de 18 años";
+            err.age = "La edad mínima es de 18 años";
+        }else if(v.age >= 99){
+            err.age = "La edad máxima son 99 años"
         }
 
+        console.log(err)
         setFormErrors(err)
         return err;
     }}
 
     onSubmit={(values, {resetForm})=>{
         resetForm();
-        values.adminID = "621455aec2ddf2bec60c76a1";
+        values.adminID = "6218312f2a77823be06b1672";
         values.permissions = {
             crudProperty: true
         }
-        console.log(values);
-        agentService.createAgent(values);
+        let {confirm_password, ...rest} = values;
+        console.log(rest);
+        console.log(rest);
+        agentService.createAgent(rest);
         setNewAgent('sent');
         setTimeout(() => setNewAgent(''),5000);
     }}
@@ -88,43 +95,49 @@ export default function CreateAgent() {
           <Form>
               <div className={styles.container}>
                   <section className={styles.section}>
-                        <h2>Información requerida</h2>
-                        <label className={styles.label} htmlFor="dni">DNI</label>
-                        <div>
-                            <Field className={styles.field} id="dni" name="dni" type="text" />
-                            <ErrorMessage name="dni" component={() => <p className={styles.wrong}>{errors.dni}</p>} />
-                        </div>
-                        <label className={styles.label} htmlFor="name">Nombre</label>
-                        <div>
-                            <Field className={styles.field} id="name" name="name" type="text" />
-                            <ErrorMessage name="name" component={() => <p className={styles.wrong}>{errors.name}</p>}/>
-                        </div>
-                        <label className={styles.label} htmlFor="password">Contraseña</label>
-                        <div>
-                            <Field className={styles.field} id="password" name="password" type="password" />
-                            <ErrorMessage name="password" component={() => <p className={styles.wrong}>{errors.name}</p>}/>
-                        </div>
-                        <label className={styles.label} htmlFor="confirm_password">Confirmar contraseña</label>
-                        <div>
-                            <Field className={styles.field} id="confirm_password" name="confirm_password" type="password" />
-                            <ErrorMessage name="confirm_password" component={() => <p className={styles.wrong}>{errors.name}</p>}/>
-                        </div>
-                        <label className={styles.label} htmlFor="address">Dirección</label>
-                        <div>
-                            <Field className={styles.field} id="address" name="address" type="text" />
-                            <ErrorMessage name="address" component={() => <p className={styles.wrong}>{errors.address}</p>}/>
-                        </div>
-                        <label className={styles.label} htmlFor="phone">Telefono</label>
-                        <div>
-                            <Field className={styles.field} id="phone" name="phone" type="text" />
-                            <ErrorMessage name="phone" component={() => <p className={styles.wrong}>{errors.phone}</p>} />
-                        </div>
-                        <label className={styles.label} htmlFor="age">Edad</label>
-                        <div>
-                            <Field className={styles.field} id="age" name="age" type="text" />
-                            <ErrorMessage name="age" component={() => <p className={styles.wrong}>{errors.age}</p>} />
-                        </div>
-                        <button className={styles.button} type="submit">Crear</button>
+                        <h1>Registro de agente</h1>
+                        <section className={styles.prueba}>
+                            <div className={styles.input_container}>
+                                <Field className={styles.field} id="dni" name="dni" type="text" />
+                                <label className={styles.label} htmlFor="dni"><span className={styles.label_text}>DNI *</span></label>
+                                {/* <ErrorMessage name="dni" component={() => <p className={styles.wrong}>{errors.dni}</p>} /> */}
+                            </div>
+                            <div className={styles.input_container}>
+                                <Field className={styles.field} id="name" name="name" type="text" />
+                                <label className={styles.label} htmlFor="name"><span className={styles.label_text}>Nombre *</span></label>
+                                {/* <ErrorMessage name="name" component={() => <p className={styles.wrong}>{errors.name}</p>}/> */}
+                            </div>
+                            <div className={styles.input_container}>
+                                <Field className={styles.age_input} id="age" name="age" type="text" />
+                                <label className={styles.age} htmlFor="age"> <span>Edad *</span></label>
+                                {/* <ErrorMessage name="age" component={() => <p className={styles.wrong}>{errors.age}</p>} /> */}
+                            </div>
+                        </section>
+                        <section className={styles.prueba}>
+                            <div className={styles.input_container}>
+                                <Field className={styles.field} id="password" name="password" type="password" />
+                                <label className={styles.label} htmlFor="password">Contraseña</label>
+                                {/* <ErrorMessage name="password" component={() => <p className={styles.wrong}>{errors.name}</p>}/> */}
+                            </div>
+                            <div className={styles.input_container}>
+                                <Field className={styles.field} id="confirm_password" name="confirm_password" type="password" />
+                                <label className={styles.label} htmlFor="confirm_password">Confirmar contraseña</label>
+                                {/* <ErrorMessage name="confirm_password" component={() => <p className={styles.wrong}>{errors.confirm_password}</p>}/> */}
+                            </div>
+                        </section>
+                        <section className={styles.prueba}>
+                            <div className={styles.input_container}>
+                                <Field className={styles.field} id="address" name="address" type="text" />
+                                <label className={styles.label} htmlFor="address">Dirección</label>
+                                {/* <ErrorMessage name="address" component={() => <p className={styles.wrong}>{errors.address}</p>}/> */}
+                            </div>
+                            <div className={styles.input_container}>
+                                <Field className={styles.field} id="phone" name="phone" type="text" />
+                                <label className={styles.label} htmlFor="phone">Telefono</label>
+                                {/* <ErrorMessage name="phone" component={() => <p className={styles.wrong}>{errors.phone}</p>} /> */}
+                            </div>
+                        </section>
+                        <button className={styles.button} type="submit">Registrar</button>
                         {newAgent && <p className={styles.success}>Angente creado correctamente</p>}
                   </section>
               </div>
