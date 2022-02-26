@@ -32,7 +32,6 @@ export default function CreatePropertyForm(){
 
         validate = {(v)=> {
             const err = {};
-            console.log(images);
             if(!v.type){
                 err.type = 'Debes elegir un tipo de inmueble';;
             }
@@ -94,7 +93,7 @@ export default function CreatePropertyForm(){
             return err;
         }}
         onSubmit={(values, {resetForm})=> {
-            resetForm();
+            /* resetForm(); */
             if(!formErrors.type && !formErrors.city && !formErrors.neighborhood && !formErrors.address && !formErrors.price && !formErrors.description && !formErrors.area && !formErrors.rooms && !formErrors.baths && !formErrors.garage && !formErrors.images){
                 const property = { 
                     typeProperty: values.type,
@@ -114,7 +113,8 @@ export default function CreatePropertyForm(){
                     },
                     agentID: "621271c06ec04903d5c20e0f" 
                 }
-                propertyServices.createProperty(property);
+                propertyServices.createProperty(property)
+                    .then((res) => console.log(res)).catch((err)=>console.log(err));
                 setNewImage([]);
                 setNewProperty('sent');
             }
@@ -160,8 +160,7 @@ export default function CreatePropertyForm(){
                             <div>
                                 <div className={styles.image_input_container}>
                                     <Field className={styles.field} name='images' type='text'/>
-                                    <button className={styles.image_button} onClick={() => onClickHandler(values.images)}>Agregar</button>
-
+                                    <button type="button" className={styles.image_button} onClick={() => onClickHandler(values.images)}>Agregar</button>
                                 </div>
                                 <ErrorMessage name='images' component={() => <p className={styles.wrong}>{errors.images}</p>}/>
                                 <div className={styles.images_container}>
