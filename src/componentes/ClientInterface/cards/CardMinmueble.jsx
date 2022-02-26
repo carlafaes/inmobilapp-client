@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import services from '../../../services/client';
-import SquareFootIcon from '@mui/icons-material/SquareFoot';
+import {HiLocationMarker} from 'react-icons/hi'
+import {MdOutlineSquareFoot} from 'react-icons/md'
+import {IoMdBed} from 'react-icons/io'
+import {GiHomeGarage} from 'react-icons/gi'
+import {HiArrowCircleRight} from 'react-icons/hi'
 import './CardMinmueble.css'
+
+
 export const CardMinmueble = () => {
   const [info,setInfo]=useState('');
   const [location,setLocation]=useState('');
@@ -22,18 +28,34 @@ export const CardMinmueble = () => {
     setTypeProperty(typeProperty)
     setDescription(description)
     setDetails(details)
+    console.log(info);
   },[])
+  
 
   return (
-    <div className="container">
-          <img className='container_img' src={img} alt="imagen" width="150px" height="150px"/>
-        <h6><i className="fa-solid fa-location-dot emoticon"></i>{location.neighborhood},{location.city}</h6>
-        <button>{typeProperty}</button>
+        
+        <div className="container_card cursor">
+        <img className='container_img' src={img} alt="imagen" width="320px" />
+        <div className='seccion1'>
+        <h6><HiLocationMarker className='emoticon'/>{location.neighborhood},{location.city}</h6>
+        <button className='btn_card btn_p'>{typeProperty}</button>
         <p>{description}</p>
-        <h6><SquareFootIcon/>{details.area}m2</h6>
-        <h6><i className="fa-solid fa-bed emoticon"></i>{details.rooms} dorms</h6>
-        <h6><i className="fa-solid fa-car emoticon"></i>{details.garage} 1 estacionamiento</h6>
-        <button>Mas detalles <i className="fa-solid fa-arrow-right emoticon"></i></button>
+        </div>
+        <div className='seccion2'>
+        <h6><MdOutlineSquareFoot className='emoticon'/> {details.area} m²</h6>
+        <h6><IoMdBed className='emoticon'/>{details.rooms} dorms</h6>
+        <h6><GiHomeGarage className='emoticon'/>{details.garage} 1 garajes</h6>
+        <button className='btn_card btn_p p' >Mas detalles <HiArrowCircleRight className='emoticon'/> </button>
+        </div>
+        <div className='seccion3'>
+          <h6>Fechas de facturas pagadas: </h6>
+          <ul>
+            {
+              info.paymentIssued?.map(e=>(<li key={e._id}>{e.date}</li>))
+            }
+          </ul>
+        </div>
     </div>
   )
+  
 }
