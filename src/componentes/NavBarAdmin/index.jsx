@@ -21,6 +21,7 @@ import { FiLogOut } from "react-icons/fi";
 import { FaPencilAlt, FaCat } from "react-icons/fa";
 import { logaoutCurrentUserForLocalStorage } from "../../utils/user";
 import { useNavigate } from "react-router-dom";
+import PutAdmin from "../PutAdmin";
 import swal from "sweetalert";
 
 const useStyles = makeStyles((theme) => ({
@@ -69,37 +70,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavBarAdmin({ setUser, setActualToken, user }) {
+export default function NavBarAdmin({ user, token, editAdmin, deleteCurrentAdminID }) {
   const classes = useStyles();
   const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [modal, setModal] = useState(false);
-
-  const body = (
-    <div className={classes.modal}>
-      <div align="center">
-        <h2 className={classes.titleLogin}>Datos a editar</h2>
-      </div>
-      <TextField label="Dni" className={classes.textfield} />
-      <br />
-      <TextField label="Password" className={classes.textfield} />
-      <br />
-      <div align="right">
-        <Button className={classes.btnLogin} color="primary">
-          Ingresar
-        </Button>
-        <Button
-          className={classes.btnLogin}
-          color="secondary"
-          onClick={() => openCloseModal()}
-        >
-          Cancelar
-        </Button>
-      </div>
-    </div>
-  );
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -111,6 +88,17 @@ export default function NavBarAdmin({ setUser, setActualToken, user }) {
 
   const openCloseModal = () => {
     setModal(!modal);
+  };
+
+  const body = (
+    <div className={classes.modal}>
+      <PutAdmin token={token} openCloseModal={openCloseModal} />
+    </div>
+  );
+
+  const editAdminModal = (id) => {
+    openCloseModal();
+    editAdmin(id);
   };
 
   const handleLogout = () => {
@@ -157,17 +145,20 @@ export default function NavBarAdmin({ setUser, setActualToken, user }) {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        <h2 className="title"> Area Administrador</h2>
+        <h2 className="title"> {user.name}</h2>
         <Link href="/">
           <MenuItem className="menuItem">
             <ImHome className="emoticon" />
             Home
           </MenuItem>
         </Link>
-        <MenuItem className="menuItem" onClick={() => openCloseModal()}>
+        <MenuItem className="menuItem" onClick={() => editAdminModal(user.id)}>
           <FaPencilAlt className="emoticon" /> Editar perfil
         </MenuItem>
-        <MenuItem className="menuItem" onClick={() => openCloseModal()}>
+        <MenuItem
+          className="menuItem"
+          onClick={() => deleteCurrentAdminID(user.id, token)}
+        >
           <FaCat className="emoticon" /> Eliminar perfil
         </MenuItem>
         <MenuItem className="menuItem" onClick={handleLogout}>

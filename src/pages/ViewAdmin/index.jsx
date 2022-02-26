@@ -16,8 +16,12 @@ import PutAgent from "../../componentes/PutAgent";
 import Footer from "../../componentes/Footer";
 import NavBarAdmin from "../../componentes/NavBarAdmin";
 import swal from "sweetalert";
+import { notifyWelcome } from "../../utils/notifications";
 
-import { getUserForLocalStorage } from "../../utils/user";
+import {
+  getUserForLocalStorage,
+  logaoutCurrentUserForLocalStorage,
+} from "../../utils/user";
 
 import styled from "./ViewAdmin.module.css";
 
@@ -37,34 +41,41 @@ export default function ViewAdmin() {
       });
       navigate("/login");
     } else {
+      notifyWelcome(`Bienvenido ${user.name}!`);
       adminService.getAdminIdAgentDetails(user.id).then((data) => {
         dispatch(setAdminDetailsAgents(data));
       });
     }
-  }, [user]);
+  }, []);
 
   if (!adminDetailsAgents) {
     return <Loading />;
   }
 
-  const editAdmin = () => {
-    adminService.getAdminID(user.id).then((data) => {
+  const editAdmin = (id) => {
+    adminService.getAdminID(id).then((data) => {
       dispatch(setAdmin(data));
     });
   };
 
-  const deleteCurrentAdminID = () => {
-    if (confirm("Seguro que desea darse de baja?")) {
-      adminService
-        .deleteAdminID(user.id, user.token)
-        .then(() => {
-          alert("Done!");
+  const deleteCurrentAdminID = (id, token) => {
+    swal({
+      title: "Estas seguro?",
+      text: "Una vez borrado no podras recuperar tus datos!",
+      icon: "warning",
+      buttons: ["No!", "Si!"],
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        adminService.deleteAdminID(id, token).then(() => {
+          logaoutCurrentUserForLocalStorage();
+          swal("Cuenta administrador borrada!", {
+            icon: "success",
+          });
           navigate("/");
-        })
-        .catch(() => {
-          alert("No se puede dar de bajan con agents a su cargo!");
         });
-    }
+      }
+    });
   };
 
   const editAgent = (id) => {
@@ -87,37 +98,18 @@ export default function ViewAdmin() {
       });
   };
 
-  const { name, agentsID, permissions } = adminDetailsAgents;
+  const { agentsID, permissions } = adminDetailsAgents;
 
   return (
     <>
-      <NavBarAdmin name={name} />
+      <NavBarAdmin
+        user={adminDetailsAgents}
+        token={user.token}
+        editAdmin={editAdmin}
+        deleteCurrentAdminID={deleteCurrentAdminID}
+      />
       <div className={styled.container}>
-        <nav>
-          <ul>
-            <li>{name}</li>
-            <li>
-              <button onClick={editAdmin}>Editar perfil</button>
-            </li>
-            <li>
-              <button onClick={deleteCurrentAdminID}>Eliminar perfil</button>
-            </li>
-            <li>
-              <button
-                onClick={() => {
-                  if (confirm("Seguro desea salir?")) {
-                    localStorage.removeItem("loggedUser");
-                    navigate("/");
-                  }
-                }}
-              >
-                Salir
-              </button>
-            </li>
-          </ul>
-        </nav>
         <article>
-          <PutAdmin token={user.token} />
           {agentsID.map((agent) => (
             <CardAgent
               key={agent.id}
