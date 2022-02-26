@@ -15,6 +15,7 @@ import { ToastContainer } from "react-toastify";
 import MaquetaForm from "./componentes/MaquetaForm";
 import QuienesSomos from "./componentes/QuienesSomos";
 import ClientInterface_DEMO from "./componentes/ClientInterface_DEMO";
+import FormAgent from "./pages/FormAgent/FormAgent"
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/form" element={<CreateProperty />} />
           <Route path="/registerAdmin" element={<FormAdmin />} />
+          <Route path="register-agent" element={<FormAgent/>}/>
           <Route path="/login" element={<LoginBeta />} />
           <Route path="/register" element={<RegisterClient />} />
           <Route path="/viewAdmin" element={<ViewAdmin />} />
