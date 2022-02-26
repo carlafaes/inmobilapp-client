@@ -5,6 +5,7 @@ import SortIcon from '@material-ui/icons/Sort';
 import icono from '../Img/icono.png';
 import Fade from '@material-ui/core/Fade';
 import Link from '@material-ui/core/Link';
+import HomeIcon from '@mui/icons-material/Home';
 import '../styles/Navbar.css'
 
 
@@ -128,9 +129,7 @@ export default function Navbar() {
                             <IconButton onClick={handleClick}>
                                 <SortIcon className={classes.icon} />
                             </IconButton>
-                            <Link href='/' className='link_home'><img src={icono} alt="logonav" width={55} height={68} className="pointer" />
-                            Home
-                            </Link>
+                            <Link href='/' className='link_home'><img src={icono} alt="logonav" width={55} height={68} className="pointer" /></Link>
                         </div>
                     </Toolbar>
                 </AppBar>
@@ -143,13 +142,13 @@ export default function Navbar() {
                 onClose={handleClose}
                 TransitionComponent={Fade}
                 >
-                <h2 className="title">Area cliente</h2>
-                <MenuItem><i className="fa-regular fa-star emoticon"></i> Favoritos</MenuItem>
-                <MenuItem><i className="fa-solid fa-gift emoticon"></i> Solicita tu inmueble</MenuItem>
+                <MenuItem> <HomeIcon />Home</MenuItem>
+                <MenuItem> <i className="fa-solid fa-house"></i>Favoritos</MenuItem>
+                <MenuItem>Solicita tu inmueble</MenuItem>
                 <Link href='/login'><MenuItem><i className="fa-solid fa-arrow-right-to-bracket emoticon"></i> Entrar</MenuItem></Link>
                 <h2 className="title">Redes sociales</h2>
-                <Link href="https://github.com/InmobilApp"><MenuItem><i className="fa-brands fa-github emoticon Link"></i> Git-Hub</MenuItem></Link>
-                <Link href='https://inmobil-app.herokuapp.com/'><MenuItem> <i className="fa-solid fa-link emoticon"></i>Link deploy</MenuItem></Link>
+                <Link href="https://github.com/InmobilApp"><MenuItem> Git-Hub</MenuItem></Link>
+                <Link href='https://inmobil-app.herokuapp.com/'><MenuItem> Link deploy</MenuItem></Link>
             </Menu>
             <Modal open={modal} onClose={openCloseModal}> 
                 {body}
