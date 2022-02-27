@@ -1,15 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../componentes/Loading";
 import adminService from "../../services/admin";
 import agentService from "../../services/agent";
-import {
-  setAdmin,
-  setAdminDetailsAgents,
-} from "../../redux/actions/actions-admin";
+import { setAdmin } from "../../redux/actions/actions-admin";
 import { setAgent } from "../../redux/actions/actions-agent";
-import { useSelector } from "react-redux";
 import CardAgent from "../../componentes/CardAgent";
 import PutAgent from "../../componentes/PutAgent";
 import NavBarAdmin from "../../componentes/NavBarAdmin";
@@ -25,22 +21,17 @@ import {
 import styled from "./ViewAdmin.module.css";
 
 export default function ViewAdmin() {
-  const adminDetailsAgents = useSelector(
-    (state) => state.reducerAdmin.adminDetailsAgents
-  );
+  const [user, setUser] = useState({});
   const dispatch = useDispatch();
 
-  const user = getUserForLocalStorage();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user && user.role === "ADMIN") {
-      notifyWelcome(`Bienvenido ${user.name}!`);
-      adminService.getAdminIdAgentDetails(user.id).then((data) => {
-        dispatch(setAdminDetailsAgents(data));
-      });
-      adminService.getAdminID(user.id).then((data) => {
-        dispatch(setAdmin(data));
+    const userLocal = getUserForLocalStorage();
+    if (userLocal && userLocal.role === "ADMIN") {
+      adminService.getAdminIdAgentDetails(userLocal.id).then((data) => {
+        setUser({ ...data, token: userLocal.token });
+        notifyWelcome(`Bienvenido ${data.name}!`);
       });
     } else {
       swal("Tienes que estar logueado como administrador!", {
@@ -50,7 +41,7 @@ export default function ViewAdmin() {
     }
   }, []);
 
-  if (!adminDetailsAgents) {
+  if (!user.hasOwnProperty("id")) {
     return <Loading />;
   }
 
@@ -86,7 +77,7 @@ export default function ViewAdmin() {
       .then(() => {
         alert("Eliminado");
         adminService.getAdminIdAgentDetails(user.id).then((data) => {
-          dispatch(setAdminDetailsAgents(data));
+          setUser({ ...data, token: user.token });
         });
       })
       .catch(() => {
@@ -94,12 +85,12 @@ export default function ViewAdmin() {
       });
   };
 
-  const { agentsID, permissions } = adminDetailsAgents;
+  const { agentsID } = user;
 
   return (
     <>
       <NavBarAdmin
-        user={adminDetailsAgents}
+        user={user}
         token={user.token}
         deleteCurrentAdminID={deleteCurrentAdminID}
       />
@@ -109,7 +100,6 @@ export default function ViewAdmin() {
             <CardAgent
               key={agent.id}
               agent={agent}
-              crudAgent={permissions.crudAgent}
               editAgent={editAgent}
               deleteAgent={deleteAgent}
             />

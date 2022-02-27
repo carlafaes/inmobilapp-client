@@ -1,10 +1,4 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import {
-  setAdmin,
-  setAdminDetailsAgents,
-} from "../../redux/actions/actions-admin";
 import { isDone, validatePutAdmin } from "../../utils/errorsFormAdmin";
 import adminService from "../../services/admin";
 import swal from "sweetalert";
@@ -23,18 +17,15 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import SendIcon from "@mui/icons-material/Send";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { useNavigate } from "react-router-dom";
+import { logaoutCurrentUserForLocalStorage } from "../../utils/user";
 
 import classes from "./PutAdmin.module.css";
-import Loading from "../Loading";
 
-export default function PutAdmin({ token, openCloseModal }) {
+export default function PutAdmin({ token, openCloseModal, admin }) {
   const [showPassword, setShowPassword] = useState(false);
-  const input = useSelector((state) => state.reducerAdmin.admin);
-  const dispatch = useDispatch();
-
-  if (!input) {
-    return <Loading />;
-  }
+  const [input, setInput] = useState({ ...admin, password: "", password1: "" });
+  const navigate = useNavigate();
 
   const [error, setError] = useState({
     name: null,
@@ -45,12 +36,10 @@ export default function PutAdmin({ token, openCloseModal }) {
   });
 
   const handleChange = (e) => {
-    dispatch(
-      setAdmin({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    );
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
     setError(
       validatePutAdmin(
         {
@@ -73,16 +62,14 @@ export default function PutAdmin({ token, openCloseModal }) {
         dangerMode: true,
       }).then((editAdmin) => {
         if (editAdmin) {
-          const { dni, ...newAdmin } = input;
+          const { dni, password1, agentsID, ...newAdmin } = input;
           adminService.putAdminID(input.id, newAdmin, token).then(() => {
             swal("Tus datos, han sido actualizados!", {
               icon: "success",
             });
-            adminService.getAdminIdAgentDetails(input.id).then((data) => {
-              dispatch(setAdminDetailsAgents(data));
-            });
-            dispatch(setAdmin(null));
             openCloseModal();
+            logaoutCurrentUserForLocalStorage();
+            navigate("/");
           });
         }
       });
