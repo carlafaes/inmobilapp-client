@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export const NavbarClient = ({ setUser, setActualToken,user}) => {
+export const NavbarClient = ({ handleLogout}) => {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
@@ -98,11 +98,7 @@ export const NavbarClient = ({ setUser, setActualToken,user}) => {
     const openCloseModal = () => {
         setModal(!modal)
     }
-    const handleLogout = () => {
-        setUser(null)
-        setActualToken('')
-        window.localStorage.removeItem("loggedUser");
-    };
+    
 
     return (
         <>

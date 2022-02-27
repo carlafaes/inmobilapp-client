@@ -6,7 +6,7 @@ import './ClientInterface.css'
 import { NavbarClient } from '../navbars/NavbarClient'
 import { useDispatch, useSelector } from "react-redux";
 import services from '../../services/client'
-import {BsFillArrowDownCircleFill, BsFillArrowUpCircleFill} from 'react-icons/bs'
+import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill } from 'react-icons/bs'
 import { CardMinmueble } from "./cards/CardMinmueble";
 
 
@@ -20,10 +20,10 @@ export const ClientInterface = () => {
   const [user, setUser] = useState(null);
   const [actualToken, setActualToken] = useState("");
   const clientID = user ? user.id : null;
-  const [open, setOpen]=useState(false)
+  const [open, setOpen] = useState(false)
 
 
-  useEffect(async() => {
+  useEffect(async () => {
     const loggedUserJSON = window.localStorage.getItem("loggedUser");
     const user = JSON.parse(loggedUserJSON);
     if (user) {
@@ -54,29 +54,41 @@ export const ClientInterface = () => {
     );
   }
 
-  const openMenu=()=>{
+  const openMenu = () => {
     setOpen(true)
   }
-  const closeMenu=()=>{
+  const closeMenu = () => {
     setOpen(false)
   }
+  const handleLogout = () => {
+    setUser(null)
+    setActualToken('')
+    window.localStorage.removeItem("loggedUser");
+};
   return (
     <>
-      <NavbarClient setUser={setUser} setActualToken={setActualToken} user={user} />
+      <NavbarClient handleLogout={handleLogout} />
       <div className="container">
         <h2>Mi inmueble</h2>
-        <div className="container_pagos">
         {
-          open?<BotonClose closeMenu={closeMenu} />:<BotonUp openMenu={openMenu}/>
-        }
-          <span>Nombre del propietario: {user.name}</span>
-          <span>Dia de pago: {user.payDay} del mes presente</span> 
-        </div>
-        {
-          open && <CardMinmueble/>
-        }
+          user.propertyID?
+          <>
+          <div className="container_pagos">
+            {
+              open ? <BotonClose closeMenu={closeMenu} /> : <BotonUp openMenu={openMenu} />
+            }
+            <span>Nombre del propietario: {user.name}</span>
+            <span>Dia de pago: {user.payDay} del mes presente</span>
+          </div>
+          {
+            open && <CardMinmueble />
+          }
         
-      </div>
+        </>
+        :
+        <CardNoHayInmueble/>
+        }
+        </div>
     </>
   );
 };
