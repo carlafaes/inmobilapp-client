@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const updateInfo = async (infoToUpdate, clientID, token) => {
-  const URL = `http://localhost:3001/api/clients/${clientID}`;
+  const URL = `/api/clients/${clientID}`;
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -17,7 +17,7 @@ const updateInfo = async (infoToUpdate, clientID, token) => {
 };
 
 const getclientInfo=async (clientID,token)=>{
-  const URL=`http://localhost:3001/api/clients/${clientID}`;
+  const URL=`/api/clients/${clientID}`;
   const config={
     headers: {
       Authorization:`Bearer ${token}`
