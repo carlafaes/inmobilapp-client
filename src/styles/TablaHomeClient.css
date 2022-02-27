@@ -1,0 +1,5 @@
+.tablaInmueble{
+    display:flex;
+    justify-content:column;
+    background-color:red;
+}

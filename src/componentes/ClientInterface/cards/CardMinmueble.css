@@ -1,0 +1,76 @@
+.container{
+    background-color: #DADBBD;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    padding: 20px;
+}
+
+.container h2{
+    padding: 20px;
+    font-family: 'Nunito', sans-serif;
+    color: #faa422;
+    font-size: 40px;
+}
+
+.container_card{
+    display: flex;
+    background-color:white;
+    height:250px;
+    padding: 20px;
+    border-radius: 20px;
+    width: 1000px;
+    box-shadow: 5px 5px 5px #faa422;
+
+}
+
+.container_card img{
+    border-radius: 10px;
+}
+.seccion1{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: 20px;
+    font-size: 30px;
+}
+
+.btn_card{
+    cursor: pointer;
+    background-color: #faa422;
+    font-size: 15px;
+    font-family: 'Nunito', sans-serif;
+    border-radius: 10px;
+    border-color: #faa422;
+}
+.btn_p{
+    width: 100px;
+}
+.p{
+    height: 100px;
+}
+
+.seccion2{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.seccion2 h6{
+    font-size: 20px;
+    font-family: 'Nunito';
+}
+.cursor{
+    cursor: pointer;
+}
+.seccion3{
+    font-family: 'Nunito';
+    padding-left: 50px;
+}
+
+.seccion3 h6{
+    font-size: 20px;
+}

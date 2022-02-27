@@ -13,6 +13,8 @@ import {
   getAllProperties,
   setFilterProperties,
 } from "../../redux/actions/actionsProperties";
+import '../../styles/FilterPropertiesNav.css'
+
 
 export default function FilterProperties() {
   const dispatch = useDispatch();
@@ -45,8 +47,11 @@ export default function FilterProperties() {
     setInput(initialState);
   };
 
+  
+
   return (
-    <Box component="form" autoComplete="off">
+    <Box className="Box_filter" component="form" autoComplete="off">
+      <div className="sector_inputs">
       <TextField
         label="Ciudad"
         variant="outlined"
@@ -65,9 +70,13 @@ export default function FilterProperties() {
         onChange={handleChange}
         name="neighborhood"
       />
-      <Box sx={{ width: 300 }}>
-        <Typography id="area">Area</Typography>
+      </div>
+      
+      <Box className="sector_rangos">
+        <Typography id="area">Area(seleccione rango: min-max)</Typography>
+        
         <Slider
+          className='slider_color'
           aria-labelledby="area"
           name="area"
           value={input.area}
@@ -77,8 +86,10 @@ export default function FilterProperties() {
           valueLabelDisplay="auto"
           disableSwap
         />
-        <Typography id="rooms">Cuartos</Typography>
+        
+        <Typography id="rooms">Cuartos(seleccione rango: min-max)</Typography>
         <Slider
+          className='slider_color'
           aria-labelledby="rooms"
           name="rooms"
           value={input.rooms}
@@ -88,8 +99,9 @@ export default function FilterProperties() {
           valueLabelDisplay="auto"
           disableSwap
         />
-        <Typography id="rentalPrice">Precio de renta</Typography>
+        <Typography id="rentalPrice">Precio de renta(seleccione rango: min-max)</Typography>
         <Slider
+          className='slider_color'
           aria-labelledby="rentalPrice"
           name="rentalPrice"
           value={input.rentalPrice}
@@ -100,8 +112,10 @@ export default function FilterProperties() {
           disableSwap
         />
       </Box>
-      <Typography id="state">Estado</Typography>
+      <div className='sector_opciones'>
+      <Typography className='sector_titulos' id="state">Estado</Typography>
       <Select
+        className='sector_select'
         name="state"
         aria-labelledby="state"
         value={input.state}
@@ -112,8 +126,11 @@ export default function FilterProperties() {
         <MenuItem value="unavailable">No disponibles</MenuItem>
         <MenuItem value="reserved">Reservada</MenuItem>
       </Select>
-      <Typography id="typeProperty">Tipo</Typography>
+      </div>
+      <div className='sector_opciones'>
+      <Typography className='sector_titulos' id="typeProperty">Tipo</Typography>
       <Select
+        className='sector_select'
         name="typeProperty"
         aria-labelledby="typeProperty"
         value={input.typeProperty}
@@ -125,7 +142,9 @@ export default function FilterProperties() {
         <MenuItem value="apartamento">Apartamento</MenuItem>
         <MenuItem value="finca">Finca</MenuItem>
       </Select>
-      <Button variant="contained" onClick={clearFilter}>
+      </div>
+      
+      <Button className='sector_clean' variant="contained" onClick={clearFilter}>
         Limpiar Filtros
       </Button>
     </Box>
