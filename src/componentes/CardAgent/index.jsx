@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Card,
   CardHeader,
@@ -6,17 +6,25 @@ import {
   CardActions,
   IconButton,
   Typography,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Collapse,
 } from "@mui/material";
 
-import { Phone } from "@mui/icons-material";
+import { ExpandLess, ExpandMore, Phone } from "@mui/icons-material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import { Link } from "react-router-dom";
 
 export default function CardAgent({ agent, deleteAgent, editAgent }) {
   const { name, phone, id } = agent;
+  const [open, setOpen] = useState(true);
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ width: 345 }}>
       <CardHeader
         avatar={<Avatar sx={{ backgroundColor: "red" }}>{name[0]}</Avatar>}
         title={name}
@@ -37,6 +45,25 @@ export default function CardAgent({ agent, deleteAgent, editAgent }) {
           <EditIcon />
         </IconButton>
       </CardActions>
+      <List sx={{ width: "100%", maxWidth: 345 }} component="nav">
+        <ListItemButton onClick={() => setOpen(!open)}>
+          <ListItemIcon>
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText primary="Propiedades">
+            {open ? <ExpandLess /> : <ExpandMore />}
+          </ListItemText>
+        </ListItemButton>
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {agent.properties.map((prop) => (
+              <ListItemButton>
+                <Link to={`/property/${prop.id}`}>{prop.id}</Link>
+              </ListItemButton>
+            ))}
+          </List>
+        </Collapse>
+      </List>
     </Card>
   );
 }

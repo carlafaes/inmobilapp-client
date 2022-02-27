@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../componentes/Loading";
-import PutAdmin from "../../componentes/PutAdmin";
 import adminService from "../../services/admin";
 import agentService from "../../services/agent";
 import {
@@ -13,10 +12,10 @@ import { setAgent } from "../../redux/actions/actions-agent";
 import { useSelector } from "react-redux";
 import CardAgent from "../../componentes/CardAgent";
 import PutAgent from "../../componentes/PutAgent";
-import Footer from "../../componentes/Footer";
 import NavBarAdmin from "../../componentes/NavBarAdmin";
 import swal from "sweetalert";
 import { notifyWelcome } from "../../utils/notifications";
+import { Grid } from "@mui/material";
 
 import {
   getUserForLocalStorage,
@@ -105,7 +104,7 @@ export default function ViewAdmin() {
         deleteCurrentAdminID={deleteCurrentAdminID}
       />
       <div className={styled.container}>
-        <article>
+        <Grid container spacing={2}>
           {agentsID.map((agent) => (
             <CardAgent
               key={agent.id}
@@ -115,10 +114,9 @@ export default function ViewAdmin() {
               deleteAgent={deleteAgent}
             />
           ))}
-          <PutAgent id={user.id} />
-        </article>
+        </Grid>
+        <PutAgent id={user.id} />
       </div>
-      <Footer />
     </>
   );
 }
