@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import updateInfo from "../services/client";
+import clientService from "../services/client";
 import { useNavigate } from "react-router-dom";
 
 const ClientInterface_DEMO = () => {
@@ -11,7 +11,7 @@ const ClientInterface_DEMO = () => {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [actualToken, setActualToken] = useState("");
-  const clientID = user ? user.id : null;
+  const [completeInfoClient, setCompleteInfoClient] = useState("");
   const userInfo = {
     name,
     address,
@@ -20,12 +20,14 @@ const ClientInterface_DEMO = () => {
     phone,
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     const loggedUserJSON = window.localStorage.getItem("loggedUser");
     const user = JSON.parse(loggedUserJSON);
     if (user) {
       setUser(user);
       setActualToken(user.token);
+      const info = await clientService.getClientInfo(user.id);
+      setCompleteInfoClient(info);
       // setName(user.name);
       // setAddress(user.address);
       // setPhone(user.phone);
@@ -44,7 +46,7 @@ const ClientInterface_DEMO = () => {
     if (userInfo.password.length === 0)
       return alert("Please enter your password");
 
-    await updateInfo(userInfo, clientID, actualToken);
+    await clientService.updateInfo(userInfo, actualToken);
   };
 
   const handleLogout = () => {

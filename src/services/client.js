@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const updateInfo = async (infoToUpdate, clientID, token) => {
-  const URL = `http://localhost:3001/api/clients/${clientID}`;
+export const updateInfo = async (infoToUpdate, token) => {
+  const URL = "/api/clients";
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -16,4 +16,19 @@ const updateInfo = async (infoToUpdate, clientID, token) => {
   }
 };
 
-export default updateInfo;
+export const getClientInfo = async (clientID) => {
+  const URL = `/api/clients/${clientID}`;
+  try {
+    const response = await axios.get(URL);
+    return response.data;
+  } catch (error) {
+    alert(error);
+  }
+};
+
+const clientService = {
+  getClientInfo,
+  updateInfo,
+};
+
+export default clientService;
