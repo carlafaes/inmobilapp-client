@@ -41,9 +41,7 @@ const useStyles = makeStyles((theme) => ({
   modal: {
     position: "absolute",
     borderRadius: "5px",
-    border: "2px solid #535353",
     boxShadow: theme.shadows[5],
-    padding: "16px 32px 24px",
     top: "50%",
     left: "50%",
     transform: "translate(-50%,-50%)",
@@ -67,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NavBarAdmin({ user, token, editAdmin, deleteCurrentAdminID }) {
+export default function NavBarAdmin({ user, token, deleteCurrentAdminID }) {
   const classes = useStyles();
   const navigate = useNavigate();
 
@@ -92,11 +90,6 @@ export default function NavBarAdmin({ user, token, editAdmin, deleteCurrentAdmin
       <PutAdmin token={token} openCloseModal={openCloseModal} />
     </div>
   );
-
-  const editAdminModal = (id) => {
-    openCloseModal();
-    editAdmin(id);
-  };
 
   const handleLogout = () => {
     swal({
@@ -149,7 +142,7 @@ export default function NavBarAdmin({ user, token, editAdmin, deleteCurrentAdmin
             Home
           </MenuItem>
         </Link>
-        <MenuItem className="menuItem" onClick={() => editAdminModal(user.id)}>
+        <MenuItem className="menuItem" onClick={() => openCloseModal()}>
           <FaPencilAlt className="emoticon" /> Editar perfil
         </MenuItem>
         <MenuItem

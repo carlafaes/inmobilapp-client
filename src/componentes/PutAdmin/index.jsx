@@ -25,6 +25,7 @@ import SendIcon from "@mui/icons-material/Send";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import classes from "./PutAdmin.module.css";
+import Loading from "../Loading";
 
 export default function PutAdmin({ token, openCloseModal }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -32,14 +33,15 @@ export default function PutAdmin({ token, openCloseModal }) {
   const dispatch = useDispatch();
 
   if (!input) {
-    return null;
+    return <Loading />;
   }
 
   const [error, setError] = useState({
-    name: input.name,
+    name: null,
     password: "*",
-    phone: input.phone,
-    address: input.address,
+    phone: null,
+    address: null,
+    age: null,
   });
 
   const handleChange = (e) => {
@@ -92,7 +94,6 @@ export default function PutAdmin({ token, openCloseModal }) {
   return (
     <Box component="form" autoComplete="off">
       <div className={classes.conten}>
-        <h1 className={classes.title}>Editar datos!</h1>
         <Stack direction="row" spacing={2} className={classes.item}>
           <TextField
             required
@@ -107,6 +108,23 @@ export default function PutAdmin({ token, openCloseModal }) {
             name="name"
             onChange={handleChange}
             color={error.name ? "error" : "success"}
+            sx={{ width: "100%" }}
+          />
+          <TextField
+            required
+            label={
+              error.age && error.age === "*"
+                ? "Edad"
+                : error.age
+                ? error.age
+                : "Edad"
+            }
+            type="number"
+            value={input.age}
+            name="age"
+            onChange={handleChange}
+            color={error.age ? "error" : "success"}
+            sx={{ width: "150px" }}
           />
         </Stack>
         <Stack direction="row" spacing={2} className={classes.item}>

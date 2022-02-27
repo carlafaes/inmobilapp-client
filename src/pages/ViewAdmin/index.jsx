@@ -35,16 +35,19 @@ export default function ViewAdmin() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) {
-      swal("Tienes que estar logueado como administrador!", {
-        icon: "warning",
-      });
-      navigate("/login");
-    } else {
+    if (user && user.role === "ADMIN") {
       notifyWelcome(`Bienvenido ${user.name}!`);
       adminService.getAdminIdAgentDetails(user.id).then((data) => {
         dispatch(setAdminDetailsAgents(data));
       });
+      adminService.getAdminID(user.id).then((data) => {
+        dispatch(setAdmin(data));
+      });
+    } else {
+      swal("Tienes que estar logueado como administrador!", {
+        icon: "warning",
+      });
+      navigate("/login");
     }
   }, []);
 
@@ -52,18 +55,12 @@ export default function ViewAdmin() {
     return <Loading />;
   }
 
-  const editAdmin = (id) => {
-    adminService.getAdminID(id).then((data) => {
-      dispatch(setAdmin(data));
-    });
-  };
-
   const deleteCurrentAdminID = (id, token) => {
     swal({
       title: "Estas seguro?",
       text: "Una vez borrado no podras recuperar tus datos!",
       icon: "warning",
-      buttons: ["No!", "Si!"],
+      buttons: ["No", "Si"],
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
@@ -105,7 +102,6 @@ export default function ViewAdmin() {
       <NavBarAdmin
         user={adminDetailsAgents}
         token={user.token}
-        editAdmin={editAdmin}
         deleteCurrentAdminID={deleteCurrentAdminID}
       />
       <div className={styled.container}>

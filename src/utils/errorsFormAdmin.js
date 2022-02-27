@@ -88,6 +88,19 @@ export const validatePutAdmin = (input, errors, name) => {
     };
   }
 
+  if (name === "age") {
+    return {
+      ...errors,
+      age: !input.age
+        ? "Ingresa tu edad"
+        : input.age < 18
+        ? "Debes ser mayor de edad"
+        : input.age > 100
+        ? "Edad invalida"
+        : null,
+    };
+  }
+
   if (name === "password" || name === "password1") {
     return {
       ...errors,
