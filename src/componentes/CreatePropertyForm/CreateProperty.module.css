@@ -54,6 +54,28 @@
     box-shadow: 3px 0 30px rgba(163, 163, 163, 0.4); 
 }
 
+.images_container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    height: auto;
+}
+
+.image_input_container {
+    display: flex;
+    align-items: center;
+}
+
+.image_button {
+    height: 45px;
+    width: 50%;
+    margin-left: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #ebb768;
+    cursor: pointer;
+}
+
 .wrong {
     font-size: 12px;
     margin-bottom: 0;

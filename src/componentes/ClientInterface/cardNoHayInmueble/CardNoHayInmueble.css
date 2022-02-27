@@ -1,0 +1,12 @@
+.cardNohay{
+    background-color: white;
+    font-size: 10px;
+    height: 35px;
+    width: 73vw;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px #faa422;
+    display: flex;
+    justify-content: center;
+    color: #faa422;
+    font-family: 'Nunito';
+}

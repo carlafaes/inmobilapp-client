@@ -1,133 +1,149 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { toast, ToastContainer } from "react-toastify";
+import { toast} from "react-toastify";
 import { PostClient } from "../redux/actions/actionClient";
 import Navbar from "./Navbar";
+import {IoSendSharp} from 'react-icons/io5'
 import "react-toastify/dist/ReactToastify.css";
 
 export const RegisterClient = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const {register,handleSubmit,formState: { errors },} = useForm();
+  
   const notify = () =>
-    toast.success("Successful registration!", {
-      icon: "🚀",
-      theme: "dark",
+    toast.success("Registro exitoso!", {
+      icon: "🚀"
     });
   const alertPassword = () =>
-    toast.error("Passwords do not match ", {
-      theme: "dark",
-    });
+    toast.error("Las contraseñas no coinciden");
+
   const alertAge = () =>
-    toast.error("You must be of legal age", {
-      theme: "dark",
-    });
+    toast.error("Debe ser mayor de edad");
+
   const alertPhone = () =>
-    toast.error("number greater than 10 digits", {
-      theme: "dark",
-    });
+    toast.error("El numero de celular debe tener 10 digitos o más digitos");
+
   const alertAgeDigits = () =>
-    toast.error("must not have more than 3 digits", {
-      theme: "dark",
-    });
+    toast.error("La edad debe ser menor a 99 años");
+
+  const camposVacios=()=>{
+    toast.error('Debe llenar todos los campos')
+  }
+  const alertDni=()=>{
+    toast.error('El Dni debe tener 10 o más digitos')
+  }
+  
 
   const handleRegister = (data) => {
-    const { password2, ...rest } = data;
+    const { password2, ...rest } = data
     if (rest.phone.length < 10) {
-      return alertPhone();
-    } else if (rest.age < 18) {
-      return alertAge();
-    } else if (rest.age.length > 2) {
-      return alertAgeDigits();
-    } else if (rest.password != password2) {
-      return alertPassword();
+      return alertPhone()
     }
-    // dispatch(PostClient(rest))
-    console.log(data);
-    notify();
-    navigate(-1);
-  };
-  return (
-    <>
-      <Navbar />
-      <div className="auth_main">
-        <div className="auth_box-container">
-          <h3 className="auth_title">Register</h3>
-          <form onSubmit={handleSubmit(handleRegister)}>
-            <input
-              type="text"
-              placeholder="Names*"
-              className="auth_input"
-              autoComplete="off"
-              {...register("name", {
-                required: true,
-              })}
-            />
-            <input
-              type="Number"
-              placeholder="DNI*"
-              className="auth_input"
-              {...register("dni", {
-                required: true,
-              })}
-            />
-            <input
-              type="text"
-              placeholder="address*"
-              className="auth_input"
-              autoComplete="off"
-              {...register("address", {
-                required: true,
-              })}
-            />
-            <input
-              type="Number"
-              placeholder="Phone*"
-              className="auth_input"
-              autoComplete="off"
-              {...register("phone", {
-                required: true,
-              })}
-            />
-            <input
-              type="Number"
-              placeholder="Age*"
-              className="auth_input"
-              {...register("age", {
-                required: true,
-              })}
-            />
-            <input
-              type="password"
-              placeholder="Password*"
-              className="auth_input"
-              {...register("password", {
-                required: true,
-              })}
-            />
-            <input
-              type="password"
-              placeholder="Confirm Password*"
-              className="auth_input"
-              {...register("password2", {
-                required: true,
-              })}
-            />
-            <button className="btn btn-primary">Register</button>
-            {Object.keys(errors).length >= 1 && (
-              <div style={{ color: "red" }}>
-                Todos los campos son requeridos*
-              </div>
-            )}
-          </form>
-        </div>
+    else if (rest.age < 18) {
+      return alertAge()
+    }
+    else if(rest.dni.length<10){
+      return alertDni()
+    }
+    else if (rest.age.length > 2) {
+      return alertAgeDigits()
+    }
+    else if (rest.password != password2) {
+      return alertPassword()
+    }
+    dispatch(PostClient(rest))
+    notify()
+    navigate('/login')
+  }
+;
+return (
+  <>
+    <Navbar />
+    <div className="auth_main">
+      <div className="auth_box-container">
+        <h3 className="auth_title">Registro</h3>
+        <form onSubmit={handleSubmit(handleRegister)}>
+        
+          <input
+            type="text"
+            placeholder="Nombre*"
+            className="auth_input"
+            autoComplete="off"
+            {...register("name", {
+              required: true,
+            })}
+          />
+          <input
+            type="Number"
+            placeholder="DNI*"
+            className="auth_input"
+            {...register("dni", {
+              required: true,
+            })}
+          />
+          <input
+            type="Number"
+            placeholder="Edad*"
+            className="auth_input edad"
+            {...register("age", {
+              required: true,
+            })}
+          />
+          
+          <div className="input_1">
+          <input
+            type="text"
+            placeholder="Direccion*"
+            className="auth_input input_ancho"
+            autoComplete="off"
+            {...register("address", {
+              required: true,
+            })}
+          />
+          <input
+            type="Number"
+            placeholder="Celular*"
+            className="auth_input input_ancho"
+            autoComplete="off"
+            {...register("phone", {
+              required: true,
+            })}
+          />
+          </div>
+          <div className="input_2">
+          <input
+            type="password"
+            placeholder="Contraseña*"
+            className="auth_input input_ancho"
+            {...register("password", {
+              required: true,
+            })}
+          />
+          <input
+            type="password"
+            placeholder="Confirmar contraseña*"
+            className="auth_input input_ancho "
+            {...register("password2", {
+              required: true,
+            })}
+          />
+          </div>
+         
+         <div className="btn_button">
+          <button className="btn">Registrar <IoSendSharp className="send"/></button>
+          
+
+         </div>
+          
+          {Object.keys(errors).length >= 1 && (
+            camposVacios()
+          )}
+        </form>
       </div>
-    </>
-  );
-};
+    </div>
+  </>
+);
+}
