@@ -28,7 +28,7 @@ function Home() {
 
   
 
-	const dwellingPerPage= 1;
+	const dwellingPerPage= 5;
 	const pagesVisited= pageNumber * dwellingPerPage;
 	const pageCount= Math.ceil(properties.length / dwellingPerPage);
 	const changePage = ({selected})=>{
