@@ -1,7 +1,6 @@
 .container {
-  width: 100vw;
-  height: 100vh;
-  background-color: aliceblue;
+  padding: 100px;
+  min-height: 700px;
 }
 
 .container article {
