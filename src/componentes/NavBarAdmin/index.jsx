@@ -87,7 +87,7 @@ export default function NavBarAdmin({ user, token, deleteCurrentAdminID }) {
 
   const body = (
     <div className={classes.modal}>
-      <PutAdmin token={token} openCloseModal={openCloseModal} />
+      <PutAdmin token={token} openCloseModal={openCloseModal} admin={user} />
     </div>
   );
 
