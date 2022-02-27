@@ -22,7 +22,7 @@ import { logaoutCurrentUserForLocalStorage } from "../../utils/user";
 
 import classes from "./PutAdmin.module.css";
 
-export default function PutAdmin({ token, openCloseModal, admin }) {
+export default function PutAdmin({ openCloseModal, admin }) {
   const [showPassword, setShowPassword] = useState(false);
   const [input, setInput] = useState({ ...admin, password: "", password1: "" });
   const navigate = useNavigate();
@@ -62,7 +62,7 @@ export default function PutAdmin({ token, openCloseModal, admin }) {
         dangerMode: true,
       }).then((editAdmin) => {
         if (editAdmin) {
-          const { dni, password1, agentsID, ...newAdmin } = input;
+          const { dni, password1, agentsID, token, ...newAdmin } = input;
           adminService.putAdminID(input.id, newAdmin, token).then(() => {
             swal("Tus datos, han sido actualizados!", {
               icon: "success",

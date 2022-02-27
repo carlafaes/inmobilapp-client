@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../componentes/Loading";
 import adminService from "../../services/admin";
 import agentService from "../../services/agent";
-import { setAdmin } from "../../redux/actions/actions-admin";
-import { setAgent } from "../../redux/actions/actions-agent";
 import CardAgent from "../../componentes/CardAgent";
-import PutAgent from "../../componentes/PutAgent";
 import NavBarAdmin from "../../componentes/NavBarAdmin";
 import swal from "sweetalert";
 import { notifyWelcome } from "../../utils/notifications";
@@ -22,7 +18,6 @@ import styled from "./ViewAdmin.module.css";
 
 export default function ViewAdmin() {
   const [user, setUser] = useState({});
-  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -65,47 +60,36 @@ export default function ViewAdmin() {
     });
   };
 
-  const editAgent = (id) => {
-    agentService.getAgentID(id).then((data) => {
-      dispatch(setAgent(data));
-    });
-  };
-
   const deleteAgent = (id) => {
-    agentService
-      .deleteAgentID(id, user.token)
-      .then(() => {
-        alert("Eliminado");
-        adminService.getAdminIdAgentDetails(user.id).then((data) => {
-          setUser({ ...data, token: user.token });
+    swal({
+      title: "Estas seguro?",
+      text: "Que deseas eliminar este agente?",
+      icon: "warning",
+      buttons: ["No", "Si"],
+      dangerMode: true,
+    }).then((confir) => {
+      if (confir) {
+        agentService.deleteAgentID(id, user.token).then(() => {
+          alert("Eliminado");
+          adminService.getAdminIdAgentDetails(user.id).then((data) => {
+            setUser({ ...data, token: user.token });
+          });
         });
-      })
-      .catch(() => {
-        alert("No se puede eliminar este agente, ya que tiene una propiedad!");
-      });
+      }
+    });
   };
 
   const { agentsID } = user;
 
   return (
     <>
-      <NavBarAdmin
-        user={user}
-        token={user.token}
-        deleteCurrentAdminID={deleteCurrentAdminID}
-      />
+      <NavBarAdmin user={user} deleteCurrentAdminID={deleteCurrentAdminID} />
       <div className={styled.container}>
         <Grid container spacing={2}>
           {agentsID.map((agent) => (
-            <CardAgent
-              key={agent.id}
-              agent={agent}
-              editAgent={editAgent}
-              deleteAgent={deleteAgent}
-            />
+            <CardAgent key={agent.id} agent={agent} deleteAgent={deleteAgent} />
           ))}
         </Grid>
-        <PutAgent id={user.id} />
       </div>
     </>
   );
