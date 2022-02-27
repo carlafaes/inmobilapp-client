@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = `http://localhost:3000/api`;
+const url = `/api`;
 export function PostClient(client) {
   return async (dispatch) => {
     const json = await axios.post(`${url}/clients`, client);
@@ -12,7 +12,7 @@ export function PostClient(client) {
 }
 
 export const getUserInfoWithToken = (credentials) => {
-  const url = "http://localhost:3001/api/login";
+  const url = "/api/login";
   return async (dispatch) => {
     try {
       const { data } = await axios.post(url, credentials);

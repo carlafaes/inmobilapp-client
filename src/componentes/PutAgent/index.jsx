@@ -8,6 +8,7 @@ import agentService from "../../services/agent";
 import adminService from "../../services/admin";
 
 import styled from "./PutAgent.module.css";
+import { getUserForLocalStorage } from "../../utils/user";
 
 export default function PutAgent({ id }) {
   const agent = useSelector((state) => state.reducerAgent.agent);
@@ -24,12 +25,19 @@ export default function PutAgent({ id }) {
     setError(validatePutAdmin({ ...agent, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     if (e.target.name === "DONE") {
       if (isDone(error)) {
         if (confirm("Seguro que desea hacer estos cambios?")) {
-          await agentService.putAgentID(agent.id, agent);
-          alert("done!");
+          const { token } = getUserForLocalStorage();
+          agentService
+            .putAgentID(agent.id, agent, token)
+            .then(() => {
+              alert("done!");
+            })
+            .catch(() => {
+              alert("No tienes autorizacion para esto!");
+            });
           adminService.getAdminIdAgentDetails(id).then((data) => {
             dispatch(setAdminDetailsAgents(data));
           });
