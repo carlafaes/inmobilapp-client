@@ -6,15 +6,21 @@ import './ClientInterface.css'
 import { NavbarClient } from '../navbars/NavbarClient'
 import { useDispatch, useSelector } from "react-redux";
 import services from '../../services/client'
+import {BsFillArrowDownCircleFill, BsFillArrowUpCircleFill} from 'react-icons/bs'
 import { CardMinmueble } from "./cards/CardMinmueble";
+
+
+import { CardNoHayInmueble } from "./cardNoHayInmueble/CardNoHayInmueble";
+import { BotonUp } from "./botones/BotonUp";
+import { BotonClose } from "./botones/BotonClose";
 export const ClientInterface = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [actualToken, setActualToken] = useState("");
-  
   const clientID = user ? user.id : null;
+  const [open, setOpen]=useState(false)
 
 
   useEffect(async() => {
@@ -25,9 +31,8 @@ export const ClientInterface = () => {
       setActualToken(user.token);
 
       const notify = () =>
-        toast.success(`Welcome ${user.name}!`, {
-          icon: "👋",
-          theme: "dark",
+        toast.success(`Bienvenid@ ${user.name}!`, {
+          icon: "👋"
         });
       notify(user.name);
     }
@@ -48,13 +53,29 @@ export const ClientInterface = () => {
       </>
     );
   }
-  // console.log(completeInfoClient);
+
+  const openMenu=()=>{
+    setOpen(true)
+  }
+  const closeMenu=()=>{
+    setOpen(false)
+  }
   return (
     <>
       <NavbarClient setUser={setUser} setActualToken={setActualToken} user={user} />
-      <div>
-      <h2>Mi inmueble</h2>
-      <CardMinmueble/>
+      <div className="container">
+        <h2>Mi inmueble</h2>
+        <div className="container_pagos">
+        {
+          open?<BotonClose closeMenu={closeMenu} />:<BotonUp openMenu={openMenu}/>
+        }
+          <span>Nombre del propietario: {user.name}</span>
+          <span>Dia de pago: {user.payDay} del mes presente</span> 
+        </div>
+        {
+          open && <CardMinmueble/>
+        }
+        
       </div>
     </>
   );

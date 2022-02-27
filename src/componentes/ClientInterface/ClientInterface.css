@@ -1,3 +1,18 @@
-.div{
-    background-color:red
+.container_pagos{
+    background-color: white;
+    display: flex;
+    font-size: 20px;
+    font-family: 'Nunito';
+    height: 70px;
+    width: 73vw;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    color: #faa422;
+}
+
+.button{
+    border: none;
 }
