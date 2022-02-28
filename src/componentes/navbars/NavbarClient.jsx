@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppBar, IconButton, Menu, MenuItem, Toolbar, Modal, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SortIcon from '@material-ui/icons/Sort';
@@ -71,30 +71,32 @@ export const NavbarClient = ({ handleLogout }) => {
     const [address, setAddress] = useState("");
     const [phone, setPhone] = useState("");
     const [actualToken, setActualToken] = useState("");
-
+    const userInfo = {
+        name,
+        address,
+        password,
+        newPassword,
+        phone,
+    };
     const alertPassword = () =>
         toast.error("Please enter your password");
 
-    const sendInfo = async (e) => {
-        e.preventDefault();
-
-        if (userInfo.password.length === 0)
-            return alertPassword()
-
-        await clientService.updateInfo(userInfo, actualToken);
-    };
+  
 
     const body = (
         <div className={classes.modal}>
             <div align='center'>
                 <h2 className={classes.titleLogin}>Datos a editar</h2>
             </div>
-            <form onSubmit={sendInfo}>
+            <form >
                 <div className='containerModal'>
                     <input type="text"
                         placeholder="Nombre"
                         className='auth_input'
                         autoComplete="off"
+                        value={name}
+                        name="name"
+                        onChange={({ target }) => setName(target.value)}
                     />
                 </div>
                 <div className='containerModal'>
@@ -102,11 +104,17 @@ export const NavbarClient = ({ handleLogout }) => {
                         placeholder="Direccion"
                         className='auth_input'
                         autoComplete="off"
+                        value={address}
+                        name="address"
+                        onChange={({ target }) => setAddress(target.value)}
                     />
                     <input type="number"
                         placeholder="Celular"
                         className='auth_input'
                         autoComplete="off"
+                        value={phone}
+                        name="phone"
+                        onChange={({ target }) => setPhone(target.value)}
                     />
                 </div>
                 <div className='containerModal'>
@@ -114,11 +122,17 @@ export const NavbarClient = ({ handleLogout }) => {
                         placeholder="Anterior contraseña"
                         className='auth_input'
                         autoComplete="off"
+                        value={password}
+                        name="password"
+                        onChange={({ target }) => setPassword(target.value)}
                     />
                     <input type="password"
                         placeholder="Nueva contraseña"
                         className='auth_input'
                         autoComplete="off"
+                        value={newPassword}
+                        name="newPassword"
+                        onChange={({ target }) => setNewPassword(target.value)}
                     />
                 </div>
             </form>
