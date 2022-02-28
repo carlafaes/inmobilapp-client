@@ -17,14 +17,12 @@ import QuienesSomos from "./componentes/QuienesSomos";
 import FormAgent from "./pages/FormAgent/FormAgent"
 import { ClientInterface } from "./componentes/ClientInterface/ClientInterface";
 import { Toaster } from "react-hot-toast";
-import FormProperty from "./pages/FormProperty/FormProperty";
 
 function App() {
   return (
     <>
       <ToastContainer/>
         <Routes>
-          <Route path="/property-beta" element={<FormProperty/>} />
           <Route path="*" element={<PageNotFound />} />
           <Route exact path="/" element={<Home />} />
           <Route exact path="/property/:id" element={<PropertyDetails />} />
