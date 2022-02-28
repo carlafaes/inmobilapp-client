@@ -9,4 +9,9 @@
     justify-content: center;
     color: #faa422;
     font-family: 'Nunito';
+    align-items: center;
+}
+.buton{
+    display: flex;
+    justify-content: space-around;
 }

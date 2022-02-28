@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from "react";
-import updateInfo from "../../services/client";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import './ClientInterface.css'
-import { NavbarClient } from '../navbars/NavbarClient'
-import { useDispatch, useSelector } from "react-redux";
-import services from '../../services/client'
-import { BsFillArrowDownCircleFill, BsFillArrowUpCircleFill } from 'react-icons/bs'
-import { CardMinmueble } from "./cards/CardMinmueble";
-
-
-import { CardNoHayInmueble } from "./cardNoHayInmueble/CardNoHayInmueble";
 import { BotonUp } from "./botones/BotonUp";
-import { BotonClose } from "./botones/BotonClose";
+import { BotonUpF} from "./botones/BotonUpF";
+import { BotonClose} from "./botones/BotonClose";
+import { BotonCloseF} from "./botones/BotonCloseF";
+import { CardMinmueble } from "./cardMInmueble/CardMinmueble";
+import { CardNoHayInmueble } from "./cardNoHayInmueble/CardNoHayInmueble";
+import { CardsMisFavoritos } from "./cardMisFavoritos/CardsMisFavoritos";
+import { CardNoHayFavoritos } from './cardNoHayFavoritos/CardNoHayFavoritos'
+import { NavbarClient } from '../navbars/NavbarClient'
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import './ClientInterface.css'
+import { AiFillStar } from "react-icons/ai";
+
 export const ClientInterface = () => {
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [actualToken, setActualToken] = useState("");
   const clientID = user ? user.id : null;
-  const [open, setOpen] = useState(false)
-
+  const [openI, setOpenI] = useState(false)
+  const [openF, setOpenF] = useState(false)
 
   useEffect(async () => {
     const loggedUserJSON = window.localStorage.getItem("loggedUser");
@@ -36,7 +35,6 @@ export const ClientInterface = () => {
         });
       notify(user.name);
     }
-
     return (
       <div className="div">
         <h1 >You must be login to see this interface</h1>
@@ -55,40 +53,52 @@ export const ClientInterface = () => {
   }
 
   const openMenu = () => {
-    setOpen(true)
+    setOpenI(true)
   }
   const closeMenu = () => {
-    setOpen(false)
+    setOpenI(false)
+  }
+  const openMenuF=()=>{
+    setOpenF(true)
+  }
+  const closeMenuF=()=>{
+    setOpenF(false)
   }
   const handleLogout = () => {
     setUser(null)
     setActualToken('')
     window.localStorage.removeItem("loggedUser");
-};
+  };
   return (
     <>
       <NavbarClient handleLogout={handleLogout} />
       <div className="container">
         <h2>Mi inmueble</h2>
         {
-          user.propertyID?
-          <>
-          <div className="container_pagos">
-            {
-              open ? <BotonClose closeMenu={closeMenu} /> : <BotonUp openMenu={openMenu} />
-            }
-            <span>Nombre del propietario: {user.name}</span>
-            <span>Dia de pago: {user.payDay} del mes presente</span>
-          </div>
-          {
-            open && <CardMinmueble />
-          }
-        
-        </>
-        :
-        <CardNoHayInmueble/>
+          user.propertyID ?
+            <>
+              <div className="container_pagos">
+                {
+                  openI ? <BotonClose closeMenu={closeMenu} /> : <BotonUp openMenu={openMenu} />
+                }
+                <span>Nombre del propietario: {user.name}</span>
+                <span>Dia de pago: {user.payDay} del mes presente</span>
+              </div>
+              {
+                openI && <CardMinmueble />
+              }
+
+            </>
+            :
+            <CardNoHayInmueble />
         }
-        </div>
+
+        <h2>Mis favoritos</h2>
+        
+        {
+          user.favoriteProperties.length>0 ?<CardsMisFavoritos/>: <CardNoHayFavoritos/>
+        }
+      </div>
     </>
   );
 };
