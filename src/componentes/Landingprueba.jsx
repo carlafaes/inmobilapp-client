@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     },
     '@media (max-width:2060px)' : {
       width: '780px',
-      marginLeft:'670px',
+      marginLeft:'421px',
       height:'300px',
       marginTop:'100px',
     },
@@ -71,15 +71,15 @@ const useStyles = makeStyles((theme) => ({
     height:'40px',
     marginTop:'-20px',
   },
-  '@media (max-width:1900px)' : {
+  '@media (max-width:1980px)' : {
     width: '780px',
-    marginLeft:'670px',
+    marginLeft:'270px',
     height:'300px',
     marginTop:'-30px',
   },
   '@media (max-width:2060px)' : {
     width: '400px',
-    marginLeft:'800px',
+    marginLeft:'540px',
     height:'80px',
     marginTop:'-10px',
   },
@@ -118,9 +118,9 @@ const useStyles = makeStyles((theme) => ({
     },
     '@media (max-width:1900px)' : {
       width: '500px',
-      marginLeft:'550px',
+      marginLeft:'450px',
       height:'100px',
-      marginTop:'-260px',
+      marginTop:'-60px',
     }
   },
 }));

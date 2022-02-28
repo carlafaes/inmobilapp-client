@@ -15,6 +15,8 @@ import { ToastContainer } from "react-toastify";
 import MaquetaForm from "./componentes/MaquetaForm";
 import QuienesSomos from "./componentes/QuienesSomos";
 import ClientInterface_DEMO from "./componentes/ClientInterface_DEMO";
+import Generales from './componentes/PreguntasFrecuentes/Generales'
+
 
 function App() {
   return (
@@ -33,6 +35,7 @@ function App() {
         <Route path="/quienes" element={<QuienesSomos />} />
         <Route path="/maquetaform" element={<MaquetaForm />} />
         <Route path="*" element={<PageNotFound />} />
+        <Route path='/preguntasFrecuentes' element={<Generales/>}/>
       </Routes>
       <ToastContainer />
     </>
