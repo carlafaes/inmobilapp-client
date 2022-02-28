@@ -94,7 +94,11 @@ export default function ViewAdmin() {
       <div className={styled.container}>
         <Grid container spacing={2}>
           {agentsID?.map((agent) => (
-            <CardAgent key={agent.id} agentID={agent.id} deleteAgent={deleteAgent} />
+            <CardAgent
+              key={agent.id}
+              agentID={agent.id}
+              deleteAgent={deleteAgent}
+            />
           ))}
         </Grid>
       </div>

@@ -31,12 +31,11 @@ function App() {
           <Route path="/viewAdmin" element={<ViewAdmin />} />
           <Route path="/registerAdmin" element={<FormAdmin />} />
           <Route exact path="/form" element={<CreateProperty />} />
-          <Route path="register-agent" element={<FormAgent/>}/>
+          <Route path="registerAgent/:id/:role" element={<FormAgent/>}/>
           <Route path="/login" element={<LoginBeta />} />
           <Route path="/agents/:id" element={<AgentDetail />} />
           <Route path="/create-property" element={<CreatePropertyForm />} />
           <Route path="/quienes" element={<QuienesSomos />} />
-          <Route path="/create-agent" element={<CreateAgent/>} />
           <Route path="/maquetaform" element={<MaquetaForm />} />
         </Routes>
         <Toaster position="top-center" reverseOrder={false} />
