@@ -2,17 +2,17 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { toast} from "react-toastify";
+import { toast } from "react-toastify";
 import { PostClient } from "../redux/actions/actionClient";
 import Navbar from "./Navbar";
-import {IoSendSharp} from 'react-icons/io5'
+import { IoSendSharp } from 'react-icons/io5'
 import "react-toastify/dist/ReactToastify.css";
 
 export const RegisterClient = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {register,handleSubmit,formState: { errors },} = useForm();
-  
+  const { register, handleSubmit, formState: { errors }, } = useForm();
+
   const notify = () =>
     toast.success("Registro exitoso!", {
       icon: "🚀"
@@ -29,13 +29,13 @@ export const RegisterClient = () => {
   const alertAgeDigits = () =>
     toast.error("La edad debe ser menor a 99 años");
 
-  const camposVacios=()=>{
+  const camposVacios = () => {
     toast.error('Debe llenar todos los campos')
   }
-  const alertDni=()=>{
+  const alertDni = () => {
     toast.error('El Dni debe tener 10 o más digitos')
   }
-  
+
 
   const handleRegister = (data) => {
     const { password2, ...rest } = data
@@ -45,7 +45,7 @@ export const RegisterClient = () => {
     else if (rest.age < 18) {
       return alertAge()
     }
-    else if(rest.dni.length<10){
+    else if (rest.dni.length < 10) {
       return alertDni()
     }
     else if (rest.age.length > 2) {
@@ -58,92 +58,92 @@ export const RegisterClient = () => {
     notify()
     navigate('/login')
   }
-;
-return (
-  <>
-    <Navbar />
-    <div className="auth_main">
-      <div className="auth_box-container">
-        <h3 className="auth_title">Registro</h3>
-        <form onSubmit={handleSubmit(handleRegister)}>
-        
-          <input
-            type="text"
-            placeholder="Nombre*"
-            className="auth_input"
-            autoComplete="off"
-            {...register("name", {
-              required: true,
-            })}
-          />
-          <input
-            type="Number"
-            placeholder="DNI*"
-            className="auth_input"
-            {...register("dni", {
-              required: true,
-            })}
-          />
-          <input
-            type="Number"
-            placeholder="Edad*"
-            className="auth_input edad"
-            {...register("age", {
-              required: true,
-            })}
-          />
-          
-          <div className="input_1">
-          <input
-            type="text"
-            placeholder="Direccion*"
-            className="auth_input input_ancho"
-            autoComplete="off"
-            {...register("address", {
-              required: true,
-            })}
-          />
-          <input
-            type="Number"
-            placeholder="Celular*"
-            className="auth_input input_ancho"
-            autoComplete="off"
-            {...register("phone", {
-              required: true,
-            })}
-          />
-          </div>
-          <div className="input_2">
-          <input
-            type="password"
-            placeholder="Contraseña*"
-            className="auth_input input_ancho"
-            {...register("password", {
-              required: true,
-            })}
-          />
-          <input
-            type="password"
-            placeholder="Confirmar contraseña*"
-            className="auth_input input_ancho "
-            {...register("password2", {
-              required: true,
-            })}
-          />
-          </div>
-         
-         <div className="btn_button">
-          <button className="btn">Registrar <IoSendSharp className="send"/></button>
-          
+    ;
+  return (
+    <>
+      <Navbar />
+      <div className="auth_main">
+        <div className="auth_box-container">
+          <h3 className="auth_title">Registro</h3>
+          <form onSubmit={handleSubmit(handleRegister)}>
 
-         </div>
-          
-          {Object.keys(errors).length >= 1 && (
-            camposVacios()
-          )}
-        </form>
+            <input
+              type="text"
+              placeholder="Nombre*"
+              className="auth_input"
+              autoComplete="off"
+              {...register("name", {
+                required: true,
+              })}
+            />
+            <input
+              type="Number"
+              placeholder="DNI*"
+              className="auth_input"
+              {...register("dni", {
+                required: true,
+              })}
+            />
+            <input
+              type="Number"
+              placeholder="Edad*"
+              className="auth_input edad"
+              {...register("age", {
+                required: true,
+              })}
+            />
+
+            <div className="input_1">
+              <input
+                type="text"
+                placeholder="Direccion*"
+                className="auth_input input_ancho"
+                autoComplete="off"
+                {...register("address", {
+                  required: true,
+                })}
+              />
+              <input
+                type="Number"
+                placeholder="Celular*"
+                className="auth_input input_ancho"
+                autoComplete="off"
+                {...register("phone", {
+                  required: true,
+                })}
+              />
+            </div>
+            <div className="input_2">
+              <input
+                type="password"
+                placeholder="Contraseña*"
+                className="auth_input input_ancho"
+                {...register("password", {
+                  required: true,
+                })}
+              />
+              <input
+                type="password"
+                placeholder="Confirmar contraseña*"
+                className="auth_input input_ancho "
+                {...register("password2", {
+                  required: true,
+                })}
+              />
+            </div>
+
+            <div className="btn_button">
+              <button className="btn">Registrar <IoSendSharp className="send" /></button>
+
+
+            </div>
+
+            {Object.keys(errors).length >= 1 && (
+              camposVacios()
+            )}
+          </form>
+        </div>
       </div>
-    </div>
-  </>
-);
+    </>
+  );
 }
