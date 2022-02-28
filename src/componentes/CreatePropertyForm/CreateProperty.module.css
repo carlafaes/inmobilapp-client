@@ -7,6 +7,9 @@
     width: 100%;
     padding: 50px;
 }
+.input_container {
+    position: relative;
+}
 
 .section {
     background-color: #ffffff;
@@ -17,15 +20,12 @@
 }
 
 .label {
-    display: block;
+    position: absolute;
+    /* display: block; */
     font-weight: bold;
     padding: 10px;
     min-height: 45px;
     cursor: pointer;
-}
-
-.input_container {
-    position: relative;
 }
 
 .field {

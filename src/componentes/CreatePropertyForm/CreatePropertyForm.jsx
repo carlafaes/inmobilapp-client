@@ -128,14 +128,14 @@ export default function CreatePropertyForm(){
 
                         <section className={styles.section}>    
                             <h2>Ubicación</h2>
-                            <div>
-                                <label className={styles.label} htmlFor="type">Tipo de propiedad</label>
+                            <div className={styles.input_container}>
                                 <Field className={styles.field} name="type" as="select">
                                     <option name="type" value="tipo" selected={true} >Tipo</option>
                                     <option name="type" value="casa">Casa</option>
                                     <option name="type" value="apartamento">Apartamento</option>
                                     <option name="type" value="local">Local</option>
                                 </Field>
+                                <label className={styles.label} htmlFor="type">Tipo de propiedad</label>
                                 <ErrorMessage name='type' component={() => <p className={styles.wrong}>{errors.type}</p>}/>
                             </div>
                             <label className={styles.label} htmlFor="city">Ciudad</label>
