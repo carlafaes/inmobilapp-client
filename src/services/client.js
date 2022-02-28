@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getUserForLocalStorage } from "../utils/user";
 
 const updateInfo = async (infoToUpdate, token) => {
   const URL = `/api/clients`;
@@ -20,6 +21,17 @@ const updateInfo = async (infoToUpdate, token) => {
   }
 };
 
+const addFavoriteProperty = (favPropertyID) => {
+  const { token } = getUserForLocalStorage();
+  const URL = "/api/clients";
+
+  return axios.put(
+    URL,
+    { favPropertyID },
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+};
+
 export const getClientInfo = async (clientID) => {
   const URL = `/api/clients/${clientID}`;
   try {
@@ -33,6 +45,7 @@ export const getClientInfo = async (clientID) => {
 const clientService = {
   getClientInfo,
   updateInfo,
+  addFavoriteProperty,
 };
 
 export default clientService;

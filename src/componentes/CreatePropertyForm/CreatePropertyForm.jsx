@@ -74,9 +74,6 @@ export default function CreatePropertyForm() {
 
         if (!v.description) {
           err.description = "Debes ingresar una descripción";
-        } else if (!/^[a-zA-ZÀ-ÿ\s]{1,2000}$/.test(v.description)) {
-          err.description =
-            "Solo se aceptan letras, espacios y guiones en este campo";
         } else if (v.description.length < 11) {
           err.description = "La descripción debe tener más de diez caracteres";
         }
