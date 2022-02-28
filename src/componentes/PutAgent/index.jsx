@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { isDone, validatePutAgent } from "../../utils/errorsFormAdmin";
 import agentService from "../../services/agent";
 import swal from "sweetalert";
@@ -6,11 +7,11 @@ import { notifyError } from "../../utils/notifications";
 import { Box, Stack, TextField, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { getUserForLocalStorage } from "../../utils/user";
-
 import classes from "./PutAgent.module.css";
 
 export default function PutAgent({ agent, handleOpenOnClouseModal }) {
   const [input, setInput] = useState({ ...agent });
+  const navigate = useNavigate();
 
   const [error, setError] = useState({
     name: null,

@@ -17,15 +17,15 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import SendIcon from "@mui/icons-material/Send";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { useNavigate } from "react-router-dom";
-import { logaoutCurrentUserForLocalStorage } from "../../utils/user";
 
 import classes from "./PutAdmin.module.css";
+import { useDispatch } from "react-redux";
+import { setAdminDetailsAgents } from "../../redux/actions/actions-admin";
 
 export default function PutAdmin({ openCloseModal, admin }) {
   const [showPassword, setShowPassword] = useState(false);
   const [input, setInput] = useState({ ...admin, password: "", password1: "" });
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [error, setError] = useState({
     name: null,
@@ -62,14 +62,15 @@ export default function PutAdmin({ openCloseModal, admin }) {
         dangerMode: true,
       }).then((editAdmin) => {
         if (editAdmin) {
-          const { dni, password1, agentsID, token, ...newAdmin } = input;
-          adminService.putAdminID(input.id, newAdmin, token).then(() => {
+          const {dni, password1, agentsID, token, ...newAdmin } = input;
+          adminService.putAdminID(input.id, newAdmin, token).then((res) => {
             swal("Tus datos, han sido actualizados!", {
               icon: "success",
             });
             openCloseModal();
-            logaoutCurrentUserForLocalStorage();
-            navigate("/");
+            adminService.getAdminIdAgentDetails(input.id).then((data) => {
+              dispatch(setAdminDetailsAgents({ ...data, token: token }));
+            });
           });
         }
       });
