@@ -16,19 +16,22 @@ export const CardMinmueble = () => {
   const [description,setDescription]=useState('');
   const [details,setDetails]=useState('');
 
-  useEffect(async()=>{
+  useEffect(()=>{
     const loggedUserJSON = window.localStorage.getItem("loggedUser");
     const user = JSON.parse(loggedUserJSON);
-    const info= await services.getclientInfo(user.id);
-    setInfo(info)
-    const {propertyID}=info
-    const{location,images,typeProperty,description,details}=propertyID
-    setLocation(location)
-    setImg(images)
-    setTypeProperty(typeProperty)
-    setDescription(description)
-    setDetails(details)
-    console.log(info);
+    const GetInfo=async()=>{
+      const info= await services.getclientInfo(user.id);
+      setInfo(info)
+      const {propertyID}=info
+      const{location,images,typeProperty,description,details}=propertyID
+      setLocation(location)
+      setImg(images)
+      setTypeProperty(typeProperty)
+      setDescription(description)
+      setDetails(details)
+      console.log(info);
+    }
+    GetInfo()
   },[])
   
 
