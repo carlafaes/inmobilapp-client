@@ -35,6 +35,7 @@ export const ClientInterface = () => {
         });
       notify(user.name);
     }
+    console.log(user);
     return (
       <div className="div">
         <h1 >You must be login to see this interface</h1>
