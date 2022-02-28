@@ -145,7 +145,7 @@ export default function NavBarAdmin({ user, token, deleteCurrentAdminID }) {
         <MenuItem className="menuItem" onClick={() => openCloseModal()}>
           <FaPencilAlt className="emoticon" /> Editar perfil
         </MenuItem>
-        <MenuItem className="menuItem" onClick={() => console.log('Crear agente')}>
+        <MenuItem className="menuItem" onClick={() => navigate(`/registerAgent/${user.id}/${user.role}`)}>
           <FaPlus className="emoticon" /> Añadir agente
         </MenuItem>
         <MenuItem
