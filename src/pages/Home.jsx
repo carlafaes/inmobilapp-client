@@ -25,12 +25,14 @@ function Home() {
 
   const [pageNumber, setPageNumber] = useState(1);
 
+
   const dwellingPerPage = 5;
   const pagesVisited = pageNumber * dwellingPerPage;
   const pageCount = Math.ceil(properties.length / dwellingPerPage);
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
+
 
   useEffect(() => {
     propertyService.getAll().then((data) => {

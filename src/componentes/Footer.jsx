@@ -14,7 +14,7 @@ export default function Footer() {
 				fontFamily={'Roboto'}
 				px={{ xs: 3, sm: 10 }}
 				py={{ xs: 10, sm: 10 }}
-				bgcolor='#DCDCDC'
+				bgcolor='rgb(220, 220, 220,0.6)'
 				color='#6C6C6C'
 			>
 				<Container>

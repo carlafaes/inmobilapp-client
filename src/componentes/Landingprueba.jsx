@@ -41,6 +41,12 @@ const useStyles = makeStyles((theme) => ({
       marginLeft:'490px',
       height:'400px',
     },
+    '@media (max-width:2060px)' : {
+      width: '780px',
+      marginLeft:'670px',
+      height:'300px',
+      marginTop:'100px',
+    },
   },
   slogan: {
     marginLeft: '26%',
@@ -71,6 +77,12 @@ const useStyles = makeStyles((theme) => ({
     height:'300px',
     marginTop:'-30px',
   },
+  '@media (max-width:2060px)' : {
+    width: '400px',
+    marginLeft:'800px',
+    height:'80px',
+    marginTop:'-10px',
+  },
   },
   arrow: {
     width:'100px',
@@ -92,6 +104,12 @@ const useStyles = makeStyles((theme) => ({
       height:'40px',
       marginTop:'-10px',
     },
+    '@media (max-width:2060px)' : {
+      width: '200px',
+      marginLeft:'870px',
+      height:'90px',
+      marginTop:'-10px',
+    },
     '@media (max-width:1366px)' : {
       width: '400px',
       marginLeft:'260px',
@@ -102,7 +120,7 @@ const useStyles = makeStyles((theme) => ({
       width: '500px',
       marginLeft:'550px',
       height:'100px',
-      marginTop:'-260px'
+      marginTop:'-260px',
     }
   },
 }));

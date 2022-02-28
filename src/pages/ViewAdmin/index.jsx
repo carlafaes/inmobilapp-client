@@ -1,21 +1,15 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../componentes/Loading";
 import adminService from "../../services/admin";
 import agentService from "../../services/agent";
-import {
-  setAdmin,
-  setAdminDetailsAgents,
-} from "../../redux/actions/actions-admin";
-import { setAgent } from "../../redux/actions/actions-agent";
-import { useSelector } from "react-redux";
 import CardAgent from "../../componentes/CardAgent";
-import PutAgent from "../../componentes/PutAgent";
 import NavBarAdmin from "../../componentes/NavBarAdmin";
 import swal from "sweetalert";
 import { notifyWelcome } from "../../utils/notifications";
 import { Grid } from "@mui/material";
+import { setAdminDetailsAgents } from "../../redux/actions/actions-admin";
 
 import {
   getUserForLocalStorage,
@@ -25,22 +19,17 @@ import {
 import styled from "./ViewAdmin.module.css";
 
 export default function ViewAdmin() {
-  const adminDetailsAgents = useSelector(
-    (state) => state.reducerAdmin.adminDetailsAgents
-  );
+  const user = useSelector((state) => state.reducerAdmin.adminDetailsAgents);
   const dispatch = useDispatch();
 
-  const user = getUserForLocalStorage();
   const navigate = useNavigate();
+  const userLocal = getUserForLocalStorage();
 
   useEffect(() => {
-    if (user && user.role === "ADMIN") {
-      notifyWelcome(`Bienvenido ${user.name}!`);
-      adminService.getAdminIdAgentDetails(user.id).then((data) => {
-        dispatch(setAdminDetailsAgents(data));
-      });
-      adminService.getAdminID(user.id).then((data) => {
-        dispatch(setAdmin(data));
+    if (userLocal && userLocal.role === "ADMIN") {
+      adminService.getAdminIdAgentDetails(userLocal.id).then((data) => {
+        dispatch(setAdminDetailsAgents({ ...data, token: userLocal.token }));
+        notifyWelcome(`Bienvenido ${data.name}!`);
       });
     } else {
       swal("Tienes que estar logueado como administrador!", {
@@ -50,7 +39,7 @@ export default function ViewAdmin() {
     }
   }, []);
 
-  if (!adminDetailsAgents) {
+  if (!user) {
     return <Loading />;
   }
 
@@ -74,48 +63,44 @@ export default function ViewAdmin() {
     });
   };
 
-  const editAgent = (id) => {
-    agentService.getAgentID(id).then((data) => {
-      dispatch(setAgent(data));
+  const deleteAgent = (id) => {
+    swal({
+      title: "Estas seguro?",
+      text: "Que deseas eliminar este agente?",
+      icon: "warning",
+      buttons: ["No", "Si"],
+      dangerMode: true,
+    }).then((confir) => {
+      if (confir) {
+        agentService.deleteAgentID(id, user.token).then(() => {
+          swal("Eliminado", {
+            icon: "success",
+          });
+          adminService.getAdminIdAgentDetails(userLocal.id).then((data) => {
+            dispatch(
+              setAdminDetailsAgents({ ...data, token: userLocal.token })
+            );
+          });
+        });
+      }
     });
   };
 
-  const deleteAgent = (id) => {
-    agentService
-      .deleteAgentID(id, user.token)
-      .then(() => {
-        alert("Eliminado");
-        adminService.getAdminIdAgentDetails(user.id).then((data) => {
-          dispatch(setAdminDetailsAgents(data));
-        });
-      })
-      .catch(() => {
-        alert("No se puede eliminar este agente, ya que tiene una propiedad!");
-      });
-  };
-
-  const { agentsID, permissions } = adminDetailsAgents;
+  const { agentsID } = user;
 
   return (
     <>
-      <NavBarAdmin
-        user={adminDetailsAgents}
-        token={user.token}
-        deleteCurrentAdminID={deleteCurrentAdminID}
-      />
+      <NavBarAdmin user={user} deleteCurrentAdminID={deleteCurrentAdminID} />
       <div className={styled.container}>
         <Grid container spacing={2}>
-          {agentsID.map((agent) => (
+          {agentsID?.map((agent) => (
             <CardAgent
               key={agent.id}
-              agent={agent}
-              crudAgent={permissions.crudAgent}
-              editAgent={editAgent}
+              agentID={agent.id}
               deleteAgent={deleteAgent}
             />
           ))}
         </Grid>
-        <PutAgent id={user.id} />
       </div>
     </>
   );
