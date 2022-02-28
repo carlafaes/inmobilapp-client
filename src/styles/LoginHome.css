@@ -30,7 +30,7 @@
   justify-content: space-around;
 }
 .edad{
-  width: 150px;
+  width: 90px;
 } 
 .input_ancho{
   width: 300px;
@@ -110,5 +110,14 @@
   gap: 1rem;
   padding: 5px;
 }
+.containerModal{
+  display: flex;
+  justify-content:space-around;
+}
 
+.botonEdit{
+  display: flex;
+  justify-content:center;
+  padding:40px
+}
 
