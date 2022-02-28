@@ -9,7 +9,7 @@ export const CardFavoritos = ({description,details,images,location,rentalPrice,s
 
     const {area,rooms,garage}=details
     const {city,neighborhood}=location
-
+    console.log(city);
     return (
         <>
         <div className="container_card cursor">
