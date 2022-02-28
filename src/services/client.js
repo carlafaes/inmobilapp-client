@@ -10,33 +10,29 @@ const updateInfo = async (infoToUpdate, token) => {
   try {
     const response = await axios.put(URL, infoToUpdate, config);
     const notify = () =>
-    toast.success("Information updated!", {
-      icon: "🚀"
-    });
-    
+      toast.success("Information updated!", {
+        icon: "🚀",
+      });
+
     return response.data;
   } catch (error) {
-    const alertPassword = () =>
-    toast.error(error.message);
+    const alertPassword = () => toast.error(error.message);
   }
 };
 
-const getclientInfo=async (clientID,token)=>{
-  const URL=`/api/clients/${clientID}`;
-  const config={
-    headers: {
-      Authorization:`Bearer ${token}`
-    }
-  };
-  try{
-    const response=await axios.get(URL,config);
-    return response.data
-  }catch(error){
-    console.log(error);
+export const getClientInfo = async (clientID) => {
+  const URL = `/api/clients/${clientID}`;
+  try {
+    const response = await axios.get(URL);
+    return response.data;
+  } catch (error) {
+    alert(error);
   }
-}
-const services={
+};
+
+const clientService = {
+  getClientInfo,
   updateInfo,
-  getclientInfo
-}
-export default services;
+};
+
+export default clientService;
