@@ -47,6 +47,7 @@ export default function CreatePropertyForm(){
             if(!v.address){
                 err.address = 'Debes ingresar una dirección';
             }
+
             if(!v.images){
                 err.images= 'necesitas agregar imagenes';
             }else if(!isValidURL(v.images)){
@@ -60,6 +61,8 @@ export default function CreatePropertyForm(){
                 err.price = 'Debes ingresar un precio';
             }else if(!/^\d+$/.test(v.price)){
                 err.price = 'Unciamente se aceptan números en este campo';
+            }else if(!(v.price>=200 && v.price <= 2000)){
+                err.price = 'El precio debe estar entre 200 y 2000 dolares';
             }
 
             if(!v.description){
@@ -78,6 +81,8 @@ export default function CreatePropertyForm(){
                 err.rooms = 'Debes ingresar un area';
             }else if(!/^\d+$/.test(v.rooms)){
                 err.rooms = 'Unicamente se aceptan números en este campo';
+            }else if(!(v.rooms > 0 && v.rooms <=20)){
+                err.rooms= 'El número de habitaciones debe ser mayor a 0 y máximo 20'
             }
 
             if(!v.baths){
@@ -89,6 +94,7 @@ export default function CreatePropertyForm(){
             if(!v.garage){
                 err.garage = 'Debes elegir una opción';
             }
+            
             setFormErrors(err)
             return err;
         }}
