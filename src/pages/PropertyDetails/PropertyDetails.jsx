@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import propertyService from '../../services/property';
 import Loading from '../../componentes/Loading';
+import Navbar from '../../componentes/Navbar';
 import { withStyles } from '@material-ui/core/styles';
 import Footer from '../../componentes/Footer';
 import BedroomParentIcon from '@mui/icons-material/BedroomParent';
@@ -47,6 +48,7 @@ function PropertyDetails(props, classes) {
 	return property.hasOwnProperty('id') && image ? (
 		<Grid spacing={3} container className={props.classes.root}>
 			<Container>
+				<Navbar />
 				<Box mt={2}>
 					<Card className={props.classes.card}>
 						<CardMedia>
