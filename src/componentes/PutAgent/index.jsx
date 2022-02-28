@@ -1,92 +1,151 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { setAgent } from "../../redux/actions/actions-agent";
-import { setAdminDetailsAgents } from "../../redux/actions/actions-admin";
-import { isDone, validatePutAdmin } from "../../utils/errorsFormAdmin";
+import { useNavigate } from "react-router-dom";
+import { isDone, validatePutAgent } from "../../utils/errorsFormAdmin";
 import agentService from "../../services/agent";
-import adminService from "../../services/admin";
-
-import styled from "./PutAgent.module.css";
+import swal from "sweetalert";
+import { notifyError } from "../../utils/notifications";
+import { Box, Stack, TextField, Button } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
 import { getUserForLocalStorage } from "../../utils/user";
+import classes from "./PutAgent.module.css";
 
-export default function PutAgent({ id }) {
-  const agent = useSelector((state) => state.reducerAgent.agent);
-  const dispatch = useDispatch();
+export default function PutAgent({ agent, handleOpenOnClouseModal }) {
+  const [input, setInput] = useState({ ...agent });
+  const navigate = useNavigate();
 
-  const [error, setError] = useState({});
-
-  if (!agent) {
-    return null;
-  }
+  const [error, setError] = useState({
+    name: null,
+    phone: null,
+    address: null,
+    age: null,
+  });
 
   const handleChange = (e) => {
-    dispatch(setAgent({ ...agent, [e.target.name]: e.target.value }));
-    setError(validatePutAdmin({ ...agent, [e.target.name]: e.target.value }));
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value,
+    });
+    setError(
+      validatePutAgent(
+        {
+          ...input,
+          [e.target.name]: e.target.value,
+        },
+        error,
+        e.target.name
+      )
+    );
   };
 
   const handleSubmit = (e) => {
-    if (e.target.name === "DONE") {
-      if (isDone(error)) {
-        if (confirm("Seguro que desea hacer estos cambios?")) {
+    if (isDone(error)) {
+      swal({
+        title: "Estas seguro?",
+        text: "Que deseas editar estos datos!",
+        icon: "warning",
+        buttons: ["No", "Si"],
+        dangerMode: true,
+      }).then((willDelete) => {
+        if (willDelete) {
           const { token } = getUserForLocalStorage();
-          agentService
-            .putAgentID(agent.id, agent, token)
-            .then(() => {
-              alert("done!");
-            })
-            .catch(() => {
-              alert("No tienes autorizacion para esto!");
+          const { id, dni, ...updateAgent } = input;
+          agentService.putAgentID(id, updateAgent, token).then(() => {
+            swal("Datos del agente editados correctamente!", {
+              icon: "success",
             });
-          adminService.getAdminIdAgentDetails(id).then((data) => {
-            dispatch(setAdminDetailsAgents(data));
+            handleOpenOnClouseModal();
           });
-          dispatch(setAgent(null));
         }
-      } else {
-        alert("Completa correctamente los campos");
-      }
+      });
     } else {
-      if (confirm("Seguro? no se guardaran los cambios!")) {
-        dispatch(setAgent(null));
-      }
+      notifyError("Completa correctamente los datos!");
     }
   };
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <input
-        className={error.name ? styled.error : styled.done}
-        type="text"
-        value={agent.name}
-        onChange={handleChange}
-        name="name"
-      />
-      <input
-        className={error.address ? styled.error : styled.done}
-        type="text"
-        value={agent.address}
-        onChange={handleChange}
-        name="address"
-      />
-      <input
-        className={error.phone ? styled.error : styled.done}
-        type="text"
-        value={agent.phone}
-        onChange={handleChange}
-        name="phone"
-      />
-      <input
-        className={error.age ? styled.error : styled.done}
-        type="text"
-        value={agent.age}
-        onChange={handleChange}
-        name="age"
-      />
-      <button name="DONE" onClick={handleSubmit}>
-        terminar
-      </button>
-      <button onClick={handleSubmit}>cancelar</button>
-    </form>
+    <Box component="form" autoComplete="off">
+      <div className={classes.conten}>
+        <Stack direction="row" spacing={2} className={classes.item}>
+          <TextField
+            required
+            label={
+              error.name && error.name === "*"
+                ? "Nombre"
+                : error.name
+                ? error.name
+                : "Nombre"
+            }
+            value={input.name}
+            name="name"
+            onChange={handleChange}
+            color={error.name ? "error" : "success"}
+            sx={{ width: "100%" }}
+          />
+          <TextField
+            required
+            label={
+              error.age && error.age === "*"
+                ? "Edad"
+                : error.age
+                ? error.age
+                : "Edad"
+            }
+            type="number"
+            value={input.age}
+            name="age"
+            onChange={handleChange}
+            color={error.age ? "error" : "success"}
+            sx={{ width: "150px" }}
+          />
+        </Stack>
+        <Stack direction="row" spacing={2} className={classes.item}>
+          <TextField
+            label={
+              error.phone && error.phone === "*"
+                ? "Celular"
+                : error.phone
+                ? error.phone
+                : "Celular"
+            }
+            type="tel"
+            value={input.phone}
+            name="phone"
+            sx={{ width: "100%" }}
+            onChange={handleChange}
+            color={error.phone ? "error" : "success"}
+          />
+          <TextField
+            label={
+              error.address && error.address === "*"
+                ? "Direccion"
+                : error.address
+                ? error.address
+                : "Direccion"
+            }
+            type="text"
+            sx={{ width: "100%" }}
+            value={input.address}
+            name="address"
+            onChange={handleChange}
+            color={error.address ? "error" : "success"}
+          />
+        </Stack>
+        <Stack
+          direction="row"
+          alignContent="center"
+          spacing={6}
+          className={classes.item}
+        >
+          <Button
+            variant="outlined"
+            onClick={handleSubmit}
+            endIcon={<SendIcon />}
+            sx={{ color: "#0d0d0d" }}
+          >
+            Enviar
+          </Button>
+        </Stack>
+      </div>
+    </Box>
   );
 }
