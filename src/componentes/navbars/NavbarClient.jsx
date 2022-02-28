@@ -12,6 +12,8 @@ import { FiLogOut } from 'react-icons/fi'
 import { AiOutlineStar } from 'react-icons/ai'
 import { FaPencilAlt } from 'react-icons/fa'
 import { useForm } from "react-hook-form";
+import clientService from '../../services/client';
+import { toast } from 'react-toastify';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -62,58 +64,68 @@ export const NavbarClient = ({ handleLogout }) => {
     const classes = useStyles();
     const open = Boolean(anchorEl);
     const [modal, setModal] = useState(false);
-    const { register, handleSubmit } = useForm()
+    const [user, setUser] = useState(null);
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [address, setAddress] = useState("");
+    const [phone, setPhone] = useState("");
+    const [actualToken, setActualToken] = useState("");
 
-    const handleEdit = (data) => {
-        console.log(data)
-    }
+    const alertPassword = () =>
+        toast.error("Please enter your password");
+
+    const sendInfo = async (e) => {
+        e.preventDefault();
+
+        if (userInfo.password.length === 0)
+            return alertPassword()
+
+        await clientService.updateInfo(userInfo, actualToken);
+    };
+
     const body = (
         <div className={classes.modal}>
-                <div align='center'>
-                    <h2 className={classes.titleLogin}>Datos a editar</h2>
-                </div>
-            <form onSubmit={handleSubmit(handleEdit)}>
+            <div align='center'>
+                <h2 className={classes.titleLogin}>Datos a editar</h2>
+            </div>
+            <form onSubmit={sendInfo}>
                 <div className='containerModal'>
                     <input type="text"
                         placeholder="Nombre"
                         className='auth_input'
                         autoComplete="off"
-                        {...register("name")} />
-                    <input type="number"
-                        placeholder="Edad"
-                        className='auth_input'
-                        autoComplete="off"
-                        {...register("age")} />
+                    />
                 </div>
                 <div className='containerModal'>
                     <input type="text"
                         placeholder="Direccion"
                         className='auth_input'
                         autoComplete="off"
-                        {...register("address")} />
+                    />
                     <input type="number"
                         placeholder="Celular"
                         className='auth_input'
                         autoComplete="off"
-                        {...register("phone")} />
+                    />
                 </div>
                 <div className='containerModal'>
                     <input type="password"
                         placeholder="Anterior contraseña"
                         className='auth_input'
                         autoComplete="off"
-                        {...register("password2")} />
+                    />
                     <input type="password"
                         placeholder="Nueva contraseña"
                         className='auth_input'
                         autoComplete="off"
-                        {...register("password")} />
+                    />
                 </div>
             </form>
-                <div align='right' className='botonEdit'>
-                    <Button color='primary'>Enviar</Button>
-                    <Button color='secondary' onClick={() => openCloseModal()}>Cancelar</Button>
-                </div>
+            <div align='right' className='botonEdit'>
+                <Button color='primary'>Enviar</Button>
+                <Button color='secondary' onClick={() => openCloseModal()}>Cancelar</Button>
+            </div>
         </div>
     )
     const handleClick = (event) => {
