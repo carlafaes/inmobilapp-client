@@ -1,0 +1,32 @@
+:root {
+  --size: 150px;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader {
+  width: var(--size);
+  height: var(--size);
+  border: 20px solid #333131;
+  border-top: 20px solid #f6c47f;
+  box-shadow: 0 0 20px #bdbdd8;
+  border-radius: 50%;
+  animation-name: girar;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes girar {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

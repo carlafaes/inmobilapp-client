@@ -4,6 +4,8 @@ const baseUrl = "/api/agents";
 
 const getAgentID = async (id) => (await axios.get(`${baseUrl}/${id}`)).data;
 
+const createAgent = async (agent) => await axios.post(`${baseUrl}`, agent);
+
 const deleteAgentID = async (id, token) =>
   await axios.delete(`${baseUrl}/${id}`, {
     headers: {
@@ -23,6 +25,7 @@ const agentService = {
   getAgentID,
   deleteAgentID,
   putAgentID,
+  createAgent,
 };
 
 export default agentService;
