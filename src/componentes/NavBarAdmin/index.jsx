@@ -18,7 +18,7 @@ import { ImHome } from "react-icons/im";
 import { IoLogoGithub } from "react-icons/io5";
 import { IoLogoVercel } from "react-icons/io5";
 import { FiLogOut } from "react-icons/fi";
-import { FaPencilAlt, FaCat } from "react-icons/fa";
+import { FaPencilAlt, FaCat, FaPlus } from "react-icons/fa";
 import { logaoutCurrentUserForLocalStorage } from "../../utils/user";
 import { useNavigate } from "react-router-dom";
 import PutAdmin from "../PutAdmin";
@@ -144,6 +144,9 @@ export default function NavBarAdmin({ user, token, deleteCurrentAdminID }) {
         </Link>
         <MenuItem className="menuItem" onClick={() => openCloseModal()}>
           <FaPencilAlt className="emoticon" /> Editar perfil
+        </MenuItem>
+        <MenuItem className="menuItem" onClick={() => console.log('Crear agente')}>
+          <FaPlus className="emoticon" /> Añadir agente
         </MenuItem>
         <MenuItem
           className="menuItem"

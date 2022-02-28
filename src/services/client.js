@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const updateInfo = async (infoToUpdate, token) => {
-  const URL = "/api/clients";
+const updateInfo = async (infoToUpdate, token) => {
+  const URL = `/api/clients`;
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -9,10 +9,14 @@ export const updateInfo = async (infoToUpdate, token) => {
   };
   try {
     const response = await axios.put(URL, infoToUpdate, config);
-    alert("Information updated");
+    const notify = () =>
+      toast.success("Information updated!", {
+        icon: "🚀",
+      });
+
     return response.data;
   } catch (error) {
-    alert(error.message);
+    const alertPassword = () => toast.error(error.message);
   }
 };
 
