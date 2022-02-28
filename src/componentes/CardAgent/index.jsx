@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardHeader,
@@ -20,11 +20,22 @@ import EditIcon from "@mui/icons-material/Edit";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import { Link } from "react-router-dom";
 import PutAgent from "../PutAgent";
+import agentService from "../../services/agent";
 
-export default function CardAgent({ agent, deleteAgent }) {
-  const { name, phone, id } = agent;
+export default function CardAgent({ agentID, deleteAgent }) {
+  const [agent, setAgent] = useState(null);
   const [open, setOpen] = useState(true);
   const [openModal, setOpenModal] = useState(false);
+
+  useEffect(() => {
+    agentService.getAgentID(agentID).then((data) => {
+      setAgent(data);
+    });
+  }, [agentID]);
+
+  if (!agent) {
+    return <h1>Cargando...</h1>;
+  }
 
   const handleOpenOnClouseModal = () => setOpenModal(!openModal);
 
@@ -39,9 +50,14 @@ export default function CardAgent({ agent, deleteAgent }) {
         minHeight: 350,
       }}
     >
-      <PutAgent agent={agent}  handleOpenOnClouseModal={handleOpenOnClouseModal} />
+      <PutAgent
+        agent={agent}
+        handleOpenOnClouseModal={handleOpenOnClouseModal}
+      />
     </div>
   );
+
+  const { name, phone, id } = agent;
 
   const handleEditAgent = () => {
     handleOpenOnClouseModal();
