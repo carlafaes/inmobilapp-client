@@ -1,26 +1,114 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import {
+  Card,
+  CardHeader,
+  Avatar,
+  CardActions,
+  IconButton,
+  Typography,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Collapse,
+  Modal,
+} from "@mui/material";
 
-import styled from "./CardAgent.module.css";
+import { ExpandLess, ExpandMore, Phone } from "@mui/icons-material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import { Link } from "react-router-dom";
+import PutAgent from "../PutAgent";
+import agentService from "../../services/agent";
 
-export default function CardAgent({
-  agent,
-  crudAgent,
-  deleteAgent,
-  editAgent,
-}) {
-  const { name, age, phone, id } = agent;
+export default function CardAgent({ agentID, deleteAgent }) {
+  const [agent, setAgent] = useState(null);
+  const [open, setOpen] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
+
+  useEffect(() => {
+    agentService.getAgentID(agentID).then((data) => {
+      setAgent(data);
+    });
+  }, [agentID]);
+
+  if (!agent) {
+    return <h1>Cargando...</h1>;
+  }
+
+  const handleOpenOnClouseModal = () => setOpenModal(!openModal);
+
+  const body = (
+    <div
+      style={{
+        position: "absolute",
+        borderRadius: "5px",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%,-50%)",
+        minHeight: 350,
+      }}
+    >
+      <PutAgent
+        agent={agent}
+        handleOpenOnClouseModal={handleOpenOnClouseModal}
+      />
+    </div>
+  );
+
+  const { name, phone, id } = agent;
+
+  const handleEditAgent = () => {
+    handleOpenOnClouseModal();
+  };
 
   return (
-    <div className={styled.card}>
-      {crudAgent ? (
-        <button onClick={() => deleteAgent(id)}>Eliminar</button>
-      ) : null}
-      <h1>{name}</h1>
-      <h2>{age}</h2>
-      <h3>{phone}</h3>
-      {crudAgent ? (
-        <button onClick={() => editAgent(id)}>Editar perfil</button>
-      ) : null}
-    </div>
+    <>
+      <Card sx={{ width: 345 }}>
+        <CardHeader
+          avatar={<Avatar sx={{ backgroundColor: "red" }}>{name[0]}</Avatar>}
+          title={name}
+          action={
+            <IconButton onClick={() => deleteAgent(id)}>
+              <DeleteIcon />
+            </IconButton>
+          }
+          subheader={
+            <div style={{ display: "flex", direction: "row" }}>
+              <Phone />
+              <Typography>{phone}</Typography>
+            </div>
+          }
+        ></CardHeader>
+        <CardActions>
+          <IconButton onClick={handleEditAgent}>
+            <EditIcon />
+          </IconButton>
+        </CardActions>
+        <List sx={{ width: "100%", maxWidth: 345 }} component="nav">
+          <ListItemButton onClick={() => setOpen(!open)}>
+            <ListItemIcon>
+              <InboxIcon />
+            </ListItemIcon>
+            <ListItemText primary="Propiedades">
+              {open ? <ExpandLess /> : <ExpandMore />}
+            </ListItemText>
+          </ListItemButton>
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              {agent.properties.map((prop) => (
+                <ListItemButton>
+                  <Link to={`/property/${prop.id}`}>{prop.id}</Link>
+                </ListItemButton>
+              ))}
+            </List>
+          </Collapse>
+        </List>
+      </Card>
+      <Modal open={openModal} onClose={handleOpenOnClouseModal}>
+        {body}
+      </Modal>
+    </>
   );
 }

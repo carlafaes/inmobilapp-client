@@ -1,7 +1,8 @@
 import axios from "axios";
+import { getUserForLocalStorage } from "../utils/user";
 
-const updateInfo = async (infoToUpdate, clientID, token) => {
-  const URL = `http://localhost:3001/api/clients/${clientID}`;
+const updateInfo = async (infoToUpdate, token) => {
+  const URL = `/api/clients`;
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -9,11 +10,42 @@ const updateInfo = async (infoToUpdate, clientID, token) => {
   };
   try {
     const response = await axios.put(URL, infoToUpdate, config);
-    alert("Information updated");
+    const notify = () =>
+      toast.success("Information updated!", {
+        icon: "🚀",
+      });
+
     return response.data;
   } catch (error) {
-    alert(error.message);
+    const alertPassword = () => toast.error(error.message);
   }
 };
 
-export default updateInfo;
+const addFavoriteProperty = (favPropertyID) => {
+  const { token } = getUserForLocalStorage();
+  const URL = "/api/clients";
+
+  return axios.put(
+    URL,
+    { favPropertyID },
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+};
+
+export const getClientInfo = async (clientID) => {
+  const URL = `/api/clients/${clientID}`;
+  try {
+    const response = await axios.get(URL);
+    return response.data;
+  } catch (error) {
+    alert(error);
+  }
+};
+
+const clientService = {
+  getClientInfo,
+  updateInfo,
+  addFavoriteProperty,
+};
+
+export default clientService;

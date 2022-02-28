@@ -1,35 +1,59 @@
 .container{
-    background-color: #f4f3f1;
+    background-color: #fafafa;
     display: grid;
     gap: 20px;
     place-content: center;
     grid-template-columns: 1fr 1fr;
     width: 100%;
     padding: 50px;
+    font-family: 'Nunito', sans-serif;
 }
 
+
 .section {
+    border: 2px solid #FAA222;
     background-color: #ffffff;
     padding: 20px;
-    border-radius: 25px;
+    border-radius: 5px;
     display: flex;
     flex-direction: column;
 }
 
+.title {
+    color: #faa422;
+    text-shadow: 1px 1px 1px #535353;
+}
+
 .label {
+    position: static;
     display: block;
-    font-weight: bold;
     padding: 10px;
     min-height: 45px;
     cursor: pointer;
 }
 
-.input_container {
-    position: relative;
+.field {
+    border: 1px solid #c4c4c4;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 10px;
+    padding: 0 40px 0 10px;
+    outline: none;
 }
 
-.field {
-    border: 2px solid #7c7c7c;
+.error {
+    border: 1px solid #e74c3c;
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 10px;
+    padding: 0 40px 0 10px;
+    outline: none;
+}
+
+.success {
+    border: 1px solid #c4c4c4;
     width: 100%;
     height: 45px;
     line-height: 45px;
@@ -38,29 +62,60 @@
 }
 
 .field:focus {
-    border: 2px solid #ebb768;
-    box-shadow: 3px 0 30px rgba(163, 163, 163, 0.4);    
+    border: 2px solid #ebb768;   
+}
+
+.field_text_area_error {
+    border: 1px solid #e74c3c;
+    border-radius: 10px;
+    width: 100%;
+    height: 156px;
 }
 
 .field_text_area {
-    border: 2px solid #7c7c7c;
+    border: 1px solid #c4c4c4;
     border-radius: 10px;
     width: 100%;
     height: 156px;
 }
 
 .field_text_area:focus {
-    border: 2px solid #ebb768;
-    box-shadow: 3px 0 30px rgba(163, 163, 163, 0.4); 
+    border: 1px solid #ebb768;
+    box-shadow: 3px 0 30px rgba(163, 163, 163, 0.4);
+    outline: none; 
+}
+
+.images_container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    height: auto;
+}
+
+.image_input_container {
+    display: flex;
+    align-items: center;
+}
+
+.image_button {
+    color: white;
+    height: 45px;
+    width: 50%;
+    margin-left: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #ebb768;
+    cursor: pointer;
 }
 
 .wrong {
     font-size: 12px;
     margin-bottom: 0;
-    color: #ebb768;
+    color: #e74c3c;
 }
 
 .button {
+    color: white;
     margin-top: 30px;
     height: 45px;
     width: 100%;

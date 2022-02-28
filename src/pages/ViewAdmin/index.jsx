@@ -1,129 +1,107 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../componentes/Loading";
-import PutAdmin from "../../componentes/PutAdmin";
 import adminService from "../../services/admin";
 import agentService from "../../services/agent";
-import {
-  setAdmin,
-  setAdminDetailsAgents,
-} from "../../redux/actions/actions-admin";
-import { setAgent } from "../../redux/actions/actions-agent";
-import { useSelector } from "react-redux";
 import CardAgent from "../../componentes/CardAgent";
-import PutAgent from "../../componentes/PutAgent";
-import Footer from "../../componentes/Footer";
+import NavBarAdmin from "../../componentes/NavBarAdmin";
+import swal from "sweetalert";
+import { notifyWelcome } from "../../utils/notifications";
+import { Grid } from "@mui/material";
+import { setAdminDetailsAgents } from "../../redux/actions/actions-admin";
 
-import { getUserForLocalStorage } from "../../utils/user";
+import {
+  getUserForLocalStorage,
+  logaoutCurrentUserForLocalStorage,
+} from "../../utils/user";
 
 import styled from "./ViewAdmin.module.css";
 
 export default function ViewAdmin() {
-  const adminDetailsAgents = useSelector(
-    (state) => state.reducerAdmin.adminDetailsAgents
-  );
+  const user = useSelector((state) => state.reducerAdmin.adminDetailsAgents);
   const dispatch = useDispatch();
 
-  const user = getUserForLocalStorage();
   const navigate = useNavigate();
+  const userLocal = getUserForLocalStorage();
 
   useEffect(() => {
-    if (!user) {
-      alert("tienes que estar logueado para usar esta vista");
-      navigate("/login");
-    } else {
-      adminService.getAdminIdAgentDetails(user.id).then((data) => {
-        dispatch(setAdminDetailsAgents(data));
+    if (userLocal && userLocal.role === "ADMIN") {
+      adminService.getAdminIdAgentDetails(userLocal.id).then((data) => {
+        dispatch(setAdminDetailsAgents({ ...data, token: userLocal.token }));
+        notifyWelcome(`Bienvenido ${data.name}!`);
       });
+    } else {
+      swal("Tienes que estar logueado como administrador!", {
+        icon: "warning",
+      });
+      navigate("/login");
     }
   }, []);
 
-  if (!adminDetailsAgents) {
+  if (!user) {
     return <Loading />;
   }
 
-  const editAdmin = () => {
-    adminService.getAdminID(user.id).then((data) => {
-      dispatch(setAdmin(data));
-    });
-  };
-
-  const deleteCurrentAdminID = () => {
-    if (confirm("Seguro que desea darse de baja?")) {
-      adminService
-        .deleteAdminID(user.id, user.token)
-        .then(() => {
-          alert("Done!");
+  const deleteCurrentAdminID = (id, token) => {
+    swal({
+      title: "Estas seguro?",
+      text: "Una vez borrado no podras recuperar tus datos!",
+      icon: "warning",
+      buttons: ["No", "Si"],
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        adminService.deleteAdminID(id, token).then(() => {
+          logaoutCurrentUserForLocalStorage();
+          swal("Cuenta administrador borrada!", {
+            icon: "success",
+          });
           navigate("/");
-        })
-        .catch(() => {
-          alert("No se puede dar de bajan con agents a su cargo!");
         });
-    }
-  };
-
-  const editAgent = (id) => {
-    agentService.getAgentID(id).then((data) => {
-      dispatch(setAgent(data));
+      }
     });
   };
 
   const deleteAgent = (id) => {
-    agentService
-      .deleteAgentID(id, user.token)
-      .then(() => {
-        alert("Eliminado");
-        adminService.getAdminIdAgentDetails(user.id).then((data) => {
-          dispatch(setAdminDetailsAgents(data));
+    swal({
+      title: "Estas seguro?",
+      text: "Que deseas eliminar este agente?",
+      icon: "warning",
+      buttons: ["No", "Si"],
+      dangerMode: true,
+    }).then((confir) => {
+      if (confir) {
+        agentService.deleteAgentID(id, user.token).then(() => {
+          swal("Eliminado", {
+            icon: "success",
+          });
+          adminService.getAdminIdAgentDetails(userLocal.id).then((data) => {
+            dispatch(
+              setAdminDetailsAgents({ ...data, token: userLocal.token })
+            );
+          });
         });
-      })
-      .catch(() => {
-        alert("No se puede eliminar este agente, ya que tiene una propiedad!");
-      });
+      }
+    });
   };
 
-  const { name, agentsID, permissions } = adminDetailsAgents;
+  const { agentsID } = user;
 
   return (
-    <div className={styled.container}>
-      <nav>
-        <ul>
-          <li>{name}</li>
-          <li>
-            <button onClick={editAdmin}>Editar perfil</button>
-          </li>
-          <li>
-            <button onClick={deleteCurrentAdminID}>Eliminar perfil</button>
-          </li>
-          <li>
-            <button
-              onClick={() => {
-                if (confirm("Seguro desea salir?")) {
-                  localStorage.removeItem("loggedUser");
-                  navigate("/");
-                }
-              }}
-            >
-              Salir
-            </button>
-          </li>
-        </ul>
-      </nav>
-      <article>
-        <PutAdmin token={user.token} />
-        {agentsID.map((agent) => (
-          <CardAgent
-            key={agent.id}
-            agent={agent}
-            crudAgent={permissions.crudAgent}
-            editAgent={editAgent}
-            deleteAgent={deleteAgent}
-          />
-        ))}
-        <PutAgent id={user.id} />
-      </article>
-      <Footer />
-    </div>
+    <>
+      <NavBarAdmin user={user} deleteCurrentAdminID={deleteCurrentAdminID} />
+      <div className={styled.container}>
+        <Grid container spacing={2}>
+          {agentsID?.map((agent) => (
+            <CardAgent
+              key={agent.id}
+              agentID={agent.id}
+              deleteAgent={deleteAgent}
+            />
+          ))}
+        </Grid>
+      </div>
+    </>
   );
 }
