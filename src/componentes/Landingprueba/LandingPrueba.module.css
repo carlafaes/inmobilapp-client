@@ -1,0 +1,32 @@
+.root {
+    height: 100vh;
+    width: 100vw;
+    background-image: url("https://images.pexels.com/photos/830891/pexels-photo-830891.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.conten {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.slogan {
+    font-size: 30px;
+    font-family: 'Nunito', sans-serif;
+    color: #0d0d0d;
+    text-shadow: #faa222 1px 1px;
+}
+
+.arrow {
+    width: 100px;
+    height: 80px;
+    margin: 0;
+    color: #faa222;
+}
