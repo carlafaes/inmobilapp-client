@@ -10,6 +10,7 @@ import swal from "sweetalert";
 import { notifyWelcome } from "../../utils/notifications";
 import { Grid } from "@mui/material";
 import { setAdminDetailsAgents } from "../../redux/actions/actions-admin";
+import Footer from "../../componentes/Footer";
 
 import {
   getUserForLocalStorage,
@@ -92,16 +93,17 @@ export default function ViewAdmin() {
     <>
       <NavBarAdmin user={user} deleteCurrentAdminID={deleteCurrentAdminID} />
       <div className={styled.container}>
-        <Grid container spacing={2}>
+        <Grid container className={styled.cards}>
           {agentsID?.map((agent) => (
             <CardAgent
               key={agent.id}
-              agentID={agent.id}
+              agent={agent}
               deleteAgent={deleteAgent}
             />
           ))}
         </Grid>
       </div>
+      <Footer/>
     </>
   );
 }

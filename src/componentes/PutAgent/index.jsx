@@ -8,10 +8,10 @@ import { Box, Stack, TextField, Button } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { getUserForLocalStorage } from "../../utils/user";
 import classes from "./PutAgent.module.css";
+import adminService from "../../services/admin";
 
 export default function PutAgent({ agent, handleOpenOnClouseModal }) {
   const [input, setInput] = useState({ ...agent });
-  const navigate = useNavigate();
 
   const [error, setError] = useState({
     name: null,
@@ -50,7 +50,7 @@ export default function PutAgent({ agent, handleOpenOnClouseModal }) {
           const { token } = getUserForLocalStorage();
           const { id, dni, ...updateAgent } = input;
           agentService.putAgentID(id, updateAgent, token).then(() => {
-            swal("Datos del agente editados correctamente!", {
+            swal("Datos del agente editados correctamente! Recarga tu Pagina!", {
               icon: "success",
             });
             handleOpenOnClouseModal();
