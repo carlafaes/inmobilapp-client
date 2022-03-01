@@ -82,6 +82,7 @@ export const NavbarClient = ({ handleLogout, user }) => {
     const alert = () =>
     toast.error("Please enter your password");
     
+
     const handleEdit =async (e) => {
         e.preventDefault();
         if(info.password.length===0){
@@ -168,7 +169,7 @@ export const NavbarClient = ({ handleLogout, user }) => {
     const openCloseModal = () => {
         setModal(!modal)
     }
-
+    
 
     return (
         <>

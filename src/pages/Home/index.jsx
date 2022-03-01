@@ -14,6 +14,7 @@ import FilterProperties from "../../componentes/FilterProperties";
 import { setAllProperties } from "../../redux/actions/actionsProperties";
 import { paginate } from "../../utils/paginate";
 import styled from "./Home.module.css";
+import { NavbarClient } from "../../componentes/navbars/NavbarClient";
 
 function Home() {
   const properties = useSelector(
@@ -21,8 +22,8 @@ function Home() {
   );
   const dispatch = useDispatch();
   const [darkMode, setDarkMode] = useState(false);
-
   const [pageNumber, setPageNumber] = useState(0);
+  const [user,setUser]=useState('')
 
   const nextPage = () => {
     setPageNumber(pageNumber + 1);
@@ -33,12 +34,14 @@ function Home() {
 
   const propertiesPerPage = 5;
 
-  useEffect(() => {
+  useEffect(async() => {
     propertyService.getAll().then((data) => {
       dispatch(setAllProperties(data));
     });
+      const loggedUserJSON = window.localStorage.getItem("loggedUser");
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user)
   }, []);
-
   if (!properties) {
     <Loading />;
   }
@@ -48,6 +51,10 @@ function Home() {
       type: darkMode ? "dark" : "light",
     },
   });
+  const handleLogout = () => {
+    setUser('')
+    window.localStorage.removeItem("loggedUser");
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -56,7 +63,10 @@ function Home() {
           <Landing />
         </div>
         <div>
-          <Navbar />
+          {
+            user?<NavbarClient handleLogout={handleLogout} user={user}/>:<Navbar/>
+          }
+          
           <div className={styled.switch_home}>
             <h2>
               🔆
@@ -69,7 +79,6 @@ function Home() {
             </h2>
           </div>
           <br />
-
           <ScoreMax />
           <FilterProperties />
         </div>
