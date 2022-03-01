@@ -14,14 +14,24 @@ export default function CreatePropertyForm() {
   const { agentID } = useParams();
 
   const navigate = useNavigate();
-
   function onClickHandler(image) {
     if (isValidURL(image)) {
       setNewImage([...images, image]);
+      const $image = document.querySelector('#image-input');
+      $image.value = ''
     } else {
       notifyError("URL invalida!");
     }
   }
+
+  function onClose(e){
+    e.preventDefault();
+    /*console.log(e.target) */
+    setNewImage(images.slice(e.target.id, 0));
+    setTimeout(()=> console.log(images), 1000);
+  }
+
+
   return (
     <Formik
       className={styles.formik}
@@ -246,6 +256,7 @@ export default function CreatePropertyForm() {
                     className={errors.images ? styles.error : styles.field}
                     name="images"
                     type="text"
+                    id="image-input"
                   />
                   <button
                     type="button"
@@ -263,7 +274,7 @@ export default function CreatePropertyForm() {
                 />
                 <div className={styles.images_container}>
                   {images.length
-                    ? images.map((im, i) => <FormImages key={i} image={im} />)
+                    ? images.map((im, i) => <FormImages key={i} image={im} index={i} onClose={onClose} />)
                     : null}
                 </div>
               </div>
@@ -363,7 +374,7 @@ export default function CreatePropertyForm() {
                   name="garage"
                   as="select"
                 >
-                  {/* <option>Garage</option> */}
+                  <option>Garage</option>
                   <option name="garage" value={true} selected={true}>
                     Si
                   </option>
