@@ -46,8 +46,6 @@ export default function CardAgent({ agent, deleteAgent }) {
     handleOpenOnClouseModal();
   };
 
-  console.log(agent);
-
   return (
     <>
       <Card sx={{ width: 345 }}>
