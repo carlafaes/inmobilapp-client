@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import PropertyDetails from './pages/PropertyDetails/PropertyDetails';
@@ -46,7 +46,7 @@ function App() {
 			<ToastContainer />
 		</>
 	);
-=======
+
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import PropertyDetails from "./pages/PropertyDetails/PropertyDetails";
