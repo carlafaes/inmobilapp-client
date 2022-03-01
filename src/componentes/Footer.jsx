@@ -61,18 +61,18 @@ export default function Footer() {
 						<Grid item xs={12} sm={4}>
 							<Box borderBottom={3}>Preguntas Frecuentes</Box>
 							<Box>
-								<Link href='/' color='inherit'>
-									Sucursales
+								<Link href='/preguntasFrecuentes' color='inherit'>
+									Generales
 								</Link>
 							</Box>
 							<Box>
 								<Link href='/' color='inherit'>
-									Pagos y promociones
+									Arrendatarios
 								</Link>
 							</Box>
 							<Box>
 								<Link href='/' color='inherit'>
-									Cambios
+								  Reservas
 								</Link>
 							</Box>
 						</Grid>

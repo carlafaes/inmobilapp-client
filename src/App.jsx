@@ -17,6 +17,7 @@ import QuienesSomos from "./componentes/QuienesSomos";
 import FormAgent from "./pages/FormAgent/FormAgent";
 import { ClientInterface } from "./componentes/ClientInterface/ClientInterface";
 import { Toaster } from "react-hot-toast";
+import Generales from './componentes/PreguntasFrecuentes/Generales'
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         />
         <Route path="/quienes" element={<QuienesSomos />} />
         <Route path="/maquetaform" element={<MaquetaForm />} />
+        <Route path="/preguntasFrecuentes" element={<Generales/>}/>
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />
       <ToastContainer />
