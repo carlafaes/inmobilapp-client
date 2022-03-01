@@ -41,11 +41,7 @@ export const validateFormAdmin = (input, errors, name) => {
   if (name === "address") {
     return {
       ...errors,
-      address: !input.address
-        ? null
-        : !/^[A-Za-z0-9\s]+$/g.test(input.address)
-        ? "Direccion invalida"
-        : null,
+      address: null,
     };
   }
 
@@ -88,27 +84,10 @@ export const validatePutAgent = (input, errors, name) => {
     };
   }
 
-  if (name === "age") {
-    return {
-      ...errors,
-      age: !input.age
-        ? "Ingresa tu edad"
-        : input.age < 18
-        ? "Debes ser mayor de edad"
-        : input.age > 100
-        ? "Edad invalida"
-        : null,
-    };
-  }
-
   if (name === "address") {
     return {
       ...errors,
-      address: !input.address
-        ? null
-        : !/^[A-Za-z0-9\s]+$/g.test(input.address)
-        ? "Direccion invalida"
-        : null,
+      address: null,
     };
   }
 
@@ -151,13 +130,22 @@ export const validatePutAdmin = (input, errors, name) => {
     };
   }
 
-  if (name === "password" || name === "password1") {
+  if (name === "newPassword") {
+    return {
+      ...errors,
+      newPassword: !input.newPassword
+        ? "Falta contraseña"
+        : input.password.length < 6
+        ? "Minimo 6 caracteres"
+        : null,
+    };
+  }
+
+  if (name === "password") {
     return {
       ...errors,
       password: !input.password
         ? "Falta contraseña"
-        : input.password !== input.password1
-        ? "Las contraseñas deben coincidir"
         : input.password.length < 6
         ? "Minimo 6 caracteres"
         : null,
@@ -167,11 +155,7 @@ export const validatePutAdmin = (input, errors, name) => {
   if (name === "address") {
     return {
       ...errors,
-      address: !input.address
-        ? null
-        : !/^[A-Za-z0-9\s]+$/g.test(input.address)
-        ? "Direccion invalida"
-        : null,
+      address: null,
     };
   }
 
