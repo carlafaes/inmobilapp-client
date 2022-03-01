@@ -9,6 +9,8 @@ import BedroomParentIcon from '@mui/icons-material/BedroomParent';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import BathroomIcon from '@mui/icons-material/Bathroom';
 import GarageIcon from '@mui/icons-material/Garage';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import {
 	Grid,
 	Card,
@@ -17,6 +19,7 @@ import {
 	CardMedia,
 	CardContent,
 	Typography,
+	Button,
 } from '@material-ui/core';
 import Carousel from 'react-material-ui-carousel';
 import { Paper } from '@mui/material';
@@ -52,15 +55,24 @@ function PropertyDetails(props, classes) {
 				<Box mt={2}>
 					<Card className={props.classes.card}>
 						<CardMedia>
+							<Button
+								className={props.classes.buttonge}
+								href='http://localhost:3000/'
+							>
+								<ArrowBackIcon className={props.classes.buttonback} />
+							</Button>
+
 							<Carousel className={props.classes.carousel}>
 								{property.images.map((image, index) => (
 									<CardMedia
 										className={props.classes.media}
 										key={index}
 										image={image}
+										image={image}
+										image={image}
+										image={image}
 										alt='property-images'
 										component='img'
-										image={image}
 										title='property-images'
 										height='400'
 									/>
@@ -115,13 +127,7 @@ function PropertyDetails(props, classes) {
 										</Box>
 										<Box>
 											<Typography variant='h6'>
-												{property.details.description}
-												<p>
-													Lorem ipsum es el texto que se usa habitualmente en
-													diseño gráfico en demostraciones de tipografías o de
-													borradores de diseño para probar el diseño visual
-													antes de insertar el texto final
-												</p>
+												{property.description}
 											</Typography>
 										</Box>
 										<Grid>
@@ -131,18 +137,20 @@ function PropertyDetails(props, classes) {
 												<br />
 												<span className={props.classes.Agen}>Phone: </span>
 												{property.agentID ? property.agentID.phone : 'No Found'}
+												<Button
+													className={props.classes.button}
+													size='small'
+													color='primary'
+													size='small'
+													color='primary'
+												>
+													Añadir a favoritos <FavoriteIcon />
+												</Button>
 											</Item>
 										</Grid>
 									</Box>
 								</Box>
 							</Grid>
-						</Container>
-					</Card>
-					<Card>
-						<Container fixed className={props.classes.containeri}>
-							<Box>
-								<h4>Inmuebles destacados</h4>
-							</Box>
 						</Container>
 					</Card>
 				</Box>
@@ -155,6 +163,40 @@ function PropertyDetails(props, classes) {
 }
 
 export default withStyles({
+	buttonge: {
+		borderRadius: '10px',
+	},
+	buttonback: {
+		margin: '0 auto',
+		width: '100%',
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginTop: '0.5rem',
+		justifyContent: 'center',
+		color: '#fff',
+		backgroundColor: '#FAA222',
+		'&:hover': {
+			backgroundColor: '#535353',
+			color: '#fff',
+			op: '1',
+		},
+	},
+	button: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		margin: '0 auto',
+		textTransform: 'yes',
+		color: '#fff',
+		backgroundColor: '#FAA222',
+		'&:hover': {
+			backgroundColor: '#535353',
+			color: '#fff',
+			op: '1',
+		},
+	},
+
 	root: {
 		backgroundImage: `url('https://www.semana.com/resizer/jnQaPKkvpQMk8c15-bx4f0F8zIo=/1200x675/filters:format(jpg):quality(50)//cloudfront-us-east-1.images.arcpublishing.com/semana/RGY5R6T7SFCSFJ6DDBEURLQCPM.jpg')`,
 		flexGrow: 1,
