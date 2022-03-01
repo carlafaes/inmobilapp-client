@@ -15,6 +15,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { LocationCity } from "@mui/icons-material";
 import PutAgent from "../PutAgent";
 import { getColorRamdom } from "../../utils/colorRandom";
+import {HiLocationMarker} from 'react-icons/hi'
 
 export default function CardAgent({ agent, deleteAgent }) {
   const [openModal, setOpenModal] = useState(false);
@@ -72,7 +73,7 @@ export default function CardAgent({ agent, deleteAgent }) {
         </CardActions>
         <CardContent sx={{ paddingTop: 0 }}>
           <div style={{ display: "flex", direction: "row" }}>
-            <LocationCity />
+            <HiLocationMarker/>
             <Typography> {address}</Typography>
           </div>
         </CardContent>
