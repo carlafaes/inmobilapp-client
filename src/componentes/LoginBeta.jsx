@@ -4,6 +4,7 @@ import LoginForm from "./LoginForm";
 import Footer from "./Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserInfoWithToken } from "../redux/actions/actionUser";
+import { getUserForLocalStorage } from "../utils/user";
 
 const LoginBeta = () => {
   const [dni, setDNI] = useState("");
@@ -11,6 +12,17 @@ const LoginBeta = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userWithToken = useSelector((state) => state.reducerUsers.users);
+
+  useEffect(() => {
+    const user = getUserForLocalStorage();
+    if (user) {
+      user.role === "ADMIN"
+        ? navigate("/viewAdmin")
+        : user.role === "CLIENT"
+        ? navigate("/viewClient")
+        : null;
+    }
+  }, []);
 
   useEffect(() => {
     userWithToken.role === "CLIENT" || userWithToken.role === "Client"
