@@ -24,15 +24,19 @@ import { setAdminDetailsAgents } from "../../redux/actions/actions-admin";
 
 export default function PutAdmin({ openCloseModal, admin }) {
   const [showPassword, setShowPassword] = useState(false);
-  const [input, setInput] = useState({ ...admin, password: "", password1: "" });
+  const [input, setInput] = useState({
+    ...admin,
+    password: "",
+    newPassword: "",
+  });
   const dispatch = useDispatch();
 
   const [error, setError] = useState({
     name: null,
-    password: "*",
+    password: null,
     phone: null,
     address: null,
-    age: null,
+    newPassword: null,
   });
 
   const handleChange = (e) => {
@@ -62,16 +66,24 @@ export default function PutAdmin({ openCloseModal, admin }) {
         dangerMode: true,
       }).then((editAdmin) => {
         if (editAdmin) {
-          const {dni, password1, agentsID, token, ...newAdmin } = input;
-          adminService.putAdminID(input.id, newAdmin, token).then((res) => {
-            swal("Tus datos, han sido actualizados!", {
-              icon: "success",
+          const { dni, agentsID, token, ...newAdmin } = input;
+          adminService
+            .putAdminID(input.id, newAdmin, token)
+            .then((res) => {
+              swal("Tus datos, han sido actualizados!", {
+                icon: "success",
+              });
+              openCloseModal();
+              adminService.getAdminIdAgentDetails(input.id).then((data) => {
+                dispatch(setAdminDetailsAgents({ ...data, token: token }));
+              });
+            })
+            .catch(() => {
+              swal("Tu nueva contraseña, no coincide con la anterior!", {
+                icon: "warning",
+              });
+              openCloseModal();
             });
-            openCloseModal();
-            adminService.getAdminIdAgentDetails(input.id).then((data) => {
-              dispatch(setAdminDetailsAgents({ ...data, token: token }));
-            });
-          });
         }
       });
     } else {
@@ -99,20 +111,19 @@ export default function PutAdmin({ openCloseModal, admin }) {
             sx={{ width: "100%" }}
           />
           <TextField
-            required
             label={
-              error.age && error.age === "*"
-                ? "Edad"
-                : error.age
-                ? error.age
-                : "Edad"
+              error.phone && error.phone === "*"
+                ? "Celular"
+                : error.phone
+                ? error.phone
+                : "Celular"
             }
-            type="number"
-            value={input.age}
-            name="age"
+            type="tel"
+            value={input.phone}
+            name="phone"
+            sx={{ width: "100%" }}
             onChange={handleChange}
-            color={error.age ? "error" : "success"}
-            sx={{ width: "150px" }}
+            color={error.phone ? "error" : "success"}
           />
         </Stack>
         <Stack direction="row" spacing={2} className={classes.item}>
@@ -123,10 +134,10 @@ export default function PutAdmin({ openCloseModal, admin }) {
               required
             >
               {error.password && error.password === "*"
-                ? "Nueva Contraseña"
+                ? "Contraseña Anterior"
                 : error.password
                 ? error.password
-                : "Nueva Contraseña"}
+                : "Contraseña Anterior"}
             </InputLabel>
             <OutlinedInput
               required
@@ -137,39 +148,39 @@ export default function PutAdmin({ openCloseModal, admin }) {
               onChange={handleChange}
               label={
                 error.password && error.password === "*"
-                  ? "Nueva Contraseña"
+                  ? "Contraseña Anterior"
                   : error.password
                   ? error.password
-                  : "Nueva Contraseña"
+                  : "Contraseña Anterior"
               }
               color={error.password ? "error" : "success"}
             />
           </FormControl>
           <FormControl sx={{ width: "100%" }}>
             <InputLabel
-              color={error.password ? "error" : "success"}
-              htmlFor="password1"
+              color={error.newPassword ? "error" : "success"}
+              htmlFor="newPassword"
               required
             >
-              {error.password && error.password === "*"
-                ? "Repita Contraseña"
-                : error.password
-                ? error.password
-                : "Repita Contraseña"}
+              {error.newPassword && error.newPassword === "*"
+                ? "Nueva Contraseña"
+                : error.newPassword
+                ? error.newPassword
+                : "Nueva Contraseña"}
             </InputLabel>
             <OutlinedInput
               required
-              id="password1"
+              id="newPassword"
               type={showPassword ? "text" : "password"}
               value={input.password1}
-              name="password1"
+              name="newPassword"
               onChange={handleChange}
               label={
-                error.password && error.password === "*"
-                  ? "Repita Contraseña"
-                  : error.password
-                  ? error.password
-                  : "Repita Contraseña"
+                error.newPassword && error.newPassword === "*"
+                  ? "Nueva Contraseña"
+                  : error.newPassword
+                  ? error.newPassword
+                  : "Nueva Contraseña"
               }
               color={error.password ? "error" : "success"}
               endAdornment={
@@ -188,21 +199,6 @@ export default function PutAdmin({ openCloseModal, admin }) {
           </FormControl>
         </Stack>
         <Stack direction="row" spacing={2} className={classes.item}>
-          <TextField
-            label={
-              error.phone && error.phone === "*"
-                ? "Celular"
-                : error.phone
-                ? error.phone
-                : "Celular"
-            }
-            type="tel"
-            value={input.phone}
-            name="phone"
-            sx={{ width: "100%" }}
-            onChange={handleChange}
-            color={error.phone ? "error" : "success"}
-          />
           <TextField
             label={
               error.address && error.address === "*"
