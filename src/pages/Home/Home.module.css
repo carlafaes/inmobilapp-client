@@ -15,17 +15,18 @@
   background-color: #ebb76859;
 }
 
-.buttonPaginate :hover {
+.buttonPaginate:hover {
   color: white;
   background-color: #faa222;
 }
+
 
 .switch_home {
   position: absolute;
   height: 80px;
   width: 150px;
   /* background-color: aqua; */
-  z-index: 3;
-  margin-left: 87%;
-  margin-top: 40px;
+  z-index: 10000;
+  margin-left: 80%;
+  margin-top: -50px;
 }

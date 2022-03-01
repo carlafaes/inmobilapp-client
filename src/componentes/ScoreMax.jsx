@@ -7,7 +7,6 @@ import {
   getAllReviews,
   getScoreReviews,
 } from "../redux/actions/actions-reviews";
-import { isValidURL } from "../utils/validurl";
 import "../styles/Score.css";
 import Carousel from "react-elastic-carousel";
 import Rating from "@mui/material/Rating";
@@ -36,7 +35,7 @@ export default function ScoreMax() {
     { width: 100, itemsToShow: 1 },
     { width: 500, itemsToShow: 2 },
     { width: 1200, itemsToShow: 3 },
-    { width: 1500, itemsToShow: 5 },
+    { width: 1500, itemsToShow: 4 },
   ];
 
   return (
