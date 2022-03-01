@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { BotonUp } from "./botones/BotonUp";
-import { BotonUpF} from "./botones/BotonUpF";
-import { BotonClose} from "./botones/BotonClose";
-import { BotonCloseF} from "./botones/BotonCloseF";
+import { BotonUpF } from "./botones/BotonUpF";
+import { BotonClose } from "./botones/BotonClose";
+import { BotonCloseF } from "./botones/BotonCloseF";
 import { CardMinmueble } from "./cardMInmueble/CardMinmueble";
 import { CardNoHayInmueble } from "./cardNoHayInmueble/CardNoHayInmueble";
 import { CardsMisFavoritos } from "./cardMisFavoritos/CardsMisFavoritos";
@@ -11,7 +11,6 @@ import { NavbarClient } from '../navbars/NavbarClient'
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import './ClientInterface.css'
-import { AiFillStar } from "react-icons/ai";
 
 export const ClientInterface = () => {
 
@@ -58,10 +57,10 @@ export const ClientInterface = () => {
   const closeMenu = () => {
     setOpenI(false)
   }
-  const openMenuF=()=>{
+  const openMenuF = () => {
     setOpenF(true)
   }
-  const closeMenuF=()=>{
+  const closeMenuF = () => {
     setOpenF(false)
   }
   const handleLogout = () => {
@@ -71,7 +70,7 @@ export const ClientInterface = () => {
   };
   return (
     <>
-      <NavbarClient handleLogout={handleLogout} />
+      <NavbarClient handleLogout={handleLogout} user={user} />
       <div className="container">
         <h2>Mi inmueble</h2>
         {
@@ -92,11 +91,22 @@ export const ClientInterface = () => {
             :
             <CardNoHayInmueble />
         }
-
         <h2>Mis favoritos</h2>
-        
         {
-          user.favoriteProperties.length>0 ?<CardsMisFavoritos/>: <CardNoHayFavoritos/>
+          user.favoriteProperties.length > 0 ?
+            <>
+              <div className="container_pagos">
+                {
+                  openF ? <BotonCloseF closeMenuF={closeMenuF} /> : <BotonUpF openMenuF={openMenuF} />
+                }
+                <span> Ver mis favoritos</span>
+              </div>
+              {
+                openF && <CardsMisFavoritos />
+              }
+            </>
+            :
+            <CardNoHayFavoritos />
         }
       </div>
     </>
