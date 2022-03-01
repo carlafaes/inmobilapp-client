@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { BotonUp } from "./botones/BotonUp";
-import { BotonUpF } from "./botones/BotonUpF";
-import { BotonClose } from "./botones/BotonClose";
-import { BotonCloseF } from "./botones/BotonCloseF";
+import { BotonUpF} from "./botones/BotonUpF";
+import { BotonClose} from "./botones/BotonClose";
+import { BotonCloseF} from "./botones/BotonCloseF";
 import { CardMinmueble } from "./cardMInmueble/CardMinmueble";
 import { CardNoHayInmueble } from "./cardNoHayInmueble/CardNoHayInmueble";
 import { CardsMisFavoritos } from "./cardMisFavoritos/CardsMisFavoritos";
@@ -11,6 +11,7 @@ import { NavbarClient } from '../navbars/NavbarClient'
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import './ClientInterface.css'
+import { AiFillStar } from "react-icons/ai";
 
 export const ClientInterface = () => {
 
@@ -35,9 +36,9 @@ export const ClientInterface = () => {
       notify(user.name);
     }
     return (
-      <div className="div">
-        <h1 >You must be login to see this interface</h1>
-        <button onClick={() => navigate("/login")}>Click to login</button>
+      <div className="title_login">
+        <h1>Debe iniciar sesión para ver esta interfaz</h1>
+        <button onClick={() => navigate("/login")} className='btn'>Click to login</button>
       </div>
     );
   }, []);
@@ -45,8 +46,10 @@ export const ClientInterface = () => {
   if (!actualToken) {
     return (
       <>
-        <h1>You must be login to see this interface</h1>
-        <button onClick={() => navigate("/login")}>Click to login</button>
+      <div className="title_login">
+        <h1>Debe iniciar sesión para ver esta interfaz</h1>
+        <button onClick={() => navigate("/login")} className='btn'>Click to login</button>
+      </div>
       </>
     );
   }
@@ -57,10 +60,10 @@ export const ClientInterface = () => {
   const closeMenu = () => {
     setOpenI(false)
   }
-  const openMenuF = () => {
+  const openMenuF=()=>{
     setOpenF(true)
   }
-  const closeMenuF = () => {
+  const closeMenuF=()=>{
     setOpenF(false)
   }
   const handleLogout = () => {
@@ -70,7 +73,7 @@ export const ClientInterface = () => {
   };
   return (
     <>
-      <NavbarClient handleLogout={handleLogout} user={user} />
+      <NavbarClient handleLogout={handleLogout} user={user}/>
       <div className="container">
         <h2>Mi inmueble</h2>
         {
@@ -91,6 +94,7 @@ export const ClientInterface = () => {
             :
             <CardNoHayInmueble />
         }
+
         <h2>Mis favoritos</h2>
         {
           user.favoriteProperties.length > 0 ?

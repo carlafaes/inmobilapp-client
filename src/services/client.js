@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 import { getUserForLocalStorage } from "../utils/user";
 
 const updateInfo = async (infoToUpdate, token) => {
@@ -14,10 +15,12 @@ const updateInfo = async (infoToUpdate, token) => {
       toast.success("Information updated!", {
         icon: "🚀",
       });
+      notify()
 
     return response.data;
   } catch (error) {
     const alertPassword = () => toast.error(error.message);
+    alertPassword()
   }
 };
 

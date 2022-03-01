@@ -4,7 +4,7 @@ import PropertyDetails from "./pages/PropertyDetails/PropertyDetails";
 import CreateAgent from "./componentes/CreateAgent/CreateAgent";
 import LoginBeta from "./componentes/LoginBeta";
 import { RegisterClient } from "./componentes/RegisterClient";
-import Home from "./pages/Home";
+import Home from "./pages/Home/index";
 import CreateProperty from "./componentes/CreateProperty";
 import AgentDetail from "./componentes/AgentDetail/AgentDetail";
 import CreatePropertyForm from "./componentes/CreatePropertyForm/CreatePropertyForm";

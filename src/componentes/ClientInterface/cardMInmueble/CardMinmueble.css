@@ -21,7 +21,7 @@
     height:250px;
     padding: 20px;
     border-radius: 20px;
-    width: 1000px;
+    width: 1130px;
     box-shadow: 5px 5px 5px #faa422;
 
 }
@@ -73,4 +73,11 @@
 
 .seccion3 h6{
     font-size: 20px;
+}
+
+.botonEdit{
+    gap: 3rem;
+}
+.btn_primary{
+    width:100px;
 }

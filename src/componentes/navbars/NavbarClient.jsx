@@ -10,8 +10,10 @@ import { IoLogoGithub } from "react-icons/io5";
 import { IoLogoVercel } from "react-icons/io5";
 import { FiLogOut } from 'react-icons/fi'
 import { AiOutlineStar } from 'react-icons/ai'
-import { FaPencilAlt } from 'react-icons/fa'
-import { useForm } from "react-hook-form";
+import { FaPencilAlt, FaUserCircle } from 'react-icons/fa'
+import toast from 'react-hot-toast';
+import clientService from '../../services/client';
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -62,46 +64,54 @@ export const NavbarClient = ({ handleLogout, user }) => {
     const classes = useStyles();
     const open = Boolean(anchorEl);
     const [modal, setModal] = useState(false);
-
+    const [name,setName]=useState('')
+    const [age,setAge]=useState('')
+    const [phone,setPhone]=useState('')
+    const [password,setPassword]=useState('')
+    const [address,setAddress]=useState('')
+    const [newPassword,setNewPassword]=useState('')
+    const info={
+        name,
+        age,
+        phone,
+        password,
+        newPassword
+    }
     // estados para el cambio de datos 
     const { token } = user
-    const alertPhone = () =>
-    toast.error("El numero de celular debe tener 10 digitos o más digitos");
-    const [input, setInput] = useState({
-        name: '',
-        age: '',
-        phone: '',
-        address: '',
-        password: '',
-        newPassword: ''
-    })
-
-    const handleEdit = () => {
-        
-        console.log(input);
+    const alert = () =>
+    toast.error("Please enter your password");
+    
+    const handleEdit =async (e) => {
+        e.preventDefault();
+        if(info.password.length===0){
+            return alert();
+        }
+        console.log(info,token)
+        await clientService.updateInfo(info, token);
     }
     const body = (
         <div className={classes.modal}>
             <div align='center'>
                 <h2 className={classes.titleLogin}>Datos a editar</h2>
             </div>
-            <form >
+            <form onSubmit={handleEdit}>
                 <div className='containerModal'>
                     <input type="text"
                         placeholder="Nombre"
                         className='auth_input'
                         autoComplete="off"
-                        onChange={(e) => {
-                            setInput({ ...input, name: e.target.value })
-                        }}
+                        value={name}
+                        name="name"
+                        onChange={({ target }) => setName(target.value)}
                     />
                     <input type="number"
                         placeholder="Edad"
                         className='auth_input'
                         autoComplete="off"
-                        onChange={(e) => {
-                            setInput({ ...input, age: e.target.value })
-                        }}
+                        value={age}
+                        name="age"
+                        onChange={({ target }) => setAge(target.value)}
                     />
                 </div>
                 <div className='containerModal'>
@@ -109,17 +119,17 @@ export const NavbarClient = ({ handleLogout, user }) => {
                         placeholder="Direccion"
                         className='auth_input'
                         autoComplete="off"
-                        onChange={(e) => {
-                            setInput({ ...input, address: e.target.value })
-                        }}
+                        value={address}
+                        name="address"
+                        onChange={({ target }) => setAddress(target.value)}
                     />
                     <input type="number"
                         placeholder="Celular"
                         className='auth_input'
                         autoComplete="off"
-                        onChange={(e) => {
-                            setInput({ ...input, phone: e.target.value })
-                        }}
+                        value={phone}
+                        name="phone"
+                        onChange={({ target }) => setPhone(target.value)}
                     />
                 </div>
                 <div className='containerModal'>
@@ -127,24 +137,24 @@ export const NavbarClient = ({ handleLogout, user }) => {
                         placeholder="Anterior contraseña"
                         className='auth_input'
                         autoComplete="off"
-                        onChange={(e) => {
-                            setInput({ ...input, password: e.target.value })
-                        }}
+                        value={password}
+                        name="password"
+                        onChange={({ target }) => setPassword(target.value)}
                     />
                     <input type="password"
                         placeholder="Nueva contraseña"
                         className='auth_input'
                         autoComplete="off"
-                        onChange={(e) => {
-                            setInput({ ...input, newPassword: e.target.value })
-                        }}
+                        value={newPassword}
+                        name="newPassword"
+                        onChange={({ target }) => setNewPassword(target.value)}
                     />
                 </div>
-            </form>
             <div align='right' className='botonEdit'>
-                <Button color='primary' onClick={handleEdit}>Enviar</Button>
-                <Button color='secondary' onClick={() => openCloseModal()}>Cancelar</Button>
+                <button type='submit' className='btn_primary'>Enviar</button>
+                <button onClick={() => openCloseModal()} className='btn_primary'>Cancelar</button>
             </div>
+            </form>
         </div>
     )
     const handleClick = (event) => {
@@ -182,7 +192,7 @@ export const NavbarClient = ({ handleLogout, user }) => {
                 onClose={handleClose}
                 TransitionComponent={Fade}
             >
-                <h2 className='title'> Area cliente</h2>
+                <h2 className='title'><FaUserCircle className='emoticon'/>  {user.name}  </h2>
                 <Link href='/'><MenuItem className='menuItem'> <ImHome className='emoticon' />Home</MenuItem></Link>
                 <Link href='/viewClient' ><MenuItem className='menuItem'><AiOutlineStar className='emoticon' /> Favoritos</MenuItem></Link>
                 <MenuItem className='menuItem' onClick={() => openCloseModal()}><FaPencilAlt className='emoticon' />  Editar perfil</MenuItem>
