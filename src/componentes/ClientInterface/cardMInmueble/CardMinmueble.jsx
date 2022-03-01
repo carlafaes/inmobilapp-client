@@ -20,7 +20,7 @@ export const CardMinmueble = () => {
     const loggedUserJSON = window.localStorage.getItem("loggedUser");
     const user = JSON.parse(loggedUserJSON);
     const GetInfo=async()=>{
-      const info= await services.getclientInfo(user.id);
+      const info= await services.getClientInfo(user.id);
       setInfo(info)
       const {propertyID}=info
       const{location,images,typeProperty,description,details}=propertyID
@@ -29,7 +29,6 @@ export const CardMinmueble = () => {
       setTypeProperty(typeProperty)
       setDescription(description)
       setDetails(details)
-      console.log(info);
     }
     GetInfo()
   },[])

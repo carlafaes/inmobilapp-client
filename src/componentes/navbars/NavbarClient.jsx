@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppBar, IconButton, Menu, MenuItem, Toolbar, Modal, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SortIcon from '@material-ui/icons/Sort';
@@ -56,64 +56,95 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const NavbarClient = ({ handleLogout }) => {
+export const NavbarClient = ({ handleLogout, user }) => {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
     const open = Boolean(anchorEl);
     const [modal, setModal] = useState(false);
-    const { register, handleSubmit } = useForm()
 
-    const handleEdit = (data) => {
-        console.log(data)
+    // estados para el cambio de datos 
+    const { token } = user
+    const alertPhone = () =>
+    toast.error("El numero de celular debe tener 10 digitos o más digitos");
+    const [input, setInput] = useState({
+        name: '',
+        age: '',
+        phone: '',
+        address: '',
+        password: '',
+        newPassword: ''
+    })
+
+    const handleEdit = () => {
+        
+        console.log(input);
     }
     const body = (
         <div className={classes.modal}>
-                <div align='center'>
-                    <h2 className={classes.titleLogin}>Datos a editar</h2>
-                </div>
-            <form onSubmit={handleSubmit(handleEdit)}>
+            <div align='center'>
+                <h2 className={classes.titleLogin}>Datos a editar</h2>
+            </div>
+            <form >
                 <div className='containerModal'>
                     <input type="text"
                         placeholder="Nombre"
                         className='auth_input'
                         autoComplete="off"
-                        {...register("name")} />
+                        onChange={(e) => {
+                            setInput({ ...input, name: e.target.value })
+                        }}
+                    />
                     <input type="number"
                         placeholder="Edad"
                         className='auth_input'
                         autoComplete="off"
-                        {...register("age")} />
+                        onChange={(e) => {
+                            setInput({ ...input, age: e.target.value })
+                        }}
+                    />
                 </div>
                 <div className='containerModal'>
                     <input type="text"
                         placeholder="Direccion"
                         className='auth_input'
                         autoComplete="off"
-                        {...register("address")} />
+                        onChange={(e) => {
+                            setInput({ ...input, address: e.target.value })
+                        }}
+                    />
                     <input type="number"
                         placeholder="Celular"
                         className='auth_input'
                         autoComplete="off"
-                        {...register("phone")} />
+                        onChange={(e) => {
+                            setInput({ ...input, phone: e.target.value })
+                        }}
+                    />
                 </div>
                 <div className='containerModal'>
                     <input type="password"
                         placeholder="Anterior contraseña"
                         className='auth_input'
                         autoComplete="off"
-                        {...register("password2")} />
+                        onChange={(e) => {
+                            setInput({ ...input, password: e.target.value })
+                        }}
+                    />
                     <input type="password"
                         placeholder="Nueva contraseña"
                         className='auth_input'
                         autoComplete="off"
-                        {...register("password")} />
+                        onChange={(e) => {
+                            setInput({ ...input, newPassword: e.target.value })
+                        }}
+                    />
                 </div>
             </form>
-                <div align='right' className='botonEdit'>
-                    <Button color='primary'>Enviar</Button>
-                    <Button color='secondary' onClick={() => openCloseModal()}>Cancelar</Button>
-                </div>
+            <div align='right' className='botonEdit'>
+                <Button color='primary' onClick={handleEdit}>Enviar</Button>
+                <Button color='secondary' onClick={() => openCloseModal()}>Cancelar</Button>
+            </div>
         </div>
     )
     const handleClick = (event) => {
