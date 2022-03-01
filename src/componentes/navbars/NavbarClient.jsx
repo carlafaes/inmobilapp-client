@@ -14,6 +14,8 @@ import { FaPencilAlt } from 'react-icons/fa'
 import { useForm } from "react-hook-form";
 import toast from 'react-hot-toast';
 import clientService from '../../services/client';
+import { useDispatch } from 'react-redux';
+import { PutClient } from '../../redux/actions/actionClient';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -60,86 +62,58 @@ const useStyles = makeStyles((theme) => ({
 
 export const NavbarClient = ({ handleLogout, user }) => {
 
+    const dispatch =useDispatch();
     const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
     const open = Boolean(anchorEl);
     const [modal, setModal] = useState(false);
-
+    const [name,setName]=useState('')
+    const [age,setAge]=useState('')
+    const [phone,setPhone]=useState('')
+    const [password,setPassword]=useState('')
+    const [address,setAddress]=useState('')
+    const [newPassword,setNewPassword]=useState('')
+    const info={
+        name,
+        age,
+        phone,
+        password,
+        newPassword
+    }
     // estados para el cambio de datos 
-    const { token } = user
-    const alertPhone = () =>
-    toast.error("El numero de celular debe tener 10 digitos o más digitos");
-
-    const alertAgeDigits = () =>
-    toast.error("La edad debe ser menor a 99 años");
-
-    const alertAge = () =>
-    toast.error("Debe ser mayor de edad");
-
-    const alertPassword = () =>
-    toast.error("La contraseña antigua no puede ser igual a la nueva");
-
-    const sendData=()=>
-    toast.success('Cambios realizados correctamente')
-    const [input, setInput] = useState({
-        name: '',
-        age: '',
-        phone: '',
-        address: '',
-        password: '',
-        newPassword: ''
-    })
-    const {age,phone,name,password,newPassword,address} =input
-
+    const { token,id } = user
+    const alert = () =>
+    toast.error("Please enter your password");
     
     const handleEdit =async (e) => {
-        e.preventDefault()
-        if(age < 18){
-            return alertAge()
+        e.preventDefault();
+        if(info.password.length===0){
+            return alert();
         }
-        else if(age.length> 2){
-            return alertAgeDigits()
-        }
-        else if(phone.length < 10){
-            return alertPhone()
-        }
-        else if(password ===newPassword){
-            return alertPassword()
-        }
-        password=newPassword
-        input={
-            name,
-            age,
-            phone,
-            address,
-            password,
-        }
-        await clientService.updateInfo(input, token);
-        sendData()
-        console.log(input);
+        await clientService.updateInfo(info, token);
     }
     const body = (
         <div className={classes.modal}>
             <div align='center'>
                 <h2 className={classes.titleLogin}>Datos a editar</h2>
             </div>
-            <form >
+            <form onSubmit={handleEdit}>
                 <div className='containerModal'>
                     <input type="text"
                         placeholder="Nombre"
                         className='auth_input'
                         autoComplete="off"
-                        onChange={(e) => {
-                            setInput({ ...input, name: e.target.value })
-                        }}
+                        value={name}
+                        name="name"
+                        onChange={({ target }) => setName(target.value)}
                     />
                     <input type="number"
                         placeholder="Edad"
                         className='auth_input'
                         autoComplete="off"
-                        onChange={(e) => {
-                            setInput({ ...input, age: e.target.value })
-                        }}
+                        value={age}
+                        name="age"
+                        onChange={({ target }) => setAge(target.value)}
                     />
                 </div>
                 <div className='containerModal'>
@@ -147,17 +121,17 @@ export const NavbarClient = ({ handleLogout, user }) => {
                         placeholder="Direccion"
                         className='auth_input'
                         autoComplete="off"
-                        onChange={(e) => {
-                            setInput({ ...input, address: e.target.value })
-                        }}
+                        value={address}
+                        name="address"
+                        onChange={({ target }) => setAddress(target.value)}
                     />
                     <input type="number"
                         placeholder="Celular"
                         className='auth_input'
                         autoComplete="off"
-                        onChange={(e) => {
-                            setInput({ ...input, phone: e.target.value })
-                        }}
+                        value={phone}
+                        name="phone"
+                        onChange={({ target }) => setPhone(target.value)}
                     />
                 </div>
                 <div className='containerModal'>
@@ -165,24 +139,24 @@ export const NavbarClient = ({ handleLogout, user }) => {
                         placeholder="Anterior contraseña"
                         className='auth_input'
                         autoComplete="off"
-                        onChange={(e) => {
-                            setInput({ ...input, password: e.target.value })
-                        }}
+                        value={password}
+                        name="password"
+                        onChange={({ target }) => setPassword(target.value)}
                     />
                     <input type="password"
                         placeholder="Nueva contraseña"
                         className='auth_input'
                         autoComplete="off"
-                        onChange={(e) => {
-                            setInput({ ...input, newPassword: e.target.value })
-                        }}
+                        value={newPassword}
+                        name="newPassword"
+                        onChange={({ target }) => setNewPassword(target.value)}
                     />
                 </div>
-            </form>
             <div align='right' className='botonEdit'>
-                <Button color='primary' onClick={handleEdit}>Enviar</Button>
+                <button type='submit'>Enviar</button>
                 <Button color='secondary' onClick={() => openCloseModal()}>Cancelar</Button>
             </div>
+            </form>
         </div>
     )
     const handleClick = (event) => {
