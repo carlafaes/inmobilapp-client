@@ -12,6 +12,8 @@ import { FiLogOut } from 'react-icons/fi'
 import { AiOutlineStar } from 'react-icons/ai'
 import { FaPencilAlt } from 'react-icons/fa'
 import { useForm } from "react-hook-form";
+import toast from 'react-hot-toast';
+import clientService from '../../services/client';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -67,6 +69,18 @@ export const NavbarClient = ({ handleLogout, user }) => {
     const { token } = user
     const alertPhone = () =>
     toast.error("El numero de celular debe tener 10 digitos o más digitos");
+
+    const alertAgeDigits = () =>
+    toast.error("La edad debe ser menor a 99 años");
+
+    const alertAge = () =>
+    toast.error("Debe ser mayor de edad");
+
+    const alertPassword = () =>
+    toast.error("La contraseña antigua no puede ser igual a la nueva");
+
+    const sendData=()=>
+    toast.success('Cambios realizados correctamente')
     const [input, setInput] = useState({
         name: '',
         age: '',
@@ -75,9 +89,33 @@ export const NavbarClient = ({ handleLogout, user }) => {
         password: '',
         newPassword: ''
     })
+    const {age,phone,name,password,newPassword,address} =input
 
-    const handleEdit = () => {
-        
+    
+    const handleEdit =async (e) => {
+        e.preventDefault()
+        if(age < 18){
+            return alertAge()
+        }
+        else if(age.length> 2){
+            return alertAgeDigits()
+        }
+        else if(phone.length < 10){
+            return alertPhone()
+        }
+        else if(password ===newPassword){
+            return alertPassword()
+        }
+        password=newPassword
+        input={
+            name,
+            age,
+            phone,
+            address,
+            password,
+        }
+        await clientService.updateInfo(input, token);
+        sendData()
         console.log(input);
     }
     const body = (
