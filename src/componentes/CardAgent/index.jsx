@@ -40,20 +40,18 @@ export default function CardAgent({ agent, deleteAgent }) {
     </div>
   );
 
-  const { address, name, phone, id, age } = agent;
+  const { address, name, phone, id, permissions } = agent;
 
   const handleEditAgent = () => {
     handleOpenOnClouseModal();
   };
-
-  console.log(agent);
 
   return (
     <>
       <Card sx={{ width: 345 }}>
         <CardHeader
           avatar={<Avatar sx={{ backgroundColor: color }}>{name[0]}</Avatar>}
-          title={name}
+          title={`${name}${!permissions.crudProperty ? ", (Sin Permisos)" : ""}`}
           action={
             <IconButton onClick={() => deleteAgent(id)}>
               <DeleteIcon />
@@ -72,7 +70,7 @@ export default function CardAgent({ agent, deleteAgent }) {
             <Typography>Editar</Typography>
           </IconButton>
         </CardActions>
-        <CardContent sx={{paddingTop: 0}}>
+        <CardContent sx={{ paddingTop: 0 }}>
           <div style={{ display: "flex", direction: "row" }}>
             <LocationCity />
             <Typography> {address}</Typography>
