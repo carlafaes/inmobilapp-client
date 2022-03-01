@@ -69,8 +69,9 @@ function Home() {
             </h2>
           </div>
           <br />
-          <FilterProperties />
+
           <ScoreMax />
+          <FilterProperties />
         </div>
         <div className={styled.containerPaginate}>
           <button onClick={previusPage} className={styled.buttonPaginate}>
