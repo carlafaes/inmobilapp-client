@@ -1,23 +1,31 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { isDone, validatePutAgent } from "../../utils/errorsFormAdmin";
 import agentService from "../../services/agent";
 import swal from "sweetalert";
 import { notifyError } from "../../utils/notifications";
-import { Box, Stack, TextField, Button } from "@mui/material";
+import {
+  Box,
+  Stack,
+  TextField,
+  Button,
+  Switch,
+  FormControlLabel,
+  FormGroup,
+} from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { getUserForLocalStorage } from "../../utils/user";
 import classes from "./PutAgent.module.css";
 
 export default function PutAgent({ agent, handleOpenOnClouseModal }) {
   const [input, setInput] = useState({ ...agent });
-  const navigate = useNavigate();
+  const [crudProperty, setCrudProperty] = useState(
+    input.permissions.crudProperty
+  );
 
   const [error, setError] = useState({
     name: null,
     phone: null,
     address: null,
-    age: null,
   });
 
   const handleChange = (e) => {
@@ -49,10 +57,16 @@ export default function PutAgent({ agent, handleOpenOnClouseModal }) {
         if (willDelete) {
           const { token } = getUserForLocalStorage();
           const { id, dni, ...updateAgent } = input;
+
+          updateAgent.permissions.crudProperty = crudProperty;
           agentService.putAgentID(id, updateAgent, token).then(() => {
-            swal("Datos del agente editados correctamente!", {
-              icon: "success",
-            });
+            swal(
+              "Datos del agente editados correctamente! Recarga tu Pagina!",
+              {
+                icon: "success",
+              }
+            );
+
             handleOpenOnClouseModal();
           });
         }
@@ -81,21 +95,10 @@ export default function PutAgent({ agent, handleOpenOnClouseModal }) {
             color={error.name ? "error" : "success"}
             sx={{ width: "100%" }}
           />
-          <TextField
-            required
-            label={
-              error.age && error.age === "*"
-                ? "Edad"
-                : error.age
-                ? error.age
-                : "Edad"
-            }
-            type="number"
-            value={input.age}
-            name="age"
-            onChange={handleChange}
-            color={error.age ? "error" : "success"}
-            sx={{ width: "150px" }}
+          <Switch
+            checked={crudProperty}
+            onChange={() => setCrudProperty(!crudProperty)}
+            inputProps={{ "aria-label": "controlled" }}
           />
         </Stack>
         <Stack direction="row" spacing={2} className={classes.item}>

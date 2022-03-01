@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AppBar, IconButton, Menu, MenuItem, Toolbar, Modal, TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import SortIcon from '@material-ui/icons/Sort';
@@ -10,8 +10,10 @@ import { IoLogoGithub } from "react-icons/io5";
 import { IoLogoVercel } from "react-icons/io5";
 import { FiLogOut } from 'react-icons/fi'
 import { AiOutlineStar } from 'react-icons/ai'
-import { FaPencilAlt } from 'react-icons/fa'
-import { useForm } from "react-hook-form";
+import { FaPencilAlt, FaUserCircle } from 'react-icons/fa'
+import toast from 'react-hot-toast';
+import clientService from '../../services/client';
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -56,64 +58,103 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export const NavbarClient = ({ handleLogout }) => {
+export const NavbarClient = ({ handleLogout, user }) => {
 
     const [anchorEl, setAnchorEl] = useState(null);
     const classes = useStyles();
     const open = Boolean(anchorEl);
     const [modal, setModal] = useState(false);
-    const { register, handleSubmit } = useForm()
-
-    const handleEdit = (data) => {
-        console.log(data)
+    const [name,setName]=useState('')
+    const [age,setAge]=useState('')
+    const [phone,setPhone]=useState('')
+    const [password,setPassword]=useState('')
+    const [address,setAddress]=useState('')
+    const [newPassword,setNewPassword]=useState('')
+    const info={
+        name,
+        age,
+        phone,
+        password,
+        newPassword
+    }
+    // estados para el cambio de datos 
+    const { token } = user
+    const alert = () =>
+    toast.error("Please enter your password");
+    
+    const handleEdit =async (e) => {
+        e.preventDefault();
+        if(info.password.length===0){
+            return alert();
+        }
+        console.log(info,token)
+        await clientService.updateInfo(info, token);
     }
     const body = (
         <div className={classes.modal}>
-                <div align='center'>
-                    <h2 className={classes.titleLogin}>Datos a editar</h2>
-                </div>
-            <form onSubmit={handleSubmit(handleEdit)}>
+            <div align='center'>
+                <h2 className={classes.titleLogin}>Datos a editar</h2>
+            </div>
+            <form onSubmit={handleEdit}>
                 <div className='containerModal'>
                     <input type="text"
                         placeholder="Nombre"
                         className='auth_input'
                         autoComplete="off"
-                        {...register("name")} />
+                        value={name}
+                        name="name"
+                        onChange={({ target }) => setName(target.value)}
+                    />
                     <input type="number"
                         placeholder="Edad"
                         className='auth_input'
                         autoComplete="off"
-                        {...register("age")} />
+                        value={age}
+                        name="age"
+                        onChange={({ target }) => setAge(target.value)}
+                    />
                 </div>
                 <div className='containerModal'>
                     <input type="text"
                         placeholder="Direccion"
                         className='auth_input'
                         autoComplete="off"
-                        {...register("address")} />
+                        value={address}
+                        name="address"
+                        onChange={({ target }) => setAddress(target.value)}
+                    />
                     <input type="number"
                         placeholder="Celular"
                         className='auth_input'
                         autoComplete="off"
-                        {...register("phone")} />
+                        value={phone}
+                        name="phone"
+                        onChange={({ target }) => setPhone(target.value)}
+                    />
                 </div>
                 <div className='containerModal'>
                     <input type="password"
                         placeholder="Anterior contraseña"
                         className='auth_input'
                         autoComplete="off"
-                        {...register("password2")} />
+                        value={password}
+                        name="password"
+                        onChange={({ target }) => setPassword(target.value)}
+                    />
                     <input type="password"
                         placeholder="Nueva contraseña"
                         className='auth_input'
                         autoComplete="off"
-                        {...register("password")} />
+                        value={newPassword}
+                        name="newPassword"
+                        onChange={({ target }) => setNewPassword(target.value)}
+                    />
                 </div>
+            <div align='right' className='botonEdit'>
+                <button type='submit' className='btn_primary'>Enviar</button>
+                <button onClick={() => openCloseModal()} className='btn_primary'>Cancelar</button>
+            </div>
             </form>
-                <div align='right' className='botonEdit'>
-                    <Button color='primary'>Enviar</Button>
-                    <Button color='secondary' onClick={() => openCloseModal()}>Cancelar</Button>
-                </div>
         </div>
     )
     const handleClick = (event) => {
@@ -151,7 +192,7 @@ export const NavbarClient = ({ handleLogout }) => {
                 onClose={handleClose}
                 TransitionComponent={Fade}
             >
-                <h2 className='title'> Area cliente</h2>
+                <h2 className='title'><FaUserCircle className='emoticon'/>  {user.name}  </h2>
                 <Link href='/'><MenuItem className='menuItem'> <ImHome className='emoticon' />Home</MenuItem></Link>
                 <Link href='/viewClient' ><MenuItem className='menuItem'><AiOutlineStar className='emoticon' /> Favoritos</MenuItem></Link>
                 <MenuItem className='menuItem' onClick={() => openCloseModal()}><FaPencilAlt className='emoticon' />  Editar perfil</MenuItem>

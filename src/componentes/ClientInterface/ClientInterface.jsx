@@ -36,9 +36,9 @@ export const ClientInterface = () => {
       notify(user.name);
     }
     return (
-      <div className="div">
-        <h1 >You must be login to see this interface</h1>
-        <button onClick={() => navigate("/login")}>Click to login</button>
+      <div className="title_login">
+        <h1>Debe iniciar sesión para ver esta interfaz</h1>
+        <button onClick={() => navigate("/login")} className='btn'>Click to login</button>
       </div>
     );
   }, []);
@@ -46,8 +46,10 @@ export const ClientInterface = () => {
   if (!actualToken) {
     return (
       <>
-        <h1>You must be login to see this interface</h1>
-        <button onClick={() => navigate("/login")}>Click to login</button>
+      <div className="title_login">
+        <h1>Debe iniciar sesión para ver esta interfaz</h1>
+        <button onClick={() => navigate("/login")} className='btn'>Click to login</button>
+      </div>
       </>
     );
   }
@@ -71,7 +73,7 @@ export const ClientInterface = () => {
   };
   return (
     <>
-      <NavbarClient handleLogout={handleLogout} />
+      <NavbarClient handleLogout={handleLogout} user={user}/>
       <div className="container">
         <h2>Mi inmueble</h2>
         {
@@ -94,9 +96,21 @@ export const ClientInterface = () => {
         }
 
         <h2>Mis favoritos</h2>
-        
         {
-          user.favoriteProperties.length>0 ?<CardsMisFavoritos/>: <CardNoHayFavoritos/>
+          user.favoriteProperties.length > 0 ?
+            <>
+              <div className="container_pagos">
+                {
+                  openF ? <BotonCloseF closeMenuF={closeMenuF} /> : <BotonUpF openMenuF={openMenuF} />
+                }
+                <span> Ver mis favoritos</span>
+              </div>
+              {
+                openF && <CardsMisFavoritos />
+              }
+            </>
+            :
+            <CardNoHayFavoritos />
         }
       </div>
     </>

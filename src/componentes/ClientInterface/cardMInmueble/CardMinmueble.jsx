@@ -19,8 +19,9 @@ export const CardMinmueble = () => {
   useEffect(()=>{
     const loggedUserJSON = window.localStorage.getItem("loggedUser");
     const user = JSON.parse(loggedUserJSON);
+    
     const GetInfo=async()=>{
-      const info= await services.getclientInfo(user.id);
+      const info= await services.getClientInfo(user.id);
       setInfo(info)
       const {propertyID}=info
       const{location,images,typeProperty,description,details}=propertyID
@@ -29,7 +30,6 @@ export const CardMinmueble = () => {
       setTypeProperty(typeProperty)
       setDescription(description)
       setDetails(details)
-      console.log(info);
     }
     GetInfo()
   },[])
@@ -47,7 +47,7 @@ export const CardMinmueble = () => {
         <div className='seccion2'>
         <h6><MdOutlineSquareFoot className='emoticon'/> {details.area} m²</h6>
         <h6><IoMdBed className='emoticon'/>{details.rooms} dorms</h6>
-        <h6><GiHomeGarage className='emoticon'/>{details.garage} 1 garajes</h6>
+        <h6><GiHomeGarage className='emoticon'/>{details.garage}garajes</h6>
         <button className='btn_card btn_p p' >Mas detalles <HiArrowCircleRight className='emoticon'/> </button>
         </div>
         <div className='seccion3'>

@@ -66,7 +66,6 @@ export const RegisterClient = () => {
         <div className="auth_box-container">
           <h3 className="auth_title">Registro</h3>
           <form onSubmit={handleSubmit(handleRegister)}>
-
             <input
               type="text"
               placeholder="Nombre*"
@@ -92,7 +91,6 @@ export const RegisterClient = () => {
                 required: true,
               })}
             />
-
             <div className="input_1">
               <input
                 type="text"
@@ -134,10 +132,7 @@ export const RegisterClient = () => {
 
             <div className="btn_button">
               <button className="btn">Registrar <IoSendSharp className="send" /></button>
-
-
             </div>
-
             {Object.keys(errors).length >= 1 && (
               camposVacios()
             )}
