@@ -30,7 +30,6 @@ export const CardMinmueble = () => {
       setTypeProperty(typeProperty)
       setDescription(description)
       setDetails(details)
-      console.log(info);
     }
     GetInfo()
   },[])

@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 import { getUserForLocalStorage } from "../utils/user";
 
 const updateInfo = async (infoToUpdate, token) => {

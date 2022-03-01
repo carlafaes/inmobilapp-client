@@ -2,6 +2,8 @@
 
 Deploy: https://inmobilapp.vercel.app/
 
+Api: https://inmobil-app-api.herokuapp.com/
+
 ## Front-End del Proyecto
 Este proyecto ha sido creado con React-App, adicionalmente se han utilizado otras librerias como Material-UI, React-scroll,React-Paginate,Figma.
 El objetivo propuesto para llevarlo a cabo, es ofrecer al agente inmobiliario  una herramienta necesaria para una correcta,sencilla, y efectiva administración de su empresa. Incluyendo tanto el sector financiero, como la publicidad de sus propiedades disponibles. 

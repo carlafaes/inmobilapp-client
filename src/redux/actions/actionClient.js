@@ -10,3 +10,17 @@ export function PostClient(client) {
         })
     }
 }
+
+export function PutClient(client,token){
+    const config={
+        headers: {
+            Authorization:`Bearer ${token}`
+        }
+    }
+    return async (dispatch) => {
+        const json = await axios.put(`/api/clients`,client,config)
+        return dispatch({
+            payload: json.data
+        })
+    }
+}

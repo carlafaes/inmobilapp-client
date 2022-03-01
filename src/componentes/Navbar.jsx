@@ -82,45 +82,6 @@ export default function Navbar() {
         setAnchorEl(null);
     };
 
-    const openCloseModal= ()=>{
-        setModal(!modal)
-    }
-    const openCloseModalAg= ()=>{
-        setModalAg(!modalAg)
-    }
-
-    
-    const body=(
-        
-        <div className={classes.modal}>
-            <div align='center'>
-                <h2 className={classes.titleLogin}>Login Admin</h2>
-            </div>
-            <TextField label='Correo electronico' className={classes.textfield}/>
-            <br/>
-            <TextField label='Password' className={classes.textfield}/>
-            <br/>
-            <div align='right'>
-                <Button className={classes.btnLogin} color='primary'>Ingresar</Button>
-                <Button className={classes.btnLogin} color='secondary' onClick={()=>openCloseModal()}>Cancelar</Button>
-            </div>
-        </div>
-    )
-    const body_agent=(
-        <div className={classes.modal}>
-            <div align='center'>
-                <h2 className={classes.titleLogin}>Loggin Agente</h2>
-            </div>
-            <TextField label='Correo electronico' className={classes.textfield}/>
-            <br/>
-            <TextField label='Password' className={classes.textfield}/>
-            <br/>
-            <div align='right'>
-                <Button className={classes.btnLogin} color='primary'>Ingresar</Button>
-                <Button className={classes.btnLogin} color='secondary' onClick={()=>openCloseModalAg()}>Cancelar</Button>
-            </div>
-        </div>
-    )
     return (
         <>
         
@@ -152,12 +113,6 @@ export default function Navbar() {
                 <Link href="https://github.com/InmobilApp"><MenuItem className='menuItem'> <IoLogoGithub className='emoticon'/>Git-Hub</MenuItem></Link>
                 <Link href='https://inmobil-app.herokuapp.com/'><MenuItem className='menuItem'><IoLogoVercel className='emoticon'/> Link deploy</MenuItem></Link>
             </Menu>
-            <Modal open={modal} onClose={openCloseModal}> 
-                {body}
-            </Modal>
-            <Modal open={modalAg} onClose={openCloseModalAg}> 
-                {body_agent}
-            </Modal>
         
         </>
 

@@ -74,3 +74,10 @@
 .seccion3 h6{
     font-size: 20px;
 }
+
+.botonEdit{
+    gap: 3rem;
+}
+.btn_primary{
+    width:100px;
+}
