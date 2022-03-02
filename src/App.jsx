@@ -38,7 +38,6 @@ function App() {
           element={<CreatePropertyForm />}
         />
         <Route path="/quienes" element={<QuienesSomos />} />
-        <Route path="/maquetaform" element={<MaquetaForm />} />
         <Route path="/preguntasFrecuentes" element={<Generales />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/preguntasFrecuentes" element={<Generales />} />
