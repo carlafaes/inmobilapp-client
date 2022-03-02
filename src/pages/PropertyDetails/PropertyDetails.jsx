@@ -35,7 +35,22 @@ const Item = styled(Paper)(({ theme }) => ({
 
 let imageIndex = 0;
 
+const getUserForLocalStorage = () => {
+	const loggedUserJSON = window.localStorage.getItem('loggedUser');
+
+	if (loggedUserJSON !== null && loggedUserJSON !== undefined) {
+		try {
+			return JSON.parse(loggedUserJSON);
+		} catch (e) {
+			return null;
+		}
+	}
+
+	return null;
+};
+
 function PropertyDetails(props, classes) {
+	const user = getUserForLocalStorage();
 	const [property, setProperty] = useState({});
 	const [image, setImage] = useState();
 
@@ -137,15 +152,17 @@ function PropertyDetails(props, classes) {
 												<br />
 												<span className={props.classes.Agen}>Phone: </span>
 												{property.agentID ? property.agentID.phone : 'No Found'}
-												<Button
-													className={props.classes.button}
-													size='small'
-													color='primary'
-													size='small'
-													color='primary'
-												>
-													Añadir a favoritos <FavoriteIcon />
-												</Button>
+												<div>
+													{user && (
+														<Button
+															className={props.classes.button}
+															size='small'
+															color='primary'
+														>
+															Añadir a favoritos <FavoriteIcon />
+														</Button>
+													)}
+												</div>
 											</Item>
 										</Grid>
 									</Box>
