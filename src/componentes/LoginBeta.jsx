@@ -9,6 +9,7 @@ import { getUserForLocalStorage } from "../utils/user";
 const LoginBeta = () => {
   const [dni, setDNI] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userWithToken = useSelector((state) => state.reducerUsers.users);
@@ -32,6 +33,13 @@ const LoginBeta = () => {
       : null;
   }, [userWithToken]);
 
+  useEffect(() => {
+    if (email) {
+      dispatch(getUserInfoWithToken({ email }));
+      setEmail("");
+    }
+  }, [email]);
+
   const handleLogin = async (event) => {
     event.preventDefault();
     if (dni && password) {
@@ -53,6 +61,7 @@ const LoginBeta = () => {
         password={password}
         setPassword={setPassword}
         handleLogin={handleLogin}
+        setEmail={setEmail}
       />
       <Footer />
     </>
