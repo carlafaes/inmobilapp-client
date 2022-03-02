@@ -18,7 +18,7 @@ export default function CreatePropertyForm() {
     if (isValidURL(image)) {
       setNewImage([...images, image]);
       const $image = document.querySelector('#image-input');
-      $image.value = ''
+      $image.reset
     } else {
       notifyError("URL invalida!");
     }
@@ -26,11 +26,8 @@ export default function CreatePropertyForm() {
 
   function onClose(e){
     e.preventDefault();
-    /*console.log(e.target) */
-    setNewImage(images.slice(e.target.id, 0));
-    setTimeout(()=> console.log(images), 1000);
+    setNewImage(images.filter(image => image !== e.target.src));
   }
-
 
   return (
     <Formik
@@ -164,6 +161,7 @@ export default function CreatePropertyForm() {
     >
       {({ errors, values }) => (
         <Form className={styles.form}>
+        {console.log(errors)}
           <div className={styles.container}>
             <section className={styles.section}>
               <h2 className={styles.title}>Ubicación</h2>
@@ -172,11 +170,11 @@ export default function CreatePropertyForm() {
                   Tipo de propiedad
                 </label>
                 <Field
-                  className={errors.type ? styles.error : styles.field}
+                  className={styles.field}
                   name="type"
                   as="select"
                 >
-                  <option name="type" value="tipo" selected={true}>
+                  <option name="type" value="">
                     Tipo
                   </option>
                   <option name="type" value="casa">
@@ -187,6 +185,9 @@ export default function CreatePropertyForm() {
                   </option>
                   <option name="type" value="local">
                     Local
+                  </option>
+                  <option name="type" value="finca">
+                    Finca
                   </option>
                 </Field>
                 <ErrorMessage
@@ -201,7 +202,7 @@ export default function CreatePropertyForm() {
               </label>
               <div>
                 <Field
-                  className={errors.city ? styles.error : styles.field}
+                  className={styles.field}
                   name="city"
                   type="text"
                 />
@@ -217,7 +218,7 @@ export default function CreatePropertyForm() {
               </label>
               <div>
                 <Field
-                  className={errors.neighborhood ? styles.error : styles.field}
+                  className={styles.field}
                   name="neighborhood"
                   type="text"
                 />
@@ -233,7 +234,7 @@ export default function CreatePropertyForm() {
               </label>
               <div>
                 <Field
-                  className={errors.address ? styles.error : styles.field}
+                  className={styles.field}
                   name="address"
                   type="text"
                 />
@@ -253,7 +254,7 @@ export default function CreatePropertyForm() {
               <div>
                 <div className={styles.image_input_container}>
                   <Field
-                    className={errors.images ? styles.error : styles.field}
+                    className={styles.field}
                     name="images"
                     type="text"
                     id="image-input"
@@ -283,7 +284,7 @@ export default function CreatePropertyForm() {
               </label>
               <div>
                 <Field
-                  className={errors.price ? styles.error : styles.field}
+                  className={styles.field}
                   name="price"
                   type="text"
                 />
@@ -299,11 +300,7 @@ export default function CreatePropertyForm() {
               </label>
               <div className={styles.input_container}>
                 <Field
-                  className={
-                    errors.description
-                      ? styles.field_text_area_error
-                      : styles.field_text_area
-                  }
+                  className={styles.field_text_area}
                   name="description"
                   as="textarea"
                 />
@@ -322,7 +319,7 @@ export default function CreatePropertyForm() {
               </label>
               <div>
                 <Field
-                  className={errors.area ? styles.error : styles.field}
+                  className={styles.field}
                   name="area"
                   type="text"
                 />
@@ -338,7 +335,7 @@ export default function CreatePropertyForm() {
               </label>
               <div>
                 <Field
-                  className={errors.rooms ? styles.error : styles.field}
+                  className={styles.field}
                   name="rooms"
                   type="text"
                 />
@@ -354,7 +351,7 @@ export default function CreatePropertyForm() {
               </label>
               <div>
                 <Field
-                  className={errors.baths ? styles.error : styles.field}
+                  className={styles.field}
                   name="baths"
                   type="text"
                 />
@@ -370,12 +367,12 @@ export default function CreatePropertyForm() {
               </label>
               <div>
                 <Field
-                  className={errors.garage ? styles.error : styles.field}
+                  className={styles.field}
                   name="garage"
                   as="select"
                 >
-                  <option>Garage</option>
-                  <option name="garage" value={true} selected={true}>
+                  <option name="garage" value="">Garage</option>
+                  <option name="garage" value={true}>
                     Si
                   </option>
                   <option name="garage" value={false}>
