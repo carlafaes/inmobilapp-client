@@ -161,7 +161,6 @@ export default function CreatePropertyForm() {
     >
       {({ errors, values }) => (
         <Form className={styles.form}>
-        {console.log(errors)}
           <div className={styles.container}>
             <section className={styles.section}>
               <h2 className={styles.title}>Ubicación</h2>
