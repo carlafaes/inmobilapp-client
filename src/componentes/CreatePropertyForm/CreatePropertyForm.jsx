@@ -75,7 +75,7 @@ export default function CreatePropertyForm() {
           err.price = "Debes ingresar un precio";
         } else if (!/^\d+$/.test(v.price)) {
           err.price = "Unciamente se aceptan números en este campo";
-        } else if (!(v.price >= 200 && v.price <= 2000)) {
+        } else if (!(v.price >= 100 && v.price <= 2000)) {
           err.price = "El precio debe estar entre 200 y 2000 dolares";
         }
 
@@ -83,12 +83,16 @@ export default function CreatePropertyForm() {
           err.description = "Debes ingresar una descripción";
         } else if (v.description.length < 11) {
           err.description = "La descripción debe tener más de diez caracteres";
+        }else if(v.description .length < 10){
+          err.description = "la descripción debe tener minim 10 caracteres"
         }
 
         if (!v.area) {
           err.area = "Debes ingresar un area";
         } else if (!/^\d+$/.test(v.area)) {
           err.area = "Unicamente se aceptan números en este campo";
+        }else if(!(v.area >= 25 && v.area <= 300)){
+          err.area = "El area mínima es de 25 m2 y como maximo 300m2";
         }
 
         if (!v.rooms) {
@@ -97,13 +101,15 @@ export default function CreatePropertyForm() {
           err.rooms = "Unicamente se aceptan números en este campo";
         } else if (!(v.rooms > 0 && v.rooms <= 20)) {
           err.rooms =
-            "El número de habitaciones debe ser mayor a 0 y máximo 20";
+            "El número de habitaciones mínimo es de 1 y máximo 20";
         }
 
         if (!v.baths) {
           err.baths = "Debes ingresar un número de baños";
         } else if (!/^\d+$/.test(v.baths)) {
-          err.baths = "Unicamente se aceptan números en este campo";
+          err.baths = "Únicamente se aceptan números en este campo";
+        }else if (!(v.baths > 0 && v.baths <= 20)) {
+          err.baths = "El número de baños debe ser mayor a 1 y como máximo 10 "
         }
 
         if (!v.garage) {

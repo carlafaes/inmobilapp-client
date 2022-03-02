@@ -5,7 +5,6 @@ import CreateAgent from "./componentes/CreateAgent/CreateAgent";
 import LoginBeta from "./componentes/LoginBeta";
 import { RegisterClient } from "./componentes/RegisterClient";
 import Home from "./pages/Home/index";
-import CreateProperty from "./pages/CreateProperty";
 import AgentDetail from "./componentes/AgentDetail/AgentDetail";
 import CreatePropertyForm from "./componentes/CreatePropertyForm/CreatePropertyForm";
 import FormAdmin from "./pages/FormAdmin";
@@ -30,7 +29,6 @@ function App() {
         <Route path="/viewClient" element={<ClientInterface />} />
         <Route path="/viewAdmin" element={<ViewAdmin />} />
         <Route path="/registerAdmin" element={<FormAdmin />} />
-        <Route exact path="/form" element={<CreateProperty />} />
         <Route path="registerAgent/:id/:role" element={<FormAgent />} />
         <Route path="/login" element={<LoginBeta />} />
         <Route path="/agents/:id" element={<AgentDetail />} />
