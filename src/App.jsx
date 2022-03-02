@@ -5,14 +5,12 @@ import CreateAgent from './componentes/CreateAgent/CreateAgent';
 import LoginBeta from './componentes/LoginBeta';
 import { RegisterClient } from './componentes/RegisterClient';
 import Home from './pages/Home/index';
-import CreateProperty from './componentes/CreateProperty';
 import AgentDetail from './componentes/AgentDetail/AgentDetail';
 import CreatePropertyForm from './componentes/CreatePropertyForm/CreatePropertyForm';
 import FormAdmin from './pages/FormAdmin';
 import PageNotFound from './pages/PageNotFound';
 import ViewAdmin from './pages/ViewAdmin';
 import { ToastContainer } from 'react-toastify';
-import MaquetaForm from './componentes/MaquetaForm';
 import QuienesSomos from './componentes/QuienesSomos';
 import FormAgent from './pages/FormAgent/FormAgent';
 import { ClientInterface } from './componentes/ClientInterface/ClientInterface';
@@ -31,7 +29,6 @@ function App() {
 				<Route path='/viewClient' element={<ClientInterface />} />
 				<Route path='/viewAdmin' element={<ViewAdmin />} />
 				<Route path='/registerAdmin' element={<FormAdmin />} />
-				<Route exact path='/form' element={<CreateProperty />} />
 				<Route path='registerAgent/:id/:role' element={<FormAgent />} />
 				<Route path='/login' element={<LoginBeta />} />
 				<Route path='/agents/:id' element={<AgentDetail />} />
@@ -40,7 +37,6 @@ function App() {
 					element={<CreatePropertyForm />}
 				/>
 				<Route path='/quienes' element={<QuienesSomos />} />
-				<Route path='/maquetaform' element={<MaquetaForm />} />
 				<Route path='/preguntasFrecuentes' element={<Generales />} />
 			</Routes>
 			<Toaster position='top-center' reverseOrder={false} />

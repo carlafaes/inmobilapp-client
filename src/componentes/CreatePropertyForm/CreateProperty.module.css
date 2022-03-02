@@ -34,17 +34,18 @@
 
 .field {
     border: 1px solid #c4c4c4;
-    width: 100%;
+    width: 88%;
     height: 45px;
     line-height: 45px;
     border-radius: 10px;
     padding: 0 40px 0 10px;
     outline: none;
+    box-sizing: border-box;
 }
 
 .error {
     border: 1px solid #e74c3c;
-    width: 100%;
+    width: 88%;
     height: 45px;
     line-height: 45px;
     border-radius: 10px;
