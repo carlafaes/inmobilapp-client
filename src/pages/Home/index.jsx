@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import propertyService from "../../services/property";
-import Landing from "../../componentes/Landingprueba";
+import Landing from "../../componentes/Landingprueba/index";
 import Navbar from "../../componentes/Navbar";
 import Loading from "../../componentes/Loading";
 import Footer from "../../componentes/Footer";
