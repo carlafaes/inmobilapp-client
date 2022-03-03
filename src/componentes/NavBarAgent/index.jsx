@@ -1,23 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { AppBar, IconButton, Menu, MenuItem, Toolbar } from "@material-ui/core";
+import React, { useState } from "react";
+import {
+  AppBar,
+  IconButton,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Modal,
+  TextField,
+  Button,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import SortIcon from "@material-ui/icons/Sort";
-import icono from "../Img/icono.png";
+import icono from "../../Img/icono.png";
 import Fade from "@material-ui/core/Fade";
 import Link from "@material-ui/core/Link";
 import { ImHome } from "react-icons/im";
 import { IoLogoGithub } from "react-icons/io5";
 import { IoLogoVercel } from "react-icons/io5";
-import { RiLoginBoxLine } from "react-icons/ri";
-import { GiExitDoor } from "react-icons/gi";
-import "../styles/Navbar.css";
-
-import {
-  getUserForLocalStorage,
-  logaoutCurrentUserForLocalStorage,
-} from "../utils/user";
-import swal from "sweetalert";
+import { FiLogOut } from "react-icons/fi";
+import { FaPencilAlt, FaCat, FaPlus } from "react-icons/fa";
+import { logaoutCurrentUserForLocalStorage } from "../../utils/user";
 import { useNavigate } from "react-router-dom";
+import PutAdmin from "../PutAdmin";
+import swal from "sweetalert";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -35,13 +40,8 @@ const useStyles = makeStyles((theme) => ({
   },
   modal: {
     position: "absolute",
-    width: 400,
-    height: 300,
     borderRadius: "5px",
-    backgroundColor: "rgba(229, 196, 271,0.7)",
-    border: "2px solid #535353",
     boxShadow: theme.shadows[5],
-    padding: "16px 32px 24px",
     top: "50%",
     left: "50%",
     transform: "translate(-50%,-50%)",
@@ -65,17 +65,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Navbar() {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [user, setUser] = useState(null);
+export default function NavBarAgent({ user, token, deleteCurrentAdminID }) {
+  const classes = useStyles();
   const navigate = useNavigate();
 
-  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-
-  useEffect(() => {
-    setUser(getUserForLocalStorage());
-  }, []);
+  const [modal, setModal] = useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -84,6 +80,16 @@ export default function Navbar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const openCloseModal = () => {
+    setModal(!modal);
+  };
+
+  const body = (
+    <div className={classes.modal}>
+      <PutAdmin token={token} openCloseModal={openCloseModal} admin={user} />
+    </div>
+  );
 
   const handleLogout = () => {
     swal({
@@ -94,7 +100,7 @@ export default function Navbar() {
     }).then((op) => {
       if (op) {
         logaoutCurrentUserForLocalStorage();
-        setUser(null);
+        navigate("/");
       }
     });
   };
@@ -108,7 +114,7 @@ export default function Navbar() {
               <IconButton onClick={handleClick}>
                 <SortIcon className={classes.icon} />
               </IconButton>
-              <Link href="/" className="link_home">
+              <Link href="/">
                 <img
                   src={icono}
                   alt="logonav"
@@ -129,54 +135,34 @@ export default function Navbar() {
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        <h2 className="title">{!!user ? user.name : "Inicio"}</h2>
-        {!!user ? (
-          <MenuItem
-            className="menuItem"
-            onClick={() => {
-              switch (user.role) {
-                case "ADMIN":
-                  navigate("/viewAdmin");
-                  break;
-                case "AGENT":
-                  navigate("/viewAgent");
-                  break;
-                case "CLIENT":
-                  navigate("/viewClient");
-                default:
-                  break;
-              }
-            }}
-          >
+        <h2 className="title"> {user.name}</h2>
+        <Link href="/">
+          <MenuItem className="menuItem">
             <ImHome className="emoticon" />
-            My Page
+            Home
           </MenuItem>
-        ) : (
-          <Link href="/">
-            <MenuItem className="menuItem">
-              <ImHome className="emoticon" />
-              Home
-            </MenuItem>
-          </Link>
-        )}
-
-        {!!user ? (
-            <MenuItem className="menuItem" onClick={handleLogout}>
-              <GiExitDoor className="emoticon" /> Salir
-            </MenuItem>
-        ) : (
-          <Link href="/login">
-            <MenuItem className="menuItem">
-              <RiLoginBoxLine className="emoticon" />
-              Login
-            </MenuItem>
-          </Link>
-        )}
-
+        </Link>
+        <MenuItem className="menuItem" onClick={() => openCloseModal()}>
+          <FaPencilAlt className="emoticon" /> Editar perfil
+        </MenuItem>
+        <MenuItem
+          className="menuItem"
+          onClick={() => navigate(`/registerAgent/${user.id}/${user.role}`)}
+        >
+          <FaPlus className="emoticon" /> Añadir agente
+        </MenuItem>
+        <MenuItem
+          className="menuItem"
+          onClick={() => deleteCurrentAdminID(user.id, token)}
+        >
+          <FaCat className="emoticon" /> Eliminar perfil
+        </MenuItem>
+        <MenuItem className="menuItem" onClick={handleLogout}>
+          <FiLogOut className="emoticon" /> Salir
+        </MenuItem>
         <h2 className="title">Redes sociales</h2>
         <Link href="https://github.com/InmobilApp">
           <MenuItem className="menuItem">
-            {" "}
             <IoLogoGithub className="emoticon" />
             Git-Hub
           </MenuItem>
@@ -187,6 +173,9 @@ export default function Navbar() {
           </MenuItem>
         </Link>
       </Menu>
+      <Modal open={modal} onClose={openCloseModal}>
+        {body}
+      </Modal>
     </>
   );
 }
