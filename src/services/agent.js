@@ -21,11 +21,16 @@ const putAgentID = async (id, agent, token) => {
   };
   return (await axios.put(`${baseUrl}/${id}`, agent, config)).data;
 };
+
+const getAgentDetailsPropertiesID = async () =>
+  (await axios.get(`${baseUrl}/${id}/?detailsProperties=true`)).data;
+
 const agentService = {
   getAgentID,
   deleteAgentID,
   putAgentID,
   createAgent,
+  getAgentDetailsPropertiesID,
 };
 
 export default agentService;

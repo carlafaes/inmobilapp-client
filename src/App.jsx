@@ -17,6 +17,7 @@ import { ClientInterface } from "./componentes/ClientInterface/ClientInterface";
 import { Toaster } from "react-hot-toast";
 import Generales from "./componentes/PreguntasFrecuentes/Generales";
 import Contact from "./pages/Contact/Contact";
+import ViewAgent from "./pages/ViewAgent";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/register" element={<RegisterClient />} />
         <Route path="/viewClient" element={<ClientInterface />} />
         <Route path="/viewAdmin" element={<ViewAdmin />} />
+        <Route path="/viewAgent" element={<ViewAgent />} />
         <Route path="/registerAdmin" element={<FormAdmin />} />
         <Route path="registerAgent/:id/:role" element={<FormAgent />} />
         <Route path="/login" element={<LoginBeta />} />
