@@ -1,5 +1,8 @@
-export const setTheme = (theme) => {
-  localStorage.setItem("themeApp", theme);
-};
+let currentTheme = "light";
 
-export const getTheme = () => localStorage.getItem("themeApp");
+export const getTheme = () => localStorage.getItem("themeApp") || currentTheme;
+
+export const changeTheme = () => {
+  currentTheme = currentTheme === "dark" ? "light" : "dark";
+  localStorage.setItem("themeApp", currentTheme);
+};
