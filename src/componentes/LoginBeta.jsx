@@ -21,6 +21,8 @@ const LoginBeta = () => {
         ? navigate("/viewAdmin")
         : user.role === "CLIENT"
         ? navigate("/viewClient")
+        : user.role === "AGENT"
+        ? navigate("viewAgent")
         : null;
     }
   }, []);
@@ -30,6 +32,8 @@ const LoginBeta = () => {
       ? navigate("/viewClient")
       : userWithToken.role === "ADMIN"
       ? navigate(`/viewAdmin`)
+      : userWithToken.role === "AGENT"
+      ? navigate("/viewAgent")
       : null;
   }, [userWithToken]);
 
