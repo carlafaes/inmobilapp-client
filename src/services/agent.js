@@ -22,7 +22,7 @@ const putAgentID = async (id, agent, token) => {
   return (await axios.put(`${baseUrl}/${id}`, agent, config)).data;
 };
 
-const getAgentDetailsPropertiesID = async () =>
+const getAgentDetailsPropertiesID = async (id) =>
   (await axios.get(`${baseUrl}/${id}/?detailsProperties=true`)).data;
 
 const agentService = {

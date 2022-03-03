@@ -22,7 +22,7 @@ const LoginBeta = () => {
         : user.role === "CLIENT"
         ? navigate("/viewClient")
         : user.role === "AGENT"
-        ? navigate("viewAgent")
+        ? navigate("/viewAgent")
         : null;
     }
   }, []);
