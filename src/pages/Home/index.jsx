@@ -6,8 +6,6 @@ import Loading from "../../componentes/Loading";
 import Footer from "../../componentes/Footer";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { ThemeProvider, createTheme } from "@material-ui/core/styles";
-import { Switch } from "@material-ui/core";
 import ScoreMax from "../../componentes/ScoreMax";
 import { ListCard } from "../../componentes/ListCard";
 import FilterProperties from "../../componentes/FilterProperties";
@@ -20,7 +18,6 @@ function Home() {
     (state) => state.reducerProperties.filteredProperties
   );
   const dispatch = useDispatch();
-  const [darkMode, setDarkMode] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
 
   const nextPage = () => {
@@ -42,52 +39,31 @@ function Home() {
     <Loading />;
   }
 
-  const theme = createTheme({
-    palette: {
-      type: darkMode ? "dark" : "light",
-    },
-  });
-
   return (
-    <ThemeProvider theme={theme}>
+    <div>
       <div>
-        <div>
-          <Landing />
-        </div>
-        <div>
-          <Navbar />
-          <div className={styled.switch_home}>
-            <h2>
-              🔆
-              <Switch
-                checked={darkMode}
-                onChange={() => setDarkMode(!darkMode)}
-                color="primary"
-              />
-              🌙
-            </h2>
-          </div>
-          <br />
-
-          <ScoreMax />
-          <FilterProperties />
-        </div>
-        <div className={styled.containerPaginate}>
-          <button onClick={previusPage} className={styled.buttonPaginate}>
-            Anterior
-          </button>
-          <button onClick={nextPage} className={styled.buttonPaginate}>
-            Siguiente
-          </button>
-        </div>
-        <ListCard
-          properties={paginate(properties, pageNumber, propertiesPerPage)}
-        />
-        <div>
-          <Footer />
-        </div>
+        <Landing />
       </div>
-    </ThemeProvider>
+      <div>
+        <Navbar />
+        <ScoreMax />
+        <FilterProperties />
+      </div>
+      <div className={styled.containerPaginate}>
+        <button onClick={previusPage} className={styled.buttonPaginate}>
+          Anterior
+        </button>
+        <button onClick={nextPage} className={styled.buttonPaginate}>
+          Siguiente
+        </button>
+      </div>
+      <ListCard
+        properties={paginate(properties, pageNumber, propertiesPerPage)}
+      />
+      <div>
+        <Footer />
+      </div>
+    </div>
   );
 }
 
