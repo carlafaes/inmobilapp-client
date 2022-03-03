@@ -61,9 +61,7 @@ function Home() {
               🔆
               <Switch
                 checked={darkMode}
-                onChange={() => {
-                  setDarkMode(!darkMode);
-                }}
+                onChange={() => setDarkMode(!darkMode)}
                 color="primary"
               />
               🌙

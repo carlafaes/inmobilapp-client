@@ -11,6 +11,7 @@ import { getUserForLocalStorage } from "../../utils/user";
 import { notifyWelcome } from "../../utils/notifications";
 
 import classes from "./ViewAgent.module.css";
+import PanelAgent from "../../componentes/PanelAgent";
 
 export default function ViewAgent() {
   const navigate = useNavigate();
@@ -37,19 +38,13 @@ export default function ViewAgent() {
   if (!agentDetail) {
     return <Loading />;
   }
-  
+
   const { permissions } = agentDetail;
 
   return (
     <div className={classes.container}>
       <NavBarAgent user={agentDetail} />
-      {permissions.crudProperty ? (
-        <div className={classes.content}>
-          <h1>Content</h1>
-        </div>
-      ) : (
-        <NotPermissions />
-      )}
+      {permissions.crudProperty ? <PanelAgent agent={agentDetail} /> : <NotPermissions />}
       <Footer />
     </div>
   );
