@@ -9,3 +9,8 @@
     object-fit: cover;
     height: 100%;
 }
+
+.image:hover {
+    cursor: pointer;
+    filter: grayscale(100%);
+}

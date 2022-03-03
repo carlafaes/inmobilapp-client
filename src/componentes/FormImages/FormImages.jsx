@@ -3,10 +3,11 @@ import styles from "./FormImages.module.css"
 
 
 
-export default function FormImages({image}) {
+export default function FormImages({image, onClose,index}) {
     return (
-        <div className={styles.image_container}>
-            <img className={styles.image} src={image}/>
-        </div>    
+        <div onClick={onClose} className={styles.image_container}>
+            <img className={styles.image} id={index} src={image}/>
+                
+        </div>
     )
 }
