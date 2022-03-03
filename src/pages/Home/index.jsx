@@ -21,7 +21,6 @@ function Home() {
   );
   const dispatch = useDispatch();
   const [darkMode, setDarkMode] = useState(false);
-
   const [pageNumber, setPageNumber] = useState(0);
 
   const nextPage = () => {
@@ -62,7 +61,9 @@ function Home() {
               🔆
               <Switch
                 checked={darkMode}
-                onChange={() => setDarkMode(!darkMode)}
+                onChange={() => {
+                  setDarkMode(!darkMode);
+                }}
                 color="primary"
               />
               🌙
