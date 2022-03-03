@@ -6,14 +6,12 @@ import Loading from "../../componentes/Loading";
 import Footer from "../../componentes/Footer";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Switch } from "@material-ui/core";
 import ScoreMax from "../../componentes/ScoreMax";
 import { ListCard } from "../../componentes/ListCard";
 import FilterProperties from "../../componentes/FilterProperties";
 import { setAllProperties } from "../../redux/actions/actionsProperties";
 import { paginate } from "../../utils/paginate";
 import styled from "./Home.module.css";
-import { changeTheme, getTheme } from "../../utils/theme";
 
 function Home() {
   const properties = useSelector(
@@ -21,7 +19,6 @@ function Home() {
   );
   const dispatch = useDispatch();
   const [pageNumber, setPageNumber] = useState(0);
-  const [darkMode, setDarkMode] = useState(getTheme() === "dark");
 
   const nextPage = () => {
     setPageNumber(pageNumber + 1);
@@ -49,22 +46,6 @@ function Home() {
       </div>
       <div>
         <Navbar />
-        <div className={styled.switch_home}>
-          <h2>
-            🔆
-            <Switch
-              checked={darkMode}
-              onChange={() => {
-                changeTheme();
-                setDarkMode(darkMode);
-              }}
-              color="primary"
-            />
-            🌙
-          </h2>
-        </div>
-        <br />
-
         <ScoreMax />
         <FilterProperties />
       </div>
