@@ -9,6 +9,7 @@ import { getUserForLocalStorage } from "../utils/user";
 const LoginBeta = () => {
   const [dni, setDNI] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userWithToken = useSelector((state) => state.reducerUsers.users);
@@ -20,6 +21,8 @@ const LoginBeta = () => {
         ? navigate("/viewAdmin")
         : user.role === "CLIENT"
         ? navigate("/viewClient")
+        : user.role === "AGENT"
+        ? navigate("/viewAgent")
         : null;
     }
   }, []);
@@ -29,8 +32,17 @@ const LoginBeta = () => {
       ? navigate("/viewClient")
       : userWithToken.role === "ADMIN"
       ? navigate(`/viewAdmin`)
+      : userWithToken.role === "AGENT"
+      ? navigate("/viewAgent")
       : null;
   }, [userWithToken]);
+
+  useEffect(() => {
+    if (email) {
+      dispatch(getUserInfoWithToken({ email }));
+      setEmail("");
+    }
+  }, [email]);
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -53,6 +65,7 @@ const LoginBeta = () => {
         password={password}
         setPassword={setPassword}
         handleLogin={handleLogin}
+        setEmail={setEmail}
       />
       <Footer />
     </>
