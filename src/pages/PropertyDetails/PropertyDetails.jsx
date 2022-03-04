@@ -11,6 +11,7 @@ import BathroomIcon from '@mui/icons-material/Bathroom';
 import GarageIcon from '@mui/icons-material/Garage';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ListReviews from '../../componentes/ListReviews';
 import {
 	Grid,
 	Card,
@@ -20,10 +21,12 @@ import {
 	CardContent,
 	Typography,
 	Button,
+	Modal,
 } from '@material-ui/core';
 import Carousel from 'react-material-ui-carousel';
 import { Paper } from '@mui/material';
 import { experimentalStyled as styled } from '@mui/material/styles';
+import clientService from '../../services/client';
 
 const Item = styled(Paper)(({ theme }) => ({
 	backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -32,6 +35,18 @@ const Item = styled(Paper)(({ theme }) => ({
 	textAlign: 'center',
 	color: theme.palette.text.secondary,
 }));
+
+const style = {
+	position: 'absolute',
+	top: '50%',
+	left: '50%',
+	transform: 'translate(-50%, -50%)',
+	width: 400,
+	bgcolor: 'background.paper',
+	border: '2px solid #000',
+	boxShadow: 24,
+	p: 4,
+};
 
 let imageIndex = 0;
 
@@ -50,6 +65,14 @@ const getUserForLocalStorage = () => {
 };
 
 function PropertyDetails(props, classes) {
+	const [open, setOpen] = React.useState(false);
+	const [mensaje, setMensaje] = React.useState('');
+	const [title, setTitle] = React.useState('');
+	const handleOpen = (msj) => {
+		setMensaje(msj);
+		setOpen(true);
+	};
+	const handleClose = () => setOpen(false);
 	const user = getUserForLocalStorage();
 	const [property, setProperty] = useState({});
 	const [image, setImage] = useState();
@@ -152,18 +175,76 @@ function PropertyDetails(props, classes) {
 												<br />
 												<span className={props.classes.Agen}>Phone: </span>
 												{property.agentID ? property.agentID.phone : 'No Found'}
-												<div>
-													{user && (
+											</Item>
+											<Item>
+												{(user && (
+													<div>
+														<Button
+															onClick={() =>
+																clientService
+																	.addFavoriteProperty(id)
+																	.then(() => {
+																		handleOpen(
+																			`Que bien😄 ${user.name} La propiedad se agrego a tus favoritos😄`
+																		);
+																	})
+																	.catch((err) => {
+																		handleOpen(
+																			`😔 ${user.name} Lo sentimos, no se pudo agregar la propiedad a tus favoritos 😔 intenta mas tarde`
+																		);
+																	})
+															}
+															variant='contained'
+															className={props.classes.button}
+														>
+															Añadir a favoritos <FavoriteIcon />
+														</Button>
+
+														<Modal
+															className={props.classes.modal}
+															open={open}
+															onClose={handleClose}
+															aria-labelledby='modal-modal-title'
+															aria-describedby='modal-modal-description'
+														>
+															<Box sx={style}>
+																<Typography
+																	id='modal-modal-title'
+																	variant='h6'
+																	component='h2'
+																>
+																	{title}
+																</Typography>
+																<Typography
+																	id='modal-modal-description'
+																	sx={{ mt: 2 }}
+																>
+																	{mensaje}
+																</Typography>
+															</Box>
+														</Modal>
+													</div>
+												)) || (
+													<div>
+														<span>
+															Para añadir a favoritos debes iniciar sesión
+														</span>
+														<br />
 														<Button
 															className={props.classes.button}
 															size='small'
 															color='primary'
+															href='/login'
 														>
-															Añadir a favoritos <FavoriteIcon />
+															{' '}
+															Iniciar sesión{' '}
 														</Button>
-													)}
-												</div>
+													</div>
+												)}
 											</Item>
+											<>
+												<ListReviews reviews={property.reviews} />
+											</>
 										</Grid>
 									</Box>
 								</Box>
@@ -180,6 +261,13 @@ function PropertyDetails(props, classes) {
 }
 
 export default withStyles({
+	modal: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		color: '#535353',
+		transition: '0.3s',
+	},
 	buttonge: {
 		borderRadius: '10px',
 	},
