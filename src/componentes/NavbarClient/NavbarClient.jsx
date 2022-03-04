@@ -64,15 +64,15 @@ export const NavbarClient = ({ handleLogout, user }) => {
     const classes = useStyles();
     const open = Boolean(anchorEl);
     const [modal, setModal] = useState(false);
-    const [name,setName]=useState('')
-    const [age,setAge]=useState('')
-    const [phone,setPhone]=useState('')
-    const [password,setPassword]=useState('')
-    const [address,setAddress]=useState('')
-    const [newPassword,setNewPassword]=useState('')
-    const info={
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [phone, setPhone] = useState('')
+    const [password, setPassword] = useState('')
+    const [address, setAddress] = useState('')
+    const [newPassword, setNewPassword] = useState('')
+    const info = {
         name,
-        age,
+        email,
         phone,
         password,
         newPassword
@@ -80,15 +80,20 @@ export const NavbarClient = ({ handleLogout, user }) => {
     // estados para el cambio de datos 
     const { token } = user
     const alert = () =>
-    toast.error("Please enter your password");
-    
+        toast.error("Please enter your password");
+    const alertEmail = () => {
+        toast.error('El email es invalido')
+    }
 
-    const handleEdit =async (e) => {
+    const handleEdit = async (e) => {
         e.preventDefault();
-        if(info.password.length===0){
+        if (info.password.length === 0) {
             return alert();
         }
-        console.log(info,token)
+        else if (!validator.isEmail(info.email)) {
+            return alertEmail()
+        }
+        console.log(info, token)
         await clientService.updateInfo(info, token);
     }
     const body = (
@@ -106,13 +111,13 @@ export const NavbarClient = ({ handleLogout, user }) => {
                         name="name"
                         onChange={({ target }) => setName(target.value)}
                     />
-                    <input type="number"
-                        placeholder="Edad"
+                    <input type="text"
+                        placeholder="Email"
                         className='auth_input'
                         autoComplete="off"
-                        value={age}
-                        name="age"
-                        onChange={({ target }) => setAge(target.value)}
+                        value={email}
+                        name="email"
+                        onChange={({ target }) => setEmail(target.value)}
                     />
                 </div>
                 <div className='containerModal'>
@@ -151,10 +156,10 @@ export const NavbarClient = ({ handleLogout, user }) => {
                         onChange={({ target }) => setNewPassword(target.value)}
                     />
                 </div>
-            <div align='right' className='botonEdit'>
-                <button type='submit' className='btn_primary'>Enviar</button>
-                <button onClick={() => openCloseModal()} className='btn_primary'>Cancelar</button>
-            </div>
+                <div align='right' className='botonEdit'>
+                    <button type='submit' className='btn_primary'>Enviar</button>
+                    <button onClick={() => openCloseModal()} className='btn_primary'>Cancelar</button>
+                </div>
             </form>
         </div>
     )
@@ -169,7 +174,7 @@ export const NavbarClient = ({ handleLogout, user }) => {
     const openCloseModal = () => {
         setModal(!modal)
     }
-    
+
 
     return (
         <>
@@ -193,7 +198,7 @@ export const NavbarClient = ({ handleLogout, user }) => {
                 onClose={handleClose}
                 TransitionComponent={Fade}
             >
-                <h2 className='title'><FaUserCircle className='emoticon'/>  {user.name}  </h2>
+                <h2 className='title'><FaUserCircle className='emoticon' />  {user.name}  </h2>
                 <Link href='/'><MenuItem className='menuItem'> <ImHome className='emoticon' />Home</MenuItem></Link>
                 <Link href='/viewClient' ><MenuItem className='menuItem'><AiOutlineStar className='emoticon' /> Favoritos</MenuItem></Link>
                 <MenuItem className='menuItem' onClick={() => openCloseModal()}><FaPencilAlt className='emoticon' />  Editar perfil</MenuItem>
