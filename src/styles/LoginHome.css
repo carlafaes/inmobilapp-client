@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
   background-color: #fafafa;
- 
+
 }
 
 
@@ -15,46 +15,55 @@
   background-color: white;
   border: 2px solid #FAA222;
   border-radius: 5px;
-  height: 450px;
+  height: 500px;
   width: 600px;
   box-shadow: 10px 10px 60px 0px rgba(0, 0, 0, 0.5);
-  
-}
- .input_1{
-  display: flex;
-  justify-content: space-around;
-  
-} 
-.input_2{
-  display: flex;
-  justify-content: space-around;
-}
-.edad{
-  width: 90px;
-} 
-.input_ancho{
-  width: 300px;
+
 }
 
+.input_1 {
+  display: flex;
+  justify-content: space-around;
+  padding-right: 30px;
+}
+
+.input_2 {
+  display: flex;
+  justify-content: space-around;
+  padding-right: 140px;
+  gap: 5rem;
+  align-items: center;
+}
+
+.edad {
+  width: 50px;
+}
+
+.input_ancho {
+  width: 250px;
+}
+.input{
+  width:240px
+}
 .auth_title {
   padding: 20px;
   text-align: center;
   margin-top: 20px;
-  margin-bottom: 20px;  
+  margin-bottom: 20px;
   font-family: 'Nunito', sans-serif;
   color: #faa422;
   text-shadow: 1px 1px 1px #535353;
   font-size: 35px;
 }
 
-.auth_input{
-    padding: 10px;
-    border-color: #d1cecefd;
-    margin:10px 10px 10px;
-    height: 50px;
+.auth_input {
+  padding: 10px;
+  border-color: #d1cecefd;
+  margin: 10px 10px 10px;
+  height: 50px;
 }
 
-.btn{
+.btn {
   cursor: pointer;
   padding: 5px;
   width: 150px;
@@ -62,19 +71,26 @@
   font-family: 'Nunito', sans-serif;
   text-align: center;
   border-color: #faa422;
+  height:50px;
 }
-.btn_button{
-  display:flex;
+
+.btn_button {
+  display: flex;
   justify-content: center;
   padding: 30px;
   align-items: center;
 }
+
 .title {
   height: 30px;
   padding: 20px;
 }
-.title:hover{
-  color:#535353
+
+.title:hover {
+  color: #535353
+}
+.b{
+  width:300px;
 }
 
 /* estilos menuNav */
@@ -86,6 +102,7 @@
   width: 200px;
   color: rgb(209, 206, 191)
 }
+
 .emoticon {
   font-size: 20px;
   color: black;
@@ -95,9 +112,10 @@
   color: #535353;
   background-color: #535353;
 }
+
 /* estilos login */
 
-.form{
+.form {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -110,14 +128,14 @@
   gap: 1rem;
   padding: 5px;
 }
-.containerModal{
+
+.containerModal {
   display: flex;
-  justify-content:space-around;
+  justify-content: space-around;
 }
 
-.botonEdit{
+.botonEdit {
   display: flex;
-  justify-content:center;
-  padding:40px
+  justify-content: center;
+  padding: 40px
 }
-
