@@ -13,19 +13,25 @@ const deleteAgentID = async (id, token) =>
     },
   });
 
-const putAgentID = async (id, agent, token) => {
+const putAgentID = async (id ,agent, token) => {
+  console.log(agent);
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
-  return (await axios.put(`${baseUrl}/${id}`, agent, config)).data;
+  return (await axios.put(`${baseUrl}`, {agentID: id, ...agent}, config)).data;
 };
+
+const getAgentDetailsPropertiesID = async (id) =>
+  (await axios.get(`${baseUrl}/${id}/?detailsProperties=true`)).data;
+
 const agentService = {
   getAgentID,
   deleteAgentID,
   putAgentID,
   createAgent,
+  getAgentDetailsPropertiesID,
 };
 
 export default agentService;

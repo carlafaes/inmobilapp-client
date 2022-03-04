@@ -67,11 +67,6 @@ export default function Footer() {
               </Box>
               <Box>
                 <Link href="/" color="inherit">
-                  Arrendatarios
-                </Link>
-              </Box>
-              <Box>
-                <Link href="/" color="inherit">
                   Reservas
                 </Link>
               </Box>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import PropertyDetails from "./pages/PropertyDetails/PropertyDetails";
 import CreateAgent from "./componentes/CreateAgent/CreateAgent";
@@ -17,33 +17,64 @@ import { ClientInterface } from "./componentes/ClientInterface/ClientInterface";
 import { Toaster } from "react-hot-toast";
 import Generales from "./componentes/PreguntasFrecuentes/Generales";
 import Contact from "./pages/Contact/Contact";
+import ViewAgent from "./pages/ViewAgent";
+import { ThemeProvider, createTheme } from "@material-ui/core/styles";
+import { getTheme, changeTheme } from "../src/utils/theme";
+import { Switch } from "@material-ui/core";
+
+console.log(getTheme());
 
 function App() {
+  const [darkMode, setDarkMode] = useState(getTheme() === "dark");
+
+  const theme = createTheme({
+    palette: {
+      type: getTheme(),
+    },
+  });
+
   return (
     <>
-      <ToastContainer />
-      <Routes>
-        <Route path="*" element={<PageNotFound />} />
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/property/:id" element={<PropertyDetails />} />
-        <Route path="/register" element={<RegisterClient />} />
-        <Route path="/viewClient" element={<ClientInterface />} />
-        <Route path="/viewAdmin" element={<ViewAdmin />} />
-        <Route path="/registerAdmin" element={<FormAdmin />} />
-        <Route path="registerAgent/:id/:role" element={<FormAgent />} />
-        <Route path="/login" element={<LoginBeta />} />
-        <Route path="/agents/:id" element={<AgentDetail />} />
-        <Route
-          path="/create-property/:agentID"
-          element={<CreatePropertyForm />}
-        />
-        <Route path="/quienes" element={<QuienesSomos />} />
-        <Route path="/preguntasFrecuentes" element={<Generales />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/preguntasFrecuentes" element={<Generales />} />
-      </Routes>
-      <Toaster position="top-center" reverseOrder={false} />
-      <ToastContainer />
+      <ThemeProvider theme={theme}>
+        <ToastContainer />
+        <div className="switch_home">
+          <h2>
+            🔆
+            <Switch
+              checked={darkMode}
+              onChange={() => {
+                changeTheme();
+                setDarkMode(!darkMode);
+              }}
+              color="primary"
+            />
+            🌙
+          </h2>
+        </div>
+        <Routes>
+          <Route path="*" element={<PageNotFound />} />
+          <Route exact path="/" element={<Home />} />
+          <Route exact path="/property/:id" element={<PropertyDetails />} />
+          <Route path="/register" element={<RegisterClient />} />
+          <Route path="/viewClient" element={<ClientInterface />} />
+          <Route path="/viewAdmin" element={<ViewAdmin />} />
+          <Route path="/viewAgent" element={<ViewAgent />} />
+          <Route path="/registerAdmin" element={<FormAdmin />} />
+          <Route path="registerAgent/:id/:role" element={<FormAgent />} />
+          <Route path="/login" element={<LoginBeta />} />
+          <Route path="/agents/:id" element={<AgentDetail />} />
+          <Route
+            path="/create-property/:agentID"
+            element={<CreatePropertyForm />}
+          />
+          <Route path="/quienes" element={<QuienesSomos />} />
+          <Route path="/preguntasFrecuentes" element={<Generales />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/preguntasFrecuentes" element={<Generales />} />
+        </Routes>
+        <Toaster position="top-center" reverseOrder={false} />
+        <ToastContainer />
+      </ThemeProvider>
     </>
   );
 }
