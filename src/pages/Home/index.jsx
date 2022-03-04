@@ -12,6 +12,7 @@ import FilterProperties from "../../componentes/FilterProperties";
 import { setAllProperties } from "../../redux/actions/actionsProperties";
 import { paginate } from "../../utils/paginate";
 import styled from "./Home.module.css";
+import Mail from '../../componentes/Newsletter/Mail'
 
 function Home() {
   const properties = useSelector(
@@ -41,6 +42,7 @@ function Home() {
 
   return (
     <div>
+       <Mail/> 
       <div>
         <Landing />
       </div>
