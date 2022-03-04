@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { PostClient } from "../redux/actions/actionClient";
 import Navbar from "./Navbar";
+import validator from 'validator'
 import { IoSendSharp } from 'react-icons/io5'
 import "react-toastify/dist/ReactToastify.css";
 
@@ -35,18 +36,24 @@ export const RegisterClient = () => {
   const alertDni = () => {
     toast.error('El Dni debe tener 10 o más digitos')
   }
+  const alertEmail = () => {
+    toast.error('El email es invalido')
+  }
 
 
   const handleRegister = (data) => {
     const { password2, ...rest } = data
-    if (rest.phone.length < 10) {
+    if (rest.dni.length < 10) {
+      return alertDni()
+    }
+    else if (!validator.isEmail(rest.email)) {
+      return alertEmail()
+    }
+    else if (rest.phone.length < 10) {
       return alertPhone()
     }
     else if (rest.age < 18) {
       return alertAge()
-    }
-    else if (rest.dni.length < 10) {
-      return alertDni()
     }
     else if (rest.age.length > 2) {
       return alertAgeDigits()
@@ -82,8 +89,7 @@ export const RegisterClient = () => {
               {...register("dni", {
                 required: true,
               })}
-            />
-            <input
+            /> <input
               type="Number"
               placeholder="Edad*"
               className="auth_input edad"
@@ -91,27 +97,33 @@ export const RegisterClient = () => {
                 required: true,
               })}
             />
+            <input
+              type='text'
+              placeholder="Email*"
+              className='auth_input input'
+              autoComplete="off"
+              {...register('email', {
+                required: true,
+              })} />
+            <input
+              type="text"
+              placeholder="Direccion*"
+              className="auth_input input"
+              autoComplete="off"
+              {...register("address", {
+                required: true,
+              })}
+            />
             <div className="input_1">
-              <input
-                type="text"
-                placeholder="Direccion*"
-                className="auth_input input_ancho"
-                autoComplete="off"
-                {...register("address", {
-                  required: true,
-                })}
-              />
               <input
                 type="Number"
                 placeholder="Celular*"
-                className="auth_input input_ancho"
+                className="auth_input input_ancho "
                 autoComplete="off"
                 {...register("phone", {
                   required: true,
                 })}
               />
-            </div>
-            <div className="input_2">
               <input
                 type="password"
                 placeholder="Contraseña*"
@@ -120,6 +132,8 @@ export const RegisterClient = () => {
                   required: true,
                 })}
               />
+            </div>
+            <div className="input_2">
               <input
                 type="password"
                 placeholder="Confirmar contraseña*"
@@ -127,11 +141,8 @@ export const RegisterClient = () => {
                 {...register("password2", {
                   required: true,
                 })}
-              />
-            </div>
-
-            <div className="btn_button">
-              <button className="btn">Registrar <IoSendSharp className="send" /></button>
+              /> 
+                <button className="btn">Registrar <IoSendSharp className="send" /></button>
             </div>
             {Object.keys(errors).length >= 1 && (
               camposVacios()

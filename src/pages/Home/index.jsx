@@ -12,13 +12,16 @@ import FilterProperties from "../../componentes/FilterProperties";
 import { setAllProperties } from "../../redux/actions/actionsProperties";
 import { paginate } from "../../utils/paginate";
 import styled from "./Home.module.css";
+import { NavbarClient } from "../../componentes/NavbarClient/NavbarClient";
 
 function Home() {
   const properties = useSelector(
     (state) => state.reducerProperties.filteredProperties
   );
   const dispatch = useDispatch();
+  const [darkMode, setDarkMode] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
+  const [user,setUser]=useState('')
 
   const nextPage = () => {
     setPageNumber(pageNumber + 1);
@@ -29,12 +32,14 @@ function Home() {
 
   const propertiesPerPage = 5;
 
-  useEffect(() => {
+  useEffect(async() => {
     propertyService.getAll().then((data) => {
       dispatch(setAllProperties(data));
     });
+      const loggedUserJSON = window.localStorage.getItem("loggedUser");
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user)
   }, []);
-
   if (!properties) {
     <Loading />;
   }

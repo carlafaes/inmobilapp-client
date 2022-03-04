@@ -21,9 +21,9 @@ const LoginForm = ({
           <h3 className="auth_title">Login</h3>
           <form onSubmit={handleLogin} className="form">
             <input
-              type="Number"
-              placeholder="DNI"
-              autoComplete="on"
+              type="text"
+              placeholder="Dni/Email"
+              autoComplete="off"
               value={dni}
               onChange={(e) => setDNI(e.target.value)}
               className="auth_input input_ancho"
