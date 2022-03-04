@@ -42,7 +42,7 @@ function Home() {
 
   return (
     <div>
-       <Mail/> 
+       {/* <Mail/>  */}
       <div>
         <Landing />
       </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AppBar, IconButton, Menu, MenuItem, Toolbar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import SortIcon from "@material-ui/icons/Sort";
-import icono from "../Img/icono.png";
+import icono from "../Img/inmobilapp-logo.png";
 import Fade from "@material-ui/core/Fade";
 import Link from "@material-ui/core/Link";
 import { ImHome } from "react-icons/im";

@@ -3,96 +3,69 @@ import { makeStyles } from '@material-ui/core/styles';
 import { CssBaseline, IconButton, Collapse } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Link as Scroll } from 'react-scroll';
-import Logo from '../Img/logo.png';
+import Logo from '../Img/inmobilapp-logo-landing.png';
+import './../styles/Navbar.css'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     position: 'relative',
-    minHeight: '100vh',
+    height: '100vh',
+    width:'100vw',
+    marginRigth:'0px',
     // backgroundImage:"url('https://images.pexels.com/photos/1095826/pexels-photo-1095826.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260')",
     backgroundImage: "url('https://images.pexels.com/photos/830891/pexels-photo-830891.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260')",
     backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
+    backgroundSize: '100vw ',
     zIndex: '10',
   },
   imgLogo: {
-    width:'600px',
-    marginLeft: '220px',
-    marginTop: '1%',
-    height:'300px',
-    '@media (max-width:575px)' : {
-      marginLeft:'100px',
-      width:'300px',
-      marginTop:'-10%',
+     width:'20%',
+     marginLeft: '40%',
+    // marginTop: '1%',
+     height:'15%',
+    '@media only screen and (max-width:575px)' : {
+      marginLeft:'0%',
+      width:'30%',
+      marginTop:'10%',
     },
-    '@media (max-width:960px)' : {
+    '@media only screen and (max-width:960px)' : {
       width: '480px',
       marginLeft:'240px',
       height:'300px',
     },
-    '@media (max-width:1200px)' : {
+    '@media only screen and (max-width:1200px)' : {
       width: '700px',
       marginLeft:'190px',
       height:'350px',
       marginTop:'30px',
     },
-    '@media (max-width:1900px)' : {
+    '@media only screen and (max-width:1900px)' : {
       width: '780px',
       marginLeft:'490px',
       height:'400px',
+      marginTop:'10%',
     },
-    '@media (max-width:2060px)' : {
+    '@media only screen and (max-width:2060px)' : {
       width: '780px',
-      marginLeft:'421px',
+      marginLeft:'30%',
       height:'300px',
       marginTop:'100px',
     },
-  },
-  slogan: {
-    marginLeft: '26%',
-    marginTop: '1%',
-    fontSize: '30px',
-    color:'#0d0d0d',
-    fontFamily: 'Times New Roman',
-    textShadow: '#faa222 1px 1px',
-  '@media (max-width:575px)' : {
-    width: '50%',
-    fontSize:'20px',
-    marginLeft: '26%',
-  },
-  '@media (max-width:960px)' : {
-    width: '400px',
-    marginLeft:'270px',
-    height:'80px',
-  },
-  '@media (max-width:1200px)' : {
-    width: '400px',
-    marginLeft:'306px',
-    height:'40px',
-    marginTop:'-20px',
-  },
-  '@media (max-width:1980px)' : {
-    width: '780px',
-    marginLeft:'270px',
-    height:'300px',
-    marginTop:'-30px',
-  },
-  '@media (max-width:2060px)' : {
-    width: '400px',
-    marginLeft:'540px',
-    height:'80px',
-    marginTop:'-10px',
-  },
+    '@media only screen and (max-width:2600px)' : {
+      width: '780px',
+      marginLeft:'35%',
+      height:'300px',
+      marginTop:'10%',
+    },
   },
   arrow: {
-    width:'100px',
+    // width:'100px',
     color: '#faa222',
     // fontSize: '40rem',
-     marginLeft: '385px',
-    marginTop: '-5%',
-    position: 'absolute',
+    //  marginLeft: '45%',
+    // marginTop: '-5%',
+    // position: 'absolute',
     zIndex: '10',
-    height:'80px',
     '@media (max-width:575px)' : {
       width: '100px',
       marginLeft:'170px',
@@ -105,9 +78,8 @@ const useStyles = makeStyles((theme) => ({
       marginTop:'-10px',
     },
     '@media (max-width:2060px)' : {
-      width: '200px',
-      marginLeft:'870px',
-      height:'90px',
+      width: '100vw',
+      height:'113px',
       marginTop:'-10px',
     },
     '@media (max-width:1366px)' : {
@@ -117,12 +89,17 @@ const useStyles = makeStyles((theme) => ({
       marginTop:'-20px',
     },
     '@media (max-width:1900px)' : {
-      width: '500px',
-      marginLeft:'450px',
+      width: '100vw',
       height:'100px',
       marginTop:'-60px',
-    }
+    },
+  '@media (max-width:2600px)' : {
+    width: '100vw',
+    marginLeft:'-20px',
+    height:'150px',
+    marginTop:'0%',
   },
+ }
 }));
 
 export default function Landing() {
@@ -144,11 +121,10 @@ export default function Landing() {
         collapsedSize={50}
       >
         <img className={classes.imgLogo}  src={Logo} alt="imglogo" width={650} height={450} />
-        <h3 className={classes.slogan} >Innovación inmobiliaria</h3>
         <CssBaseline />
         <div>
           <Scroll to="navbar" smooth>
-            <IconButton>
+            <IconButton className='custombtn'>
               <div className='arrow_landing'>
               <ExpandMoreIcon className={classes.arrow} />
               </div>

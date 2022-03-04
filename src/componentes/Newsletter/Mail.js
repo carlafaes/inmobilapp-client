@@ -23,7 +23,7 @@ export default function Mail(){
                 console.log('succes',data)
                 setValues({...values,status:true})
             }
-        }).catch(console.log('error in send email'))
+        }).catch(console.log('send email,mail.js 26'))
     }
 
     return(
