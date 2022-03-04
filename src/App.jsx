@@ -18,6 +18,7 @@ import { Toaster } from "react-hot-toast";
 import Generales from "./componentes/PreguntasFrecuentes/Generales";
 import Contact from "./pages/Contact/Contact";
 import ViewAgent from "./pages/ViewAgent";
+import Checkout from "./pages/Checkout/Checkout"
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path="/preguntasFrecuentes" element={<Generales />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/preguntasFrecuentes" element={<Generales />} />
+        <Route path="/checkout" element={<Checkout/>} />
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />
       <ToastContainer />
