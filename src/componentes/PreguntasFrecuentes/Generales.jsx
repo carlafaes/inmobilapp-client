@@ -26,7 +26,7 @@ box-shadow:2px 10px 35px 1px rgab(153,153,153,0.3);
 `;
 const Wrap= styled.div`
 background:rgb(242, 214, 173,0.6);
-color:#a3a3a3;
+color:6c6c6c;
 border-bottom-style:ridge;
 display:flex;
 justify-content:space-between;

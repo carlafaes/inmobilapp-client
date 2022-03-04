@@ -66,7 +66,7 @@ export default function Footer() {
                 </Link>
               </Box>
               <Box>
-                <Link href="/" color="inherit">
+                <Link href="/reservas" color="inherit">
                   Reservas
                 </Link>
               </Box>
