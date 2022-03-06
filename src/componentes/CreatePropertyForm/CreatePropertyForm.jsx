@@ -13,14 +13,14 @@ export default function CreatePropertyForm() {
   const [newProperty, setNewProperty] = useState("");
   const [formErrors, setFormErrors] = useState({});
   const [images, setNewImage] = useState([]);
-  let agentID = null;
+  const [agentID, setAgentID] = useState("");
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const user = getUserForLocalStorage();
     if (user && user.role === "AGENT") {
-      agentID = user.id;
+      setAgentID(user.id);
     } else {
       notifyError("No tienes permisos para entrar en esta ruta!");
       navigate("/");
@@ -168,7 +168,7 @@ export default function CreatePropertyForm() {
             .createProperty(property)
             .then(() => {
               notifySuccess("Propiedad creada");
-              setTimeout(() => navigate("/"), 2000);
+              navigate("/viewAgent");
             })
             .catch((err) => notifyError(err.message));
           setNewImage([]);
