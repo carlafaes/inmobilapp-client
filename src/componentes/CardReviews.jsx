@@ -13,7 +13,6 @@ import {
 import { Rating } from '@material-ui/lab';
 
 const CardReviews = ({ review, classes }) => {
-	console.log(review);
 	return (
 		<Container>
 			<Card className={classes.root}>

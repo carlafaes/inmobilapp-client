@@ -1,14 +1,18 @@
 import { IconButton } from "@mui/material";
 import { BsFillPlusSquareFill } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 import CardPropertyAgent from "../CardPropertyAgent";
 
 import classes from "./PanelAgent.module.css";
 
 export default function PanelAgent({ agent }) {
+
+  const navigate = useNavigate();
+
   return (
     <div className={classes.container}>
       <div className={classes.appBar}>
-        <IconButton>
+        <IconButton onClick={() => navigate("/create-property")}>
           <BsFillPlusSquareFill />
         </IconButton>
       </div>
