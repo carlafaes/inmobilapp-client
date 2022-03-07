@@ -95,7 +95,7 @@ function PropertyDetails(props, classes) {
 						<CardMedia>
 							<Button
 								className={props.classes.buttonge}
-								href='http://localhost:3000/'
+								href='https://inmobilapp.vercel.app/'
 							>
 								<ArrowBackIcon className={props.classes.buttonback} />
 							</Button>
@@ -177,7 +177,7 @@ function PropertyDetails(props, classes) {
 												{property.agentID ? property.agentID.phone : 'No Found'}
 											</Item>
 											<Item>
-												{(user && (
+												{user && user.role === 'CLIENT' ? (
 													<div>
 														<Button
 															onClick={() =>
@@ -224,7 +224,7 @@ function PropertyDetails(props, classes) {
 															</Box>
 														</Modal>
 													</div>
-												)) || (
+												) : (
 													<div>
 														<span>
 															Para añadir a favoritos debes iniciar sesión
