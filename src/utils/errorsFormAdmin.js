@@ -55,19 +55,6 @@ export const validateFormAdmin = (input, errors, name) => {
         : null,
     };
   }
-
-  if (name === "age") {
-    return {
-      ...errors,
-      age: !input.age
-        ? "Ingresa tu edad"
-        : input.age < 18
-        ? "Debes ser mayor de edad"
-        : input.age > 100
-        ? "Edad invalida"
-        : null,
-    };
-  }
 };
 
 export const validatePutAgent = (input, errors, name) => {
@@ -113,19 +100,6 @@ export const validatePutAdmin = (input, errors, name) => {
         ? "Solo letras"
         : input.name.length < 5
         ? "Longitud minima 5"
-        : null,
-    };
-  }
-
-  if (name === "age") {
-    return {
-      ...errors,
-      age: !input.age
-        ? "Ingresa tu edad"
-        : input.age < 18
-        ? "Debes ser mayor de edad"
-        : input.age > 100
-        ? "Edad invalida"
         : null,
     };
   }
