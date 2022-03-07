@@ -6,8 +6,6 @@ import {
   MenuItem,
   Toolbar,
   Modal,
-  TextField,
-  Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import SortIcon from "@material-ui/icons/Sort";
@@ -18,7 +16,8 @@ import { ImHome } from "react-icons/im";
 import { IoLogoGithub } from "react-icons/io5";
 import { IoLogoVercel } from "react-icons/io5";
 import { FiLogOut } from "react-icons/fi";
-import { FaPencilAlt, FaCat, FaPlus } from "react-icons/fa";
+import { FaPencilAlt, FaPlus } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 import { logaoutCurrentUserForLocalStorage } from "../../utils/user";
 import { useNavigate } from "react-router-dom";
 import PutAdmin from "../PutAdmin";
@@ -145,14 +144,17 @@ export default function NavBarAdmin({ user, token, deleteCurrentAdminID }) {
         <MenuItem className="menuItem" onClick={() => openCloseModal()}>
           <FaPencilAlt className="emoticon" /> Editar perfil
         </MenuItem>
-        <MenuItem className="menuItem" onClick={() => navigate(`/registerAgent/${user.id}/${user.role}`)}>
+        <MenuItem
+          className="menuItem"
+          onClick={() => navigate("/registerAgent")}
+        >
           <FaPlus className="emoticon" /> Añadir agente
         </MenuItem>
         <MenuItem
           className="menuItem"
           onClick={() => deleteCurrentAdminID(user.id, token)}
         >
-          <FaCat className="emoticon" /> Eliminar perfil
+          <MdDelete className="emoticon" /> Eliminar perfil
         </MenuItem>
         <MenuItem className="menuItem" onClick={handleLogout}>
           <FiLogOut className="emoticon" /> Salir

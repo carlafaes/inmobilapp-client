@@ -59,7 +59,7 @@ function App() {
           <Route path="/viewAdmin" element={<ViewAdmin />} />
           <Route path="/viewAgent" element={<ViewAgent />} />
           <Route path="/registerAdmin" element={<FormAdmin />} />
-          <Route path="registerAgent/:id/:role" element={<FormAgent />} />
+          <Route path="/registerAgent" element={<FormAgent />} />
           <Route path="/login" element={<LoginBeta />} />
           <Route path="/agents/:id" element={<AgentDetail />} />
           <Route

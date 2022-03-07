@@ -98,6 +98,7 @@ export default function Navbar() {
         swal("Listo!", {
           icon: "success",
         });
+        navigate("/");
       }
     });
   };
