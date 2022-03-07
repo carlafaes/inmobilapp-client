@@ -1,64 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import propertyServices from "../../services/property";
 
-
-const mercadopago = new MercadoPago('PUBLIC_KEY', {
-    locale: 'YOUR_LOCALE' // The most common are: 'pt-BR', 'es-AR' and 'en-US'
+export default function Checkout() {
+  const [property, setProperty] = useState({});
+  const { id } = useParams();
+  useEffect(() => {
+    async function getProperty() {
+      setProperty(await propertyServices.getPropertyDetail(id));
+    }
   });
 
-document.getElementById("checkout-btn").addEventListener("click", function() {
+  const mercadopago = new window.MercadoPago(
+    "TEST-0357acf5-bb8f-4697-a26b-332ccab4020b",
+    {
+      locale: "es-CO", // The most common are: 'pt-BR', 'es-AR' and 'en-US'
+    }
+  );
 
-    $('#checkout-btn').attr("disabled", true);
-    
-    const orderData = {
-      quantity: document.getElementById("quantity").value,
-      description: document.getElementById("product-description").innerHTML,
-      price: document.getElementById("unit-price").innerHTML
-    };
-      
-    fetch("/create_preference", {
-      method: "POST",
-      headers: {
-          "Content-Type": "application/json",
-      },
-      body: JSON.stringify(orderData),
-    })
-      .then(function(response) {
-          return response.json();
-      })
-      .then(function(preference) {
-          createCheckoutButton(preference.id);
-          
-          $(".shopping-cart").fadeOut(500);
-          setTimeout(() => {
-              $(".container_payment").show(500).fadeIn();
-          }, 500);
-      })
-      .catch(function() {
-          alert("Unexpected error");
-          $('#checkout-btn').attr("disabled", false);
-      });
-  });
-  
-  // Create preference when click on checkout button
   function createCheckoutButton(preferenceId) {
     // Initialize the checkout
     mercadopago.checkout({
       preference: {
-        id: preferenceId
+        id: preferenceId,
       },
       render: {
-        container: '#button-checkout', // Class name where the payment button will be displayed
-        label: 'Pay', // Change the payment button text (optional)
-      }
+        container: "#button-checkout", // Class name where the payment button will be displayed
+        label: "Pay", // Change the payment button text (optional)
+      },
     });
-}
+  }
 
-export default function Checkout(){
-    return (
-        <div>
-            <div>
-                checkout
-            </div>
-        </div>
-    )
+  function handleClick(e) {
+    /* e.target.attr("disabled", true); */
+
+    /* const orderData = {
+      title: `Arriendo-${property._id}`,
+      quantity: 1,
+      price: property.rentalPrice,
+    }; */
+
+    const orderData = {
+      title: "Arriendo prueba",
+      quantity: 1,
+      price: 40000,
+    };
+
+    axios
+      .post("/api/checkout", orderData)
+      .then((data) => createCheckoutButton(data.data))
+      .catch((err) => console.log(err));
+  }
+
+  return (
+    <div>
+      <button onClick={handleClick} id="checkout-btn">
+        checkout
+      </button>
+      <div id="button-checkout"></div>
+    </div>
+  );
 }

@@ -21,7 +21,7 @@ import ViewAgent from "./pages/ViewAgent";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { getTheme, changeTheme } from "../src/utils/theme";
 import { Switch } from "@material-ui/core";
-import Checkout from "./pages/Checkout/Checkout"
+import Checkout from "./pages/Checkout/Checkout";
 
 console.log(getTheme());
 
@@ -64,11 +64,14 @@ function App() {
           <Route path="registerAgent/:id/:role" element={<FormAgent />} />
           <Route path="/login" element={<LoginBeta />} />
           <Route path="/agents/:id" element={<AgentDetail />} />
-          <Route path="/create-property/:agentID" element={<CreatePropertyForm />}/>
+          <Route
+            path="/create-property/:agentID"
+            element={<CreatePropertyForm />}
+          />
           <Route path="/quienes" element={<QuienesSomos />} />
           <Route path="/preguntasFrecuentes" element={<Generales />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/checkout" element={<Checkout/>}/>
+          <Route path="/checkout/:id" element={<Checkout />} />
           <Route path="/preguntasFrecuentes" element={<Generales />} />
         </Routes>
         <Toaster position="top-center" reverseOrder={false} />
