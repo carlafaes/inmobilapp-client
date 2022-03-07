@@ -95,6 +95,9 @@ export default function Navbar() {
       if (op) {
         logaoutCurrentUserForLocalStorage();
         setUser(null);
+        swal("Listo!", {
+          icon: "success",
+        });
       }
     });
   };
@@ -161,9 +164,9 @@ export default function Navbar() {
         )}
 
         {!!user ? (
-            <MenuItem className="menuItem" onClick={handleLogout}>
-              <GiExitDoor className="emoticon" /> Salir
-            </MenuItem>
+          <MenuItem className="menuItem" onClick={handleLogout}>
+            <GiExitDoor className="emoticon" /> Salir
+          </MenuItem>
         ) : (
           <Link href="/login">
             <MenuItem className="menuItem">
