@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import propertyService from "../../services/property";
-import Landing from "../../componentes/Landingprueba";
+import Landing from "../../componentes/Landing";
 import Navbar from "../../componentes/Navbar";
 import Loading from "../../componentes/Loading";
 import Footer from "../../componentes/Footer";
@@ -12,21 +12,19 @@ import FilterProperties from "../../componentes/FilterProperties";
 import { setAllProperties } from "../../redux/actions/actionsProperties";
 import { paginate } from "../../utils/paginate";
 import styled from "./Home.module.css";
-import Popup from '../../componentes/Newsletter/Popup';
-import '../../componentes/Newsletter/newsletter.css';
-import { NavbarClient } from "../../componentes/NavbarClient/NavbarClient";
+import Popup from "../../componentes/Newsletter/Popup";
+import "../../componentes/Newsletter/newsletter.css";
 
 function Home() {
   const properties = useSelector(
     (state) => state.reducerProperties.filteredProperties
   );
   const dispatch = useDispatch();
-  const [darkMode, setDarkMode] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
-  const [user,setUser]=useState('')
+  const [user, setUser] = useState("");
 
-  const [buttonPopup,setButtonPopup] = useState(true)
-  const [timedPopup,setTimedPopup] = useState(false)
+  const [buttonPopup, setButtonPopup] = useState(true);
+  const [timedPopup, setTimedPopup] = useState(false);
 
   const nextPage = () => {
     setPageNumber(pageNumber + 1);
@@ -39,18 +37,17 @@ function Home() {
 
   useEffect(() => {
     setTimeout(() => {
-      setTimedPopup(true)
-    }, 5000)
-  },[])
+      setTimedPopup(true);
+    }, 5000);
+  }, []);
 
-  
-  useEffect(async() => {
+  useEffect(async () => {
     propertyService.getAll().then((data) => {
       dispatch(setAllProperties(data));
     });
-      const loggedUserJSON = window.localStorage.getItem("loggedUser");
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user)
+    const loggedUserJSON = window.localStorage.getItem("loggedUser");
+    const user = JSON.parse(loggedUserJSON);
+    setUser(user);
   }, []);
   if (!properties) {
     <Loading />;
@@ -74,15 +71,14 @@ function Home() {
           Siguiente
         </button>
       </div>
-        <main>
-          
-        <Popup 
-        trigger={timedPopup}  
-        setTrigger={setTimedPopup}
-        toggle={buttonPopup}
-        setToggle={setButtonPopup}
+      <main>
+        <Popup
+          trigger={timedPopup}
+          setTrigger={setTimedPopup}
+          toggle={buttonPopup}
+          setToggle={setButtonPopup}
         />
-        </main>
+      </main>
       <ListCard
         properties={paginate(properties, pageNumber, propertiesPerPage)}
       />
