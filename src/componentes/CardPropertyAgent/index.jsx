@@ -1,18 +1,18 @@
-import { Avatar, Card, CardHeader, CardMedia, IconButton } from "@mui/material";
+import {
+  Avatar,
+  Card,
+  CardHeader,
+  CardActions,
+  IconButton,
+  Button,
+} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import swal from "sweetalert";
 
-import { getRandomArbitrary } from "../../utils/colorRandom";
 import propertyService from "../../services/property";
 import { notifyError, notifySuccess } from "../../utils/notifications";
 
-export default function CardPropertyAgent({
-  images,
-  state,
-  id,
-  clientsID,
-  ...d
-}) {
+export default function CardPropertyAgent({ images, state, id }) {
   const deleteProperty = () => {
     swal({
       title: "Eliminar Propiedad!",
@@ -40,41 +40,41 @@ export default function CardPropertyAgent({
   };
 
   return (
-    <Card sx={{ maxWidth: 400 }}>
-      <CardHeader
-        avatar={
-          <Avatar
-            sx={{
-              bgcolor:
-                state === "available"
-                  ? "#21f600"
-                  : state === "reserved"
-                  ? "#2000ad"
-                  : "#ba0001",
-            }}
-          >
-            {state === "available" ? "D" : state === "reserved" ? "R" : "O"}
-          </Avatar>
-        }
-        action={
-          <IconButton aria-label="Eliminar" onClick={deleteProperty}>
-            <DeleteIcon />
-          </IconButton>
-        }
-        title={
-          state === "available"
-            ? "Disponible"
-            : state === "reserved"
-            ? "Reservada"
-            : "Ocupada"
-        }
-        subheader={`ID: ${id}`}
-      />
-      <CardMedia
-        component="img"
-        all={state}
-        image={images[getRandomArbitrary(0, images.length)]}
-      />
-    </Card>
+    <div>
+      <Card sx={{ maxWidth: 400 }}>
+        <CardHeader
+          avatar={
+            <Avatar
+              sx={{
+                bgcolor:
+                  state === "available"
+                    ? "#21f600"
+                    : state === "reserved"
+                    ? "#2000ad"
+                    : "#ba0001",
+              }}
+            >
+              {state === "available" ? "D" : state === "reserved" ? "R" : "O"}
+            </Avatar>
+          }
+          action={
+            <IconButton aria-label="Eliminar" onClick={deleteProperty}>
+              <DeleteIcon />
+            </IconButton>
+          }
+          title={
+            state === "available"
+              ? "Disponible"
+              : state === "reserved"
+              ? "Reservada"
+              : "Ocupada"
+          }
+          subheader={`ID: ${id}`}
+        />
+        <CardActions>
+          <Button size="small">editar</Button>
+        </CardActions>
+      </Card>
+    </div>
   );
 }
