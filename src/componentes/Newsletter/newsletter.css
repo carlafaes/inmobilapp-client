@@ -48,7 +48,7 @@ main{
 }
 .close-btn:hover{
     background-color: gray;
-    border-radius: 2px;
+    border-radius: 10px;
 }
 .form-mail{
     display: flex;
