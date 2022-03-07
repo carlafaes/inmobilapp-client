@@ -15,7 +15,7 @@ export default function Checkout() {
   const mercadopago = new window.MercadoPago(
     "TEST-0357acf5-bb8f-4697-a26b-332ccab4020b",
     {
-      locale: "es-CO", // The most common are: 'pt-BR', 'es-AR' and 'en-US'
+      locale: "es-AR", // The most common are: 'pt-BR', 'es-AR' and 'en-US'
     }
   );
 
@@ -33,18 +33,10 @@ export default function Checkout() {
   }
 
   function handleClick(e) {
-    /* e.target.attr("disabled", true); */
-
-    /* const orderData = {
-      title: `Arriendo-${property._id}`,
-      quantity: 1,
-      price: property.rentalPrice,
-    }; */
-
     const orderData = {
       title: "Arriendo prueba",
       quantity: 1,
-      price: 40000,
+      price: 1500,
     };
 
     axios

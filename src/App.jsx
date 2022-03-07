@@ -62,10 +62,7 @@ function App() {
           <Route path="registerAgent/:id/:role" element={<FormAgent />} />
           <Route path="/login" element={<LoginBeta />} />
           <Route path="/agents/:id" element={<AgentDetail />} />
-          <Route
-            path="/create-property"
-            element={<CreatePropertyForm />}
-          />
+          <Route path="/create-property" element={<CreatePropertyForm />} />
           <Route path="/quienes" element={<QuienesSomos />} />
           <Route path="/preguntasFrecuentes" element={<Generales />} />
           <Route path="/contact" element={<Contact />} />
