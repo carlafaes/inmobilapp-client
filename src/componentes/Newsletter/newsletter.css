@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Creepster&family=Nunito:wght@200&family=Open+Sans+Condensed:wght@300&family=Redressed&display=swap");
+main{
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    position: fixed;
+    z-index: 300;
+}
+
+.popup{
+    position:fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.popup-inner{
+    position: relative;
+    padding: 32px;
+    width: 100%;
+    max-width: 640px;
+    height: 400px;
+    background-color: rgba(202, 201, 188, 0.897);
+    border-radius: 10px;
+    background-image: url('../../Img/inmobilapp-logo.png');
+    background-size: 590px 450px;
+    padding-top: 20px;
+    background-repeat: no-repeat;
+    
+}
+
+.popup-inner .close-btn{
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    border-style: none;
+    background-color: transparent;
+    transition: all ease-in 1s;
+}
+.close-btn:hover{
+    background-color: gray;
+    border-radius: 10px;
+}
+.form-mail{
+    display: flex;
+    height: 90%;
+    flex-direction: column;
+    padding-top: 30px;
+    /* justify-content: center;
+    align-items: center; */
+    gap:20px;
+    width: auto;
+}
+
+.title_mail{
+    position: relative;
+    font-size: 25px;
+    z-index: 10;
+    padding-top: 20px;
+    font-family: "Nunito", sans-serif;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.input-mail{
+    border-radius: 4px;
+    width: 100%;
+    height: 35px;
+    color: #9c6108;
+    background-color: rgba(211, 212, 199, 0.527);
+}
+.label-email-form{
+    font-family: "Nunito", sans-serif;
+    font-weight: bold;
+    color: #352c1e;
+}
+
+.btn_sus{
+    background-color: #faa222;
+    color: aliceblue;
+    width: 100px;
+    margin-left: 80%;
+    height: 40px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: all ease 1s;
+}
+.btn_sus:hover{
+    background-color: gray;
+}

@@ -17,3 +17,6 @@
 .link_home:visited{ 
     color: #53452e;
 }   
+.custombtn:hover{
+    background-color: inherit !important;
+}
