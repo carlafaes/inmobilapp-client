@@ -12,7 +12,7 @@ import {
 import { Phone } from "@mui/icons-material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { LocationCity } from "@mui/icons-material";
+import { GiPositionMarker } from "react-icons/gi";
 import PutAgent from "../PutAgent";
 import { getColorRamdom } from "../../utils/colorRandom";
 
@@ -51,7 +51,9 @@ export default function CardAgent({ agent, deleteAgent }) {
       <Card sx={{ width: 345 }}>
         <CardHeader
           avatar={<Avatar sx={{ backgroundColor: color }}>{name[0]}</Avatar>}
-          title={`${name}${!permissions.crudProperty ? ", (Sin Permisos)" : ""}`}
+          title={`${name}${
+            !permissions.crudProperty ? ", (Sin Permisos)" : ""
+          }`}
           action={
             <IconButton onClick={() => deleteAgent(id)}>
               <DeleteIcon />
@@ -72,7 +74,7 @@ export default function CardAgent({ agent, deleteAgent }) {
         </CardActions>
         <CardContent sx={{ paddingTop: 0 }}>
           <div style={{ display: "flex", direction: "row" }}>
-            <LocationCity />
+            <GiPositionMarker className="emoticon" />
             <Typography> {address}</Typography>
           </div>
         </CardContent>
