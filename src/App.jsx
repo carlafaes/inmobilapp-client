@@ -70,7 +70,6 @@ function App() {
           <Route path="/checkout/:id" element={<Checkout />} />
           <Route path="/preguntasFrecuentes" element={<Generales/>} />
           <Route path='/reservas' element={<Reservas/>}/>
-
         </Routes>
         <Toaster position="top-center" reverseOrder={false} />
         <ToastContainer />

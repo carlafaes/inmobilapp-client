@@ -51,6 +51,10 @@
 .p{
     height: 100px;
 }
+.botonesEx{
+    display:flex;
+    justify-content:space-around;
+}
 
 .seccion2{
     display: flex;

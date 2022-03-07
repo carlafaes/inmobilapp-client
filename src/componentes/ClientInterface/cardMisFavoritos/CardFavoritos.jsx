@@ -26,7 +26,7 @@ export const CardFavoritos = ({description,details,images,location,rentalPrice,s
                 <h6><MdOutlineSquareFoot className='emoticon' /> {area} m²</h6>
                 <h6><IoMdBed className='emoticon' />{rooms} dorms</h6>
                 <h6><GiHomeGarage className='emoticon' />{garage} 1 garajes</h6>
-                <h6><AiFillDollarCircle className='emoticon'/> {rentalPrice} Dollars</h6>
+                <h6><AiFillDollarCircle className='emoticon'/> {rentalPrice} USD</h6>
             </div>
         </div>
         <br />

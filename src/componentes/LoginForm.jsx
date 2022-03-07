@@ -42,7 +42,6 @@ const LoginForm = ({
               onSuccess={respuestaGoogle}
               onFailure={respuestaGoogle}
               cookiePolicy={"single_host_origin"}
-              //   onChange={({ target }) => setPassword(target.value)}
             />
             <Link to="/register" className="link">
               Create new account
