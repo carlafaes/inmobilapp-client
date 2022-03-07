@@ -18,11 +18,11 @@ import { Toaster } from "react-hot-toast";
 import Generales from "./componentes/PreguntasFrecuentes/Generales";
 import Contact from "./pages/Contact/Contact";
 import ViewAgent from "./pages/ViewAgent";
+import Reservas from './componentes/PreguntasFrecuentes/Reservas'
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { getTheme, changeTheme } from "../src/utils/theme";
 import { Switch } from "@material-ui/core";
-
-console.log(getTheme());
+import Checkout from "./pages/Checkout/Checkout";
 
 function App() {
   const [darkMode, setDarkMode] = useState(getTheme() === "dark");
@@ -60,17 +60,17 @@ function App() {
           <Route path="/viewAdmin" element={<ViewAdmin />} />
           <Route path="/viewAgent" element={<ViewAgent />} />
           <Route path="/registerAdmin" element={<FormAdmin />} />
-          <Route path="registerAgent/:id/:role" element={<FormAgent />} />
+          <Route path="/registerAgent" element={<FormAgent />} />
           <Route path="/login" element={<LoginBeta />} />
           <Route path="/agents/:id" element={<AgentDetail />} />
-          <Route
-            path="/create-property/:agentID"
-            element={<CreatePropertyForm />}
-          />
+          <Route path="/create-property" element={<CreatePropertyForm />} />
           <Route path="/quienes" element={<QuienesSomos />} />
           <Route path="/preguntasFrecuentes" element={<Generales />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/preguntasFrecuentes" element={<Generales />} />
+          <Route path="/checkout/:id" element={<Checkout />} />
+          <Route path="/preguntasFrecuentes" element={<Generales/>} />
+          <Route path='/reservas' element={<Reservas/>}/>
+
         </Routes>
         <Toaster position="top-center" reverseOrder={false} />
         <ToastContainer />

@@ -1,32 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import styles from "./CreateProperty.module.css";
 import propertyServices from "../../services/property";
 import { isValidURL } from "../../utils/validurl";
 import FormImages from "../FormImages/FormImages";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { notifySuccess, notifyError } from "../../utils/notifications";
+
+import { getUserForLocalStorage } from "../../utils/user";
 
 export default function CreatePropertyForm() {
   const [newProperty, setNewProperty] = useState("");
   const [formErrors, setFormErrors] = useState({});
   const [images, setNewImage] = useState([]);
-  const { agentID } = useParams();
+  const [agentID, setAgentID] = useState("");
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = getUserForLocalStorage();
+    if (user && user.role === "AGENT") {
+      setAgentID(user.id);
+    } else {
+      notifyError("No tienes permisos para entrar en esta ruta!");
+      navigate("/");
+    }
+  }, []);
+
   function onClickHandler(image) {
     if (isValidURL(image)) {
       setNewImage([...images, image]);
-      const $image = document.querySelector('#image-input');
-      $image.reset
+      const $image = document.querySelector("#image-input");
+      $image.reset;
     } else {
       notifyError("URL invalida!");
     }
   }
 
-  function onClose(e){
+  function onClose(e) {
     e.preventDefault();
-    setNewImage(images.filter(image => image !== e.target.src));
+    setNewImage(images.filter((image) => image !== e.target.src));
   }
 
   return (
@@ -83,15 +96,15 @@ export default function CreatePropertyForm() {
           err.description = "Debes ingresar una descripción";
         } else if (v.description.length < 11) {
           err.description = "La descripción debe tener más de diez caracteres";
-        }else if(v.description .length < 10){
-          err.description = "la descripción debe tener minim 10 caracteres"
+        } else if (v.description.length < 10) {
+          err.description = "la descripción debe tener minim 10 caracteres";
         }
 
         if (!v.area) {
           err.area = "Debes ingresar un area";
         } else if (!/^\d+$/.test(v.area)) {
           err.area = "Unicamente se aceptan números en este campo";
-        }else if(!(v.area >= 25 && v.area <= 300)){
+        } else if (!(v.area >= 25 && v.area <= 300)) {
           err.area = "El area mínima es de 25 m2 y como maximo 300m2";
         }
 
@@ -100,16 +113,15 @@ export default function CreatePropertyForm() {
         } else if (!/^\d+$/.test(v.rooms)) {
           err.rooms = "Unicamente se aceptan números en este campo";
         } else if (!(v.rooms > 0 && v.rooms <= 20)) {
-          err.rooms =
-            "El número de habitaciones mínimo es de 1 y máximo 20";
+          err.rooms = "El número de habitaciones mínimo es de 1 y máximo 20";
         }
 
         if (!v.baths) {
           err.baths = "Debes ingresar un número de baños";
         } else if (!/^\d+$/.test(v.baths)) {
           err.baths = "Únicamente se aceptan números en este campo";
-        }else if (!(v.baths > 0 && v.baths <= 20)) {
-          err.baths = "El número de baños debe ser mayor a 1 y como máximo 10 "
+        } else if (!(v.baths > 0 && v.baths <= 20)) {
+          err.baths = "El número de baños debe ser mayor a 1 y como máximo 10 ";
         }
 
         if (!v.garage) {
@@ -120,7 +132,7 @@ export default function CreatePropertyForm() {
         return err;
       }}
       onSubmit={(values, { resetForm }) => {
-        /* resetForm(); */
+        resetForm();
         if (
           !formErrors.type &&
           !formErrors.city &&
@@ -156,7 +168,7 @@ export default function CreatePropertyForm() {
             .createProperty(property)
             .then(() => {
               notifySuccess("Propiedad creada");
-              setTimeout(() => navigate("/"), 2000);
+              navigate("/viewAgent");
             })
             .catch((err) => notifyError(err.message));
           setNewImage([]);
@@ -174,11 +186,7 @@ export default function CreatePropertyForm() {
                 <label className={styles.label} htmlFor="type">
                   Tipo de propiedad
                 </label>
-                <Field
-                  className={styles.field}
-                  name="type"
-                  as="select"
-                >
+                <Field className={styles.field} name="type" as="select">
                   <option name="type" value="">
                     Tipo
                   </option>
@@ -206,11 +214,7 @@ export default function CreatePropertyForm() {
                 Ciudad
               </label>
               <div>
-                <Field
-                  className={styles.field}
-                  name="city"
-                  type="text"
-                />
+                <Field className={styles.field} name="city" type="text" />
                 <ErrorMessage
                   name="city"
                   component={() => (
@@ -238,11 +242,7 @@ export default function CreatePropertyForm() {
                 Dirección
               </label>
               <div>
-                <Field
-                  className={styles.field}
-                  name="address"
-                  type="text"
-                />
+                <Field className={styles.field} name="address" type="text" />
                 <ErrorMessage
                   name="address"
                   component={() => (
@@ -280,7 +280,14 @@ export default function CreatePropertyForm() {
                 />
                 <div className={styles.images_container}>
                   {images.length
-                    ? images.map((im, i) => <FormImages key={i} image={im} index={i} onClose={onClose} />)
+                    ? images.map((im, i) => (
+                        <FormImages
+                          key={i}
+                          image={im}
+                          index={i}
+                          onClose={onClose}
+                        />
+                      ))
                     : null}
                 </div>
               </div>
@@ -288,11 +295,7 @@ export default function CreatePropertyForm() {
                 Precio
               </label>
               <div>
-                <Field
-                  className={styles.field}
-                  name="price"
-                  type="text"
-                />
+                <Field className={styles.field} name="price" type="text" />
                 <ErrorMessage
                   name="price"
                   component={() => (
@@ -323,11 +326,7 @@ export default function CreatePropertyForm() {
                 Area
               </label>
               <div>
-                <Field
-                  className={styles.field}
-                  name="area"
-                  type="text"
-                />
+                <Field className={styles.field} name="area" type="text" />
                 <ErrorMessage
                   name="area"
                   component={() => (
@@ -339,11 +338,7 @@ export default function CreatePropertyForm() {
                 Habitaciones
               </label>
               <div>
-                <Field
-                  className={styles.field}
-                  name="rooms"
-                  type="text"
-                />
+                <Field className={styles.field} name="rooms" type="text" />
                 <ErrorMessage
                   name="rooms"
                   component={() => (
@@ -355,11 +350,7 @@ export default function CreatePropertyForm() {
                 Baños
               </label>
               <div>
-                <Field
-                  className={styles.field}
-                  name="baths"
-                  type="text"
-                />
+                <Field className={styles.field} name="baths" type="text" />
                 <ErrorMessage
                   name="baths"
                   component={() => (
@@ -371,12 +362,10 @@ export default function CreatePropertyForm() {
                 Garage
               </label>
               <div>
-                <Field
-                  className={styles.field}
-                  name="garage"
-                  as="select"
-                >
-                  <option name="garage" value="">Garage</option>
+                <Field className={styles.field} name="garage" as="select">
+                  <option name="garage" value="">
+                    Garage
+                  </option>
                   <option name="garage" value={true}>
                     Si
                   </option>

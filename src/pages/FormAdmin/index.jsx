@@ -28,7 +28,7 @@ export default function FormAdmin() {
     dni: "",
     address: "",
     phone: "",
-    age: "",
+    age: "1994-01-01",
     password: "",
     password1: "",
   };
@@ -40,7 +40,6 @@ export default function FormAdmin() {
     name: "*",
     dni: "*",
     password: "*",
-    age: "*",
     phone: "*",
     address: "*",
   });
@@ -117,23 +116,13 @@ export default function FormAdmin() {
               onChange={handleChange}
               color={error.dni ? "error" : "success"}
             />
-
-            <TextField
-              required
-              label={
-                error.age && error.age === "*"
-                  ? "Edad"
-                  : error.age
-                  ? error.age
-                  : "Edad"
-              }
-              type="number"
-              value={input.age}
+            <input
+              className={styled.date}
+              type="date"
               name="age"
+              value={input.age}
               onChange={handleChange}
-              color={error.age ? "error" : "success"}
-              sx={{ width: "100px" }}
-            />
+            ></input>
           </Stack>
           <Stack direction="row" spacing={2} className={styled.item}>
             <FormControl sx={{ width: "100%" }}>

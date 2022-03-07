@@ -12,6 +12,8 @@ import FilterProperties from "../../componentes/FilterProperties";
 import { setAllProperties } from "../../redux/actions/actionsProperties";
 import { paginate } from "../../utils/paginate";
 import styled from "./Home.module.css";
+import Popup from '../../componentes/Newsletter/Popup';
+import '../../componentes/Newsletter/newsletter.css';
 import { NavbarClient } from "../../componentes/NavbarClient/NavbarClient";
 
 function Home() {
@@ -23,6 +25,9 @@ function Home() {
   const [pageNumber, setPageNumber] = useState(0);
   const [user,setUser]=useState('')
 
+  const [buttonPopup,setButtonPopup] = useState(true)
+  const [timedPopup,setTimedPopup] = useState(false)
+
   const nextPage = () => {
     setPageNumber(pageNumber + 1);
   };
@@ -32,6 +37,13 @@ function Home() {
 
   const propertiesPerPage = 5;
 
+  useEffect(() => {
+    setTimeout(() => {
+      setTimedPopup(true)
+    }, 5000)
+  },[])
+
+  
   useEffect(async() => {
     propertyService.getAll().then((data) => {
       dispatch(setAllProperties(data));
@@ -62,6 +74,15 @@ function Home() {
           Siguiente
         </button>
       </div>
+        <main>
+          
+        <Popup 
+        trigger={timedPopup}  
+        setTrigger={setTimedPopup}
+        toggle={buttonPopup}
+        setToggle={setButtonPopup}
+        />
+        </main>
       <ListCard
         properties={paginate(properties, pageNumber, propertiesPerPage)}
       />
