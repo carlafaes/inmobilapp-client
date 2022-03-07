@@ -7,7 +7,7 @@ import { CardMinmueble } from "./cardMInmueble/CardMinmueble";
 import { CardNoHayInmueble } from "./cardNoHayInmueble/CardNoHayInmueble";
 import { CardsMisFavoritos } from "./cardMisFavoritos/CardsMisFavoritos";
 import { CardNoHayFavoritos } from "./cardNoHayFavoritos/CardNoHayFavoritos";
-import { NavbarClient } from "../navbars/NavbarClient";
+import { NavbarClient } from "../NavbarClient/NavbarClient";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import "./ClientInterface.css";

@@ -23,8 +23,6 @@ import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { getTheme, changeTheme } from "../src/utils/theme";
 import { Switch } from "@material-ui/core";
 
-console.log(getTheme());
-
 function App() {
   const [darkMode, setDarkMode] = useState(getTheme() === "dark");
 
@@ -65,7 +63,7 @@ function App() {
           <Route path="/login" element={<LoginBeta />} />
           <Route path="/agents/:id" element={<AgentDetail />} />
           <Route
-            path="/create-property/:agentID"
+            path="/create-property"
             element={<CreatePropertyForm />}
           />
           <Route path="/quienes" element={<QuienesSomos />} />

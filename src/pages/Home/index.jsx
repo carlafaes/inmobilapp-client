@@ -14,14 +14,16 @@ import { paginate } from "../../utils/paginate";
 import styled from "./Home.module.css";
 import Popup from '../../componentes/Newsletter/Popup';
 import '../../componentes/Newsletter/newsletter.css';
-
+import { NavbarClient } from "../../componentes/NavbarClient/NavbarClient";
 
 function Home() {
   const properties = useSelector(
     (state) => state.reducerProperties.filteredProperties
   );
   const dispatch = useDispatch();
+  const [darkMode, setDarkMode] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
+  const [user,setUser]=useState('')
 
   const [buttonPopup,setButtonPopup] = useState(true)
   const [timedPopup,setTimedPopup] = useState(false)
@@ -41,12 +43,15 @@ function Home() {
     }, 5000)
   },[])
 
-  useEffect(() => {
+  
+  useEffect(async() => {
     propertyService.getAll().then((data) => {
       dispatch(setAllProperties(data));
     });
+      const loggedUserJSON = window.localStorage.getItem("loggedUser");
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user)
   }, []);
-
   if (!properties) {
     <Loading />;
   }
