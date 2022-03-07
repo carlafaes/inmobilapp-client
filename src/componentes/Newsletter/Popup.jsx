@@ -10,7 +10,7 @@ export default function Popup(props){
                 <button className='close-btn'
                 onClick={()=> props.setToggle(false)}
                 >
-                cerrar
+                ❌
                 </button>
             </div>
         </div>
