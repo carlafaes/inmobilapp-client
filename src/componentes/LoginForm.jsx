@@ -22,7 +22,7 @@ const LoginForm = ({
           <form onSubmit={handleLogin} className="form">
             <input
               type="text"
-              placeholder="Dni/Email"
+              placeholder="Dni"
               autoComplete="off"
               value={dni}
               onChange={(e) => setDNI(e.target.value)}
