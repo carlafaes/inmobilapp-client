@@ -100,17 +100,6 @@ export default function QuienesSomos(){
                     <img align="center" src="https://logos-marcas.com/wp-content/uploads/2020/11/GitHub-Logo.png" alt="dairo_link" height="20" width="30" /></a>
                     </div>
                   </div>
-                  <div className='perfil_unit'>
-                    <img className='imagen_perfil' src={fede} alt="brayan" />
-                    <div className='container_nombreYLinks'>
-                    <h2 className='name_title'>Federico Oses<br/></h2>
-                    <a href="https://www.linkedin.com/in/federico-oses-gonzález/" target="blank">
-                    <img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="fede_link" height="20" width="30" /></a>
-
-                    <a href="https://github.com/DexOses" target="blank">
-                    <img align="center" src="https://logos-marcas.com/wp-content/uploads/2020/11/GitHub-Logo.png" alt="https://github.com/DexOses" height="20" width="30" /></a>
-                    </div>
-                  </div>
               </div>
         </div>
         </>
