@@ -1,0 +1,36 @@
+.container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background-image: url("../../Img/fondocity5.jpeg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.content {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.arrow {
+  font-size: 5em;
+  color: #faa222;
+}
+
+.button {
+  position: relative;
+  top: -100px;
+  background: none;
+  border: none;
+}
+
+.button:hover {
+  cursor: pointer;
+}
