@@ -27,6 +27,7 @@ import Carousel from 'react-material-ui-carousel';
 import { Paper } from '@mui/material';
 import { experimentalStyled as styled } from '@mui/material/styles';
 import clientService from '../../services/client';
+import HouseboatIcon from '@mui/icons-material/Houseboat';
 
 const Item = styled(Paper)(({ theme }) => ({
 	backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -100,7 +101,7 @@ function PropertyDetails(props, classes) {
 							<Carousel className={props.classes.carousel}>
 								{property.images.map((image, index) => (
 									<CardMedia
-										className={props.classes.media}
+										className={props.classes.mediacarrusel}
 										key={index}
 										image={image}
 										alt='property-images'
@@ -195,8 +196,13 @@ function PropertyDetails(props, classes) {
 															className={props.classes.button}
 														>
 															Añadir a favoritos <FavoriteIcon />
+														</Button>{' '}
+														<br />
+														<Button className={props.classes.button}>
+															Solicite ya su propiedad
+															<HouseboatIcon />
 														</Button>
-
+														<br />
 														<Modal
 															className={props.classes.modal}
 															open={open}
@@ -258,6 +264,16 @@ function PropertyDetails(props, classes) {
 }
 
 export default withStyles({
+	mediacarrusel: {
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center',
+		height: '100%',
+		width: '100%',
+		backgroundColor: '#fafafa',
+		backgroundImage: `url(${'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'})`,
+	},
 	modal: {
 		display: 'flex',
 		alignItems: 'center',
@@ -300,7 +316,7 @@ export default withStyles({
 	},
 
 	root: {
-		backgroundImage: `url('https://www.semana.com/resizer/jnQaPKkvpQMk8c15-bx4f0F8zIo=/1200x675/filters:format(jpg):quality(50)//cloudfront-us-east-1.images.arcpublishing.com/semana/RGY5R6T7SFCSFJ6DDBEURLQCPM.jpg')`,
+		backgroundColor: '#F4F3F1',
 		flexGrow: 1,
 		backgroundPosition: 'center',
 		backgroundSize: 'cover',
@@ -347,16 +363,17 @@ export default withStyles({
 		padding: '0px',
 	},
 	carousel: {
-		position: 'relative',
 		width: '860px',
 		height: '400px',
 		margin: '0 auto',
 		marginTop: '70px',
-		marginBottom: '20px',
+		marginBottom: '50px',
 		hover: {
 			cursor: 'pointer',
+			boxShadow: '0px 0px 10px 0px rgba(0,0,0,0.75)',
 		},
 	},
+
 	card: {},
 	gridItem: {
 		display: 'flex',
