@@ -34,7 +34,13 @@ export const CardMinmueble = () => {
   const body = (
     <div className={classes.modal}>
       <div align='center'>
-        <h2 className={classes.titleLogin}>Datos a editar</h2>
+        <h2 className={classes.titleLogin}>Realiza tu reseña</h2>
+        <textarea
+          name='reseña'
+          rows='7'
+          placeholder='Reseña del inmueble'
+          required
+        ></textarea>
       </div>
     </div>
   )
@@ -63,6 +69,7 @@ export const CardMinmueble = () => {
       setDescription(description)
       setDetails(details)
       setIdProperties(id)
+
     }
     GetInfo()
   }, [])
@@ -89,7 +96,10 @@ export const CardMinmueble = () => {
       <div className='seccion2'>
         <h6><MdOutlineSquareFoot className='emoticon' /> {details.area} m²</h6>
         <h6><IoMdBed className='emoticon' />{details.rooms} dorms</h6>
-        <h6><GiHomeGarage className='emoticon' />{details.garage}garajes</h6>
+        {
+          details.garage && <h6><GiHomeGarage className='emoticon' />{details.garage}garajes</h6>
+        }
+
         <button className='btn_card btn_p p' onClick={handleId} >Mas detalles <HiArrowCircleRight className='emoticon' /> </button>
       </div>
       <div className='seccion3'>

@@ -33,6 +33,7 @@ export const ClientInterface = () => {
           icon: "👋",
         });
       notify(user.name);
+      console.log(user);
     }
     return (
       <div className="title_login">

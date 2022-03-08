@@ -25,10 +25,8 @@ const updateInfo = async (infoToUpdate, token) => {
 };
 
 const addFavoriteProperty = (favPropertyID) => {
-	console.log('favPropertyID', favPropertyID);
 
 	const { token } = getUserForLocalStorage();
-	console.log('token', token);
 	const URL = '/api/clients';
 
 	return axios.put(
