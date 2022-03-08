@@ -39,7 +39,7 @@ function ProCard(props, classes) {
 							image={props.property.images[0]}
 						/>
 						<CardContent>
-							<Typography component='p' variant='h6' component='div'>
+							<Typography component='p' variant='h6'>
 								<p className={props.classes.detallesCity}>
 									<LocationOnIcon className={props.classes.icon} />
 									{props.property.location?.city}
@@ -55,8 +55,6 @@ function ProCard(props, classes) {
 								size='small'
 								color='primary'
 								href={`/property/${props.property.id}`}
-								size='small'
-								color='primary'
 							>
 								Mas detalles
 							</Button>
@@ -79,10 +77,10 @@ export default withStyles({
 		color: '#FAA222',
 		marginRight: '0.1rem',
 		position: 'relative',
-		top: '0.2rem',
+		top: '0.3rem',
 		left: '0.2rem',
 		JustifyContent: 'center',
-		padding: '0.1rem',
+		padding: '0 rem',
 	},
 	detallesCity: {
 		padding: '0px',
@@ -137,7 +135,7 @@ export default withStyles({
 		textTransform: 'none',
 	},
 	item: {
-		opacity: '0.9',
+		opacity: '0.8',
 		display: 'flex',
 		marginTop: '5em',
 		marginLeft: '1em',
@@ -153,8 +151,9 @@ export default withStyles({
 		boxShadow: '0px 0px 10px #000000',
 		'&:hover': {
 			boxShadow: '0px 0px 10px  #FAA222',
-			trasition: '0.9s',
-			opacity: '1',
+			trasition: '0.10s',
+			opacity: '2',
+			borderBottom: '10px solid #FAA222 ',
 		},
 	},
 
