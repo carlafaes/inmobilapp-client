@@ -68,10 +68,10 @@ export default function FormAdmin() {
           });
           navigate(`/login`);
         })
-        .catch(() => {
+        .catch((err) => {
           swal("Un administrador con ese DNI ya se encuentra registrado", {
             icon: "warning",
-          });
+          }); 
           setInput(initInput);
           navigate(`/login`);
         });

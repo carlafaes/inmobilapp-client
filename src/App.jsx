@@ -18,11 +18,12 @@ import { Toaster } from "react-hot-toast";
 import Generales from "./componentes/PreguntasFrecuentes/Generales";
 import Contact from "./pages/Contact/Contact";
 import ViewAgent from "./pages/ViewAgent";
-import Reservas from './componentes/PreguntasFrecuentes/Reservas'
+import Reservas from "./componentes/PreguntasFrecuentes/Reservas";
 import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { getTheme, changeTheme } from "../src/utils/theme";
 import { Switch } from "@material-ui/core";
 import Checkout from "./pages/Checkout/Checkout";
+import AssignProperty from "./pages/AssignProperty";
 
 function App() {
   const [darkMode, setDarkMode] = useState(getTheme() === "dark");
@@ -68,9 +69,12 @@ function App() {
           <Route path="/preguntasFrecuentes" element={<Generales />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/checkout/:id" element={<Checkout />} />
-          <Route path="/preguntasFrecuentes" element={<Generales/>} />
-          <Route path='/reservas' element={<Reservas/>}/>
-
+          <Route path="/preguntasFrecuentes" element={<Generales />} />
+          <Route
+            path="/assignproperty/:clientID/:propertyID"
+            element={<AssignProperty />}
+          />
+          <Route path="/reservas" element={<Reservas />} />
         </Routes>
         <Toaster position="top-center" reverseOrder={false} />
         <ToastContainer />
