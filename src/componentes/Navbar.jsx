@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     background: "rgba(212,212,212, 0.7)",
     position: "relative",
+    width:'100%',
   },
   icon: {
     color: "#faa222",
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     justifyContent: "space-between",
-    width: "100vw",
+    width: "100%",
   },
   modal: {
     position: "absolute",
