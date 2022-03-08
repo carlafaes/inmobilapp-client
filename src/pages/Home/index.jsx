@@ -14,6 +14,7 @@ import { paginate } from "../../utils/paginate";
 import styled from "./Home.module.css";
 import Popup from "../../componentes/Newsletter/Popup";
 import "../../componentes/Newsletter/newsletter.css";
+import { getUserForLocalStorage } from '../../utils/user'
 
 function Home() {
   const properties = useSelector(
@@ -36,9 +37,14 @@ function Home() {
   const propertiesPerPage = 5;
 
   useEffect(() => {
-    setTimeout(() => {
-      setTimedPopup(true);
-    }, 5000);
+
+    const user = getUserForLocalStorage()
+    if(!user){
+      
+      setTimeout(() => {
+        setTimedPopup(true);
+      }, 5000);
+    }
   }, []);
 
   useEffect(async () => {

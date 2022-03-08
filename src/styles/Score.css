@@ -25,7 +25,8 @@
 .score_rating {
   display: flex;
   flex-direction: row;
-  margin-left: 30%;
+  margin-left: 40%;
+  margin-bottom:23px;
 }
 .score_disp {
   display: flex;
