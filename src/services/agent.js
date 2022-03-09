@@ -31,14 +31,14 @@ const assignProperty = async (clientID, propertyID, token) => {
     },
   };
 
-  return await axios.put(
+  return (await axios.put(
     clientsBaseURL,
     {
       clientID,
       propertyID,
     },
     config
-  ).data;
+  )).data;
 };
 
 const delClientProperty = async (clientID, boolean, token) => {
@@ -48,11 +48,11 @@ const delClientProperty = async (clientID, boolean, token) => {
     },
   };
 
-  return await axios.put(
+  return (await axios.put(
     clientsBaseURL,
     { clientID, delPropertyID: boolean },
     config
-  ).data;
+  )).data;
 };
 
 const getAgentDetailsPropertiesID = async (id) =>

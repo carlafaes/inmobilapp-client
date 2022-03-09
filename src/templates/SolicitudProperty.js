@@ -10,8 +10,8 @@ function msg(client, property) {
 
 export function sendSolicitudProperty(client, property) {
   return sendEmail(
-    property.agentID.name,
-    "brayanalexanderb@gmail.com",
+    property.agentID.id,
+    "garcianaranjodairo@gmail.com",
     msg(client, property)
   );
 }
