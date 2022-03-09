@@ -1,0 +1,51 @@
+.login-form__auth-main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fafafa;
+}
+
+.login-form__auth_box-container {
+  background-color: white;
+  border: 2px solid #faa222;
+  border-radius: 5px;
+  height: auto;
+  min-width: 45%;
+  width: auto;
+  box-shadow: 10px 10px 60px 0px rgba(0, 0, 0, 0.5);
+}
+
+.login-form__form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-form__auth_input {
+  padding: 10px;
+  border-color: #d1cecefd;
+  margin: 10px 10px 10px;
+  height: 50px;
+  min-width: 70%;
+}
+
+.login-form__link {
+  margin: 10px;
+}
+
+.login-form__btn {
+  cursor: pointer;
+  padding: 5px;
+  width: 150px;
+  font-size: 20px;
+  font-family: "Nunito", sans-serif;
+  text-align: center;
+  border-color: #faa422;
+  height: 50px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}

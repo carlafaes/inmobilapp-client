@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import SortIcon from "@material-ui/icons/Sort";
 import icono from "../Img/inmobilapp-logo.png";
 import Fade from "@material-ui/core/Fade";
-import Link from "@material-ui/core/Link";
+import {Link} from 'react-router-dom'
 import { ImHome } from "react-icons/im";
 import { IoLogoGithub } from "react-icons/io5";
 import { IoLogoVercel } from "react-icons/io5";
@@ -113,7 +113,7 @@ export default function Navbar() {
               <IconButton onClick={handleClick}>
                 <SortIcon className={classes.icon} />
               </IconButton>
-              <Link href="/" className="link_home">
+              <Link to="/" className="link_home">
                 <img
                   src={icono}
                   alt="logonav"
@@ -157,7 +157,7 @@ export default function Navbar() {
             My Page
           </MenuItem>
         ) : (
-          <Link href="/">
+          <Link to="/">
             <MenuItem className="menuItem">
               <ImHome className="emoticon" />
               Home
@@ -170,7 +170,7 @@ export default function Navbar() {
             <GiExitDoor className="emoticon" /> Salir
           </MenuItem>
         ) : (
-          <Link href="/login">
+          <Link to="/login">
             <MenuItem className="menuItem">
               <RiLoginBoxLine className="emoticon" />
               Login
@@ -179,14 +179,14 @@ export default function Navbar() {
         )}
 
         <h2 className="title">Redes sociales</h2>
-        <Link href="https://github.com/InmobilApp">
+        <Link to="https://github.com/InmobilApp">
           <MenuItem className="menuItem">
             {" "}
             <IoLogoGithub className="emoticon" />
             Git-Hub
           </MenuItem>
         </Link>
-        <Link href="https://inmobil-app.herokuapp.com/">
+        <Link to="https://inmobil-app.herokuapp.com/">
           <MenuItem className="menuItem">
             <IoLogoVercel className="emoticon" /> Link deploy
           </MenuItem>

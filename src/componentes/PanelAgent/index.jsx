@@ -5,12 +5,16 @@ import { useNavigate } from "react-router-dom";
 import CardPropertyAgent from "../CardPropertyAgent";
 import axios from "axios";
 import { msg } from "../../templates/ClientSuscribe";
-
 import classes from "./PanelAgent.module.css";
+import Modal from './Modal/Modal'
 
 export default function PanelAgent({ agent }) {
   const navigate = useNavigate();
+  const [send, setSend]=useState(false);
+  
 
+  
+  
   const seAlquiloPropiedad = (name, email, property) => {
     console.log(property);
     axios.post("/api/sendemail", {
@@ -18,7 +22,12 @@ export default function PanelAgent({ agent }) {
       name,
       template: msg(name, email, property),
     });
+    setTimeout(() => {
+      setSend(true)
+    }, 1000);
+    
   };
+
 
   const [input, setInput] = useState({
     name: "Dairo",
@@ -35,12 +44,13 @@ export default function PanelAgent({ agent }) {
         <button
           onClick={() =>
             seAlquiloPropiedad(
-              "Carla",
-              "garcianaranjodairo@gmail.com",
+              "Car",
+              "carlaf2193@gmail.com",
               agent.properties[0]
             )
           }
         >
+          
           enviar
         </button>
       </div>
@@ -49,6 +59,10 @@ export default function PanelAgent({ agent }) {
           return <CardPropertyAgent key={property.id} {...property} />;
         })}
       </div>
+      {send && <Modal send={setSend}/>}
+     
     </div>
   );
-}
+  }
+
+  

@@ -15,19 +15,18 @@ export default function Checkout() {
   const mercadopago = new window.MercadoPago(
     "TEST-0357acf5-bb8f-4697-a26b-332ccab4020b",
     {
-      locale: "es-AR", // The most common are: 'pt-BR', 'es-AR' and 'en-US'
+      locale: "en-US",
     }
   );
 
   function createCheckoutButton(preferenceId) {
-    // Initialize the checkout
     mercadopago.checkout({
       preference: {
         id: preferenceId,
       },
       render: {
-        container: "#button-checkout", // Class name where the payment button will be displayed
-        label: "Pay", // Change the payment button text (optional)
+        container: "#button-checkout",
+        label: "Pagar",
       },
     });
   }
