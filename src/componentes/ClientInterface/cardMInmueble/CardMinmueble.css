@@ -59,7 +59,6 @@
 .seccion2{
     display: flex;
     justify-content: center;
-    flex-direction: column;
     gap: .5rem;
 }
 
@@ -88,6 +87,11 @@
 .img{
     display:flex;
     flex-direction:row;
+}
+.buttonFa{
+    cursor:pointer;
+    height:25px;
+    border: none;
 }
 
 

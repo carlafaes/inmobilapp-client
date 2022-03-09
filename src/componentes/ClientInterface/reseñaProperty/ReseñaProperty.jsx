@@ -46,7 +46,7 @@ export const ReseñaProperty = () => {
         }
         await dispatch(PostReview(input))
 
-        // navigate('/viewClient')
+        navigate('/viewClient')
 
         // console.log(input)
     }
