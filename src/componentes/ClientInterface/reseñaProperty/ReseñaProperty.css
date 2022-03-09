@@ -1,0 +1,15 @@
+.inputReseña{
+    width:500px;
+    height:200px;
+    border:1px solid black;
+}
+.content_conten{
+    display:flex;
+    gap:3rem;
+    flex-direction:column;
+    padding: 30px;
+}
+.i{
+    color:#faa422
+}
+

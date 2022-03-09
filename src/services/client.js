@@ -1,6 +1,8 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { getUserForLocalStorage } from '../utils/user';
+import {
+	getUserForLocalStorage
+} from '../utils/user';
 
 const updateInfo = async (infoToUpdate, token) => {
 	const URL = `/api/clients`;
@@ -26,13 +28,19 @@ const updateInfo = async (infoToUpdate, token) => {
 
 const addFavoriteProperty = (favPropertyID) => {
 
-	const { token } = getUserForLocalStorage();
+	const {
+		token
+	} = getUserForLocalStorage();
 	const URL = '/api/clients';
 
 	return axios.put(
-		URL,
-		{ favPropertyID },
-		{ headers: { Authorization: `Bearer ${token}` } }
+		URL, {
+			favPropertyID
+		}, {
+			headers: {
+				Authorization: `Bearer ${token}`
+			}
+		}
 	);
 };
 
@@ -45,6 +53,7 @@ export const getClientInfo = async (clientID) => {
 		alert(error);
 	}
 };
+
 
 const clientService = {
 	getClientInfo,

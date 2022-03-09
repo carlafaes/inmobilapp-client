@@ -85,3 +85,10 @@
 .btn_primary{
     width:100px;
 }
+.img{
+    display:flex;
+    flex-direction:row;
+}
+
+
+

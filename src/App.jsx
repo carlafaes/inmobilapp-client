@@ -23,6 +23,7 @@ import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { getTheme, changeTheme } from "../src/utils/theme";
 import { Switch } from "@material-ui/core";
 import Checkout from "./pages/Checkout/Checkout";
+import { ReseñaProperty } from "./componentes/ClientInterface/reseñaProperty/ReseñaProperty";
 
 function App() {
   const [darkMode, setDarkMode] = useState(getTheme() === "dark");
@@ -70,6 +71,7 @@ function App() {
           <Route path="/checkout/:id" element={<Checkout />} />
           <Route path="/preguntasFrecuentes" element={<Generales/>} />
           <Route path='/reservas' element={<Reservas/>}/>
+          <Route path='/reseProperty' element={<ReseñaProperty/>}/>
         </Routes>
         <Toaster position="top-center" reverseOrder={false} />
         <ToastContainer />
