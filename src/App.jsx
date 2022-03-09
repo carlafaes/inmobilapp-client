@@ -24,6 +24,7 @@ import { getTheme, changeTheme } from "../src/utils/theme";
 import { Switch } from "@material-ui/core";
 import Checkout from "./pages/Checkout/Checkout";
 import AssignProperty from "./pages/AssignProperty";
+import Payment from "./pages/Payment";
 
 function App() {
   const [darkMode, setDarkMode] = useState(getTheme() === "dark");
@@ -74,6 +75,7 @@ function App() {
             path="/assignproperty/:clientID/:propertyID"
             element={<AssignProperty />}
           />
+          <Route path="/payment" element={<Payment />} />
           <Route path="/reservas" element={<Reservas />} />
         </Routes>
         <Toaster position="top-center" reverseOrder={false} />
