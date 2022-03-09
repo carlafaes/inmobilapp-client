@@ -24,3 +24,10 @@ export function PutClient(client,token){
         })
     }
 }
+
+export function PostReview  (cont) {
+	return async (dispatch) => {
+        const json = await axios.post(`/api/reviews`,cont)
+    }
+	
+}
