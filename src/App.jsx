@@ -71,9 +71,9 @@ function App() {
           <Route path="/preguntasFrecuentes" element={<Generales />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/checkout/:id" element={<Checkout />} />
-          <Route path="/preguntasFrecuentes" element={<Generales/>} />
-          <Route path='/reservas' element={<Reservas/>}/>
-          <Route path='/reseProperty' element={<ReseñaProperty/>}/>
+          <Route path="/preguntasFrecuentes" element={<Generales />} />
+          <Route path="/reservas" element={<Reservas />} />
+          <Route path="/reseProperty" element={<ReseñaProperty />} />
           <Route path="/preguntasFrecuentes" element={<Generales />} />
           <Route
             path="/assignproperty/:clientID/:propertyID"

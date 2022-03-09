@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 export default function Approved() {
-  return <div>Aprovado</div>;
+  const query = useLocation();
+  console.log(query);
+  return <div>approved</div>;
 }

@@ -113,19 +113,12 @@ export default function FormAgent() {
             />
             <TextField
               required
-              label={
-                error.age && error.age === "*"
-                  ? "Edad"
-                  : error.age
-                  ? error.age
-                  : "Edad"
-              }
-              type="number"
+              type="date"
               value={input.age}
               name="age"
               onChange={onChangeHandler}
               color={error.age ? "error" : "success"}
-              sx={{ width: "100px" }}
+              sx={{ width: "150px" }}
             />
           </Stack>
           <Stack direction="row" spacing={2} className={styled.item}>
