@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { CardFavoritos } from "./CardFavoritos";
-import { CardNoHayFavoritos } from "../cardNoHayFavoritos/CardNoHayFavoritos";
 import services from "../../../services/client";
 
 export const CardsMisFavoritos = () => {

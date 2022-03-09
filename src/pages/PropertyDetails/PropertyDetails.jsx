@@ -27,6 +27,12 @@ import Carousel from "react-material-ui-carousel";
 import { Paper } from "@mui/material";
 import { experimentalStyled as styled } from "@mui/material/styles";
 import clientService from "../../services/client";
+<<<<<<< HEAD
+=======
+import HouseboatIcon from "@mui/icons-material/Houseboat";
+import { sendSolicitudProperty } from "../../templates/SolicitudProperty";
+import swal from "sweetalert";
+>>>>>>> a9f4fdba218cd73502ca6e2876a28998c20b3a2b
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -100,7 +106,11 @@ function PropertyDetails(props, classes) {
               <Carousel className={props.classes.carousel}>
                 {property.images.map((image, index) => (
                   <CardMedia
+<<<<<<< HEAD
                     className={props.classes.media}
+=======
+                    className={props.classes.mediacarrusel}
+>>>>>>> a9f4fdba218cd73502ca6e2876a28998c20b3a2b
                     key={index}
                     image={image}
                     alt="property-images"
@@ -195,8 +205,33 @@ function PropertyDetails(props, classes) {
                               className={props.classes.button}
                             >
                               Añadir a favoritos <FavoriteIcon />
+<<<<<<< HEAD
                             </Button>
 
+=======
+                            </Button>{" "}
+                            <br />
+                            <Button
+                              onClick={() =>
+                                sendSolicitudProperty(user, property)
+                                  .then(() => {
+                                    swal("Solucitud Exitosa!", {
+                                      icon: "success",
+                                    });
+                                  })
+                                  .catch(() => {
+                                    swal("Ha ocurrido un Error!", {
+                                      icon: "warning",
+                                    });
+                                  })
+                              }
+                              className={props.classes.button}
+                            >
+                              Solicite ya su propiedad
+                              <HouseboatIcon />
+                            </Button>
+                            <br />
+>>>>>>> a9f4fdba218cd73502ca6e2876a28998c20b3a2b
                             <Modal
                               className={props.classes.modal}
                               open={open}
@@ -258,6 +293,19 @@ function PropertyDetails(props, classes) {
 }
 
 export default withStyles({
+<<<<<<< HEAD
+=======
+  mediacarrusel: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100%",
+    width: "100%",
+    backgroundColor: "#fafafa",
+    backgroundImage: `url(${"https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60"})`,
+  },
+>>>>>>> a9f4fdba218cd73502ca6e2876a28998c20b3a2b
   modal: {
     display: "flex",
     alignItems: "center",
@@ -300,7 +348,11 @@ export default withStyles({
   },
 
   root: {
+<<<<<<< HEAD
     backgroundImage: `url('https://www.semana.com/resizer/jnQaPKkvpQMk8c15-bx4f0F8zIo=/1200x675/filters:format(jpg):quality(50)//cloudfront-us-east-1.images.arcpublishing.com/semana/RGY5R6T7SFCSFJ6DDBEURLQCPM.jpg')`,
+=======
+    backgroundColor: "#F4F3F1",
+>>>>>>> a9f4fdba218cd73502ca6e2876a28998c20b3a2b
     flexGrow: 1,
     backgroundPosition: "center",
     backgroundSize: "cover",
@@ -347,16 +399,29 @@ export default withStyles({
     padding: "0px",
   },
   carousel: {
+<<<<<<< HEAD
     position: "relative",
+=======
+>>>>>>> a9f4fdba218cd73502ca6e2876a28998c20b3a2b
     width: "860px",
     height: "400px",
     margin: "0 auto",
     marginTop: "70px",
+<<<<<<< HEAD
     marginBottom: "20px",
     hover: {
       cursor: "pointer",
     },
   },
+=======
+    marginBottom: "50px",
+    hover: {
+      cursor: "pointer",
+      boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)",
+    },
+  },
+
+>>>>>>> a9f4fdba218cd73502ca6e2876a28998c20b3a2b
   card: {},
   gridItem: {
     display: "flex",

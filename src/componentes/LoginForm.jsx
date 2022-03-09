@@ -23,7 +23,7 @@ const LoginForm = ({
           <form onSubmit={handleLogin} className="login-form__form">
             <input
               type="text"
-              placeholder="Dni/Email"
+              placeholder="Dni"
               autoComplete="off"
               value={dni}
               onChange={(e) => setDNI(e.target.value)}
@@ -43,7 +43,6 @@ const LoginForm = ({
               onSuccess={respuestaGoogle}
               onFailure={respuestaGoogle}
               cookiePolicy={"single_host_origin"}
-              //   onChange={({ target }) => setPassword(target.value)}
             />
             <Link to="/register" className="login-form__link">
               Create new account

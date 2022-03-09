@@ -23,7 +23,13 @@ import { ThemeProvider, createTheme } from "@material-ui/core/styles";
 import { getTheme, changeTheme } from "../src/utils/theme";
 import { Switch } from "@material-ui/core";
 import Checkout from "./pages/Checkout/Checkout";
+<<<<<<< HEAD
 import Approved from "./pages/Approved/Approved";
+=======
+import { ReseñaProperty } from "./componentes/ClientInterface/reseñaProperty/ReseñaProperty";
+import AssignProperty from "./pages/AssignProperty";
+import Payment from "./pages/Payment";
+>>>>>>> a9f4fdba218cd73502ca6e2876a28998c20b3a2b
 
 function App() {
   const [darkMode, setDarkMode] = useState(getTheme() === "dark");
@@ -69,9 +75,22 @@ function App() {
           <Route path="/preguntasFrecuentes" element={<Generales />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/checkout/:id" element={<Checkout />} />
+<<<<<<< HEAD
           <Route path="/preguntasFrecuentes" element={<Generales />} />
           <Route path="/reservas" element={<Reservas />} />
           <Route path="/checkout" element={<Approved />} />
+=======
+          <Route path="/preguntasFrecuentes" element={<Generales/>} />
+          <Route path='/reservas' element={<Reservas/>}/>
+          <Route path='/reseProperty' element={<ReseñaProperty/>}/>
+          <Route path="/preguntasFrecuentes" element={<Generales />} />
+          <Route
+            path="/assignproperty/:clientID/:propertyID"
+            element={<AssignProperty />}
+          />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/reservas" element={<Reservas />} />
+>>>>>>> a9f4fdba218cd73502ca6e2876a28998c20b3a2b
         </Routes>
         <Toaster position="top-center" reverseOrder={false} />
         <ToastContainer />
