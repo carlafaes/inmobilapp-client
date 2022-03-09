@@ -7,7 +7,7 @@ main{
     justify-content: center;
     min-height: 100vh;
     position: fixed;
-    z-index: 300;
+    z-index: 1000;
 }
 
 .popup{
@@ -20,7 +20,7 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    z-index: 600;
 }
 
 .popup-inner{

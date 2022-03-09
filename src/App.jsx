@@ -51,7 +51,7 @@ function App() {
             🌙
           </h2>
         </div>
-        <Routes>
+        <Routes >
           <Route path="*" element={<PageNotFound />} />
           <Route exact path="/" element={<Home />} />
           <Route exact path="/property/:id" element={<PropertyDetails />} />
