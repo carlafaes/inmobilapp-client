@@ -81,9 +81,9 @@ export const CardMinmueble = () => {
             Pagar Factura
           </button>
           {pago && (
-            <a href={pago.links[1].href} target="_blank">
-              Realizar pago
-            </a>
+          <button className="btn_card btn_p"> <a href={pago.links[1].href} target="_blank">
+          Realizar pago
+        </a></button>
           )}
 
           <button className="btn_card btn_p" onClick={reseña}>

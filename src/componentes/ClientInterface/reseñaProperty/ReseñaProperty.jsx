@@ -8,6 +8,8 @@ import { useDispatch } from "react-redux";
 import { PostReview } from "../../../redux/actions/actionClient";
 import { useNavigate } from "react-router-dom";
 export const ReseñaProperty = () => {
+
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alertContent = () => {
@@ -30,7 +32,7 @@ export const ReseñaProperty = () => {
     setInput({ ...input, user: name, porpertyID: propertyID });
   }, []);
 
-  console.log(input);
+
 
   const { content, score } = input;
 
@@ -43,9 +45,9 @@ export const ReseñaProperty = () => {
     }
     await dispatch(PostReview(input));
 
-    // navigate('/viewClient')
+    navigate('/viewClient')
   };
-  navigate("/viewClient");
+  
 
   return (
     <div className="auth_main">
