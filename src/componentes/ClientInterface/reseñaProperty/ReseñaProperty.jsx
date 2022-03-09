@@ -30,7 +30,7 @@ export const ReseñaProperty = () => {
     setInput({ ...input, user: name, porpertyID: propertyID });
   }, []);
 
-  console.log(input);
+
 
   const { content, score } = input;
 
@@ -45,6 +45,7 @@ export const ReseñaProperty = () => {
 
     navigate('/viewClient')
   };
+  
 
   return (
     <div className="auth_main">
