@@ -35,8 +35,8 @@ export default function PanelAgent({ agent }) {
         <button
           onClick={() =>
             seAlquiloPropiedad(
-              "Carla",
-              "garcianaranjodairo@gmail.com",
+              "email de prueba",
+              "carlaf2193@gmail.com",
               agent.properties[0]
             )
           }
