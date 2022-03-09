@@ -45,6 +45,7 @@ main{
     border-style: none;
     background-color: transparent;
     transition: all ease-in 1s;
+    cursor:pointer;
 }
 .close-btn:hover{
     background-color: gray;
