@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Creepster&family=Nunito:wght@200&family=Open+Sans+Condensed:wght@300&family=Redressed&display=swap");
+.modal-container{
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(71, 100, 100, 0.082);
+    z-index: 500;
+}
+.modal_alert{
+    background-color: rgb(252, 248, 244);
+    margin-top: 20px;
+    width: 350px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+}
+.check-ok{
+    margin-top: 30px;
+    width: 60px;
+    height: 60px;
+    
+}
+
+.text-check-ok{
+    margin-top: 20px;
+    color: gray;
+    font-size: 30px;
+    padding-left: 20%;
+}
+
+.btn-div{
+    margin-top: 15%;
+    display: flex;
+    flex-direction: row-reverse;
+    width: 90%;
+}
+.btn_modal_ok{
+    background-color: #faa222;
+    color: aliceblue;
+    transition: all ease-in 0.5s;
+    cursor: pointer;
+    width: 70px;
+    height: 40px;
+    border-radius: 10px;
+    border-style: none;
+}
+.btn_modal_ok:hover{
+    background-color: #31220b;
+}
+body{
+    padding: 0;
+    margin: 0;
+}

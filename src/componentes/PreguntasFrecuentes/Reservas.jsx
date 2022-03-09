@@ -48,7 +48,7 @@ color: #5c4216;
 width:100%;
 padding-left:20px;
 padding-right:20px;
-height:400px;
+height:auto;
 display:flex;
 flex-direction:column;
 justify-content:center;
