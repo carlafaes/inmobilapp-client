@@ -20,7 +20,6 @@ export const CardFavoritos = ({ description, details, images, location, rentalPr
         const info = getUserForLocalStorage();
         setToken(info.token)
         setInput({...input,delFavPropertyID:id})
-        console.log(input);
     }, []);
     
     ;

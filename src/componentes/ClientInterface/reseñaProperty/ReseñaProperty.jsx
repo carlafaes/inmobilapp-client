@@ -8,6 +8,8 @@ import { useDispatch } from "react-redux";
 import { PostReview } from "../../../redux/actions/actionClient";
 import { useNavigate } from "react-router-dom";
 export const ReseñaProperty = () => {
+
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const alertContent = () => {
