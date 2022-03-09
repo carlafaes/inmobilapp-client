@@ -7,18 +7,15 @@
   align-items: center;
   justify-content: center;
   background-color: #fafafa;
-
 }
-
 
 .auth_box-container {
   background-color: white;
-  border: 2px solid #FAA222;
+  border: 2px solid #faa222;
   border-radius: 5px;
   height: 500px;
   width: 600px;
   box-shadow: 10px 10px 60px 0px rgba(0, 0, 0, 0.5);
-
 }
 
 .input_1 {
@@ -42,15 +39,15 @@
 .input_ancho {
   width: 250px;
 }
-.input{
-  width:240px
+.input {
+  width: 240px;
 }
 .auth_title {
   padding: 20px;
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   color: #faa422;
   text-shadow: 1px 1px 1px #535353;
   font-size: 35px;
@@ -68,10 +65,10 @@
   padding: 5px;
   width: 150px;
   font-size: 20px;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
   text-align: center;
   border-color: #faa422;
-  height:50px;
+  height: 50px;
 }
 
 .btn_button {
@@ -87,10 +84,10 @@
 }
 
 .title:hover {
-  color: #535353
+  color: #535353;
 }
-.b{
-  width:300px;
+.b {
+  width: 300px;
 }
 
 /* estilos menuNav */
@@ -100,7 +97,7 @@
   flex-direction: column;
   background-color: antiquewhite;
   width: 200px;
-  color: rgb(209, 206, 191)
+  color: rgb(209, 206, 191);
 }
 
 .emoticon {
@@ -137,5 +134,5 @@
 .botonEdit {
   display: flex;
   justify-content: center;
-  padding: 40px
+  padding: 40px;
 }

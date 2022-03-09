@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import adminService from "../../services/admin";
 import { validateFormAdmin, isDone } from "../../utils/errorsFormAdmin";
@@ -19,9 +19,20 @@ import SendIcon from "@mui/icons-material/Send";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import NavBar from "../../componentes/Navbar";
 import { notifyError } from "../../utils/notifications";
+import { getUserForLocalStorage } from "../../utils/user";
 import swal from "sweetalert";
 
 export default function FormAdmin() {
+  const navigate = useNavigate();
+  const [adminId, setAdminId] = useState();
+  useEffect(() => {
+    const user = getUserForLocalStorage();
+    if (user && user.role !== "ADMIN") {
+      notifyError("No tienes permisos para entrar en esta ruta!");
+      navigate("/");
+    }
+  });
+
   document.title = "InmobillApp | registrar admin";
   const initInput = {
     name: "",
@@ -33,7 +44,6 @@ export default function FormAdmin() {
     password1: "",
   };
 
-  const navigate = useNavigate();
   const [input, setInput] = useState(initInput);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState({

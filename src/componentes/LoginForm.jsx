@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import GoogleLogin from "react-google-login";
+import "./LoginForm/LoginForm.css";
 
 const LoginForm = ({
   dni,
@@ -16,26 +17,26 @@ const LoginForm = ({
   return (
     <>
       <Navbar />
-      <div className="auth_main">
-        <div className="auth_box-container">
+      <div className="login-form__auth-main">
+        <div className="login-form__auth_box-container">
           <h3 className="auth_title">Login</h3>
-          <form onSubmit={handleLogin} className="form">
+          <form onSubmit={handleLogin} className="login-form__form">
             <input
               type="text"
               placeholder="Dni/Email"
               autoComplete="off"
               value={dni}
               onChange={(e) => setDNI(e.target.value)}
-              className="auth_input input_ancho"
+              className="login-form__auth_input input_ancho"
             />
             <input
               type="password"
               placeholder="Password"
               value={password}
               onChange={({ target }) => setPassword(target.value)}
-              className="auth_input input_ancho"
+              className="login-form__auth_input input_ancho"
             />
-            <button className=" btn">Login</button>
+            <button className="login-form__btn">Login</button>
             <GoogleLogin
               clientId="207561397241-v7ceqk4t819s7l8k2u87p2vfq86sb0lj.apps.googleusercontent.com"
               buttonText="Login"
@@ -44,7 +45,7 @@ const LoginForm = ({
               cookiePolicy={"single_host_origin"}
               //   onChange={({ target }) => setPassword(target.value)}
             />
-            <Link to="/register" className="link">
+            <Link to="/register" className="login-form__link">
               Create new account
             </Link>
           </form>
