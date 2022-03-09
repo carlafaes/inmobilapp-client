@@ -43,9 +43,8 @@ export const ReseñaProperty = () => {
     }
     await dispatch(PostReview(input));
 
-    // navigate('/viewClient')
+    navigate('/viewClient')
   };
-  navigate("/viewClient");
 
   return (
     <div className="auth_main">

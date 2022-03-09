@@ -58,7 +58,7 @@
 
 .seccion2{
     display: flex;
-    justify-content: center;
+    flex-direction:column;
     gap: .5rem;
 }
 
@@ -90,7 +90,7 @@
 }
 .buttonFa{
     cursor:pointer;
-    height:25px;
+    height:40px;
     border: none;
 }
 

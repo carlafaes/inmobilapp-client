@@ -37,3 +37,19 @@ export function PostReview(cont) {
     }
 
 }
+
+export function PutFavorites(id,token){
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+    return async (dispatch)=>{
+        const json= await axios.put(`/api/clients`,id,config)
+        const notify = () =>
+        toast.success("Favorito eliminado!", {
+            icon: "🚀"
+        });
+        return notify()
+}
+    }

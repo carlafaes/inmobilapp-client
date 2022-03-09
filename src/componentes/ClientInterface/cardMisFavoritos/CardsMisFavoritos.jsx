@@ -27,6 +27,7 @@ export const CardsMisFavoritos = () => {
           rentalPrice={el.rentalPrice}
           state={el.state}
           typeProperty={el.typeProperty}
+          id={el.id}
         />
       ))}
     </>
