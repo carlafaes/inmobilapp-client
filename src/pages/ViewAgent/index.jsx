@@ -16,12 +16,14 @@ import PanelAgent from "../../componentes/PanelAgent";
 export default function ViewAgent() {
   const navigate = useNavigate();
   const [agentDetail, setAgentDetail] = useState(null);
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
     const user = getUserForLocalStorage();
     if (user.role !== "AGENT") {
       return navigate("/");
     }
+    setToken(user.token);
     agentService
       .getAgentDetailsPropertiesID(user.id)
       .then((data) => {
@@ -44,7 +46,7 @@ export default function ViewAgent() {
   return (
     <div className={classes.container}>
       <NavBarAgent user={agentDetail} />
-      {permissions.crudProperty ? <PanelAgent agent={agentDetail} /> : <NotPermissions />}
+      {permissions.crudProperty ? <PanelAgent agent={agentDetail} token={token} /> : <NotPermissions />}
       <Footer />
     </div>
   );

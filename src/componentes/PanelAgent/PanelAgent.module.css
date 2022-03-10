@@ -10,18 +10,22 @@
 
 .appBar {
   margin: 10px;
-  border: 1px solid coral;
   border-radius: 5px;
 }
 
 .content {
-  height: 75vh;
+  height: auto;
   padding: 10px;
   display: grid;
   justify-content: space-around;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   grid-gap: 20px;
+}
+
+.content a:link,
+a:visited {
+  text-decoration: none;
 }
 
 @media (min-width: 30em) {
@@ -34,4 +38,12 @@
   .content {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+
+.title {
+  text-align: center;
+  color: #faa422;
+  text-shadow: 1px 1px 1px #535353;
+  font-family: "Nunito", sans-serif;
+  font-size: 3em;
 }
