@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 import propertyService from "../../services/property";
 import { notifyError, notifySuccess } from "../../utils/notifications";
 
-export default function CardPropertyAgent({ images, state, id }) {
+export default function CardPropertyAgent({ images, state, id, clientsID }) {
   const deleteProperty = () => {
     swal({
       title: "Eliminar Propiedad!",

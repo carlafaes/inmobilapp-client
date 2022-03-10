@@ -26,19 +26,6 @@ export default function Footer() {
                   Quienes Somos?
                 </Link>
               </Box>
-              <Box>
-                <Link
-                  href='/"https://www.argentina.gob.ar/produccion/defensadelconsumidor/formulario'
-                  color="inherit"
-                >
-                  misión
-                </Link>
-              </Box>
-              <Box>
-                <Link href="/" color="inherit">
-                  visión
-                </Link>
-              </Box>
             </Grid>
             <Grid item xs={12} sm={4}>
               <Box borderBottom={3}>Politicas de Privacidad</Box>
@@ -46,17 +33,7 @@ export default function Footer() {
                 <Link href="/contact" color="inherit">
                   Contact
                 </Link>
-              </Box>
-              <Box>
-                <Link href="/" color="inherit">
-                  Support
-                </Link>
-              </Box>
-              <Box>
-                <Link href="/" color="inherit">
-                  Privacy
-                </Link>
-              </Box>
+              </Box>  
             </Grid>
             <Grid item xs={12} sm={4}>
               <Box borderBottom={3}>Preguntas Frecuentes</Box>
