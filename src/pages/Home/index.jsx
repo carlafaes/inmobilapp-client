@@ -60,7 +60,7 @@ function Home() {
   }
 
   return (
-    <div>
+    <div >
       <div>
         <Landing />
       </div>
