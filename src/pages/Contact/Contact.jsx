@@ -15,11 +15,11 @@ const Contact = () => {
 		e.preventDefault();
 
 		await emailjs.sendForm(
-			'service_6lxdhno',
-			'template_a324q9c',
-			form.current,
-			'hOlEUxo0waQC8iPxw'
-		);
+      "service_inp44ta",
+      "template_rl9bj2e",
+      form.current,
+      "hOlEUxo0waQC8iPxw"
+    );
 		e.target.reset();
 		swal('Mensaje enviado', { icon: 'success' });
 	};
