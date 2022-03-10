@@ -85,6 +85,7 @@ export const ClientInterface = () => {
   };
 
   const compararFecha = (fechaPago) => {
+    if(!fechaPago) return true;
     let fechaActual = new Date();
     fechaActual = `${fechaActual.getDate()}/${fechaActual.getMonth()}/${fechaActual.getFullYear()}`;
 
@@ -95,8 +96,6 @@ export const ClientInterface = () => {
       return true;
     return false;
   };
-
-  console.log(compararFecha(info.payDay));
 
   return (
     <>
