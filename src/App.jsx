@@ -23,6 +23,8 @@ import Checkout from "./pages/Checkout/Checkout";
 import { ReseñaProperty } from "./componentes/ClientInterface/reseñaProperty/ReseñaProperty";
 import AssignProperty from "./pages/AssignProperty";
 import Payment from "./pages/Payment";
+import Generales from './componentes/PreguntasFrecuentes/Generales'
+import Reservas from './componentes/PreguntasFrecuentes/Reservas'
 
 function App() {
   return (
@@ -41,19 +43,9 @@ function App() {
         <Route path="/agents/:id" element={<AgentDetail />} />
         <Route path="/create-property" element={<CreatePropertyForm />} />
         <Route path="/quienes" element={<QuienesSomos />} />
-        <Route path="/preguntasFrecuentes" element={<Generales />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/checkout/:id" element={<Checkout />} />
-        <Route path="/preguntasFrecuentes" element={<Generales />} />
-        <Route path="/reservas" element={<Reservas />} />
-        <Route path="/reseProperty" element={<ReseñaProperty />} />
-        <Route path="/preguntasFrecuentes" element={<Generales />} />
-        <Route
-          path="/assignproperty/:clientID/:propertyID/:agentID"
-          element={<AssignProperty />}
-        />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/reservas" element={<Reservas />} />
+        <Route path="/maquetaform" element={<MaquetaForm />} />
+        <Route path="/preguntasFrecuentes" element={<Generales/>}/>
+        <Route path='/reservas' element={<Reservas/>}/>
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />
       <ToastContainer />
