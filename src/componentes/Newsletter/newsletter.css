@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Creepster&family=Nunito:wght@200&family=Open+Sans+Condensed:wght@300&family=Redressed&display=swap");
 main{
-    padding: 32px;
+   
     display: flex;
     flex-direction: column;
     align-items: center;

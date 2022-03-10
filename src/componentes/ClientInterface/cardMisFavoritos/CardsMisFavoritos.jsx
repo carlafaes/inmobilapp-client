@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { CardFavoritos } from "./CardFavoritos";
-import { CardNoHayFavoritos } from "../cardNoHayFavoritos/CardNoHayFavoritos";
 import services from "../../../services/client";
 
 export const CardsMisFavoritos = () => {
@@ -28,6 +27,7 @@ export const CardsMisFavoritos = () => {
           rentalPrice={el.rentalPrice}
           state={el.state}
           typeProperty={el.typeProperty}
+          id={el.id}
         />
       ))}
     </>

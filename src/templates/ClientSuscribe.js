@@ -1,4 +1,4 @@
-export  function msg(name, email, property){
+export  function msg(name, property){
     return `
     <!DOCTYPE html>
     <html style='margin:0; padding:0;'>

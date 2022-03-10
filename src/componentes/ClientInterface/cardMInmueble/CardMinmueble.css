@@ -51,11 +51,14 @@
 .p{
     height: 100px;
 }
+.botonesEx{
+    display:flex;
+    justify-content:space-around;
+}
 
 .seccion2{
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    flex-direction:column;
     gap: .5rem;
 }
 
@@ -81,3 +84,15 @@
 .btn_primary{
     width:100px;
 }
+.img{
+    display:flex;
+    flex-direction:row;
+}
+.buttonFa{
+    cursor:pointer;
+    height:40px;
+    border: none;
+}
+
+
+

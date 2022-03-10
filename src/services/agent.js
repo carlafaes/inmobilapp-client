@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const baseUrl = "/api/agents";
+const clientsBaseURL = "/api/clients";
 
 const getAgentID = async (id) => (await axios.get(`${baseUrl}/${id}`)).data;
 
@@ -13,14 +14,45 @@ const deleteAgentID = async (id, token) =>
     },
   });
 
-const putAgentID = async (id ,agent, token) => {
-  console.log(agent);
+const putAgentID = async (id, agent, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   };
-  return (await axios.put(`${baseUrl}`, {agentID: id, ...agent}, config)).data;
+  return (await axios.put(`${baseUrl}`, { agentID: id, ...agent }, config))
+    .data;
+};
+
+const assignProperty = async (clientID, propertyID, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  return (await axios.put(
+    clientsBaseURL,
+    {
+      clientID,
+      propertyID,
+    },
+    config
+  )).data;
+};
+
+const delClientProperty = async (clientID, boolean, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  return (await axios.put(
+    clientsBaseURL,
+    { clientID, delPropertyID: boolean },
+    config
+  )).data;
 };
 
 const getAgentDetailsPropertiesID = async (id) =>
@@ -32,6 +64,8 @@ const agentService = {
   putAgentID,
   createAgent,
   getAgentDetailsPropertiesID,
+  assignProperty,
+  delClientProperty,
 };
 
 export default agentService;
