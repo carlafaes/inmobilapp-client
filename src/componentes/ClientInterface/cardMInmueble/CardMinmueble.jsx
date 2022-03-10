@@ -12,7 +12,7 @@ import { sendPayment } from "../../../services/payment";
 import swal from "sweetalert";
 import { notifySuccess } from "../../../utils/notifications";
 
-export const CardMinmueble = () => {
+export const CardMinmueble = ({btnPago}) => {
   const [info, setInfo] = useState("");
   const [location, setLocation] = useState("");
   const [img, setImg] = useState(null);
@@ -64,6 +64,8 @@ export const CardMinmueble = () => {
       });
   };
 
+  
+
   return (
     <div className="container_card cursor">
       <div className="img">
@@ -76,14 +78,19 @@ export const CardMinmueble = () => {
         </h6>
         <div className="botonesEx">
           <button className="btn_card btn_p">{typeProperty}</button>
+          {btnPago && (
+            <button onClick={handlePago} className="btn_card btn_p">
+              Pagar Factura
+            </button>
+          )}
 
-          <button onClick={handlePago} className="btn_card btn_p">
-            Pagar Factura
-          </button>
           {pago && (
-          <button className="btn_card btn_p"> <a href={pago.links[1].href} target="_blank">
-          Realizar pago
-        </a></button>
+            <button className="btn_card btn_p">
+              {" "}
+              <a href={pago.links[1].href} target="_blank">
+                Realizar pago
+              </a>
+            </button>
           )}
 
           <button className="btn_card btn_p" onClick={reseña}>

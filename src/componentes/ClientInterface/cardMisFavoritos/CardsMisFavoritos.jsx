@@ -2,18 +2,19 @@ import React, { useEffect, useState } from "react";
 import { CardFavoritos } from "./CardFavoritos";
 import services from "../../../services/client";
 
-export const CardsMisFavoritos = () => {
-  const [info, setInfo] = useState("");
+export const CardsMisFavoritos = ({info}) => {
+  // const [info, setInfo] = useState("");
 
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem("loggedUser");
-    const user = JSON.parse(loggedUserJSON);
-    const GetInfo = async () => {
-      const info = await services.getClientInfo(user.id);
-      setInfo(info);
-    };
-    GetInfo();
-  }, []);
+  // useEffect(() => {
+  //   const loggedUserJSON = window.localStorage.getItem("loggedUser");
+  //   const user = JSON.parse(loggedUserJSON);
+  //   const GetInfo = async () => {
+  //     const info = await services.getClientInfo(user.id);
+  //     setInfo(info);
+  //   };
+  //   GetInfo();
+  // }, []);
+
 
   return (
     <>
