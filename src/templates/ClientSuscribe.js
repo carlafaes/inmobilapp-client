@@ -26,7 +26,7 @@ export  function msg(name, property){
                    <h5>Podes hacerlo ingresando al siguiente link: <a href='https://inmobilapp.vercel.app/preguntasFrecuentes'> Click aqui</a> </h5>
                    
                    <div>
-                   <img src='https://i.ibb.co/vP2TGtp/inmobilapp-logo-landing.png' alt='logo-mail' width='40' height='40' /><h5>Saludos, equipo InmobilApp</h5>
+                   <img src='https://i.ibb.co/vP2TGtp/inmobilapp-logo-landing.png' alt='logo-mail' width='70' height='40' /><h5>Saludos, equipo InmobilApp</h5>
                    </div>
                    </div>
                </div>
