@@ -47,7 +47,6 @@ export default function FormAgent() {
     name: "*",
     dni: "*",
     password: "*",
-    age: "*",
     phone: "*",
     address: "*",
   });
@@ -117,8 +116,7 @@ export default function FormAgent() {
               value={input.age}
               name="age"
               onChange={onChangeHandler}
-              color={error.age ? "error" : "success"}
-              sx={{ width: "150px" }}
+              sx={{ width: "200px" }}
             />
           </Stack>
           <Stack direction="row" spacing={2} className={styled.item}>

@@ -91,7 +91,7 @@ export default function ViewAdmin() {
 
   return (
     <>
-      <NavBarAdmin user={user} deleteCurrentAdminID={deleteCurrentAdminID} />
+      <NavBarAdmin user={user} deleteCurrentAdminID={deleteCurrentAdminID} token={user.token} />
       <div className={styled.container}>
         <Grid container className={styled.cards}>
           {agentsID?.map((agent) => (
