@@ -24,7 +24,7 @@ import swal from "sweetalert";
 
 export default function FormAdmin() {
   const navigate = useNavigate();
-  const [adminId, setAdminId] = useState();
+
   useEffect(() => {
     const user = getUserForLocalStorage();
     if (user && user.role !== "ADMIN") {
@@ -132,7 +132,7 @@ export default function FormAdmin() {
               name="age"
               value={input.age}
               onChange={handleChange}
-            ></input>
+            />
           </Stack>
           <Stack direction="row" spacing={2} className={styled.item}>
             <FormControl sx={{ width: "100%" }}>

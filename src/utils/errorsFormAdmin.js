@@ -55,6 +55,8 @@ export const validateFormAdmin = (input, errors, name) => {
         : null,
     };
   }
+
+  return errors;
 };
 
 export const validatePutAgent = (input, errors, name) => {
