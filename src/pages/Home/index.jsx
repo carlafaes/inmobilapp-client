@@ -77,7 +77,7 @@ function Home() {
           Siguiente
         </button>
       </div>
-      <main>
+      <main className=".main__carla">
         <Popup
           trigger={timedPopup}
           setTrigger={setTimedPopup}

@@ -27,7 +27,7 @@ const Contact = () => {
   return (
     <>
       <Navbar />
-      <main className="container">
+      <main className="contact_main_container">
         <h5 className="main__title">Contáctanos</h5>
         <Grid className="main__grid" container spacing={3}>
           <div className="contact__container">
