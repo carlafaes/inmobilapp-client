@@ -14,13 +14,14 @@
 }
 
 .content {
-  height: auto;
+  max-width: 1240px;
   padding: 10px;
   display: grid;
   justify-content: space-around;
   grid-template-columns: 1fr;
   grid-template-rows: auto;
   grid-gap: 20px;
+  background-color: rgba(191, 192, 138, 0.287);
 }
 
 .content a:link,
