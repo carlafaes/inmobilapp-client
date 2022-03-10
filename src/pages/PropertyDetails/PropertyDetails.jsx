@@ -89,6 +89,8 @@ function PropertyDetails(props, classes) {
     setProperty(request);
   }, []);
 
+  console.log(property);
+
   return property.hasOwnProperty("id") && image ? (
     <Grid spacing={3} container className={props.classes.root}>
       <Container>
@@ -200,6 +202,7 @@ function PropertyDetails(props, classes) {
                               Añadir a favoritos <FavoriteIcon />
                             </Button>{" "}
                             <br />
+
                             <Button
                               onClick={() =>
                                 sendSolicitudProperty(user, property)
