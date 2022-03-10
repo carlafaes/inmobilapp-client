@@ -20,12 +20,13 @@ const putAdminID = async (id, admin, token) =>
     })
   ).data;
 
-const deleteAdminID = async (id, token) =>
-  await axios.delete(`${baseUrl}/${id}`, {
+const deleteAdminID = async (id, token) => {
+  return await axios.delete(`${baseUrl}/${id}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
+};
 
 const adminService = {
   postAdmin,
