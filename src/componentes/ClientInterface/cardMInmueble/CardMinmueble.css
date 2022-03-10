@@ -18,12 +18,11 @@
 .container_card{
     display: flex;
     background-color:white;
-    height:250px;
     padding: 20px;
     border-radius: 20px;
     width: 1130px;
     box-shadow: 5px 5px 5px #faa422;
-
+    height: auto;
 }
 
 .container_card img{
@@ -35,6 +34,7 @@
     gap: .5rem;
     padding: 20px;
     font-size: 30px;
+    height: auto;
 }
 
 .btn_card{
