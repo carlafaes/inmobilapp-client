@@ -1,6 +1,6 @@
 import { sendEmail } from "../services/sendEmail";
 
-const baseUrl = "http://localhost:3000";
+const baseUrl = "https://inmobilapp.vercel.app/";
 
 function msg(client, property, { name, id }) {
   return `<!DOCTYPE html>
