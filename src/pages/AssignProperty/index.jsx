@@ -67,19 +67,21 @@ export default function AssignProperty() {
   }
 
   return (
-    <div>
+    <div className={styled.container}>
       <NavBarAgent user={agentDetail} />
-      <p>
-        {clientID}, {propertyID}
-      </p>
-      <button className={styled.button} onClick={asignarPropiedad}>
-        Asignar propiedad al cliente
-      </button>
-      {send && <Modal send={setSend} />}
-      <button className={styled.button} onClick={eliminarPropiedad}>
-        Eliminar propiedad del cliente
-      </button>
-      {/* <Footer /> */}
+      <div className={styled.formContainer}>
+        <h1 className={styled.formContainer__title}>
+          Asignar o eliminar propiedad
+        </h1>
+        <button className={styled.button} onClick={asignarPropiedad}>
+          Asignar propiedad
+        </button>
+        {send && <Modal send={setSend} />}
+        <button className={styled.button} onClick={eliminarPropiedad}>
+          Eliminar propiedad
+        </button>
+      </div>
+      <Footer />
     </div>
   );
 }
