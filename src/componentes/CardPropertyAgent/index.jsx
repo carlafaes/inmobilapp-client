@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import swal from "sweetalert";
+import { Link } from "react-router-dom";
 
 import propertyService from "../../services/property";
 import { notifyError, notifySuccess } from "../../utils/notifications";
@@ -72,7 +73,9 @@ export default function CardPropertyAgent({ images, state, id }) {
           subheader={`ID: ${id}`}
         />
         <CardActions>
-          <Button size="small">editar</Button>
+            <Link to={`/property/${id}`}>
+              Ver detalles
+            </Link>
         </CardActions>
       </Card>
     </div>
